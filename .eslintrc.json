@@ -27,6 +27,7 @@
     "no-var": "error",
     "sort-vars": "warn",
     "curly": "error",
+    "react/react-in-jsx-scope": "off",
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "var", "next": "return" }
