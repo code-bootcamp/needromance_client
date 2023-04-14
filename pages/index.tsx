@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
-
+// 스타일링 변수 예시
+import { StyleTestDiv } from "./StylesTest";
 export default function Home() {
   return (
     <>
@@ -10,7 +11,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>test</main>
+      {/* 스타일링 변수 예시 */}
+      <StyleTestDiv>red</StyleTestDiv>
     </>
   );
 }
