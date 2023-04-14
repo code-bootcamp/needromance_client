@@ -13,3 +13,7 @@ const server = config.backend.baseURL;
 //   console.log(response.data.data);
 //   return response.data.data;
 // };
+
+// fetchUser..
+
+// 유저에 관한 api 는 여기서 추가
