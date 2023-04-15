@@ -5,9 +5,15 @@ export const globalStyles = css`
     font-family: ;
     src: url();
   } */
+
   :root {
-    --main-bg-color: red;
-    --sub-bg-color: blue;
+    --font-size-lg: 32px;
+    --font-size-md: 20px;
+    --font-size-sm: 14px;
+    --main-bg-color: #f8f3eb;
+    --sub-bg-color: #f0e9e0;
+    --point-color-brown: #433b32;
+    --point-color-green: #5f795a;
     --font-size-lg: 32px;
     --font-size-md: 20px;
     --font-size-sm: 14px;
@@ -16,7 +22,9 @@ export const globalStyles = css`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    color: #2c2c2c;
   }
+
   input,
   select,
   button {
