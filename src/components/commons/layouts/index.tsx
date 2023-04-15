@@ -13,7 +13,7 @@ export default function Layout(props: ILayoutProps) {
 
   return (
     <>
-      <div></div>
+      <div>{props.children}</div>
     </>
   );
 }

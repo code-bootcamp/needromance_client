@@ -2,9 +2,6 @@ import { css } from "@emotion/react";
 
 export const globalStyles = css`
   :root {
-    --font-size-lg: 32px;
-    --font-size-md: 20px;
-    --font-size-sm: 14px;
     --main-bg-color: #f8f3eb;
     --sub-bg-color: #f0e9e0;
     --point-color-brown: #433b32;
@@ -13,11 +10,11 @@ export const globalStyles = css`
     --font-size-md: 20px;
     --font-size-sm: 14px;
   }
+
   * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    color: #2c2c2c;
   }
 
   html {
@@ -25,8 +22,10 @@ export const globalStyles = css`
   }
 
   body {
+    /* font: "GowunDodum"; */
     font-family: "GowunDodum-Regular";
     overflow-x: hidden;
+    background-color: #433b32;
   }
 
   input,
@@ -44,5 +43,13 @@ export const globalStyles = css`
   li,
   ul {
     list-style: none;
+  }
+
+  @font-face {
+    font-family: "GowunDodum-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
   }
 `;
