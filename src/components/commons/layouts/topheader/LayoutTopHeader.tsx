@@ -25,7 +25,7 @@ const Menu = styled.a`
 export default function LayoutTopHeader() {
   return (
     <TopHeader>
-      <Link href={"/login"}>
+      <Link href={"/signin"}>
         <Menu>로그인</Menu>
       </Link>
       <Link href={"/signup"}>
