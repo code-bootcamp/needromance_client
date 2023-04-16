@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Temp from "../src/components/units/login/temp";
 
 // 스타일링 변수 예시
 import { StyleTestDiv } from "./StylesTest";
@@ -12,9 +11,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Temp />
+      <main
+        style={{ width: "100%", height: "40em", backgroundColor: "darkkhaki" }}
+      >
+        메인 들어올 자리 입니다.
+      </main>
       {/* 스타일링 변수 예시 */}
-      <StyleTestDiv>redreded하이하이하이</StyleTestDiv>
+      {/* <StyleTestDiv></StyleTestDiv> */}
     </>
   );
 }
