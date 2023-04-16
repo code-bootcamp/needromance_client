@@ -1,3 +1,4 @@
+import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
 
 export default function SignIn() {
@@ -13,7 +14,12 @@ export default function SignIn() {
           <input />
           <label>Password</label>
           <input />
-
+          <S.InputWrapper>
+            <BorderInput label="Email" />
+          </S.InputWrapper>
+          <S.InputWrapper>
+            <BorderInput label="Password" />
+          </S.InputWrapper>
           <button>SignIn</button>
         </S.SignInForm>
         <div>아이디 / 비밀번호를 잊으셨나요?</div>

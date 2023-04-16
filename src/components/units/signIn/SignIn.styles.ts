@@ -31,3 +31,8 @@ export const SignInForm = styled.form`
   display: flex;
   flex-direction: column;
 `;
+
+export const InputWrapper = styled.div`
+  width: 350px;
+  gap: 50px;
+`;
