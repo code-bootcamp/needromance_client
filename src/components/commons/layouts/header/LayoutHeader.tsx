@@ -16,7 +16,7 @@ const Wrapper = styled.header`
 
 const Logo = styled.a`
   font-size: 20px;
-  font-family: "TAEBAEKmilkyway";
+  font-family: var(--logo-font);
   font-weight: bolder;
   display: flex;
   flex-direction: row;

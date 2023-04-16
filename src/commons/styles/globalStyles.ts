@@ -12,6 +12,9 @@ export const globalStyles = css`
     --font-size-lg: 32px;
     --font-size-md: 20px;
     --font-size-sm: 14px;
+    --base-font: "GowunDodum-Regular";
+    --logo-font: "TAEBAEKmilkyway";
+    --eng-font: "Poppins";
   }
   * {
     box-sizing: border-box;
@@ -25,7 +28,7 @@ export const globalStyles = css`
   }
 
   body {
-    font-family: "GowunDodum-Regular";
+    font-family: var(--base-font);
     overflow-x: hidden;
   }
 
@@ -65,5 +68,7 @@ export const globalStyles = css`
       format("woff2");
     font-weight: normal;
     font-style: normal;
+
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap");
   }
 `;
