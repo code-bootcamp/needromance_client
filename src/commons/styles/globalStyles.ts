@@ -45,4 +45,25 @@ export const globalStyles = css`
   ul {
     list-style: none;
   }
+
+  a {
+    text-decoration-line: none;
+  }
+
+  @font-face {
+    font-family: "GowunDodum-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  // 로고 폰트
+  @font-face {
+    font-family: "TAEBAEKmilkyway";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2")
+      format("woff2");
+    font-weight: normal;
+    font-style: normal;
+  }
 `;
