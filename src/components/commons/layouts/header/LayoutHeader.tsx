@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 
 const Wrapper = styled.header`
   width: 100vw;
@@ -13,13 +14,14 @@ const Wrapper = styled.header`
   align-items: center;
 `;
 
-const Logo = styled.div`
+const Logo = styled.a`
   font-size: 20px;
   font-family: "TAEBAEKmilkyway";
   font-weight: bolder;
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 `;
 
 const LogoImage = styled.img`
@@ -29,10 +31,12 @@ const LogoImage = styled.img`
 export default function LayoutHeader() {
   return (
     <Wrapper>
-      <Logo>
-        <LogoImage src="img/logo/INR_logo.png" />
-        <span>로맨스가 필요해</span>
-      </Logo>
+      <Link href={"/"}>
+        <Logo>
+          <LogoImage src="img/logo/INR_logo.png" />
+          <span>로맨스가 필요해</span>
+        </Logo>
+      </Link>
     </Wrapper>
   );
 }
