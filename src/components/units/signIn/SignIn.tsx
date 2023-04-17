@@ -10,22 +10,23 @@ export default function SignIn() {
           지금 당신의 연애고민은 무엇인가요?
         </S.Logo>
         <S.SignInForm>
-          <label>Email</label>
-          <input />
-          <label>Password</label>
-          <input />
           <S.InputWrapper>
-            <BorderInput label="Email" />
+            <BorderInput label="Email" style={{ marginBottom: "25px" }} />
           </S.InputWrapper>
           <S.InputWrapper>
             <BorderInput label="Password" />
           </S.InputWrapper>
-          <button>SignIn</button>
+          <S.ButtonWrapper>
+            <S.SignInButton>SignIn</S.SignInButton>
+          </S.ButtonWrapper>
         </S.SignInForm>
-        <div>아이디 / 비밀번호를 잊으셨나요?</div>
-        <line></line>
-        <div>구글 로그인 구역</div>
-        <div>회원이 아니신가요? 회원가입</div>
+        <S.BottomWrapper>
+          <S.FindID><span>아이디</span>/ <span>비밀번호</span>를 잊으셨나요?</S.FindID>
+          <S.Line />
+          <div>구글 로그인 구역</div>
+          <div>회원이 아니신가요? <button>회원가입</button></div>
+
+        </S.BottomWrapper>
       </S.SignInWindow>
       로그인 페이지입니다.
     </S.Wrapper>
