@@ -7,6 +7,9 @@ const Wrapper = styled.nav`
   // 양쪽에 꽉차게 하기 위한 옵션
   position: relative;
   left: calc(-50vw + 50%);
+
+  border: solid var(--sub-bg-color);
+  border-width: 1px 0px;
 `;
 
 const Navigation = styled.div`
