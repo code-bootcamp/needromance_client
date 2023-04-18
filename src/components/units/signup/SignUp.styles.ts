@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
   padding: 50px 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: auto;
 `;
 
 export const SignInWindow = styled.div`

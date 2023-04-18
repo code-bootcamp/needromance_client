@@ -21,6 +21,10 @@ const Navigation = styled.div`
   align-items: center;
   gap: 50px;
   position: relative;
+
+  a {
+    color: var(--point-color-brown);
+  }
 `;
 
 export default function LayoutNavigation() {

@@ -22,6 +22,7 @@ const Logo = styled.a`
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+  color: var(--point-color-brown);
 `;
 
 const LogoImage = styled.img`

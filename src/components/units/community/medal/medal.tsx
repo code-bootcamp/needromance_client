@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 const BottomCircle = styled.div`
   width: 90px;
   height: 90px;
-  background-color: #d9d9d9;
+  background-color: var(--point-color-beige);
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -25,10 +25,7 @@ const Ranking = styled.img`
 
 const Label = styled.label`
   font-family: var(--eng-font);
-
-  color: #6b6b6b;
   font-size: 18px;
-  margin-left: 8px;
 `;
 
 export default function Medal({
