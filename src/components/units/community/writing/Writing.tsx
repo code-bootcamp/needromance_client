@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Answerer = styled.div`
+const Counselee = styled.div`
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -19,15 +19,15 @@ const Answerer = styled.div`
   align-items: center;
 `;
 
-const AnswererImg = styled.img`
+const CounseleeImg = styled.img`
   width: 75px;
   height: 75px;
   border-radius: 100%;
 `;
 
-const AnswererName = styled.span``;
+const CounseleeName = styled.span``;
 
-const AnswererText = styled.div`
+const CounseleeText = styled.div`
   width: 700px;
   padding: 30px 0px;
 `;
@@ -36,7 +36,7 @@ const Nametag = styled.div``;
 
 const Heart = styled.div``;
 
-export default function Answer({
+export default function Writing({
   name,
   content,
 }: {
@@ -45,11 +45,11 @@ export default function Answer({
 }) {
   return (
     <Wrapper>
-      <Answerer>
-        <AnswererImg src="img/community/default_profile.png" />
-        <AnswererName>{name}</AnswererName>
-      </Answerer>
-      <AnswererText>{content}</AnswererText>
+      <Counselee>
+        <CounseleeImg src="img/community/default_profile.png" />
+        <CounseleeName>{name}</CounseleeName>
+      </Counselee>
+      <CounseleeText>{content}</CounseleeText>
       <div>
         <Nametag></Nametag>
         <Heart></Heart>
