@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
-  width: 900px;
+  width: 100%;
+  /* min-width: 900px; */
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -9,14 +10,16 @@ const Wrapper = styled.div`
   border-bottom: 1px solid var(--sub-bg-color);
   justify-content: center;
   align-items: center;
+  padding: 30px 0px;
 `;
 
 const Answerer = styled.div`
-  width: 200px;
+  width: 15%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 5px;
 `;
 
 const AnswererImg = styled.img`
@@ -28,8 +31,7 @@ const AnswererImg = styled.img`
 const AnswererName = styled.span``;
 
 const AnswererText = styled.div`
-  width: 700px;
-  padding: 30px 0px;
+  width: 60%;
 `;
 
 const Nametag = styled.div``;

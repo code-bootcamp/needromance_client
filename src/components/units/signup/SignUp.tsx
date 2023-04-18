@@ -9,6 +9,7 @@ export default function SignUp() {
     setIsChecking(!isChecking);
   };
   const checkEmailDuplicate = () => {};
+
   return (
     <S.Wrapper>
       <S.SignInWindow>

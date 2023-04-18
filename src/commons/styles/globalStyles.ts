@@ -7,12 +7,14 @@ export const globalStyles = css`
     --font-size-sm: 14px;
     --main-bg-color: #f8f3eb;
     --sub-bg-color: #f0e9e0;
+    --point-color-beige: #cfbbae;
     --point-color-brown: #433b32;
     --point-color-green: #5f795a;
     --point-color-light-green: #296a02;
     --font-size-lg: 32px;
     --font-size-md: 20px;
     --font-size-sm: 14px;
+    --font-size-xs: 13px;
     --base-font: "GowunDodum-Regular";
     --logo-font: "TAEBAEKmilkyway";
     --eng-font: "Poppins";
@@ -70,6 +72,7 @@ export const globalStyles = css`
     font-weight: normal;
     font-style: normal;
 
+    // 영어 폰트
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap");
   }
 `;
