@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,19 +9,19 @@ const Wrapper = styled.div`
 `;
 
 const BottomCircle = styled.div`
-width: 90px;
-height: 90px;
-background-color: #D9D9D9;
-border-radius: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-`
+  width: 90px;
+  height: 90px;
+  background-color: #d9d9d9;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Ranking = styled.img`
-    width: 70px;
-    height: 70px;
-`
+  width: 70px;
+  height: 70px;
+`;
 
 const Label = styled.label`
   font-family: var(--eng-font);
@@ -33,18 +32,18 @@ const Label = styled.label`
 `;
 
 export default function Medal({
-    label,
-    ranking,
+  label,
+  ranking,
 }: {
-    label?: string;
-    ranking: string;
+  label?: string;
+  ranking: string;
 }) {
-    return (
-        <Wrapper>
-            <BottomCircle>
-                <Ranking src={`img/community/medal/${ranking}.png`} alt="등급 메달" />
-            </BottomCircle>
-            <Label>{label}</Label>
-        </Wrapper>
-    )
+  return (
+    <Wrapper>
+      <BottomCircle>
+        <Ranking src={`img/community/medal/${ranking}.png`} alt="등급 메달" />
+      </BottomCircle>
+      <Label>{label}</Label>
+    </Wrapper>
+  );
 }
