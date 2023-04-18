@@ -32,16 +32,23 @@ export default function BorderInput({
   placeholder,
   onChange,
   style,
+  type,
 }: {
   label?: string;
   placeholder?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   style?: CSSProperties;
+  type?: string;
 }) {
   return (
     <Wrapper>
       <Label>{label}</Label>
-      <Input placeholder={placeholder} onChange={onChange} style={style} />
+      <Input
+        placeholder={placeholder}
+        onChange={onChange}
+        style={style}
+        type={type}
+      />
     </Wrapper>
   );
 }
