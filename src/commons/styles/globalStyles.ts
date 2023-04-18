@@ -9,6 +9,7 @@ export const globalStyles = css`
     --sub-bg-color: #f0e9e0;
     --point-color-brown: #433b32;
     --point-color-green: #5f795a;
+    --point-color-light-green: #296a02;
     --font-size-lg: 32px;
     --font-size-md: 20px;
     --font-size-sm: 14px;
@@ -20,7 +21,6 @@ export const globalStyles = css`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    color: #2c2c2c;
   }
 
   html {
@@ -30,6 +30,7 @@ export const globalStyles = css`
   body {
     font-family: var(--base-font);
     overflow-x: hidden;
+    color: #2c2c2c;
   }
 
   input,

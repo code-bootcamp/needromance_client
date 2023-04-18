@@ -17,6 +17,7 @@ const Navigation = styled.div`
   justify-content: center;
   align-items: center;
   gap: 50px;
+  position: relative;
 `;
 
 export default function LayoutNavigation() {
