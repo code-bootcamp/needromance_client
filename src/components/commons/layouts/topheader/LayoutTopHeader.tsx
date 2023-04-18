@@ -4,7 +4,6 @@ import Link from "next/link";
 const TopHeader = styled.header`
   width: 100vw;
   height: 30px;
-
   // 양쪽에 꽉차게 하기 위한 옵션
   position: relative;
   left: calc(-50vw + 50%);
