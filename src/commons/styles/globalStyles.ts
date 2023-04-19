@@ -1,31 +1,35 @@
 import { css } from "@emotion/react";
+import { breakPoints } from "./media";
 
 export const globalStyles = css`
   :root {
-    --font-size-lg: 32px;
-    --font-size-md: 20px;
-    --font-size-sm: 14px;
     --main-bg-color: #f8f3eb;
     --sub-bg-color: #f0e9e0;
     --point-color-beige: #cfbbae;
     --point-color-brown: #433b32;
     --point-color-green: #5f795a;
     --point-color-light-green: #296a02;
-    --font-size-lg: 32px;
-    --font-size-md: 20px;
-    --font-size-sm: 14px;
-    --font-size-xs: 13px;
+    --font-size-lg: 1.875rem;
+    --font-size-md: 1.25rem;
+    --font-size-sm: 0.875rem;
+    --font-mobile-size-lg: 1.286rem;
+    --font-mobile-size-md: 1.143rem;
+    --font-mobile-size-xs: 0.714rem;
     --base-font: "GowunDodum-Regular";
     --logo-font: "TAEBAEKmilkyway";
     --eng-font: "Poppins";
+    --btn-radius-lg: 3.125rem;
+    --btn-radius-xs: 0.5rem;
   }
   * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
   }
-
   html {
+    @media ${breakPoints.mobile} {
+      font-size: 14px;
+    }
     font-size: 16px;
   }
 
