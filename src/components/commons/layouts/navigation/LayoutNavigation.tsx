@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { Fragment, MouseEventHandler, useEffect, useState } from "react";
+import { UrlObject } from "url";
+
+interface IIsActiveProps {
+  isActive: boolean;
+}
 
 const Wrapper = styled.nav`
   width: 100vw;
@@ -21,22 +28,72 @@ const Navigation = styled.div`
   align-items: center;
   gap: 50px;
   position: relative;
-
-  a {
-    color: var(--point-color-brown);
-  }
 `;
 
+const NavigationMenu = styled.a`
+  height: 50%;
+  color: ${(props: IIsActiveProps) =>
+    props.isActive ? "var(--point-color-green)" : "var(--point-color-brown)"};
+  border-left: ${(props: IIsActiveProps) =>
+    props.isActive ? "1px solid var(--point-color-light-green)" : "none"};
+  border-right: ${(props: IIsActiveProps) =>
+    props.isActive ? "1px solid var(--point-color-light-green)" : "none"};
+  padding: 7px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &:hover {
+    color: var(--point-color-green);
+  }
+
+  transition: background 0.5s;
+`;
+
+const NAVIGATION = [
+  { name: "너의 마음을 말해줘", page: "/chatgpt" },
+  { name: "대화공간", page: "/community" },
+];
+
 export default function LayoutNavigation() {
+  const router = useRouter();
+
+  const [activeMenu, setActiveMenu] = useState("");
+
+  useEffect(() => {
+    NAVIGATION.map((menu) => {
+      if (router.pathname.includes(menu.page)) {
+        setActiveMenu(menu.page);
+      } else {
+        setActiveMenu("");
+      }
+    });
+  }, [router.pathname]);
+
+  const handleActiveMenu = (event: any) => {
+    if (event.target instanceof Element) {
+      const activeMenu = event.target.id;
+
+      setActiveMenu(activeMenu);
+    }
+  };
+
   return (
     <Wrapper>
       <Navigation>
-        <Link href={"/chatgpt"}>
-          <a>너의 마음을 말해줘</a>
-        </Link>
-        <Link href={"/community"}>
-          <a>대화공간</a>
-        </Link>
+        {NAVIGATION?.map((menu) => (
+          <Fragment key={menu.page}>
+            <Link href={menu.page}>
+              <NavigationMenu
+                id={menu.page}
+                onClick={(event) => handleActiveMenu(event)}
+                isActive={activeMenu.includes(menu.page)}
+              >
+                {menu.name}
+              </NavigationMenu>
+            </Link>
+          </Fragment>
+        ))}
       </Navigation>
     </Wrapper>
   );
