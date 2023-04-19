@@ -23,6 +23,9 @@ const Logo = styled.a`
   align-items: center;
   cursor: pointer;
   color: var(--point-color-brown);
+  &:hover {
+    color: var(--point-color-brown);
+  }
 `;
 
 const LogoImage = styled.img`
