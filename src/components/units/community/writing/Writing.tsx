@@ -2,9 +2,8 @@ import styled from "@emotion/styled";
 import { FaCommentDots } from "react-icons/fa";
 
 const Wrapper = styled.div`
-  width: 900px;
+  width: 100%;
   min-height: 120px;
-  height: 100%;
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -12,20 +11,21 @@ const Wrapper = styled.div`
   border-bottom: 1px solid var(--sub-bg-color);
   justify-content: center;
   align-items: center;
-  padding: 30px 0px;
+  padding: 30px 30px;
 `;
 
 const Counselee = styled.div`
-  width: 200px;
+  width: 15%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 5px;
 `;
 
 const CounseleeImg = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 75px;
+  height: 75px;
   border-radius: 100%;
 `;
 
@@ -40,7 +40,7 @@ const ContentWrapper = styled.div`
 `;
 
 const Content = styled.div`
-  width: 700px;
+  width: 100%;
 `;
 
 const HashtagWrapper = styled.div`

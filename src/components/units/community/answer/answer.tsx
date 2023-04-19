@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   border-bottom: 1px solid var(--sub-bg-color);
   justify-content: center;
   align-items: center;
-  padding: 30px 0px;
+  padding: 30px 30px;
 `;
 
 const Answerer = styled.div`
@@ -31,7 +31,7 @@ const AnswererImg = styled.img`
 const AnswererName = styled.span``;
 
 const AnswererText = styled.div`
-  width: 60%;
+  width: 100%;
 `;
 
 const Nametag = styled.div``;
