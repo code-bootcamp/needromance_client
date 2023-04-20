@@ -36,31 +36,60 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: blue;
+  gap: 25px;
+  padding: 5px;
 `;
 
 const Content = styled.div`
-  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const HashtagWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 10px;
+  padding: 0px 5px;
 `;
 
 const Hashtag = styled.div`
-  font-size: 13px;
+  height: 30px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  border-radius: 3px;
+  background-color: #cfbbae;
+  color: white;
+
+  &:hover {
+    background-color: #baa08f;
+    cursor: pointer;
+  }
+`;
+
+const CommentDateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
 `;
 
 const CommentCount = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  color: #baa08f;
+  font-size: 1rem;
 `;
 
 const Date = styled.span`
-  font-size: 13px;
+  font-size: 0.8rem;
+  color: var(--point-color-beige);
 `;
 
 const Heart = styled.div``;
@@ -86,13 +115,13 @@ export default function Writing({
           <Hashtag>#질투</Hashtag>
         </HashtagWrapper>
       </ContentWrapper>
-      <div>
+      <CommentDateWrapper>
         <CommentCount>
           <FaCommentDots />
           <span>27</span>
         </CommentCount>
         <Date>2023.04.18</Date>
-      </div>
+      </CommentDateWrapper>
     </Wrapper>
   );
 }
