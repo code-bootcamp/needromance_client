@@ -80,3 +80,11 @@ export const Line = styled.div`
   border-bottom: 1px solid #cccccc;
   padding: 5px;
 `;
+
+export const SignUpLink = styled.div`
+  padding: 20px;
+
+  a {
+    color: var(--point-color-green);
+  }
+`;

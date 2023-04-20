@@ -1,14 +1,27 @@
+import Link from "next/link";
 import { useState } from "react";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./SignUp.styles";
 
 export default function SignUp() {
   const [isChecking, setIsChecking] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+
+  const [input, setInput] = useState({
+    email: "",
+    id: "",
+    password: "",
+  });
+
+  const handleInput = () => {};
 
   const handleCheckButton = () => {
     setIsChecking(!isChecking);
   };
-  const checkEmailDuplicate = () => {};
+  const checkEmailDuplicate = () => {
+    // email(input의 value)을 가져온다.
+    //
+  };
 
   return (
     <S.Wrapper>
@@ -46,14 +59,17 @@ export default function SignUp() {
           </S.InputWrapper>
 
           <S.ButtonWrapper>
-            <S.SignUpButton>SignUp</S.SignUpButton>
+            <S.SignUpButton isActive={isActive}>SignUp</S.SignUpButton>
           </S.ButtonWrapper>
         </S.SignInForm>
         <S.BottomWrapper>
           <S.Line />
           <div>구글 로그인 구역</div>
           <div>
-            이미 회원인가요? <button>로그인</button>
+            이미 회원이라면
+            <Link href={"/signin"}>
+              <a>로그인</a>
+            </Link>
           </div>
         </S.BottomWrapper>
       </S.SignInWindow>

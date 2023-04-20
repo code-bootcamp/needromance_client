@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "../../../../commons/styles/media";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,6 +17,16 @@ const BottomCircle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media ${breakPoints.tablet} {
+    width: 85px;
+    height: 85px;
+  }
+
+  @media ${breakPoints.mobile} {
+    width: 70px;
+    height: 70px;
+  }
 `;
 
 const Ranking = styled.img`
