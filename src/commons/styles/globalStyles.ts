@@ -58,6 +58,10 @@ export const globalStyles = css`
 
   a {
     text-decoration-line: none;
+    color: var(--point-color-brown);
+    &:hover {
+      color: var(--point-color-brown);
+    }
   }
 
   @font-face {
