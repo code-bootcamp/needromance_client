@@ -37,7 +37,7 @@ const MyPageBoard = () => {
   return (
     <>
       <MyPageTitle>"{UserNickName}"님의 이야기들</MyPageTitle>
-      <Search />
+      <Search placeholder="내가 작성한 글을 검색해보세요 ex) 고백" />
       <S.Table>
         <S.Thead>
           <tr>

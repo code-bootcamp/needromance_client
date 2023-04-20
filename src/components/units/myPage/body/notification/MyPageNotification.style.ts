@@ -1,24 +1,33 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "../../../../../commons/styles/media";
 
 export const NotificationCard = styled.div`
   border: 1px solid #eee;
-  border-radius: 4px;
+  border-radius: var(--btn-radius-sm);
   width: 100%;
-  padding: 20px;
-  margin-bottom: 10px;
+  padding: 1.25rem;
+  margin-bottom: 0.625rem;
 
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 0.625rem;
+
+  @media ${breakPoints.mobile} {
+    padding: 0.8rem;
+  }
 `;
 
 export const IconWrap = styled.div`
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   background-color: var(--point-color-light-green);
+  font-size: 0.7rem;
   color: #fff;
-  font-size: 14px;
+  @media ${breakPoints.mobile} {
+    width: 20px;
+    height: 18px;
+  }
 
   display: flex;
   flex-direction: row;
@@ -31,17 +40,27 @@ export const ContentWrap = styled.div`
 `;
 
 export const Title = styled.h3`
-  font-size: 16px;
+  font-size: 1rem;
+
   span {
     font-size: var(--font-size-sm);
     color: #a39f9f;
-    margin-left: 10px;
+    margin-left: 0.625rem;
+
+    @media ${breakPoints.mobile} {
+      font-size: var(--font-mobile-size-sm);
+    }
   }
 `;
 
 export const Content = styled.p`
   font-size: var(--font-size-sm);
-  margin-top: 10px;
+  margin-top: 0.625rem;
+
+  @media ${breakPoints.mobile} {
+    font-size: var(--font-mobile-size-sm);
+    margin-top: 0.5rem;
+  }
 `;
 
 export const DeleteWrap = styled.div`

@@ -7,11 +7,11 @@ import {
 
 export const ModalWrap = styled(Modal)`
   .ant-modal-content {
-    width: 400px;
-    height: 300px;
+    width: 25rem;
+    height: 18.75rem;
     background-color: #f0e9e0;
     border-radius: 8px;
-    padding: 32px;
+    padding: 2rem;
   }
 
   .ant-modal-header {
@@ -30,28 +30,33 @@ export const ModalWrap = styled(Modal)`
 
   .ant-modal-footer {
     border-top: 0;
-    margin-top: 32px;
+    margin-top: 2rem;
   }
 
   .ant-btn {
-    font-size: 14px;
-    height: 40px;
-    padding: 7px 15px;
-    border-radius: 50px;
-    font-family: inherit;
-    width: 110px;
     background: none;
     border: none;
+    font-size: var(--btn-font-size);
+    padding: var(--btn-padding);
+    border-radius: var(--btn-radius-lg);
+    font-family: inherit;
+    height: var(--btn-height);
+    width: var(--btn-width-md);
   }
 
   .ant-btn-default {
-    color: #5f795a;
-    border: 1px solid #5f795a;
+    border: 1px solid var(--point-color-green);
+
+    span {
+      color: var(--point-color-green);
+    }
   }
 
   .ant-btn-primary {
-    color: #ffffff;
-    background-color: #5f795a;
+    background-color: var(--point-color-green);
+    span {
+      color: #ffffff;
+    }
   }
 `;
 
@@ -74,8 +79,8 @@ const Icon = styled.div`
 `;
 
 const Text = styled.p`
-  font-size: 14px;
-  color: #333333;
+  font-size: var(--font-size-sm);
+  color: #2c2c2c;
   margin: 0;
 `;
 
@@ -89,7 +94,7 @@ export const WidthdrawalModal = ({ open, setOpen, setConfirm }) => {
         setConfirm(true);
       }}
       onCancel={() => setOpen(false)}
-      width={400}
+      width="25rem"
     >
       <TextWrap>
         <Icon>
@@ -97,7 +102,6 @@ export const WidthdrawalModal = ({ open, setOpen, setConfirm }) => {
         </Icon>
         <Text>정말 회원을 탈퇴하시겠어요?</Text>
         <Text>회원 탈퇴를 하시면 지금까지 받은 상담내용이 사라집니다.</Text>
-        {/* <SubText>취소된 예약은 되돌릴 수 없습니다.</SubText> */}
       </TextWrap>
     </ModalWrap>
   );
@@ -110,7 +114,7 @@ export const ConfirmModal = ({ confirm, setConfirm }) => {
       open={confirm}
       onOk={() => setConfirm(false)}
       // onCancel={() => setConfirm(false)}
-      width={400}
+      width="25rem"
     >
       <TextWrap>
         <Icon>

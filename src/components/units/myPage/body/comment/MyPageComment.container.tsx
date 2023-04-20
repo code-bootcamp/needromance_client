@@ -49,7 +49,7 @@ const MyPageComment = () => {
             <S.TH>No</S.TH>
             <S.TH>제목</S.TH>
             <S.TH>작성일</S.TH>
-            <S.TH>작성자 Pick</S.TH>
+            <S.TH>채택</S.TH>
             <S.TH>좋아요</S.TH>
             <S.TH>관리</S.TH>
           </tr>

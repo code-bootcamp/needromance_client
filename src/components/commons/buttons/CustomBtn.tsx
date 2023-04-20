@@ -2,7 +2,7 @@ import { MouseEventHandler } from "react";
 import styled from "@emotion/styled";
 
 interface IBtnProps {
-  onClickMoveToPage?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: any;
   text?: string;
   type?: string;
   fill?: boolean;
@@ -29,13 +29,17 @@ const WrapperMd = styled(Wrapper)<IBtnProps>`
   color: ${(props) => (props.fill ? "#fff" : "var(--point-color-green)")};
   background-color: ${(props) =>
     props.fill ? "var(--point-color-green)" : "#fff"};
+  border: ${(props) =>
+    props.fill ? "none" : "1px solid var(--point-color-green)"};
 `;
 const WrapperLg = styled(Wrapper)<IBtnProps>`
   width: var(--btn-width-lg);
   height: var(--btn-height);
-  color: ${(props) => (props.fill ? "#fff" : "var(--point-color-green)")};
+  color: ${(props) => (props.fill ? "#fff" : " var(--point-color-green)")};
   background-color: ${(props) =>
-    props.fill ? "var(--point-color-green)" : "#fff"};
+    props.fill ? " var(--point-color-green)" : "#fff"};
+  border: ${(props) =>
+    props.fill ? "none" : "1px solid var(--point-color-green)"};
 `;
 
 export default function CustomBtn(props: IBtnProps) {
@@ -43,17 +47,17 @@ export default function CustomBtn(props: IBtnProps) {
   return (
     <>
       {props.type === "Lg" && (
-        <WrapperLg fill={props.fill} onClick={props.onClickMoveToPage}>
+        <WrapperLg fill={props.fill} onClick={props.onClick}>
           {props.text}
         </WrapperLg>
       )}
       {props.type === "Md" && (
-        <WrapperMd fill={props.fill} onClick={props.onClickMoveToPage}>
+        <WrapperMd fill={props.fill} onClick={props.onClick}>
           {props.text}
         </WrapperMd>
       )}
       {props.type === "Sm" && (
-        <WrapperSm fill={props.fill} onClick={props.onClickMoveToPage}>
+        <WrapperSm fill={props.fill} onClick={props.onClick}>
           {props.text}
         </WrapperSm>
       )}
