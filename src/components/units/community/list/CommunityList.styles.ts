@@ -55,14 +55,24 @@ export const SearchSection = styled.section`
   align-items: center;
   background-color: var(--sub-bg-color);
   padding: 50px;
-
-  p {
-    font-size: 2rem;
-    line-height: 4;
-  }
 `;
 
+export const InfoText = styled.p`
+  font-size: 2rem;
+  line-height: 4;
+
+  @media ${breakPoints.tablet} {
+    font-size: 1.5rem;
+    line-height: 3;
+  }
+
+  @media ${breakPoints.mobile} {
+    font-size: 1.25rem;
+    line-height: 3;
+  }
+`;
 export const SearchWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,12 +83,13 @@ export const SearchWrapper = styled.div`
   }
 `;
 export const SearchBox = styled.div`
+  width: 100%;
+  max-width: 600px;
   position: relative;
 `;
 
 export const SearchInput = styled.input`
   display: block;
-  min-width: 600px;
   width: 100%;
   height: 45px;
   border-radius: 20px;

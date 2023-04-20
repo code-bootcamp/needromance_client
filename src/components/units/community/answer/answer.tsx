@@ -62,18 +62,26 @@ const TagHeartWrapper = styled.div`
 `;
 
 const RankingTag = styled.div`
+  position: relative;
+  height: 100%;
+`;
+
+const RankingText = styled.div`
   position: absolute;
-  top: 0px;
-  right: 0px;
   width: max-content;
   height: 30px;
   padding: 8px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--point-color-green);
-  border-bottom-left-radius: 10px;
+  top: 3;
+  right: 3;
+`;
+
+const RankingSeal = styled.img`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  top: 0;
+  right: 10px;
 `;
 
 const Heart = styled.div`
@@ -102,7 +110,10 @@ export default function Answer({
         <AnswererName>{name}</AnswererName>
       </Answerer>
       <AnswererText>{content}</AnswererText>
-      <RankingTag>Best1</RankingTag>
+      <RankingTag>
+        <RankingSeal src="img/community/badge.png" />
+        <RankingText>Best1</RankingText>
+      </RankingTag>
 
       <TagHeartWrapper>
         <Heart>

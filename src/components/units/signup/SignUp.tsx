@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import CustomBtn from "../../commons/buttons/CustomBtn";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./SignUp.styles";
 
@@ -38,6 +39,7 @@ export default function SignUp() {
           <S.GreenButton onClick={handleCheckButton}>
             이메일 중복검사
           </S.GreenButton>
+          <CustomBtn text="이메일 중복검사 얍" />
           <S.InputWrapper>
             <BorderInput label="Nickname" placeholder="닉네임을 입력하세요." />
           </S.InputWrapper>

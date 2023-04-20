@@ -33,7 +33,7 @@ const Navigation = styled.div`
 const NavigationMenu = styled.a`
   height: 50%;
   color: ${(props: IIsActiveProps) =>
-    props.isActive ? "var(--point-color-green)" : "var(--point-color-brown)"};
+    props.isActive ? "var(--point-color-green)" : "#96785e"};
   border-left: ${(props: IIsActiveProps) =>
     props.isActive ? "1px solid var(--point-color-light-green)" : "none"};
   border-right: ${(props: IIsActiveProps) =>
@@ -44,7 +44,7 @@ const NavigationMenu = styled.a`
   align-items: center;
 
   &:hover {
-    color: var(--point-color-green);
+    color: var(--point-color-brown);
   }
 
   transition: background 0.5s;

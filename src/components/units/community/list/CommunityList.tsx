@@ -1,3 +1,4 @@
+import CustomBtn from "../../../commons/buttons/CustomBtn";
 import Tag from "../../../commons/hashtag/HashTag";
 import Answer from "../answer/Answer";
 import Medal from "../medal/Medal";
@@ -31,11 +32,11 @@ export default function CommunityList() {
         />
       </S.BestAnswerWrapper>
       <S.SearchSection>
-        <p>
+        <S.InfoText>
           해결하고 싶은 연애고민이 있나요?
           <br />
           다른 사람의 이야기를 들어보세요!
-        </p>
+        </S.InfoText>
         <S.SearchWrapper>
           <S.SearchBox>
             <S.SearchInput placeholder="검색어를 입력하세요." />
@@ -52,7 +53,8 @@ export default function CommunityList() {
       <S.CounselWrapper>
         <S.LatestCounsel>
           <p>최신 상담 List</p>
-          <button>글 작성하기</button>
+          <CustomBtn fill={false} type="Md" text="글 작성하기" />
+          {/* <button>글 작성하기</button> */}
         </S.LatestCounsel>
         <S.LatestCounselWriting>
           <Writing
