@@ -13,7 +13,8 @@ const Wrapper = styled.div`
   border-bottom: 1px solid var(--sub-bg-color);
   justify-content: center;
   align-items: center;
-  padding: 30px 30px;
+  /* padding: 30px 30px; */
+  padding: 30px;
 `;
 
 const Answerer = styled.div`
@@ -29,13 +30,29 @@ const AnswererImg = styled.img`
   width: 75px;
   height: 75px;
   border-radius: 100%;
+
+  @media ${breakPoints.tablet} {
+    width: 60px;
+    height: 60px;
+  }
+
   @media ${breakPoints.mobile} {
     width: 50px;
     height: 50px;
   }
 `;
 
-const AnswererName = styled.span``;
+const AnswererName = styled.span`
+  font-size: 1rem;
+
+  @media ${breakPoints.tablet} {
+    font-size: 0.9rem;
+  }
+
+  @media ${breakPoints.mobile} {
+    font-size: 0.8rem;
+  }
+`;
 
 const AnswererText = styled.div`
   width: 100%;
@@ -63,7 +80,8 @@ const TagHeartWrapper = styled.div`
 
 const RankingTag = styled.div`
   position: relative;
-  height: 100%;
+  width: 50px;
+  height: 100px;
 `;
 
 const RankingText = styled.div`
@@ -80,8 +98,8 @@ const RankingSeal = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 100%;
-  top: 0;
-  right: 10px;
+  top: 0px;
+  right: 0px;
 `;
 
 const Heart = styled.div`

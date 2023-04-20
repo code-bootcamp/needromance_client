@@ -24,19 +24,36 @@ const BottomCircle = styled.div`
   }
 
   @media ${breakPoints.mobile} {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
 const Ranking = styled.img`
   width: 70px;
   height: 70px;
+
+  @media ${breakPoints.tablet} {
+    width: 60px;
+    height: 60px;
+  }
+
+  @media ${breakPoints.mobile} {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const Label = styled.label`
-  font-family: var(--eng-font);
-  font-size: 1.3rem;
+  font-size: 1rem;
+
+  @media ${breakPoints.tablet} {
+    font-size: 0.9rem;
+  }
+
+  @media ${breakPoints.mobile} {
+    font-size: 0.8rem;
+  }
 `;
 
 export default function Medal({
