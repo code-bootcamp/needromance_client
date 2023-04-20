@@ -65,6 +65,7 @@ export default function CommunityList() {
           <Writing
             name="우리사이"
             content="친한 남사친을 질투하는 남자친구..."
+            tags={["질투", "남자친구", "남사친"]}
           />
           <Writing
             name="우리사이"
