@@ -58,13 +58,26 @@ export default function CommunityList() {
       <section>
         <input />
       </section>
-      <section>
-        <div>
+      <S.CounselWrapper>
+        <S.LatestCounsel>
           <p>최신 상담 List</p>
           <button>글 작성하기</button>
-        </div>
-        <Writing name="우리사이" content="친한 남사친을 질투하는 남자친구..." />
-      </section>
+        </S.LatestCounsel>
+        <S.LatestCounselWriting>
+          <Writing
+            name="우리사이"
+            content="친한 남사친을 질투하는 남자친구..."
+          />
+          <Writing
+            name="우리사이"
+            content="친한 남사친을 질투하는 남자친구..."
+          />
+          <Writing
+            name="우리사이"
+            content="친한 남사친을 질투하는 남자친구..."
+          />
+        </S.LatestCounselWriting>
+      </S.CounselWrapper>
     </S.Wrapper>
   );
 }

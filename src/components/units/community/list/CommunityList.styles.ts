@@ -18,7 +18,7 @@ export const Ranking = styled.section`
 
 export const MedalWrapper = styled.div`
   display: flex;
-  gap: 80px;
+  gap: 120px;
 `;
 
 export const BestAnswerWrapper = styled.section`
@@ -30,12 +30,17 @@ export const SearchSection = styled.section`
   width: 100vw;
   // 양쪽에 꽉차게 하기 위한 옵션
   position: relative;
-  left: calc(-50vw + 50%);
+  /* left: calc(-50vw + 50%); */
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: var(--sub-bg-color);
   padding: 50px;
+
+  p {
+    font-size: 2rem;
+    line-height: 4;
+  }
 `;
 
 export const SearchWrapper = styled.div`
@@ -48,7 +53,9 @@ export const SearchBox = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  min-width: 500px;
+  display: block;
+  min-width: 600px;
+  width: 100%;
   height: 45px;
   border-radius: 20px;
   padding: 15px;
@@ -88,4 +95,37 @@ export const HashTag = styled.div`
     background-color: #baa08f;
     cursor: pointer;
   }
+`;
+
+export const CounselWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+export const LatestCounsel = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  p {
+    font-size: var(--font-size-lg);
+    margin: 0px;
+  }
+
+  button {
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    color: white;
+    background-color: var(--point-color-green);
+  }
+`;
+
+export const LatestCounselWriting = styled.div`
+  /* width: 100%; */
+
+  display: flex;
+  flex-direction: column;
 `;

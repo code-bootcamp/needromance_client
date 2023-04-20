@@ -3,14 +3,14 @@ import styled from "@emotion/styled";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   justify-content: center;
   align-items: center;
 `;
 
 const BottomCircle = styled.div`
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   background-color: var(--point-color-beige);
   border-radius: 100%;
   display: flex;
@@ -25,7 +25,7 @@ const Ranking = styled.img`
 
 const Label = styled.label`
   font-family: var(--eng-font);
-  font-size: 18px;
+  font-size: 1.3rem;
 `;
 
 export default function Medal({
