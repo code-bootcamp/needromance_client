@@ -23,6 +23,7 @@ const WrapperSm = styled(Wrapper)<IBtnProps>`
   background-color: ${(props) =>
     props.fill ? "var(--point-color-green)" : "#fff"};
 `;
+
 const WrapperMd = styled(Wrapper)<IBtnProps>`
   width: var(--btn-width-md);
   height: var(--btn-height);
@@ -30,6 +31,7 @@ const WrapperMd = styled(Wrapper)<IBtnProps>`
   background-color: ${(props) =>
     props.fill ? "var(--point-color-green)" : "#fff"};
 `;
+
 const WrapperLg = styled(Wrapper)<IBtnProps>`
   width: var(--btn-width-lg);
   height: var(--btn-height);
@@ -39,7 +41,6 @@ const WrapperLg = styled(Wrapper)<IBtnProps>`
 `;
 
 export default function CustomBtn(props: IBtnProps) {
-  console.log(props.fill);
   return (
     <>
       {props.type === "Lg" && (

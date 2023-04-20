@@ -30,7 +30,6 @@ const BtnPosition = styled.div`
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
-  /* width: 100px; */
 `;
 
 export default function MainSection1UI(): JSX.Element {

@@ -21,11 +21,14 @@ export default function SignIn() {
           </S.ButtonWrapper>
         </S.SignInForm>
         <S.BottomWrapper>
-          <S.FindID><span>아이디</span>/ <span>비밀번호</span>를 잊으셨나요?</S.FindID>
+          <S.FindID>
+            <span>아이디</span>/ <span>비밀번호</span>를 잊으셨나요?
+          </S.FindID>
           <S.Line />
           <div>구글 로그인 구역</div>
-          <div>회원이 아니신가요? <button>회원가입</button></div>
-
+          <div>
+            회원이 아니신가요? <button>회원가입</button>
+          </div>
         </S.BottomWrapper>
       </S.SignInWindow>
       로그인 페이지입니다.

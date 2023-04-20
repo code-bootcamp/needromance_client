@@ -1,4 +1,11 @@
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
+import { useInView } from "react-intersection-observer";
+
+interface IAnimationProps {
+  inView: boolean;
+  delay: number;
+}
 
 const Wrapper = styled.div`
   margin-top: 200px;
@@ -12,10 +19,28 @@ const WrapperTop = styled.div`
   align-items: center;
   justify-content: space-evenly;
 `;
-const TopBox = styled.div`
+
+// Animation
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+`;
+const TopBox = styled.div<IAnimationProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  opacity: 0;
+  animation-name: ${({ inView }) => inView && fadeIn};
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: ${({ delay }) => delay || 0}s;
   div:nth-of-type(1) {
     font-size: var(--font-size-lg);
     color: var(--point-color-green);
@@ -51,18 +76,21 @@ const BodyImgBox = styled.div`
   }
 `;
 export default function MainSection3UI(): JSX.Element {
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
   return (
     <Wrapper>
       <WrapperTop>
-        <TopBox>
+        <TopBox ref={ref} delay={0.5} inView={inView}>
           <div>Change</div>
           <div>변화</div>
         </TopBox>
-        <TopBox>
+        <TopBox ref={ref} delay={1} inView={inView}>
           <div>Authenticit</div>
           <div>진정성</div>
         </TopBox>
-        <TopBox>
+        <TopBox ref={ref} delay={1.5} inView={inView}>
           <div>Sympath</div>
           <div>공감</div>
         </TopBox>
