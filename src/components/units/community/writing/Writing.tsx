@@ -93,7 +93,7 @@ const CommentCount = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #baa08f;
+  color: #8e796b;
   font-size: 1rem;
 `;
 
