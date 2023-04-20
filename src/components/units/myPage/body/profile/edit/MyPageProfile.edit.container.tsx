@@ -1,4 +1,5 @@
 import { Icon_Plus } from "../../../../../../commons/styles/icons";
+import CustomBtn from "../../../../../commons/buttons/CustomBtn";
 import { IMyPageProps } from "../../../MyPage.type";
 import * as S from "./../MyPageProfile.style";
 
@@ -27,8 +28,18 @@ const MyPageProfileEdit = ({ setIsEdit }: IMyPageProps) => {
         </S.ListWrap>
       </S.Row>
       <S.BtnWrap>
-        <S.Btn_line onClick={() => setIsEdit(false)}>취소</S.Btn_line>
-        <S.Btn onClick={() => console.log("수정")}>수정</S.Btn>
+        <CustomBtn
+          type="Md"
+          fill={false}
+          text="취소"
+          onClick={() => setIsEdit(false)}
+        />
+        <CustomBtn
+          type="Md"
+          fill={true}
+          text="수정"
+          onClick={() => console.log("수정")}
+        />
       </S.BtnWrap>
     </S.ProfileWrap>
   );
