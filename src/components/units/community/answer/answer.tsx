@@ -48,7 +48,7 @@ export default function Answer({
   return (
     <Wrapper>
       <Answerer>
-        <AnswererImg src="img/community/default_profile.png" />
+        <AnswererImg src="img/community/default_profile.jpg" />
         <AnswererName>{name}</AnswererName>
       </Answerer>
       <AnswererText>{content}</AnswererText>

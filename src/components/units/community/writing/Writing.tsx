@@ -104,7 +104,7 @@ export default function Writing({
   return (
     <Wrapper>
       <Counselee>
-        <CounseleeImg src="img/community/default_profile.png" />
+        <CounseleeImg src="img/community/default_profile.jpg" />
         <CounseleeName>{name}</CounseleeName>
       </Counselee>
       <ContentWrapper>
