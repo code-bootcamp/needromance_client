@@ -1,3 +1,4 @@
+import Tag from "../../../commons/hashtag/HashTag";
 import Answer from "../answer/answer";
 import Medal from "../medal/medal";
 import Writing from "../writing/Writing";
@@ -50,8 +51,7 @@ export default function CommunityList() {
             <S.SearchIcon />
           </S.SearchBox>
           <S.TagBox>
-            <S.HashTag>#장거리</S.HashTag>
-            <S.HashTag>#100일선물</S.HashTag>
+            <Tag tags={["장거리", "100일선물"]} />
           </S.TagBox>
         </S.SearchWrapper>
       </S.SearchSection>
