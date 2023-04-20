@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 import { FaCommentDots } from "react-icons/fa";
+import { breakPoints } from "../../../../commons/styles/media";
+import Tag from "../../../commons/hashtag/HashTag";
 
 const Wrapper = styled.div`
   width: 100%;
-  min-height: 120px;
+  height: 100%;
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -15,7 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const Counselee = styled.div`
-  width: 15%;
+  padding-right: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,20 +29,28 @@ const CounseleeImg = styled.img`
   width: 75px;
   height: 75px;
   border-radius: 100%;
+
+  @media ${breakPoints.mobile} {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const CounseleeName = styled.span``;
 
 const ContentWrapper = styled.div`
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 25px;
+  gap: 20px;
   padding: 5px;
 `;
 
 const Content = styled.div`
+  width: 100%;
+  padding-right: 5%;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -97,9 +107,11 @@ const Heart = styled.div``;
 export default function Writing({
   name,
   content,
+  tags,
 }: {
   name: string;
   content: string;
+  tags?: string[];
 }) {
   return (
     <Wrapper>
@@ -107,12 +119,11 @@ export default function Writing({
         <CounseleeImg src="img/community/default_profile.jpg" />
         <CounseleeName>{name}</CounseleeName>
       </Counselee>
+
       <ContentWrapper>
         <Content>{content}</Content>
         <HashtagWrapper>
-          <Hashtag>#남사친</Hashtag>
-          <Hashtag>#남친</Hashtag>
-          <Hashtag>#질투</Hashtag>
+          <Tag tags={tags} />
         </HashtagWrapper>
       </ContentWrapper>
       <CommentDateWrapper>

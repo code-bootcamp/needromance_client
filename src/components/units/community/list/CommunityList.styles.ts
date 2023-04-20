@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
 import { BsSearchHeartFill } from "react-icons/bs";
+import { breakPoints } from "../../../../commons/styles/media";
 
 export const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 export const Ranking = styled.section`
@@ -14,16 +17,32 @@ export const Ranking = styled.section`
     font-size: var(--font-size-lg);
     padding: 0px;
   }
+  width: 100%;
 `;
 
 export const MedalWrapper = styled.div`
-  display: flex;
-  gap: 120px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  justify-content: space-between;
+  align-items: center;
+  gap: 90px;
+
+  @media ${breakPoints.tablet} {
+    width: 100%;
+    gap: 50px;
+  }
+
+  @media ${breakPoints.mobile} {
+    width: 100%;
+    gap: 40px;
+  }
 `;
 
 export const BestAnswerWrapper = styled.section`
   display: flex;
   flex-direction: column;
+  padding: 50px 0px;
 `;
 
 export const SearchSection = styled.section`
@@ -46,7 +65,12 @@ export const SearchSection = styled.section`
 export const SearchWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
+
+  @media ${breakPoints.mobile} {
+    width: 100%;
+  }
 `;
 export const SearchBox = styled.div`
   position: relative;
@@ -61,6 +85,11 @@ export const SearchInput = styled.input`
   padding: 15px;
   border: 1px solid var(--point-color-beige);
   background-color: white;
+
+  @media ${breakPoints.mobile} {
+    min-width: 300px;
+    /* width: 300px; */
+  }
 `;
 
 export const SearchIcon = styled(BsSearchHeartFill)`
@@ -77,8 +106,13 @@ export const SearchIcon = styled(BsSearchHeartFill)`
 
 export const TagBox = styled.div`
   display: flex;
+
   gap: 10px;
   padding: 0px 5px;
+
+  @media ${breakPoints.mobile} {
+    width: 100%;
+  }
 `;
 
 export const HashTag = styled.div`
