@@ -14,12 +14,19 @@ export const globalStyles = css`
     --font-size-sm: 0.875rem;
     --font-mobile-size-lg: 1.286rem;
     --font-mobile-size-md: 1.143rem;
-    --font-mobile-size-xs: 0.714rem;
+    --font-mobile-size-sm: 0.714rem;
     --base-font: "GowunDodum-Regular";
     --logo-font: "TAEBAEKmilkyway";
     --eng-font: "Poppins";
     --btn-radius-lg: 3.125rem;
-    --btn-radius-xs: 0.5rem;
+    --btn-radius-sm: 0.5rem;
+
+    --btn-radius: 3.125rem;
+    --btn-padding: 7px 15px;
+    --btn-font-size: 0.875rem;
+    --btn-width-md: 110px;
+    --btn-width-lg: 312px;
+    --btn-height: 40px;
   }
   * {
     box-sizing: border-box;

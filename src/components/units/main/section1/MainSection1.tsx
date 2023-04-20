@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Slider, { Settings } from "@ant-design/react-slick";
-
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import CustomBtn from "../../../commons/buttons/CustomBtn";
 const settings: Settings = {
   arrows: false,
   // infinite: true,
@@ -24,16 +25,17 @@ const Slide = styled.div`
     width: 100%;
   }
 `;
-const Btn = styled.button`
+const BtnPosition = styled.div`
   position: absolute;
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  background-color: green;
+  /* width: 100px; */
 `;
 
 export default function MainSection1UI(): JSX.Element {
+  const { onClickMoveToPage } = useMoveToPage();
+
   return (
     // react-slick 이미지 에러 발생 원인 찾는중
     <Wrapper>
@@ -51,7 +53,14 @@ export default function MainSection1UI(): JSX.Element {
           <img src="/img/main/slider_4.jpg" alt="img" />
         </Slide> */}
       </Slider>
-      <Btn>시작하기</Btn>
+      <BtnPosition>
+        <CustomBtn
+          type={"Md"}
+          fill={true}
+          text={"시작하기"}
+          onClickMoveToPage={onClickMoveToPage("/admin")}
+        />
+      </BtnPosition>
     </Wrapper>
   );
 }
