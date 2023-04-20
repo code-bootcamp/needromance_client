@@ -1,6 +1,8 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useInView } from "react-intersection-observer";
+import CustomBtn from "../../../commons/buttons/CustomBtn";
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 
 interface IAnimationProps {
   inView: boolean;
@@ -56,7 +58,7 @@ const WrapperBody = styled.div`
   justify-content: center;
   align-items: flex-end;
   height: 600px;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
   position: relative;
 `;
 const BodyCommentsBox = styled.div`
@@ -76,6 +78,8 @@ const BodyImgBox = styled.div`
   }
 `;
 export default function MainSection3UI(): JSX.Element {
+  const { onClickMoveToPage } = useMoveToPage();
+
   const { ref, inView } = useInView({
     threshold: 0,
   });
@@ -103,7 +107,12 @@ export default function MainSection3UI(): JSX.Element {
           <p>친구들에게 말하지 못했던 이야기들..</p>
           <p>우리와 함께 나눠 보는건 어떨까요?</p>
         </BodyCommentsBox>
-        <button>대화하러 가기</button>
+        <CustomBtn
+          type={"Sm"}
+          fill={false}
+          text={"친구들과 소통하기"}
+          onClickMoveToPage={onClickMoveToPage("/community")}
+        />
       </WrapperBody>
     </Wrapper>
   );

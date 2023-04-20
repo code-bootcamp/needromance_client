@@ -1,6 +1,8 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useInView } from "react-intersection-observer";
+import CustomBtn from "../../../commons/buttons/CustomBtn";
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 
 interface IAnimationProps {
   inView: boolean;
@@ -73,7 +75,10 @@ const BodyComment = styled.p`
   margin: 20px 0;
   font-size: var(--font-size-lg);
 `;
-
+const BtnPosition = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const BodyImgBox = styled.div`
   position: relative;
   height: 900px;
@@ -99,10 +104,11 @@ const BodyImgBox = styled.div`
   }
 `;
 export default function MainSection2UI(): JSX.Element {
+  const { onClickMoveToPage } = useMoveToPage();
+
   const { ref, inView } = useInView({
     threshold: 0,
   });
-  console.log(inView);
   return (
     <Wrapper>
       <WrapperTop>
@@ -149,7 +155,14 @@ export default function MainSection2UI(): JSX.Element {
           <BodyComment>당신의 이야기를 들려주세요.</BodyComment>
           <BodyComment>오늘은 당신이 주인공이니까요!</BodyComment>
         </BodyCommentsBox>
-        <button>채팅하러가기</button>
+        <BtnPosition>
+          <CustomBtn
+            type={"Md"}
+            fill={true}
+            text={"채팅하러가기"}
+            onClickMoveToPage={onClickMoveToPage("/chatgpt")}
+          />
+        </BtnPosition>
       </WrapperBody>
     </Wrapper>
   );

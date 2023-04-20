@@ -1,16 +1,22 @@
 import styled from "@emotion/styled";
-import Slider, { Settings } from "@ant-design/react-slick";
+import SlickCarousel, { Settings } from "react-slick";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import CustomBtn from "../../../commons/buttons/CustomBtn";
+
 const settings: Settings = {
   arrows: false,
-  // infinite: true,
+  dots: false,
+  infinite: true,
   speed: 2000,
   autoplay: true,
   autoplaySpeed: 2000,
   slidesToShow: 1,
   slidesToScroll: 1,
   fade: true,
+  // lazyLoad: "ondemand",
   lazyLoad: "progressive",
 };
 
@@ -36,13 +42,12 @@ export default function MainSection1UI(): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
-    // react-slick 이미지 에러 발생 원인 찾는중
     <Wrapper>
       <Slider {...settings}>
         <Slide>
           <img src="/img/main/slider_1.jpg" alt="img" />
         </Slide>
-        {/* <Slide>
+        <Slide>
           <img src="/img/main/slider_2.jpg" alt="img" />
         </Slide>
         <Slide>
@@ -50,7 +55,7 @@ export default function MainSection1UI(): JSX.Element {
         </Slide>
         <Slide>
           <img src="/img/main/slider_4.jpg" alt="img" />
-        </Slide> */}
+        </Slide>
       </Slider>
       <BtnPosition>
         <CustomBtn

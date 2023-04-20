@@ -1,7 +1,9 @@
-import CommunityList from '../../src/components/units/community/list/CommunityList'
+import CommunityList from "../../src/components/units/community/list/CommunityList";
 
 export default function CommunityListPage() {
-    return (
-        <div><CommunityList /></div>
-    )
+  return (
+    <div>
+      <CommunityList />
+    </div>
+  );
 }
