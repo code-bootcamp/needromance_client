@@ -63,7 +63,6 @@ const WrapperBody = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 100px;
-  /* height: 1500px; */
 `;
 const BodyCommentsBox = styled.div`
   display: flex;
