@@ -1,3 +1,4 @@
+import Link from "next/link";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./FindID.styles";
 
@@ -8,25 +9,23 @@ export default function FindID() {
         <S.Logo>
           <S.LogoImage src="img/logo/INR_logo.png" alt="로필 로고" />
         </S.Logo>
-        <div> 아이디 찾기</div>
+        <S.Menu> 아이디 찾기</S.Menu>
         <S.SignInForm>
           <S.InputWrapper>
-            <BorderInput label="Email" style={{ marginBottom: "25px" }} />
-            <S.Checker />
+            <BorderInput
+              check={true}
+              label="Email"
+              style={{ marginBottom: "25px" }}
+            />
           </S.InputWrapper>
-
           <S.ButtonWrapper>
-            <S.SignInButton>SignIn</S.SignInButton>
+            <S.SignInButton>비밀번호 찾기</S.SignInButton>
           </S.ButtonWrapper>
+          <Link href="/signin">
+            <a>로그인하러 가기</a>
+          </Link>
         </S.SignInForm>
-        <S.BottomWrapper>
-          <S.FindID>
-            <span>아이디</span>/ <span>비밀번호</span>를 잊으셨나요?
-          </S.FindID>
-          <S.Line />
-          <div>구글 로그인 구역</div>
-          <S.SignUpLink>회원이 아니라면, </S.SignUpLink>
-        </S.BottomWrapper>
+        <S.BottomWrapper></S.BottomWrapper>
       </S.SignInWindow>
     </S.Wrapper>
   );
