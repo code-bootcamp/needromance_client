@@ -70,7 +70,7 @@ export const FindID = styled.div`
   padding-top: 10px;
   font-size: var(--font-size-sm);
 
-  span {
+  a {
     color: var(--point-color-green);
   }
 `;

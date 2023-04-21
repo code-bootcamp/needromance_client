@@ -23,12 +23,19 @@ export default function SignIn() {
         </S.SignInForm>
         <S.BottomWrapper>
           <S.FindID>
-            <span>아이디</span>/ <span>비밀번호</span>를 잊으셨나요?
+            <Link href="/findid">
+              <a>아이디</a>
+            </Link>
+            /
+            <Link href="findpw">
+              <a>비밀번호</a>
+            </Link>
+            를 잊으셨나요?
           </S.FindID>
           <S.Line />
           <div>구글 로그인 구역</div>
           <S.SignUpLink>
-            회원이 아니라면,{" "}
+            회원이 아니라면,
             <Link href="/signup">
               <a>회원가입</a>
             </Link>
