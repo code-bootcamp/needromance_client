@@ -1,19 +1,11 @@
 import styled from "@emotion/styled";
-import { breakPoints } from "../../../commons/styles/media";
-
-interface ISignUpProps {
-  isActive?: boolean;
-}
+import { IoCheckmarkSharp } from "react-icons/io5";
 
 export const Wrapper = styled.section`
   padding: 50px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media ${breakPoints.mobile} {
-    width: 100%;
-  }
 `;
 
 export const SignInWindow = styled.div`
@@ -46,38 +38,26 @@ export const SignInForm = styled.form`
 
 export const InputWrapper = styled.div`
   position: relative;
-  width: 320px;
+  width: 280px;
+  gap: 100px;
+`;
+
+export const Checker = styled(IoCheckmarkSharp)`
+  position: absolute;
+  top: 0;
 `;
 
 export const ButtonWrapper = styled.div`
   padding-top: 30px;
 `;
 
-export const GreenButton = styled.button`
-  position: absolute;
-  top: 35px;
-  right: 10px;
-  width: 90px;
-  height: 30px;
-  border: 1px solid var(--point-color-green);
-  color: var(--point-color-green);
-  background-color: white;
-  font-size: var(--font-mobile-size-sm);
-  border-radius: 50px;
-  padding: 5px;
-`;
-
-export const SignUpButton = styled.button`
-  width: 320px;
+export const SignInButton = styled.button`
+  width: 280px;
   height: 45px;
-  /* background-color: var(--point-color-green); */
+  background-color: var(--point-color-green);
   color: white;
   font-size: 18px;
   border-radius: 8px;
-  // 조건 만족시 컬러
-
-  background-color: ${(props: ISignUpProps) =>
-    props.isActive ? "var(--point-color-green)" : "#878787"};
 `;
 
 export const BottomWrapper = styled.div`
@@ -108,7 +88,10 @@ export const Line = styled.div`
   padding: 5px;
 `;
 
-export const Checker = styled.p`
-  color: green;
-  font-size: 13px;
+export const SignUpLink = styled.div`
+  padding: 20px;
+
+  a {
+    color: var(--point-color-green);
+  }
 `;

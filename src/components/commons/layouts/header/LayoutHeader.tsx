@@ -37,7 +37,7 @@ export default function LayoutHeader() {
     <Wrapper>
       <Link href={"/"}>
         <Logo>
-          <LogoImage src="img/logo/INR_logo.png" />
+          <LogoImage src="/img/logo/INR_logo.png" />
           <span>로맨스가 필요해</span>
         </Logo>
       </Link>

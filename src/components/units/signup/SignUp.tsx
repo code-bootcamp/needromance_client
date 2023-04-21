@@ -1,27 +1,46 @@
 import Link from "next/link";
 import { useState } from "react";
-import CustomBtn from "../../commons/buttons/CustomBtn";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./SignUp.styles";
+
+interface ISignUpProps {
+  inputs: { email: string; id: string; password: string };
+
+  [key: string]: any;
+}
 
 export default function SignUp() {
   const [isChecking, setIsChecking] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-  const [input, setInput] = useState({
-    email: "",
-    id: "",
-    password: "",
+  const [inputs, setInputs] = useState<ISignUpProps>({
+    inputs: {
+      email: "",
+      id: "",
+      password: "",
+    },
   });
 
   const handleInput = () => {};
 
   const handleCheckButton = () => {
     setIsChecking(!isChecking);
+    // 이메일 중복 검사
   };
   const checkEmailDuplicate = () => {
     // email(input의 value)을 가져온다.
     //
+  };
+
+  const checkFormValidity = (inputs: ISignUpProps) => {
+    for (let key in inputs) {
+      if (!inputs[key]) {
+        return;
+        // 비어있는 칸이 있으면 return
+      }
+    }
+    setIsActive(true);
+    // 모두 다 채워졌다면 isActive true
   };
 
   return (
@@ -34,12 +53,12 @@ export default function SignUp() {
         <S.SignInForm>
           <S.InputWrapper>
             <BorderInput label="Email" />
+            <S.GreenButton onClick={handleCheckButton}>
+              이메일 중복검사
+            </S.GreenButton>
             <S.Checker>사용가능한 이메일입니다.</S.Checker>
           </S.InputWrapper>
-          <S.GreenButton onClick={handleCheckButton}>
-            이메일 중복검사
-          </S.GreenButton>
-          <CustomBtn text="이메일 중복검사 얍" />
+
           <S.InputWrapper>
             <BorderInput label="Nickname" placeholder="닉네임을 입력하세요." />
           </S.InputWrapper>
