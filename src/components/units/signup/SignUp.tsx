@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import BorderInput from "../../commons/input/Input";
+import GoogleSignIn from "../signin/GoogleSignIn";
 import * as S from "./SignUp.styles";
 
 interface ISignUpProps {
@@ -61,8 +62,8 @@ export default function SignUp() {
 
           <S.InputWrapper>
             <BorderInput label="Nickname" placeholder="닉네임을 입력하세요." />
+            <S.GreenButton>닉네임 중복검사</S.GreenButton>
           </S.InputWrapper>
-          <S.GreenButton>닉네임 중복검사</S.GreenButton>
           <S.InputWrapper>
             <BorderInput
               label="Password"
@@ -85,16 +86,14 @@ export default function SignUp() {
         </S.SignInForm>
         <S.BottomWrapper>
           <S.Line />
-          <div>구글 로그인 구역</div>
-          <div>
-            이미 회원이라면
+          <GoogleSignIn />
+          <S.SignInLink>
             <Link href={"/signin"}>
               <a>로그인</a>
             </Link>
-          </div>
+          </S.SignInLink>
         </S.BottomWrapper>
       </S.SignInWindow>
-      로그인 페이지입니다.
     </S.Wrapper>
   );
 }

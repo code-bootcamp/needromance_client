@@ -38,15 +38,18 @@ export const Logo = styled.div`
 `;
 
 export const SignInForm = styled.form`
+  width: 320px;
   padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 `;
 
 export const InputWrapper = styled.div`
   position: relative;
-  width: 320px;
+  width: 100%;
+  /* max-width: 320px; */
 `;
 
 export const ButtonWrapper = styled.div`
@@ -55,7 +58,7 @@ export const ButtonWrapper = styled.div`
 
 export const GreenButton = styled.button`
   position: absolute;
-  top: 35px;
+  top: 30px;
   right: 10px;
   width: 90px;
   height: 30px;
@@ -94,21 +97,30 @@ export const BottomWrapper = styled.div`
 `;
 
 export const FindID = styled.div`
-  padding-top: 10px;
+  padding-top: 20px;
   font-size: var(--font-size-sm);
 
-  span {
+  a {
     color: var(--point-color-green);
   }
 `;
 
 export const Line = styled.div`
-  width: 70%;
+  width: 90%;
   border-bottom: 1px solid #cccccc;
-  padding: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
 `;
 
 export const Checker = styled.p`
   color: green;
   font-size: 13px;
+`;
+
+export const SignInLink = styled.div`
+  padding: 20px;
+
+  a {
+    color: var(--point-color-green);
+  }
 `;

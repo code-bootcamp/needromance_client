@@ -67,7 +67,7 @@ export const BottomWrapper = styled.div`
 `;
 
 export const FindID = styled.div`
-  padding-top: 10px;
+  padding-top: 20px;
   font-size: var(--font-size-sm);
 
   a {
@@ -76,9 +76,10 @@ export const FindID = styled.div`
 `;
 
 export const Line = styled.div`
-  width: 70%;
+  width: 90%;
   border-bottom: 1px solid #cccccc;
-  padding: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
 `;
 
 export const SignUpLink = styled.div`
