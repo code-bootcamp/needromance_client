@@ -40,7 +40,7 @@ export const SignInForm = styled.form`
   padding-top: 50px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 `;
 
 export const InputWrapper = styled.div`
@@ -58,7 +58,7 @@ export const ButtonWrapper = styled.div`
   padding-top: 20px;
 `;
 
-export const SignInButton = styled.button`
+export const ResetButton = styled.button`
   width: 280px;
   height: 45px;
   background-color: var(--point-color-green);
@@ -95,10 +95,23 @@ export const FindID = styled.div`
   }
 `;
 
+export const Line = styled.div`
+  width: 70%;
+  border-bottom: 1px solid #cccccc;
+  padding: 5px;
+`;
+
 export const SignUpLink = styled.div`
   padding: 20px;
 
   a {
     color: var(--point-color-green);
   }
+`;
+
+export const BtnInputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;

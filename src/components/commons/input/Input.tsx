@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { ChangeEventHandler, CSSProperties } from "react";
-import { IoCheckmarkSharp } from "react-icons/io5";
-import { GoCheck } from "react-icons/go";
+
 interface IInputProps {
   isValid?: boolean;
 }
@@ -22,7 +21,6 @@ const Input = styled.input`
   width: 100%;
   height: 45px;
   background-color: white;
-  /* border: 1px solid var(--point-color-green); */
   border: 1px solid #cccccc;
   border-radius: 8px;
   padding: 10px;
@@ -30,18 +28,15 @@ const Input = styled.input`
   font-size: 18px;
   color: #6b6b6b;
   margin: 5px 0px;
+
+  background: ${(props: IInputProps) =>
+    props.isValid ? `url("/img/check.png") no-repeat` : "none"};
+  background-size: 1.3rem;
+  background-position: 96% 50%;
 `;
 
 export const InputBox = styled.div`
   position: relative;
-`;
-
-export const Check = styled(GoCheck)`
-  display: ${(props: IInputProps) => (props.isValid ? "block" : "none")};
-  position: absolute;
-  top: 25%;
-  right: 10px;
-  font-size: 1rem;
 `;
 export default function BorderInput({
   label,
@@ -67,8 +62,8 @@ export default function BorderInput({
           onChange={onChange}
           style={style}
           type={type}
+          isValid={check}
         />
-        <Check isValid={check} />
       </InputBox>
     </Wrapper>
   );

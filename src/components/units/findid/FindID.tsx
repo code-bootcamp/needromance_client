@@ -21,11 +21,12 @@ export default function FindID() {
           <S.ButtonWrapper>
             <S.SignInButton>비밀번호 찾기</S.SignInButton>
           </S.ButtonWrapper>
+        </S.SignInForm>
+        <S.BottomWrapper>
           <Link href="/signin">
             <a>로그인하러 가기</a>
           </Link>
-        </S.SignInForm>
-        <S.BottomWrapper></S.BottomWrapper>
+        </S.BottomWrapper>
       </S.SignInWindow>
     </S.Wrapper>
   );
