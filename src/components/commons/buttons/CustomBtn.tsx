@@ -23,8 +23,10 @@ const WrapperSm = styled(Wrapper)<IBtnProps>`
   background-color: ${(props) =>
     props.fill ? "var(--point-color-green)" : "#fff"};
 `;
+
 const WrapperMd = styled(Wrapper)<IBtnProps>`
-  width: var(--btn-width-md);
+  border: 1px solid var(--point-color-green);
+  min-width: var(--btn-width-md);
   height: var(--btn-height);
   color: ${(props) => (props.fill ? "#fff" : "var(--point-color-green)")};
   background-color: ${(props) =>
@@ -32,8 +34,10 @@ const WrapperMd = styled(Wrapper)<IBtnProps>`
   border: ${(props) =>
     props.fill ? "none" : "1px solid var(--point-color-green)"};
 `;
+
 const WrapperLg = styled(Wrapper)<IBtnProps>`
-  width: var(--btn-width-lg);
+  border: 1px solid var(--point-color-green);
+  min-width: var(--btn-width-lg);
   height: var(--btn-height);
   color: ${(props) => (props.fill ? "#fff" : " var(--point-color-green)")};
   background-color: ${(props) =>
@@ -43,7 +47,6 @@ const WrapperLg = styled(Wrapper)<IBtnProps>`
 `;
 
 export default function CustomBtn(props: IBtnProps) {
-  console.log(props.fill);
   return (
     <>
       {props.type === "Lg" && (
@@ -64,3 +67,4 @@ export default function CustomBtn(props: IBtnProps) {
     </>
   );
 }
+// chatgpt
