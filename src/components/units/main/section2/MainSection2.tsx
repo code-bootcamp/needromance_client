@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { useInView } from "react-intersection-observer";
 import CustomBtn from "../../../commons/buttons/CustomBtn";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import { breakPoints } from "../../../../commons/styles/media";
 
 interface IAnimationProps {
   inView: boolean;
@@ -43,6 +44,7 @@ const TopBox = styled.div<IAnimationProps>`
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
   animation-delay: ${({ delay }) => delay || 0}s;
+
   div:nth-of-type(1) {
     display: flex;
     align-items: center;
@@ -51,12 +53,29 @@ const TopBox = styled.div<IAnimationProps>`
       margin-left: 10px;
       font-size: var(--font-size-md);
     }
+    @media ${breakPoints.mobile} {
+      font-size: var(--font-mobile-size-lg);
+      span {
+        font-size: var(--font-mobile-size-md);
+      }
+    }
+    @media ${breakPoints.tablet} {
+      font-size: var(--font-size-md);
+      span {
+        font-size: var(--font-size-md);
+      }
+    }
   }
 
   div:nth-of-type(2) {
     font-size: var(--font-size-lg);
-    font-weight: 700;
     color: var(--point-color-green);
+    @media ${breakPoints.mobile} {
+      font-size: var(--font-mobile-size-lg);
+    }
+    @media ${breakPoints.tablet} {
+      font-size: var(--font-size-md);
+    }
   }
 `;
 const WrapperBody = styled.div`
@@ -68,11 +87,22 @@ const BodyCommentsBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 200px 0px;
+  margin: 100px 0px;
 `;
 const BodyComment = styled.p`
   margin: 20px 0;
   font-size: var(--font-size-lg);
+  text-align: center;
+  @media ${breakPoints.mobile} {
+    padding: 0px 20px;
+    font-size: var(--font-mobile-size-lg);
+    margin: 20px 0;
+  }
+  @media ${breakPoints.tablet} {
+    padding: 0px 20px;
+    font-size: var(--font-size-md);
+    margin: 30px 0px;
+  }
 `;
 const BtnPosition = styled.div`
   display: flex;
@@ -80,7 +110,10 @@ const BtnPosition = styled.div`
 `;
 const BodyImgBox = styled.div`
   position: relative;
-  height: 900px;
+  min-height: 900px;
+  @media ${breakPoints.mobile} {
+    min-height: 500px;
+  }
   > div {
     position: absolute;
   }
@@ -159,7 +192,7 @@ export default function MainSection2UI(): JSX.Element {
             type={"Md"}
             fill={true}
             text={"채팅하러가기"}
-            onClickMoveToPage={onClickMoveToPage("/chatgpt")}
+            onClick={onClickMoveToPage("/chatgpt")}
           />
         </BtnPosition>
       </WrapperBody>

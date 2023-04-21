@@ -62,7 +62,7 @@ export default function MainSection1UI(): JSX.Element {
           type={"Md"}
           fill={true}
           text={"시작하기"}
-          onClickMoveToPage={onClickMoveToPage("/admin")}
+          onClick={onClickMoveToPage("/admin")}
         />
       </BtnPosition>
     </Wrapper>

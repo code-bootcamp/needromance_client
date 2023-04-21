@@ -157,7 +157,7 @@ export default function MainSection1UI(): JSX.Element {
       </Slider>
       <BtnPosition>
         <CustomBtn
-          type={"Md"}
+          type={"Sm"}
           fill={true}
           text={"시작하기"}
           onClickMoveToPage={onClickMoveToPage("/admin")}
