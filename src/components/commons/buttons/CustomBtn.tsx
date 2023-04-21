@@ -6,6 +6,7 @@ interface IBtnProps {
   text?: string;
   type?: string;
   fill?: boolean;
+  children?: JSX.Element;
 }
 
 // default 속성
@@ -52,16 +53,19 @@ export default function CustomBtn(props: IBtnProps) {
       {props.type === "Lg" && (
         <WrapperLg fill={props.fill} onClick={props.onClick}>
           {props.text}
+          {props.children}
         </WrapperLg>
       )}
       {props.type === "Md" && (
         <WrapperMd fill={props.fill} onClick={props.onClick}>
           {props.text}
+          {props.children}
         </WrapperMd>
       )}
       {props.type === "Sm" && (
         <WrapperSm fill={props.fill} onClick={props.onClick}>
           {props.text}
+          {props.children}
         </WrapperSm>
       )}
     </>
