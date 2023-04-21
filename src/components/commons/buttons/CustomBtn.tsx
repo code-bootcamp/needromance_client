@@ -71,4 +71,3 @@ export default function CustomBtn(props: IBtnProps) {
     </>
   );
 }
-// chatgpt
