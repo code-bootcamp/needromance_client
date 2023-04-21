@@ -8,7 +8,7 @@ interface IInputProps {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3x;
+  gap: 0px;
 `;
 const Label = styled.label`
   font-family: var(--eng-font);
@@ -27,12 +27,12 @@ const Input = styled.input`
   font-family: var(--eng-font);
   font-size: 18px;
   color: #6b6b6b;
-  margin: 5px 0px;
+  margin: 0px 0px 5px 0px;
 
-  background: ${(props: IInputProps) =>
+  /* background: ${(props: IInputProps) =>
     props.isValid ? `url("/img/check.png") no-repeat` : "none"};
   background-size: 1.3rem;
-  background-position: 96% 50%;
+  background-position: 96% 50%; */
 `;
 
 export const InputBox = styled.div`

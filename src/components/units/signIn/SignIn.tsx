@@ -1,6 +1,8 @@
 import Link from "next/link";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
+import { signIn, signOut, useSession } from "next-auth/react";
+import GoogleSignIn from "./GoogleSignIn";
 
 export default function SignIn() {
   return (
@@ -18,7 +20,7 @@ export default function SignIn() {
             <BorderInput label="Password" />
           </S.InputWrapper>
           <S.ButtonWrapper>
-            <S.SignInButton>SignIn</S.SignInButton>
+            <S.SignInButton onClick={() => signIn()}>SignIn</S.SignInButton>
           </S.ButtonWrapper>
         </S.SignInForm>
         <S.BottomWrapper>
@@ -27,15 +29,16 @@ export default function SignIn() {
               <a>아이디</a>
             </Link>
             /
-            <Link href="findpw">
+            <Link href="/findpw">
               <a>비밀번호</a>
             </Link>
             를 잊으셨나요?
           </S.FindID>
           <S.Line />
-          <div>구글 로그인 구역</div>
+          <div>
+            <GoogleSignIn />
+          </div>
           <S.SignUpLink>
-            회원이 아니라면,
             <Link href="/signup">
               <a>회원가입</a>
             </Link>
