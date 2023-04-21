@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Wrapper = styled.header`
   width: 100vw;
-  height: 77px;
+  height: 90px;
   // 양쪽에 꽉차게 하기 위한 옵션
   position: relative;
   left: calc(-50vw + 50%);
@@ -15,7 +15,7 @@ const Wrapper = styled.header`
 `;
 
 const Logo = styled.a`
-  font-size: 20px;
+  font-size: 1.5rem;
   font-family: var(--logo-font);
   font-weight: bolder;
   display: flex;

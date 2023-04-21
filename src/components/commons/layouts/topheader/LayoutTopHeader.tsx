@@ -17,8 +17,12 @@ const TopHeader = styled.header`
 `;
 
 const Menu = styled.a`
-  color: white;
+  color: #d2d2d2;
   cursor: pointer;
+
+  &:hover {
+    color: white;
+  }
 `;
 
 export default function LayoutTopHeader() {

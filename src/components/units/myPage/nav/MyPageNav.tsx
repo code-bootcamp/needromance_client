@@ -29,39 +29,44 @@ const MyPageNav = ({ IsActive, setIsActive }: IMyPageProps) => {
   const [open, setOpen] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [openNav, setOpenNav] = useState(false);
-  const isMobile = useMediaQuery({
+  const NavIcon = useMediaQuery({
     query: "(max-width:768px)",
   });
 
   return (
     <>
-      {isMobile && (
+      <S.NavWrap openNav={openNav} onClick={() => setOpenNav(false)}>
+        <S.MenuWrap>
+          {USER_INFO.map((user) => (
+            <S.ProfileWrap key={user.id}>
+              <S.ProfileImg src={user.profileImg} />
+              <S.Nickname>{user.nickname}</S.Nickname>
+            </S.ProfileWrap>
+          ))}
+          <S.Line />
+          <S.ListsWrap>
+            {NAV_LISTS.map((li) => (
+              <S.List key={li.id} onClick={() => setIsActive(li.id)}>
+                <S.Name active={IsActive === li.id ?? true}>{li.name}</S.Name>
+              </S.List>
+            ))}
+            <S.List onClick={() => setOpen(true)}>
+              <S.Name active={IsActive === "withdrawal" ?? true}>
+                회원탈퇴
+              </S.Name>
+            </S.List>
+          </S.ListsWrap>
+        </S.MenuWrap>
+      </S.NavWrap>
+      <WidthdrawalModal open={open} setOpen={setOpen} setConfirm={setConfirm} />
+      <ConfirmModal confirm={confirm} setConfirm={setConfirm} />
+
+      {NavIcon && (
         <S.MenuBtn
           onClick={() => setOpenNav((prev) => !prev)}
           src="./img/menu.png"
         />
       )}
-      <S.NavWrap openNav={openNav}>
-        {USER_INFO.map((user) => (
-          <S.ProfileWrap key={user.id}>
-            <S.ProfileImg src={user.profileImg} />
-            <S.Nickname>{user.nickname}</S.Nickname>
-          </S.ProfileWrap>
-        ))}
-        <S.Line />
-        <S.ListsWrap>
-          {NAV_LISTS.map((li) => (
-            <S.List key={li.id} onClick={() => setIsActive(li.id)}>
-              <S.Name active={IsActive === li.id ?? true}>{li.name}</S.Name>
-            </S.List>
-          ))}
-          <S.List onClick={() => setOpen(true)}>
-            <S.Name active={IsActive === "withdrawal" ?? true}>회원탈퇴</S.Name>
-          </S.List>
-        </S.ListsWrap>
-      </S.NavWrap>
-      <WidthdrawalModal open={open} setOpen={setOpen} setConfirm={setConfirm} />
-      <ConfirmModal confirm={confirm} setConfirm={setConfirm} />
     </>
   );
 };

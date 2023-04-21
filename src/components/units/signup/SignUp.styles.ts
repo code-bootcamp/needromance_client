@@ -1,8 +1,19 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "../../../commons/styles/media";
+
+interface ISignUpProps {
+  isActive?: boolean;
+}
 
 export const Wrapper = styled.section`
   padding: 50px 0px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media ${breakPoints.mobile} {
+    width: 100%;
+  }
 `;
 
 export const SignInWindow = styled.div`
@@ -54,11 +65,14 @@ export const GreenButton = styled.button`
 export const SignUpButton = styled.button`
   width: 280px;
   height: 45px;
-  background-color: var(--point-color-green);
+  /* background-color: var(--point-color-green); */
   color: white;
   font-size: 18px;
   border-radius: 8px;
   // 조건 만족시 컬러
+
+  background-color: ${(props: ISignUpProps) =>
+    props.isActive ? "var(--point-color-green)" : "#878787"};
 `;
 
 export const BottomWrapper = styled.div`

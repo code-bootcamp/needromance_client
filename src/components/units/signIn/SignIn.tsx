@@ -1,3 +1,4 @@
+import Link from "next/link";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
 
@@ -26,12 +27,14 @@ export default function SignIn() {
           </S.FindID>
           <S.Line />
           <div>구글 로그인 구역</div>
-          <div>
-            회원이 아니신가요? <button>회원가입</button>
-          </div>
+          <S.SignUpLink>
+            회원이 아니라면,{" "}
+            <Link href="/signup">
+              <a>회원가입</a>
+            </Link>
+          </S.SignUpLink>
         </S.BottomWrapper>
       </S.SignInWindow>
-      로그인 페이지입니다.
     </S.Wrapper>
   );
 }
