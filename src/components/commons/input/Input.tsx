@@ -22,7 +22,8 @@ const Input = styled.input`
   width: 100%;
   height: 45px;
   background-color: white;
-  border: 1px solid var(--point-color-green);
+  /* border: 1px solid var(--point-color-green); */
+  border: 1px solid #cccccc;
   border-radius: 8px;
   padding: 10px;
   font-family: var(--eng-font);

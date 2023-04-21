@@ -13,6 +13,9 @@ export const SignInWindow = styled.div`
   background-color: #ffffffb2;
   border-radius: 10px;
   padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const LogoImage = styled.img`
@@ -29,11 +32,20 @@ export const Logo = styled.div`
   gap: 10px;
 `;
 
+export const Menu = styled.div`
+  font-size: var(--font-size-md);
+`;
+
 export const SignInForm = styled.form`
   padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  a {
+    padding-top: 10px;
+    color: #999999;
+    font-size: var(--font-size-sm);
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -48,7 +60,7 @@ export const Checker = styled(IoCheckmarkSharp)`
 `;
 
 export const ButtonWrapper = styled.div`
-  padding-top: 30px;
+  padding-top: 20px;
 `;
 
 export const SignInButton = styled.button`
@@ -56,7 +68,7 @@ export const SignInButton = styled.button`
   height: 45px;
   background-color: var(--point-color-green);
   color: white;
-  font-size: 18px;
+  font-size: 1rem;
   border-radius: 8px;
 `;
 
