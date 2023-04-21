@@ -4,8 +4,8 @@ import styled from "@emotion/styled";
 interface IBtnProps {
   onClick?: any;
   text?: string;
-  type?: string;
-  fill?: boolean;
+  type?: string; // 크기
+  fill?: boolean; // 색상
   children?: JSX.Element;
 }
 

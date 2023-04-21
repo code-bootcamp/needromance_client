@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { breakPoints } from "../../../commons/styles/media";
+import { breakPoints } from "../../../../commons/styles/media";
 
 interface ISignUpProps {
   isActive?: boolean;
@@ -68,7 +68,7 @@ export const GreenButton = styled.button`
 `;
 
 export const SignUpButton = styled.button`
-  width: 320px;
+  width: 280px;
   height: 45px;
   /* background-color: var(--point-color-green); */
   color: white;
