@@ -20,12 +20,18 @@ export const CardWrap = styled.div`
   width: 100%;
   max-width: 630px;
   height: auto;
+  min-height: 400px;
   padding: 1.25rem 1.875rem;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   margin-top: 3px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
 `;
 
 export const InnerWrap = styled.div`
