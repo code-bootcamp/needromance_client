@@ -1,7 +1,6 @@
 import Link from "next/link";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
-import { signIn, signOut, useSession } from "next-auth/react";
 import GoogleSignIn from "./GoogleSignIn";
 
 export default function SignIn() {
@@ -20,7 +19,7 @@ export default function SignIn() {
             <BorderInput label="Password" />
           </S.InputWrapper>
           <S.ButtonWrapper>
-            <S.SignInButton onClick={() => signIn()}>SignIn</S.SignInButton>
+            <S.SignInButton>SignIn</S.SignInButton>
           </S.ButtonWrapper>
         </S.SignInForm>
         <S.BottomWrapper>

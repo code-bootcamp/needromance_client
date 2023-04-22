@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
-import { GoogleLogin } from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
 import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { userProfileState } from "../../../commons/store/\batoms";
 
 const GoogleLoginButton = styled.div`
   position: relative;
@@ -26,9 +30,37 @@ const GoogleLogo = styled.img`
 `;
 
 export default function GoogleSignIn() {
+  const [user, setUser] = useState([]);
+  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
+
+  useEffect(() => {
+    if (user.length !== 0) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setUserProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
+
+  // console.log(user);
+  // console.log(profile);
+
   const googleSocialLogin = useGoogleLogin({
-    onSuccess: (codeResponse) => console.log(codeResponse),
-    flow: "auth-code",
+    onSuccess: (res) => setUser(res),
+    onError: (res) => console.log(res, "로그인 실패"),
+    // flow: "auth-code",
+
+    // scope: "https://www.googleapis.com/auth/business.manage",
   });
 
   return (
