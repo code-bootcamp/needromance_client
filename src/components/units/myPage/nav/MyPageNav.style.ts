@@ -1,12 +1,15 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "../../../../commons/styles/media";
 
-export const NavWrap = styled.nav`
-  background-color: #eee;
+interface IStylePropsType {
+  openNav: boolean;
+}
 
+export const NavWrap = styled.nav<IStylePropsType>`
   @media ${breakPoints.mobile} {
-    display: ${(props) => (props.openNav ? "block" : "none")};
+    visibility: ${({ openNav }) => (openNav ? "visible" : "hidden")};
     position: relative;
+    transition: visibility 0.6s;
 
     ::before {
       content: "";
@@ -19,10 +22,10 @@ export const NavWrap = styled.nav`
       z-index: 100;
     }
   }
-
   @media ${breakPoints.tablet} {
-    display: ${(props) => (props.openNav ? "block" : "none")};
+    visibility: ${({ openNav }) => (openNav ? "visible" : "hidden")};
     position: relative;
+    transition: visibility 0.6s;
 
     ::before {
       content: "";
@@ -42,16 +45,44 @@ export const MenuWrap = styled.div`
   background: rgba(255, 255, 255, 1);
   border-right: 1px solid #eee;
 
+  @keyframes fade-in {
+    from {
+      left: -220px;
+    }
+    to {
+      left: 0;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      left: 0;
+    }
+    to {
+      left: -220px;
+    }
+  }
+
   @media ${breakPoints.mobile} {
     position: absolute;
     left: 0;
     z-index: 101;
+
+    animation: ${({ openNav }) =>
+      openNav
+        ? "fade-in 0.6s forwards ease-out"
+        : "fade-out 0.6s forwards ease-out"};
   }
 
   @media ${breakPoints.tablet} {
     position: absolute;
     left: 0;
     z-index: 101;
+
+    animation: ${({ openNav }) =>
+      openNav
+        ? "fade-in 0.6s forwards ease-out"
+        : "fade-out 0.6s forwards ease-out"};
   }
 `;
 
@@ -104,13 +135,10 @@ export const Name = styled.span<{ active: boolean }>`
   color: ${(props) => (props?.active ? "#296a02" : "#2c2c2c")};
 `;
 
-export const MenuBtn = styled.img`
-  width: 20px;
-  height: 20px;
-  object-fit: cover;
-  position: absolute;
-  top: 130px;
-  left: 20px;
+export const MenuBtn = styled.div`
   cursor: pointer;
-  z-index: 20;
+  position: absolute;
+  font-size: var(--font-size-md);
+  top: 124px;
+  left: 20px;
 `;

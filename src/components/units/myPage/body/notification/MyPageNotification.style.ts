@@ -15,6 +15,10 @@ export const NotificationCard = styled.div`
   @media ${breakPoints.mobile} {
     padding: 0.8rem;
   }
+
+  @media ${breakPoints.tablet} {
+    padding: 0.8rem;
+  }
 `;
 
 export const IconWrap = styled.div`
@@ -27,6 +31,13 @@ export const IconWrap = styled.div`
   @media ${breakPoints.mobile} {
     width: 20px;
     height: 18px;
+    margin-top: 3px;
+  }
+
+  @media ${breakPoints.tablet} {
+    width: 20px;
+    height: 18px;
+    margin-top: 3px;
   }
 
   display: flex;
@@ -50,6 +61,10 @@ export const Title = styled.h3`
     @media ${breakPoints.mobile} {
       font-size: var(--font-mobile-size-sm);
     }
+
+    @media ${breakPoints.tablet} {
+      font-size: var(--font-mobile-size-sm);
+    }
   }
 `;
 
@@ -58,6 +73,11 @@ export const Content = styled.p`
   margin-top: 0.625rem;
 
   @media ${breakPoints.mobile} {
+    font-size: var(--font-mobile-size-sm);
+    margin-top: 0.5rem;
+  }
+
+  @media ${breakPoints.tablet} {
     font-size: var(--font-mobile-size-sm);
     margin-top: 0.5rem;
   }

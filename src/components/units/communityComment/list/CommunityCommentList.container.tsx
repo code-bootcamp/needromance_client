@@ -1,3 +1,5 @@
+import { Icon_Heart } from "../../../../commons/styles/icons";
+import CustomBtn from "../../../commons/buttons/CustomBtn";
 import CommunityCommentWriteContainer from "../write/CommunityCommentWrite.container";
 import * as S from "./CommunityCommentList.style";
 
@@ -7,12 +9,12 @@ const COMMENT_DATA = [
     id: "1234567",
     content:
       "답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다.",
-    createdAt: "2023.04.20",
+    createdAt: "2023년 4월 20일",
     likes: 10,
     picked: true,
     user: {
-      nickname: "작성자닉네임입니다",
-      grade: "작성자등급입니다",
+      nickname: "작성자닉네임",
+      grade: "작성자등급",
       profileImg: "https://ssl.pstatic.net/static/common/myarea/myInfo.gif",
     },
   },
@@ -20,12 +22,12 @@ const COMMENT_DATA = [
     id: "1234567",
     content:
       "답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 답변 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다. 상담글의 내용입니다.",
-    createdAt: "2023.04.20",
+    createdAt: "2023년 4월 20일",
     likes: 1000,
     picked: false,
     user: {
-      nickname: "작성자닉네임입니다",
-      grade: "작성자등급입니다",
+      nickname: "작성자닉네임",
+      grade: "작성자등급",
       profileImg: "https://ssl.pstatic.net/static/common/myarea/myInfo.gif",
     },
   },
@@ -33,10 +35,6 @@ const COMMENT_DATA = [
 //////////////////////
 
 const CummunityCommentListContainer = () => {
-  // 질문자
-  // 유저
-  // 버튼모양 달라짐
-
   // const onClickPick = () => {};
   // const onClickLike = () => {};
 
@@ -44,39 +42,46 @@ const CummunityCommentListContainer = () => {
     <>
       {COMMENT_DATA.map((data) => (
         <S.CommentWrap key={data.id} picked={!!data.picked}>
-          <S.TopWrap>
-            {data.picked && (
-              <p>
-                <S.Picked /> 질문자 • 지식인 채택
-              </p>
-            )}
+          {data.picked && (
+            <S.PickedLabel>
+              <S.Picked /> 질문자 • 지식인 채택
+            </S.PickedLabel>
+          )}
+          <S.CardWrap>
             <S.BtnWrap>
-              <S.Btn_line>수정</S.Btn_line>
-              <S.Btn_line>삭제</S.Btn_line>
+              <CustomBtn type="Sm" fill={false} text="수정" />
+              <CustomBtn type="Sm" fill={true} text="삭제" />
             </S.BtnWrap>
-          </S.TopWrap>
 
-          <S.InfoWrap>
-            <S.ProfileWrap>
-              <S.ProfileImg src={data.user.profileImg} />
+            <S.InnerWrap>
+              <S.LeftWrap>
+                <S.NameTo>
+                  <span>To.</span>작성자이름
+                </S.NameTo>
+                <S.Contents>{data.content}</S.Contents>
+              </S.LeftWrap>
+              <S.RigthWrap>
+                <S.StampWrap>
+                  <S.ProfileImg src={data.user.profileImg} />
+                  <S.SealImg src="/img/community/seal.png" />
+                </S.StampWrap>
+                <S.Nickname> {data.user.nickname}</S.Nickname>
+                <S.UserGrade>{data.user.grade}</S.UserGrade>
+              </S.RigthWrap>
+            </S.InnerWrap>
+            <S.FooterWrap>
               <div>
-                <S.Nickname>닉네임: {data.user.nickname}</S.Nickname>
-                <S.UserGrade>등급: {data.user.grade}</S.UserGrade>
+                <S.CreatedAt>{data.createdAt}</S.CreatedAt>
+                <S.LikeCount>
+                  <span>💛</span> 좋아요 {data.likes}
+                </S.LikeCount>
               </div>
-            </S.ProfileWrap>
-            <S.LikeBtn>
-              ❤<S.LikeCount>{data.likes}</S.LikeCount>
-            </S.LikeBtn>
-          </S.InfoWrap>
-
-          <S.Contents>{data.content}</S.Contents>
-          <S.CreatedAt>{data.createdAt}</S.CreatedAt>
-
-          <S.BtnWrap>
-            <S.Btn_line>
-              {data.picked ? "답변 채택취소" : "답변 채택하기"}
-            </S.Btn_line>
-          </S.BtnWrap>
+              <S.BtnWrap>
+                <CustomBtn type="Sm" fill={false} text="좋아요" />
+                <CustomBtn type="Sm" fill={false} text="채택하기" />
+              </S.BtnWrap>
+            </S.FooterWrap>
+          </S.CardWrap>
         </S.CommentWrap>
       ))}
       <CommunityCommentWriteContainer />

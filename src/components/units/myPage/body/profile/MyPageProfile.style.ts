@@ -38,7 +38,11 @@ export const Input = styled.input`
 
   @media ${breakPoints.mobile} {
     width: 14rem;
-  
+  }
+
+  @media ${breakPoints.tablet} {
+    width: 14rem;
+  }
 `;
 
 export const ProfileImg = styled.img`
