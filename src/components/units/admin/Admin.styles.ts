@@ -15,6 +15,7 @@ export const Wrapper = styled.div`
   display: flex;
   position: relative;
 `;
+
 export const TabsMenu = styled.div<ITabsItemProps>`
   position: absolute;
   font-size: var(--font-size-md);
@@ -40,6 +41,7 @@ export const TabsWrapper = styled.li<ITabsItemProps>`
       left: 0px;
     }
   }
+
   padding: 3.125rem;
   display: flex;
   flex-direction: column;

@@ -32,10 +32,12 @@ export const HashTag = styled.div`
 
   @media ${breakPoints.tablet} {
     height: 25px;
+    font-size: var(--font-size-sm);
   }
 
   @media ${breakPoints.mobile} {
     height: 23px;
+    font-size: var(--font-mobile-size-sm);
   }
 `;
 export default function Tag({ tags }: { tags: string[] }) {

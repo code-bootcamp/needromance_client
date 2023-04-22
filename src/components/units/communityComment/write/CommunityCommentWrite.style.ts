@@ -4,7 +4,7 @@ export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
+  max-width: 630px;
   position: relative;
 `;
 
@@ -22,7 +22,8 @@ export const Textarea = styled.textarea`
   width: 100%;
   height: 140px;
   padding: 20px;
-  border-radius: 8px;
+  border: 1px solid #eee;
+  border-radius: 2px;
 `;
 
 export const BtnWrap = styled.div`

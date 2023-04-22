@@ -71,6 +71,11 @@ export const globalStyles = css`
     }
   }
 
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
   @font-face {
     font-family: "GowunDodum-Regular";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff")

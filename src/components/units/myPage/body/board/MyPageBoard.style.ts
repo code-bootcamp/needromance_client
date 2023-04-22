@@ -22,6 +22,9 @@ export const Thead = styled.thead`
   @media ${breakPoints.mobile} {
     font-size: var(--font-mobile-size-sm);
   }
+  @media ${breakPoints.tablet} {
+    font-size: var(--font-mobile-size-sm);
+  }
 `;
 
 export const TH = styled.th`
@@ -42,12 +45,14 @@ export const TH = styled.th`
     top: 50%;
     transform: translateY(-50%);
     height: 50%;
-    width: 0.625rem;
     border-left: 1px solid #f0f0f0;
   }
 
   @media ${breakPoints.mobile} {
-    padding: 0.5rem;
+    padding: 1rem 0.1rem;
+  }
+  @media ${breakPoints.tablet} {
+    padding: 1rem 0.1rem;
   }
 `;
 
@@ -58,11 +63,21 @@ export const Tbody = styled.tbody`
   @media ${breakPoints.mobile} {
     font-size: var(--font-mobile-size-sm);
   }
+  @media ${breakPoints.tablet} {
+    font-size: var(--font-mobile-size-sm);
+  }
 `;
 
 export const TD = styled.td`
   border-bottom: 1px solid #f0f0f0;
   padding: 1rem;
+
+  @media ${breakPoints.mobile} {
+    padding: 1rem 0.1rem;
+  }
+  @media ${breakPoints.tablet} {
+    padding: 1rem 0.1rem;
+  }
 `;
 
 export const ControlsWrap = styled.div`

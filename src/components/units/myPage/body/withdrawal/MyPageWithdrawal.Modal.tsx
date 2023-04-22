@@ -7,8 +7,8 @@ import {
 
 export const ModalWrap = styled(Modal)`
   .ant-modal-content {
-    width: 25rem;
-    height: 18.75rem;
+    width: 20rem;
+    height: 18rem;
     background-color: #f0e9e0;
     border-radius: 8px;
     padding: 2rem;
@@ -94,14 +94,14 @@ export const WidthdrawalModal = ({ open, setOpen, setConfirm }) => {
         setConfirm(true);
       }}
       onCancel={() => setOpen(false)}
-      width="25rem"
+      width="20rem"
     >
       <TextWrap>
         <Icon>
           <Icon_Exclamation />
         </Icon>
         <Text>정말 회원을 탈퇴하시겠어요?</Text>
-        <Text>회원 탈퇴를 하시면 지금까지 받은 상담내용이 사라집니다.</Text>
+        {/* <Text>회원 탈퇴를 하시면 지금까지 받은 상담내용이 사라집니다.</Text> */}
       </TextWrap>
     </ModalWrap>
   );
@@ -114,14 +114,13 @@ export const ConfirmModal = ({ confirm, setConfirm }) => {
       open={confirm}
       onOk={() => setConfirm(false)}
       // onCancel={() => setConfirm(false)}
-      width="25rem"
+      width="20rem"
     >
       <TextWrap>
         <Icon>
           <Icon_Bell />
         </Icon>
         <Text>탈퇴처리가 완료되었습니다.</Text>
-        <Text>로맨스가 필요해 서비스를 이용해주셔서 감사합니다.</Text>
       </TextWrap>
     </ConfirmWrap>
   );
