@@ -1,13 +1,18 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import * as S from "./Admin.styles";
-import type { MenuProps } from "antd";
+import type { MenuProps, TableProps } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { Button, Dropdown, Table } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
 
 interface IAdminProps {
   pageTabs: number;
   setPageTabs: Dispatch<SetStateAction<number>>;
+  browserWidth: number | null;
+  openTabs: boolean;
+  setOpenTabs: Dispatch<SetStateAction<boolean>>;
   searchUserFilter: string;
+  togleTabs: (prev: boolean) => void;
   setSearchUserFilter: Dispatch<SetStateAction<string>>;
   searchBoardFilter: string;
   setSearchBoardFilter: Dispatch<SetStateAction<string>>;
@@ -98,10 +103,13 @@ const dummyName = "Admin123";
 export default function AdminUI({
   pageTabs,
   setPageTabs,
+  browserWidth,
   searchUserFilter,
   setSearchUserFilter,
   searchBoardFilter,
   setSearchBoardFilter,
+  togleTabs,
+  openTabs,
 }: IAdminProps) {
   const userItems: MenuProps["items"] = [
     {
@@ -170,10 +178,14 @@ export default function AdminUI({
       date: "2023.03.09",
     },
   ];
+
   return (
     <S.Wrapper>
+      <S.TabsMenu browserWidth={browserWidth}>
+        <MenuOutlined onClick={() => togleTabs(openTabs)} />
+      </S.TabsMenu>
       {/* tabs */}
-      <S.TabsWrapper>
+      <S.TabsWrapper openTabs={openTabs}>
         {TabsItems.map((el, index) => (
           <S.TabsItem
             pageTabs={pageTabs}
@@ -192,11 +204,11 @@ export default function AdminUI({
             <S.TableTitle>
               <div>{dummyName}님 안녕하세요!</div>
             </S.TableTitle>
+            <S.SearchTitle>
+              <div>회원관리</div>
+              <div>검색을 통해 회원을 관리해주세요.</div>
+            </S.SearchTitle>
             <S.TableSearchBox>
-              <S.SearchTitle>
-                <div>회원관리</div>
-                <div>검색을 통해 회원을 관리해주세요.</div>
-              </S.SearchTitle>
               <S.SearchFilterBox>
                 <Dropdown
                   className="DropdownBtn"
@@ -217,7 +229,12 @@ export default function AdminUI({
               </S.SearchFilterBox>
             </S.TableSearchBox>
             {/* table */}
-            <Table columns={userColumns} dataSource={userData} />
+            <Table
+              columns={userColumns}
+              dataSource={userData}
+              size="small"
+              scroll={{ x: "max-content", y: "max-content" }}
+            />
           </S.TableUserWrapper>
         )}
         {pageTabs === 1 && (
@@ -225,11 +242,11 @@ export default function AdminUI({
             <S.TableTitle>
               <div>{dummyName}님 안녕하세요!</div>
             </S.TableTitle>
+            <S.SearchTitle>
+              <div>게시글관리</div>
+              <div>검색을 통해 게시글을 관리해주세요.</div>
+            </S.SearchTitle>
             <S.TableSearchBox>
-              <S.SearchTitle>
-                <div>게시글관리</div>
-                <div>검색을 통해 게시글을 관리해주세요.</div>
-              </S.SearchTitle>
               <S.SearchFilterBox>
                 <Dropdown
                   className="DropdownBtn"
@@ -250,7 +267,12 @@ export default function AdminUI({
               </S.SearchFilterBox>
             </S.TableSearchBox>
             {/* table */}
-            <Table columns={boardColumns} dataSource={boardData} />
+            <Table
+              columns={boardColumns}
+              dataSource={boardData}
+              size="small"
+              scroll={{ x: "max-content", y: "max-content" }}
+            />
           </S.TableBoardWrapper>
         )}
       </S.TableWrapper>
