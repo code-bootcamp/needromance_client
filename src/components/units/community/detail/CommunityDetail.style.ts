@@ -15,6 +15,7 @@ export const CardWrap = styled.div`
   width: 100%;
   max-width: 650px;
   height: auto;
+  min-height: 400px;
   padding: 1.25rem 1.875rem;
   background-color: #fff;
   border-radius: 2px;
@@ -23,6 +24,7 @@ export const CardWrap = styled.div`
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
 `;
 
