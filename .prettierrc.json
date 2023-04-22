@@ -1,10 +1,10 @@
 {
- "editor.formatOnSave": true,
- "editor.defaultFormatter": "esbenp.prettier-vscode",
- "printWidth": 80,
- "semi": true,
- "singleQuote": false,
- "tabWidth": 2,
- "curly": true,
- "object-curly-newline": ["error", { "multiline": true }]
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "printWidth": 80,
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "curly": true,
+  "object-curly-newline": ["error", { "multiline": true }]
 }
