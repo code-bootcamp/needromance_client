@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
+import { googleLogout } from "@react-oauth/google";
 import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { userProfileState } from "../../../../commons/store/\batoms";
 
 const TopHeader = styled.header`
   width: 100vw;
@@ -14,6 +17,15 @@ const TopHeader = styled.header`
   justify-content: right;
   gap: 30px;
   padding: 3px;
+
+  span {
+    color: #d2d2d2;
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+    }
+  }
 `;
 
 const Menu = styled.a`
@@ -25,12 +37,41 @@ const Menu = styled.a`
   }
 `;
 
+const Profile = styled.div`
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  img {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+  }
+`;
 export default function LayoutTopHeader() {
+  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
+
+  const GoogleLogout = () => {
+    googleLogout();
+    setUserProfile([]);
+  };
+
+  console.log("headerUser", userProfile);
   return (
     <TopHeader>
-      <Link href={"/signin"}>
-        <Menu>로그인</Menu>
-      </Link>
+      {userProfile.length !== 0 && (
+        <Profile>
+          <img src={userProfile.picture} alt="프로필 사진" />
+          <span>{userProfile.name}</span>
+        </Profile>
+      )}
+      {userProfile.length === 0 ? (
+        <Link href={"/signin"}>
+          <Menu>로그인</Menu>
+        </Link>
+      ) : (
+        <span onClick={GoogleLogout}>로그아웃</span>
+      )}
+
       <Link href={"/signup"}>
         <Menu>회원가입</Menu>
       </Link>

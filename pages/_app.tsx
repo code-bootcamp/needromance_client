@@ -4,6 +4,7 @@ import Layout from "../src/components/commons/layouts";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { RecoilRoot } from "recoil";
 
 export default function App({
   Component,
@@ -11,12 +12,14 @@ export default function App({
 }: AppProps) {
   return (
     <>
-      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT}>
-        <Global styles={globalStyles} />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </GoogleOAuthProvider>
+      <RecoilRoot>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT}>
+          <Global styles={globalStyles} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </GoogleOAuthProvider>
+      </RecoilRoot>
     </>
   );
 }
