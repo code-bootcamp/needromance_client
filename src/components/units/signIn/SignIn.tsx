@@ -2,8 +2,12 @@ import Link from "next/link";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
 import GoogleSignIn from "./GoogleSignIn";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function SignIn() {
+  const { data: session } = useSession();
+
+  console.log(session);
   return (
     <S.Wrapper>
       <S.SignInWindow>
@@ -43,6 +47,13 @@ export default function SignIn() {
             </Link>
           </S.SignUpLink>
         </S.BottomWrapper>
+        <button onClick={() => signIn("google")}>구글 로그인</button>
+        <button onClick={() => signIn("kakao", { callbackUrl: "/" })}>
+          카카오톡 Sign in
+        </button>
+        <button onClick={() => signIn("github")}>깃허브 로그인</button>
+        <button onClick={() => signIn("naver")}>네이버 로그인</button>
+        {session && <button onClick={() => signOut()}>로그아웃</button>}
       </S.SignInWindow>
     </S.Wrapper>
   );
