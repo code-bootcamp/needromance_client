@@ -88,6 +88,7 @@ export const SearchWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 
@@ -128,8 +129,9 @@ export const SearchIcon = styled(BsSearchHeartFill)`
 
 export const TagBox = styled.div`
   width: 100%;
+  max-width: 600px;
   display: flex;
-  justify-content: left;
+  /* justify-content: center; */
   gap: 10px;
   padding: 0px 5px;
 

@@ -6,6 +6,7 @@ interface IInputProps {
 }
 
 const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -22,6 +23,8 @@ const Input = styled.input`
   height: 45px;
   background-color: white;
   border: 1px solid #cccccc;
+  box-shadow: 0px 2px rgba(217, 214, 224, 0.25);
+
   border-radius: 8px;
   padding: 10px;
   font-family: var(--eng-font);

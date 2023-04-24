@@ -25,17 +25,25 @@ export default function CommunityWrite() {
 
   return (
     <S.Wrapper>
-      <span>게시글 작성/수정</span>
+      <S.Title>게시글 작성/수정</S.Title>
+      <S.TitleInputWrapper>
+        <S.InfoTitle>제목</S.InfoTitle>
+        <S.InputWrapper>
+          <BorderInput />
+        </S.InputWrapper>
+      </S.TitleInputWrapper>
+
+      <S.ContentBox>
+        <S.InfoTitle>내용</S.InfoTitle>
+        <ToastEditor
+          defaultValue="하하"
+          editorRef={editorRef}
+          onChangeContent={onChangeContent}
+        />
+      </S.ContentBox>
+
       <S.InputWrapper>
-        <S.Title>제목</S.Title>
-        <BorderInput />
-      </S.InputWrapper>
-      <ToastEditor
-      // editorRef={editorRef}
-      // onChangeContent={onChangeContent}
-      />
-      <div>
-        <span>태그</span>
+        <S.InfoTitle>태그</S.InfoTitle>
         <Tag
           tagItem={tagItem}
           setTagItem={setTagItem}
@@ -43,7 +51,7 @@ export default function CommunityWrite() {
           setTagList={setTagList}
           // editData={editData}
         />
-      </div>
+      </S.InputWrapper>
     </S.Wrapper>
   );
 }

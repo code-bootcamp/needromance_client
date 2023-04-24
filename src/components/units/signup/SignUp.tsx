@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import { checkDuplicateEmail } from "../../../commons/api/test";
 import BorderInput from "../../commons/input/Input";
 import GoogleSignIn from "../signin/GoogleSignIn";
 import * as S from "./SignUp.styles";
@@ -26,11 +27,13 @@ export default function SignUp() {
 
   const handleCheckButton = () => {
     setIsChecking(!isChecking);
+    checkEmailDuplicate(inputs);
     // 이메일 중복 검사
   };
-  const checkEmailDuplicate = () => {
+  const checkEmailDuplicate = (inputs) => {
     // email(input의 value)을 가져온다.
     //
+    console.log(checkDuplicateEmail(inputs.email));
   };
 
   const checkFormValidity = (inputs: ISignUpProps) => {
@@ -54,7 +57,7 @@ export default function SignUp() {
         <S.SignInForm>
           <S.InputWrapper>
             <BorderInput label="Email" />
-            <S.GreenButton onClick={handleCheckButton}>
+            <S.GreenButton type="button" onClick={handleCheckButton}>
               이메일 중복검사
             </S.GreenButton>
             <S.Checker>사용가능한 이메일입니다.</S.Checker>
@@ -86,7 +89,7 @@ export default function SignUp() {
         </S.SignInForm>
         <S.BottomWrapper>
           <S.Line />
-          <GoogleSignIn />
+          {/* <GoogleSignIn /> */}
           <S.SignInLink>
             <Link href={"/signin"}>
               <a>로그인</a>
