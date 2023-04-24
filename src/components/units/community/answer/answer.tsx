@@ -82,6 +82,20 @@ const RankingTag = styled.div`
   position: relative;
   width: 50px;
   height: 100px;
+  background-color: blue;
+`;
+
+const RankingSeal = styled.div`
+  position: absolute;
+  width: 50px;
+  height: 30px;
+  /* border-radius: 100%; */
+  top: 0px;
+  right: -25px;
+  background-color: #9e9e4d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const RankingText = styled.div`
@@ -91,15 +105,6 @@ const RankingText = styled.div`
   padding: 8px;
   top: 3;
   right: 3;
-`;
-
-const RankingSeal = styled.img`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  top: 0px;
-  right: 0px;
 `;
 
 const Heart = styled.div`
@@ -128,11 +133,10 @@ export default function Answer({
         <AnswererName>{name}</AnswererName>
       </Answerer>
       <AnswererText>{content}</AnswererText>
-      <RankingTag>
-        <RankingSeal src="img/community/badge.png" />
-        <RankingText>Best1</RankingText>
-      </RankingTag>
 
+      <RankingSeal>
+        <RankingText>Best1</RankingText>
+      </RankingSeal>
       <TagHeartWrapper>
         <Heart>
           <TiHeart style={{ color: "#ff7d93", fontSize: "20px" }} />
