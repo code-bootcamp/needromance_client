@@ -17,7 +17,7 @@ const DETAIL_DATA = [
     views: 1000,
     user: {
       nickname: "작성자닉네임",
-      profileImg: "https://ssl.pstatic.net/static/common/myarea/myInfo.gif",
+      profileImg: "/img/community/default_profile.jpg",
     },
   },
 ];
@@ -34,12 +34,12 @@ const CommunityDetailContainer = () => {
             <CustomBtn type="Sm" fill={false} text="삭제" />
           </S.BtnWrap>
 
+          <S.Title>
+            <span>Q.</span>
+            {data.title}
+          </S.Title>
           <S.InnerWrap>
             <S.LeftWrap>
-              <S.Title>
-                <span>Q.</span>
-                {data.title}
-              </S.Title>
               <S.Contents>{data.content}</S.Contents>
             </S.LeftWrap>
             <S.RigthWrap>
