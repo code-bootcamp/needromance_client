@@ -15,7 +15,7 @@ const COMMENT_DATA = [
     user: {
       nickname: "작성자닉네임",
       grade: "작성자등급",
-      profileImg: "https://ssl.pstatic.net/static/common/myarea/myInfo.gif",
+      profileImg: "/img/community/default_profile.jpg",
     },
   },
   {
@@ -28,7 +28,7 @@ const COMMENT_DATA = [
     user: {
       nickname: "작성자닉네임",
       grade: "작성자등급",
-      profileImg: "https://ssl.pstatic.net/static/common/myarea/myInfo.gif",
+      profileImg: "/img/community/default_profile.jpg",
     },
   },
 ];
@@ -53,11 +53,11 @@ const CummunityCommentListContainer = () => {
               <CustomBtn type="Sm" fill={true} text="삭제" />
             </S.BtnWrap>
 
+            <S.NameTo>
+              <span>To.</span>작성자이름
+            </S.NameTo>
             <S.InnerWrap>
               <S.LeftWrap>
-                <S.NameTo>
-                  <span>To.</span>작성자이름
-                </S.NameTo>
                 <S.Contents>{data.content}</S.Contents>
               </S.LeftWrap>
               <S.RigthWrap>
