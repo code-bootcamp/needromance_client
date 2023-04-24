@@ -54,6 +54,9 @@ export default function CommunityList() {
         <S.LatestCounsel>
           <p>최신 상담 List</p>
           <CustomBtn fill={false} type="Md" text="글 작성하기" />
+          <CustomBtn fill={false} type="Md">
+            <a href="/community/write">글 작성하기</a>
+          </CustomBtn>
           {/* <button>글 작성하기</button> */}
         </S.LatestCounsel>
         <S.LatestCounselWriting>
