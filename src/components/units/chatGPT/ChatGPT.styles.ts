@@ -6,6 +6,7 @@ export const Position = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100%;
+  padding-bottom: 100px;
   background-color: #fff;
   @media ${breakPoints.mobile} {
   }
@@ -14,8 +15,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 375px;
-  height: 70%;
-  margin-top: 50px;
+  margin-top: 20px;
   border-radius: var(--btn-radius-sm);
   @media ${breakPoints.mobile} {
     margin-top: 10px;
@@ -59,13 +59,12 @@ export const Notice = styled.div`
 export const ChatBody = styled.div`
   display: flex;
   width: 375px;
-  height: 100%;
 `;
 export const ChatWrapper = styled.div`
   /* 반응형으로 사이즈 맞추기 */
   /* 데이터 들어오고 아래로 최신대화가 안내려오면 height 속성을 바꿔보기. */
   width: 375px;
-  min-height: 500px;
+  height: 450px;
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: var(--main-bg-color);
