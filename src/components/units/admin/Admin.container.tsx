@@ -5,7 +5,6 @@ export default function Admin() {
   const [pageTabs, setPageTabs] = useState(0);
   const [openTabs, setOpenTabs] = useState(false);
   const [browserWidth, setBrowserWidth] = useState<number | null>(768);
-
   const [searchUserFilter, setSearchUserFilter] = useState("nickname");
   const [searchBoardFilter, setSearchBoardFilter] = useState("nickname");
 
