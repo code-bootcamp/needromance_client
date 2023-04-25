@@ -1,4 +1,4 @@
-import CommunityDetailContainer from "../../../src/components/units/community/detail/CommunityDetail.container";
+import CommunityDetailContainer from "../../../src/components/units/boards/detail/CommunityDetail.container";
 
 const CommunityDetailPage = () => {
   return <CommunityDetailContainer />;

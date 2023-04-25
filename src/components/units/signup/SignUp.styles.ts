@@ -21,6 +21,9 @@ export const SignInWindow = styled.div`
   background-color: #ffffffb2;
   border-radius: 10px;
   padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const LogoImage = styled.img`
