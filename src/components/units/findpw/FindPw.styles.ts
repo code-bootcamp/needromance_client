@@ -115,3 +115,24 @@ export const BtnInputWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const ValidationButton = styled.button`
+  width: 140px;
+  height: 35px;
+  background-color: ${(props) =>
+    props.disabled ? "#cccccc" : "var(--point-color-green)"};
+
+  color: white;
+  /* background-color: white; */
+  font-size: var(--font-mobile-size-sm);
+  border-radius: 50px;
+  padding: 5px;
+  /* cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")}; */
+`;
+
+export const ValidationWrapper = styled.div`
+  max-width: 280px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;

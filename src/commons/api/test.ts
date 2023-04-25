@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL = "http://need-romance.site";
+const URL = "https://need-romance.site";
 
 export const checkDuplicateEmail = async (email: string) => {
   try {
@@ -22,7 +22,7 @@ export const sendVerificationEmail = async (email: string) => {
 
     return response.statusText;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 
@@ -35,16 +35,20 @@ export const checkVerificationEmail = async (email: string, token: string) => {
 
     return response.data;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 
 export const checkDuplicateNickname = async (nickname: string) => {
-  const response = await axios({
-    method: "get",
-    url: URL + `/user/find/nickname?nickname=${nickname}`,
-  });
-  return response.data;
+  try {
+    const response = await axios({
+      method: "get",
+      url: URL + `/user/find/nickname?nickname=${nickname}`,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const signUp = async (inputs: {
@@ -53,27 +57,34 @@ export const signUp = async (inputs: {
   password: string;
 }) => {
   const { email, nickname, password } = inputs;
-  const response = await axios({
-    method: "post",
-    url: URL + "/user/signup",
-    data: {
-      email,
-      nickname,
-      password,
-    },
-  });
-  return response.data;
+  try {
+    const response = await axios({
+      method: "post",
+      url: URL + "/user/signup",
+      data: {
+        email,
+        nickname,
+        password,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const login = async (email: string, password: string) => {
-  console.log(email, password);
-  const response = await axios({
-    method: "post",
-    url: URL + "/auth/login",
-    data: {
-      email,
-      password,
-    },
-  });
-  return response;
+  try {
+    const response = await axios({
+      method: "post",
+      url: URL + "/auth/login",
+      data: {
+        email,
+        password,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 };
