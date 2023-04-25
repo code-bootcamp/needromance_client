@@ -2,7 +2,12 @@ import styled from "@emotion/styled";
 import { PushpinFilled, StarFilled, TrophyFilled } from "@ant-design/icons";
 import { breakPoints } from "../../../../commons/styles/media";
 
-export const CommentWrap = styled.div``;
+export const CommentWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const PickedLabel = styled.span`
   background-color: var(--point-color-green);
@@ -28,23 +33,26 @@ export const CardWrap = styled.div`
     rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 
   margin-top: 3px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   gap: 10px;
+
+  @media ${breakPoints.mobile} {
+    min-height: 350px;
+  }
 `;
 
 export const InnerWrap = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-top: 10px;
   margin-bottom: 20px;
 `;
 
 export const LeftWrap = styled.div`
   padding: 0 1.875rem 0 0;
-  border-right: 1px solid #eee;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -56,6 +64,7 @@ export const RigthWrap = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 0 0 1.875rem;
+  border-left: 1px solid #eee;
 `;
 
 export const NameTo = styled.p`
@@ -131,6 +140,10 @@ export const Contents = styled.div`
 
   @media ${breakPoints.mobile} {
     font-size: var(--font-mobile-size-sm);
+  }
+
+  @media ${breakPoints.tablet} {
+    font-size: var(--font-mobile-sm);
   }
 `;
 

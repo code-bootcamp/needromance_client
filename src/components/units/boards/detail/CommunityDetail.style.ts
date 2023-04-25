@@ -25,18 +25,22 @@ export const CardWrap = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   gap: 10px;
+
+  @media ${breakPoints.mobile} {
+    min-height: 350px;
+  }
 `;
 
 export const InnerWrap = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-top: 10px;
   margin-bottom: 10px;
 `;
 
 export const LeftWrap = styled.div`
   padding: 0 1.875rem 0 0;
-  border-right: 1px solid #eee;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -48,6 +52,7 @@ export const RigthWrap = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 0 0 1.875rem;
+  border-left: 1px solid #eee;
 `;
 
 export const Title = styled.p`
