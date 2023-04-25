@@ -15,7 +15,6 @@ const Wrapper = styled.button`
   padding: var(--btn-padding);
   border-radius: var(--btn-radius);
   border: none;
-  cursor: pointer;
 `;
 
 const WrapperSm = styled(Wrapper)<IBtnProps>`

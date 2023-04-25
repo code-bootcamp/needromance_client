@@ -4,7 +4,8 @@ import AdminUI from "./Admin.presenter";
 export default function Admin() {
   const [pageTabs, setPageTabs] = useState(0);
   const [openTabs, setOpenTabs] = useState(false);
-  const [browserWidth, setBrowserWidth] = useState<number | null>(768);
+  const [openModal, setOpenModal] = useState(false);
+  const [browserWidth, setBrowserWidth] = useState<number | null>(769);
   const [searchUserFilter, setSearchUserFilter] = useState("nickname");
   const [searchBoardFilter, setSearchBoardFilter] = useState("nickname");
 
@@ -26,6 +27,8 @@ export default function Admin() {
       pageTabs={pageTabs}
       setPageTabs={setPageTabs}
       openTabs={openTabs}
+      openModal={openModal}
+      setOpenModal={setOpenModal}
       setOpenTabs={setOpenTabs}
       browserWidth={browserWidth}
       togleTabs={togleTabs}

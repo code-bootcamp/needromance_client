@@ -4,12 +4,15 @@ import type { MenuProps, TableProps } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { Button, Dropdown, Table } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
+import CustomModal from "../../commons/modals/CustomModal";
 
 interface IAdminProps {
   pageTabs: number;
   setPageTabs: Dispatch<SetStateAction<number>>;
   browserWidth: number | null;
   openTabs: boolean;
+  openModal: boolean;
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
   setOpenTabs: Dispatch<SetStateAction<boolean>>;
   searchUserFilter: string;
   togleTabs: (prev: boolean) => void;
@@ -110,6 +113,8 @@ export default function AdminUI({
   setSearchBoardFilter,
   togleTabs,
   openTabs,
+  openModal,
+  setOpenModal,
 }: IAdminProps) {
   const userItems: MenuProps["items"] = [
     {
@@ -178,6 +183,9 @@ export default function AdminUI({
       date: "2023.03.09",
     },
   ];
+  const handleTestFn = () => {
+    console.log("testFn");
+  };
 
   return (
     <S.Wrapper>
@@ -202,7 +210,15 @@ export default function AdminUI({
         {pageTabs === 0 && (
           <S.TableUserWrapper>
             <S.TableTitle>
-              <div>{dummyName}님 안녕하세요!</div>
+              <div onClick={() => setOpenModal(true)}>
+                {dummyName}님 안녕하세요!
+              </div>
+              <CustomModal
+                type="userBan"
+                setOpenModal={setOpenModal}
+                openModal={openModal}
+                handleTestFn={handleTestFn}
+              />
             </S.TableTitle>
             <S.SearchTitle>
               <div>회원관리</div>
