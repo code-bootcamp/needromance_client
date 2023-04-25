@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as S from "./../MyPageProfile.style";
 import { IMyPageProps } from "../../../MyPage.type";
 import CustomBtn from "../../../../../commons/buttons/CustomBtn";
