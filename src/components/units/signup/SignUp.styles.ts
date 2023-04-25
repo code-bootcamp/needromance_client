@@ -3,6 +3,7 @@ import { breakPoints } from "../../../commons/styles/media";
 
 interface ISignUpProps {
   isActive?: boolean;
+  isValidate?: boolean;
 }
 
 export const Wrapper = styled.section`
@@ -55,8 +56,27 @@ export const InputWrapper = styled.div`
   /* max-width: 320px; */
 `;
 
+export const ValidationWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
 export const ButtonWrapper = styled.div`
   padding-top: 30px;
+`;
+
+export const ValidationButton = styled.button`
+  width: 140px;
+  height: 35px;
+  background-color: ${(props) =>
+    props.disabled ? "#cccccc" : "var(--point-color-green)"};
+
+  color: white;
+  /* background-color: white; */
+  font-size: var(--font-mobile-size-sm);
+  border-radius: 50px;
+  padding: 5px;
+  /* cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")}; */
 `;
 
 export const GreenButton = styled.button`
@@ -116,8 +136,9 @@ export const Line = styled.div`
 `;
 
 export const Checker = styled.p`
-  color: green;
+  color: ${(props: ISignUpProps) => (props.isValidate ? "green" : "red")};
   font-size: 13px;
+  padding: 3px;
 `;
 
 export const SignInLink = styled.div`

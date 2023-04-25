@@ -4,7 +4,9 @@ import BorderInput from "../../../commons/input/Input";
 import * as S from "./SignUpGoogle.styles";
 
 interface ISignUpProps {
-  inputs: { email: string; id: string; password: string };
+  email: string;
+  nickname: string;
+  password: string;
 
   [key: string]: any;
 }

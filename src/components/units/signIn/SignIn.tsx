@@ -3,11 +3,27 @@ import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
 import GoogleSignIn from "./GoogleSignIn";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { login } from "../../../commons/api/test";
+import { useState } from "react";
 
 export default function SignIn() {
   const { data: session } = useSession();
-
+  const [inputs, setInputs] = useState({ email: "", password: "" });
   console.log(session);
+
+  const handleInput = (event) => {
+    const { value, name } = event.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  const handleLoginButton = async () => {
+    event?.preventDefault();
+    const data = await login(inputs.email, inputs.password);
+    console.log(data);
+  };
   return (
     <S.Wrapper>
       <S.SignInWindow>
@@ -17,13 +33,23 @@ export default function SignIn() {
         </S.Logo>
         <S.SignInForm>
           <S.InputWrapper>
-            <BorderInput label="Email" style={{ marginBottom: "25px" }} />
+            <BorderInput
+              name="email"
+              label="Email"
+              onChange={handleInput}
+              style={{ marginBottom: "25px" }}
+            />
           </S.InputWrapper>
           <S.InputWrapper>
-            <BorderInput label="Password" />
+            <BorderInput
+              type="password"
+              name="password"
+              label="Password"
+              onChange={handleInput}
+            />
           </S.InputWrapper>
           <S.ButtonWrapper>
-            <S.SignInButton>SignIn</S.SignInButton>
+            <S.SignInButton onClick={handleLoginButton}>SignIn</S.SignInButton>
           </S.ButtonWrapper>
         </S.SignInForm>
         <S.BottomWrapper>
