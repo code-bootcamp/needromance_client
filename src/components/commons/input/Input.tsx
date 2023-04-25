@@ -28,7 +28,8 @@ const Input = styled.input`
   border-radius: 8px;
   padding: 10px;
   font-family: var(--eng-font);
-  font-size: 18px;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
   color: #6b6b6b;
   margin: 0px 0px 5px 0px;
 

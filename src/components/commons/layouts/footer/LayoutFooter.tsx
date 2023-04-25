@@ -10,6 +10,7 @@ const Wrapper = styled.footer`
   justify-content: space-between;
   font-size: 0.8rem;
   padding: 2px;
+  font-family: var(--eng-font);
 `;
 
 const Info = styled.div`
