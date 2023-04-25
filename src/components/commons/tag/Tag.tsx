@@ -72,9 +72,14 @@ const TagItem = styled.div`
   justify-content: space-between;
   margin: 5px;
   padding: 0.4em 0.8em;
-  background-color: #d9d6e0;
+  background-color: #cfbbae;
   border-radius: 5px;
   font-size: 13px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #baa08f;
+  }
 `;
 
 const Text = styled.span`
@@ -88,7 +93,7 @@ const Button = styled.button`
   width: 1em;
   height: 1em;
   margin-left: 0.3em;
-  background-color: #d9d6e0;
+  /* background-color: #cfbbae; */
   border-radius: 50%;
   border: none;
 `;
