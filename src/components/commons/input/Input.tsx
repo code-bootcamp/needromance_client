@@ -48,6 +48,8 @@ export default function BorderInput({
   style,
   type,
   check,
+  name,
+  disabled,
 }: {
   label?: string;
   placeholder?: string;
@@ -55,6 +57,8 @@ export default function BorderInput({
   style?: CSSProperties;
   type?: string;
   check?: boolean;
+  name?: string;
+  disabled?: boolean;
 }) {
   return (
     <Wrapper>
@@ -66,6 +70,8 @@ export default function BorderInput({
           style={style}
           type={type}
           isValid={check}
+          name={name}
+          disabled={disabled}
         />
       </InputBox>
     </Wrapper>
