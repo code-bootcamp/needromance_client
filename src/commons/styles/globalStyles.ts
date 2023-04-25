@@ -42,8 +42,13 @@ export const globalStyles = css`
 
   body {
     font-family: var(--base-font);
-    overflow-x: hidden;
     color: #2c2c2c;
+  }
+
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
   }
 
   input,
