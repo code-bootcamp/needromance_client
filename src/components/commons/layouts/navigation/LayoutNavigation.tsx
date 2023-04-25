@@ -52,7 +52,7 @@ const NavigationMenu = styled.a`
 
 const NAVIGATION = [
   { name: "너의 마음을 말해줘", page: "/chatgpt" },
-  { name: "대화공간", page: "/community" },
+  { name: "대화공간", page: "/boards" },
 ];
 
 export default function LayoutNavigation() {

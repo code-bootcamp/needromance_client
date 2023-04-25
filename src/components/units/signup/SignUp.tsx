@@ -30,10 +30,11 @@ export default function SignUp() {
     checkEmailDuplicate(inputs);
     // 이메일 중복 검사
   };
-  const checkEmailDuplicate = (inputs) => {
+  const checkEmailDuplicate = async (inputs: ISignUpProps) => {
     // email(input의 value)을 가져온다.
     //
-    console.log(checkDuplicateEmail(inputs.email));
+    const { data } = await checkDuplicateEmail(inputs.email);
+    console.log(data);
   };
 
   const checkFormValidity = (inputs: ISignUpProps) => {
