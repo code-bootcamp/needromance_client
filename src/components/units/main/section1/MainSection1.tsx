@@ -3,7 +3,6 @@ import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
-import CustomBtn from "../../../commons/buttons/CustomBtn";
 import { breakPoints } from "../../../../commons/styles/media";
 import Image from "next/image";
 
@@ -67,16 +66,7 @@ const ImagesWrap = styled.div`
   } */
 `;
 
-const BtnPosition = styled.div`
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
 export default function MainSection1UI(): JSX.Element {
-  const { onClickMoveToPage } = useMoveToPage();
-
   return (
     <Wrapper>
       <Slider {...settings}>
@@ -518,14 +508,6 @@ export default function MainSection1UI(): JSX.Element {
           </ImagesWrap>
         </Slide>
       </Slider>
-      <BtnPosition>
-        <CustomBtn
-          type={"Sm"}
-          fill={true}
-          text={"시작하기"}
-          onClick={onClickMoveToPage("/community")}
-        />
-      </BtnPosition>
     </Wrapper>
   );
 }

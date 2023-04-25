@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import CustomBtn from "../../../commons/buttons/CustomBtn";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import { breakPoints } from "../../../../commons/styles/media";
+import Image from "next/image";
 
 interface IAnimationProps {
   inView: boolean;
@@ -87,7 +88,7 @@ const BodyCommentsBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 100px 0px;
+  margin: 50px 0px;
 `;
 const BodyComment = styled.p`
   margin: 20px 0;
@@ -109,30 +110,20 @@ const BtnPosition = styled.div`
   justify-content: center;
 `;
 const BodyImgBox = styled.div`
+  height: 600px;
   position: relative;
-  min-height: 900px;
-  @media ${breakPoints.mobile} {
-    min-height: 500px;
-  }
-  > div {
+  > div:nth-of-type(1) {
+    width: 50%;
+    height: 50%;
     position: absolute;
+    right: 0px;
   }
-  .section2_img1 {
+  > div:nth-of-type(2) {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    bottom: 100px;
     left: 0px;
-    width: 40%;
-    > img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .section2_img2 {
-    top: 0px;
-    right: 100px;
-    width: 40%;
-    > img {
-      width: 100%;
-      height: 100%;
-    }
   }
 `;
 export default function MainSection2UI(): JSX.Element {
@@ -166,26 +157,43 @@ export default function MainSection2UI(): JSX.Element {
       <WrapperBody>
         <BodyCommentsBox>
           <BodyComment>
-            당신의 소중한 이야기는 내면을 성장시키는 씨앗입니다.
+            소중한 연인에 대해 이야기하고 싶지만 상담할 사람이 없어서
+            힘드신가요?
           </BodyComment>
           <BodyComment>
-            이제 그 씨앗을 행복과 희망을 기르는 새싹으로 성장시켜주세요.
+            로맨스가 필요해는 당신의 고민을 개선하기 위해 도움을 드릴 수 있어요.
           </BodyComment>
           <BodyComment>
-            그리고 그 새싹은 많은 사람들에게도 희망과 위로가 되어줄거예요.
+            속으로만 고민하던 당신만의 이야기를 들려주세요. 분명 좋은 결과가
+            있을거에요!
           </BodyComment>
         </BodyCommentsBox>
         <BodyImgBox>
-          <div className="section2_img1">
-            <img src="/img/main/section2_img1.png" alt="img" />
+          <div>
+            <Image
+              src="/img/main/section2_img1.png"
+              alt="img"
+              layout="fill"
+              objectFit="contain"
+            />
           </div>
-          <div className="section2_img2">
-            <img src="/img/main/section2_img2.png" alt="img" />
+          <div>
+            <Image
+              src="/img/main/section2_img2.png"
+              alt="img"
+              layout="fill"
+              objectFit="contain"
+            />
           </div>
         </BodyImgBox>
         <BodyCommentsBox>
-          <BodyComment>당신의 이야기를 들려주세요.</BodyComment>
-          <BodyComment>오늘은 당신이 주인공이니까요!</BodyComment>
+          <BodyComment>
+            최신 AI 기술인 Chat GPT를 활용하여 채팅형식으로 상담받을 수 있어요!
+          </BodyComment>
+          <BodyComment>
+            당신의 고민을 누구에게도 알리고 싶지 않다면 Chat GPT에게 속삭여보는
+            것은 어떨까요?
+          </BodyComment>
         </BodyCommentsBox>
         <BtnPosition>
           <CustomBtn

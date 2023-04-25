@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import CustomBtn from "../../../commons/buttons/CustomBtn";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import { breakPoints } from "../../../../commons/styles/media";
+import Image from "next/image";
 
 interface IAnimationProps {
   inView: boolean;
@@ -11,17 +12,15 @@ interface IAnimationProps {
 }
 
 const Wrapper = styled.div`
-  margin-top: 200px;
+  width: 100%;
   background-color: #fff;
-  height: 900px;
 `;
 const WrapperTop = styled.div`
-  height: 300px;
+  height: 250px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 `;
-
 // Animation
 const fadeIn = keyframes`
   from {
@@ -67,52 +66,42 @@ const TopBox = styled.div<IAnimationProps>`
 const WrapperBody = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 600px;
-  position: relative;
-  @media ${breakPoints.mobile} {
-  }
 `;
 const BodyCommentsBox = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(600px - 100px);
-  background-color: red;
-  > p {
-    font-size: var(--font-size-lg);
-  }
+  align-items: center;
+  margin: 100px 0px 50px 0px;
+`;
+const BodyComment = styled.p`
+  margin: 20px 0px;
+  font-size: var(--font-size-lg);
+  text-align: center;
   @media ${breakPoints.mobile} {
-    > p {
-      font-size: var(--font-mobile-size-md);
-    }
+    padding: 0px 20px;
+    font-size: var(--font-mobile-size-lg);
+    margin: 20px 0;
   }
   @media ${breakPoints.tablet} {
-    > p {
-      font-size: var(--font-size-md);
-    }
+    padding: 0px 20px;
+    font-size: var(--font-size-md);
+    margin: 30px 0px;
   }
 `;
 const BodyImgBox = styled.div`
-  position: absolute;
-  top: -100px;
-  left: 200px;
-  width: 600px;
-  > img {
-    width: 100%;
-    height: 100%;
-  }
-  @media ${breakPoints.mobile} {
-    width: 400px;
-    top: 0px;
-    left: 0px;
-  }
-  @media ${breakPoints.tablet} {
-    width: 500px;
-    top: 0px;
-    left: 0px;
-  }
+  height: fit-content;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 `;
-const BtnPosition = styled.div``;
+const BtnPosition = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0px;
+`;
 export default function MainSection3UI(): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
 
@@ -123,12 +112,12 @@ export default function MainSection3UI(): JSX.Element {
     <Wrapper>
       <WrapperTop>
         <TopBox ref={ref} delay={0.5} inView={inView}>
-          <div>Change</div>
-          <div>변화</div>
+          <div>Anonymity</div>
+          <div>익명성</div>
         </TopBox>
         <TopBox ref={ref} delay={1} inView={inView}>
-          <div>Authenticit</div>
-          <div>진정성</div>
+          <div>Consulting</div>
+          <div>상담</div>
         </TopBox>
         <TopBox ref={ref} delay={1.5} inView={inView}>
           <div>Sympath</div>
@@ -137,16 +126,38 @@ export default function MainSection3UI(): JSX.Element {
       </WrapperTop>
       <WrapperBody>
         <BodyImgBox>
-          <img src="/img/main/section3_img1.png" alt="img" />
+          <Image
+            src="/img/main/section3_img1.png"
+            alt="img"
+            width={400}
+            height={400}
+          />
+          <Image
+            src="/img/main/section3_img2.png"
+            alt="img"
+            width={400}
+            height={400}
+          />
+          {/* <div>
+            <Image
+              src="/img/main/section3_img2.png"
+              alt="img"
+              layout="fill"
+              objectFit="contain"
+            />
+          </div> */}
         </BodyImgBox>
         <BodyCommentsBox>
-          <p>친구들에게 말하지 못했던 이야기들..</p>
-          <p>우리와 함께 나눠 보는건 어떨까요?</p>
+          <BodyComment>누군가와 같은 고민을 하고 있을지 몰라요.</BodyComment>
+          <BodyComment>
+            익명성이 보장된 대화공간에서 자신만의 고민을 이야기하는 것은
+            어떨까요?
+          </BodyComment>
         </BodyCommentsBox>
         <BtnPosition>
           <CustomBtn
             type={"Sm"}
-            fill={false}
+            fill={true}
             text={"친구들과 소통하기"}
             onClick={onClickMoveToPage("/community")}
           />

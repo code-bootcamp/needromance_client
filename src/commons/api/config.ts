@@ -1,6 +1,6 @@
 const config = {
   backend: {
-    baseURL: "https://test.com",
+    baseURL: process.env.NEXT_PUBLIC_BACKEND,
   },
   chatGPT: {
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
