@@ -7,20 +7,33 @@ import * as S from "./CommunityDetail.style";
 import { getDate } from "../../../../commons/libraries/getDate";
 import { DeleteBoard, GetBoard } from "../../../../commons/api/boards";
 import { useEffect, useState } from "react";
+import { getUserInfo } from "../../../../commons/api/test";
+import { accessToken } from "../../../../commons/api/token";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../../../commons/store/atoms";
 
 const CommunityDetailContainer = () => {
   const router = useRouter();
-  const { onClickMoveToPage } = useMoveToPage();
+  // const accessToken = useRecoilValue(accessTokenState);
   const [data, setData] = useState(null);
+  const [checkUser, setCheckUser] = useState("");
+  const { onClickMoveToPage } = useMoveToPage();
 
   const fetch = async () => {
     const result = await GetBoard(Number(router.query.communityId));
     setData(result);
   };
 
+  // 로그인한 유저 정보
+  const getUserInformation = async () => {
+    const result = await getUserInfo(""); //토큰 추후에 리코일로 교체하기
+    setCheckUser(result);
+  };
+
   // 화면이 맨 처음 렌더링될 떄 데이터 가져옴
   useEffect(() => {
     fetch();
+    getUserInformation();
   }, [router.query.communityId]);
 
   const handleDeleteBoard = async () => {
@@ -28,26 +41,28 @@ const CommunityDetailContainer = () => {
     await router.push("/boards");
   };
 
+  console.log(checkUser, data);
   return (
     <S.Wrap>
       <S.CardWrap>
-        <S.BtnWrap>
-          <CustomBtn
-            type="Sm"
-            fill={false}
-            text="수정"
-            onClick={onClickMoveToPage(
-              `/boards/${router.query.communityId}/edit`
-            )}
-          />
-          <CustomBtn
-            type="Sm"
-            fill={false}
-            text="삭제"
-            onClick={() => handleDeleteBoard()}
-          />
-        </S.BtnWrap>
-
+        {checkUser?.id === data?.user?.id && (
+          <S.BtnWrap>
+            <CustomBtn
+              type="Sm"
+              fill={false}
+              text="수정"
+              onClick={onClickMoveToPage(
+                `/boards/${router.query.communityId}/edit`
+              )}
+            />
+            <CustomBtn
+              type="Sm"
+              fill={false}
+              text="삭제"
+              onClick={() => handleDeleteBoard()}
+            />
+          </S.BtnWrap>
+        )}
         <S.Title>
           <span>Q.</span>
           {data?.title}
@@ -86,8 +101,10 @@ const CommunityDetailContainer = () => {
       />
 
       <CummunityCommentListContainer
+        checkUser={checkUser}
         boardId={router.query.communityId}
         writer={data?.user?.nickname}
+        onlyWriter={data?.user?.id === checkUser?.id}
       />
     </S.Wrap>
   );

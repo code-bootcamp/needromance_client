@@ -12,8 +12,13 @@ import {
 } from "../../../../commons/api/comment";
 import { useEffect, useState } from "react";
 
-const CummunityCommentListContainer = ({ boardId, writer }: any) => {
-  console.log(boardId, writer);
+const CummunityCommentListContainer = ({
+  boardId,
+  writer,
+  checkUser,
+  onlyWriter,
+}: any) => {
+  console.log(boardId, writer, onlyWriter);
 
   const [data, setData] = useState(null);
   const [isEdit, setIsEdit] = useState<string>("");
@@ -83,20 +88,23 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
             />
           ) : (
             <S.CardWrap>
-              <S.BtnWrap>
-                <CustomBtn
-                  type="Sm"
-                  fill={false}
-                  text="수정"
-                  onClick={() => setIsEdit(list.id)}
-                />
-                <CustomBtn
-                  type="Sm"
-                  fill={true}
-                  text="삭제"
-                  onClick={() => handleDeleteComment(list.id)}
-                />
-              </S.BtnWrap>
+              {checkUser?.id === list?.user?.id && (
+                <S.BtnWrap>
+                  <CustomBtn
+                    type="Sm"
+                    fill={false}
+                    text="수정"
+                    onClick={() => setIsEdit(list.id)}
+                  />
+                  <CustomBtn
+                    type="Sm"
+                    fill={true}
+                    text="삭제"
+                    onClick={() => handleDeleteComment(list.id)}
+                  />
+                </S.BtnWrap>
+              )}
+
               <S.NameTo>
                 <span>To.</span>
                 {writer}
@@ -135,12 +143,14 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
                     text="좋아요"
                     onClick={() => toggleLike(list.id)}
                   />
-                  <CustomBtn
-                    type="Sm"
-                    fill={false}
-                    text={list?.status ? "채택취소" : "채택하기"}
-                    onClick={() => togglePick(list.id, list.status)}
-                  />
+                  {onlyWriter && (
+                    <CustomBtn
+                      type="Sm"
+                      fill={false}
+                      text={list?.status ? "채택취소" : "채택하기"}
+                      onClick={() => togglePick(list.id, list.status)}
+                    />
+                  )}
                 </S.BtnWrap>
               </S.FooterWrap>
             </S.CardWrap>
