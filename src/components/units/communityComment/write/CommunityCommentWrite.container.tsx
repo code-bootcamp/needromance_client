@@ -4,16 +4,16 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 interface IPropstype {
   isEdit?: string;
   setIsEdit?: Dispatch<SetStateAction<string>>;
-  handleEditComment?: (contents: string) => Promise<void>;
-  handlePostComment?: (contents: string) => Promise<void>;
+  handleUpdateAnswer?: (contents: string) => Promise<void>;
+  handlePostAnswer?: (contents: string) => Promise<void>;
   defaultContents?: string;
 }
 
 const CommunityCommentWriteContainer = ({
   isEdit,
   setIsEdit,
-  handleEditComment,
-  handlePostComment,
+  handleUpdateAnswer,
+  handlePostAnswer,
   defaultContents,
 }: IPropstype) => {
   const [contents, setContent] = useState<string>("");
@@ -21,7 +21,7 @@ const CommunityCommentWriteContainer = ({
 
   useEffect(() => {
     setContent(defaultContents ?? "");
-  }, [handlePostComment, defaultContents]);
+  }, [handlePostAnswer, defaultContents]);
 
   const handleCancle = () => {
     setIsEdit("");
@@ -40,14 +40,14 @@ const CommunityCommentWriteContainer = ({
 
       {isEdit ? (
         <S.BtnWrap>
-          <S.Btn_line onClick={() => handleEditComment(contents)}>
+          <S.Btn_line onClick={() => handleUpdateAnswer(contents)}>
             수정
           </S.Btn_line>
           <S.Btn_full onClick={() => handleCancle()}>취소</S.Btn_full>
         </S.BtnWrap>
       ) : (
         <S.BtnWrap>
-          <S.Btn_full onClick={() => handlePostComment(contents)}>
+          <S.Btn_full onClick={() => handlePostAnswer(contents)}>
             작성
           </S.Btn_full>
         </S.BtnWrap>

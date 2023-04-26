@@ -19,14 +19,14 @@ const USER_INFO = [
 /////////////////
 
 const NAV_LISTS = [
-  { id: "notification", name: "알람" },
+  { id: "myProfile", name: "내 정보" },
   { id: "board", name: "내 게시글 조회" },
   { id: "comment", name: "내 답변 조회" },
-  { id: "myProfile", name: "내 정보" },
+  { id: "notification", name: "알람" },
   // { id: "withdrawal", name: "회원탈퇴" },
 ];
 
-const MyPageNav = ({ IsActive, setIsActive }: IMyPageProps) => {
+const MyPageNav = ({ myData, IsActive, setIsActive }: IMyPageProps) => {
   const [confirm, setConfirm] = useState(false);
   const [openNav, setOpenNav] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -34,38 +34,50 @@ const MyPageNav = ({ IsActive, setIsActive }: IMyPageProps) => {
     query: "(max-width:768px)",
   });
 
-  console.log(IsActive);
-
   return (
     <>
-      <S.NavWrap openNav={openNav} onClick={() => setOpenNav((prev) => !prev)}>
+      <S.NavWrap openNav={openNav}>
         <S.MenuWrap openNav={openNav}>
-          {USER_INFO.map((user) => (
-            <S.ProfileWrap key={user.id}>
-              <S.ProfileImg src={user.profileImg} />
-              <S.Nickname>{user.nickname}</S.Nickname>
-            </S.ProfileWrap>
-          ))}
+          <S.ProfileWrap key={myData.id}>
+            {myData?.userImg ? (
+              <S.ProfileImg src={myData?.userImg} />
+            ) : (
+              <S.ProfileImg src="/img/community/default_userImg.png" />
+            )}
+            <S.Nickname>{myData.nickname}</S.Nickname>
+          </S.ProfileWrap>
           <S.Line />
           <S.ListsWrap>
             {NAV_LISTS.map((li) => (
-              <S.List key={li.id} onClick={() => setIsActive(li.id)}>
+              <S.List
+                key={li.id}
+                onClick={() => {
+                  setIsActive(li.id);
+                  setOpenNav(false);
+                }}
+              >
                 <S.Name active={IsActive === li.id ?? true}>{li.name}</S.Name>
               </S.List>
             ))}
-            <S.List onClick={() => setOpenModal(true)}>
+            <S.List
+              onClick={() => {
+                setOpenModal(true);
+                setOpenNav(false);
+              }}
+            >
               <S.Name active={IsActive === "withdrawal" ?? true}>
                 회원탈퇴
               </S.Name>
             </S.List>
           </S.ListsWrap>
         </S.MenuWrap>
+        {NavIcon && (
+          <S.MenuBtn onClick={() => setOpenNav((prev) => !prev)}>
+            <MenuOutlined />
+          </S.MenuBtn>
+        )}
       </S.NavWrap>
-      {NavIcon && (
-        <S.MenuBtn onClick={() => setOpenNav((prev) => !prev)}>
-          <MenuOutlined />
-        </S.MenuBtn>
-      )}
+
       <WidthdrawalModal
         open={openModal}
         setOpen={setOpenModal}

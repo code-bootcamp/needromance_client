@@ -1,45 +1,64 @@
-import { useEffect } from "react";
-import { getBoards } from "../../../../commons/api/boards";
+import { useEffect, useState } from "react";
+import { GetBoards, getBoards } from "../../../../commons/api/boards";
 import CustomBtn from "../../../commons/buttons/CustomBtn";
 import Tag from "../../../commons/hashtag/HashTag";
 import Answer from "../answer/Answer";
 import Medal from "../medal/Medal";
 import Writing from "../writing/Writing";
 import * as S from "./CommunityList.styles";
+import { BestUsers } from "../../../../commons/api/user";
+import { BestAnswer } from "../../../../commons/api/answers";
 
 export default function CommunityList() {
+  const [ranking, setRanking] = useState<Array>([]);
+  const [answers, setAnswers] = useState<Array>([]);
+  const [boards, setBoards] = useState<Array>([]);
+
+  const fetch = async () => {
+    const ranking = await BestUsers();
+    const answers = await BestAnswer();
+    const boards = await GetBoards(1);
+    const rankingUser = ranking?.map((user) => user.nickname);
+    setRanking(rankingUser);
+    setAnswers(answers);
+    setBoards(boards);
+  };
+
   useEffect(() => {
-    getBoardsList(1);
+    fetch();
   }, []);
 
-  const getBoardsList = async (page: number) => {
-    const data = await getBoards(page);
-    console.log(data);
-  };
+  // useEffect(() => {
+  //   getBoardsList(1);
+  // }, []);
+
+  // const getBoardsList = async (page: number) => {
+  //   const data = await getBoards(page);
+  //   console.log(data);
+  // };
   return (
     <S.Wrapper>
       <S.Ranking>
         <p>상담 랭킹</p>
         <S.MedalWrapper>
-          <Medal label="망고떡" ranking="1st" />
-          <Medal label="망고떡" ranking="2nd" />
-          <Medal label="망고떡" ranking="3rd" />
-          <Medal label="망고떡" ranking="4th" />
-          <Medal label="망고떡" ranking="5th" />
+          <Medal label={ranking[0]} ranking="1st" />
+          <Medal label={ranking[1]} ranking="2nd" />
+          <Medal label={ranking[2]} ranking="3rd" />
+          <Medal label={ranking[3]} ranking="4th" />
+          <Medal label={ranking[4]} ranking="5th" />
         </S.MedalWrapper>
       </S.Ranking>
       <S.BestAnswerWrapper>
-        <Answer name="황도롱이" content="대통령은 국가의 독립" />
-        <Answer
-          name="황도롱이"
-          content="대통령은 국가의 독립·영토의 보전·국가의 계속성과 헌법을 수호할 책무를 진다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다.
-
-모든 국민은 법률이 정하는 바에 의하여 국가기관에 문서로 청원할 권리를 가진다. 대통령은 국가의 안위에 관계되는 중대한 교전상태에 있어서 국가를 보위하기 위하여 긴급한 조치가 필요하고 국회의 집회가 불가능한 때에 한하여 법률의 효력을 가지는 명령을 발할 수 있다.
-
-모든 국민은 소급입법에 의하여 참정권의 제한을 받거나 재산권을 박탈당하지 아니한다. 행정권은 대통령을 수반으로 하는 정부에 속한다. 국가는 모성의 보호를 위하여 노력하여야 한다.
-
-명령·규칙 또는 처분이 헌법이나 법률에 위반되는 여부가 재판의 전제가 된 경우에는 "
-        />
+        {answers.map((answer: any, index: number) => (
+          <Answer
+            key={answer.nickname}
+            name={answer.nickname}
+            content={answer.contents}
+            userImg={answer.userImg}
+            likes={answer.likes}
+            index={index + 1}
+          />
+        ))}
       </S.BestAnswerWrapper>
       <S.SearchSection>
         <S.InfoText>
@@ -70,20 +89,16 @@ export default function CommunityList() {
           {/* <button>글 작성하기</button> */}
         </S.LatestCounsel>
         <S.LatestCounselWriting>
-          <Writing
-            name="우리사이"
-            content="친한 남사친을 질투하는 남자친구... 과하게 질투하는데 남사친과 연락을 끊어야 하나요? 답변 부탁드립니다. 답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다. 답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다.답변 부탁드립니다."
-            tags={["질투", "남자친구", "남사친"]}
-          />
-          <Writing
-            name="우리사이"
-            content="친한 남사친을 질투하는 남자친구..."
-            tags={["질투", "남자친구", "남사친"]}
-          />
-          <Writing
-            name="우리사이"
-            content="친한 남사친을 질투하는 남자친구..."
-          />
+          {boards?.map((board: any) => (
+            <Writing
+              key={board.id}
+              name={board.user.nickname}
+              content={board.contents}
+              hashtags={board.hashtags}
+              createdAt={board.createdAt}
+              answers={board.answers.length}
+            />
+          ))}
         </S.LatestCounselWriting>
       </S.CounselWrapper>
     </S.Wrapper>

@@ -4,7 +4,7 @@ import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
 
-export const GetComments = async (boardId: number, status: number) => {
+export const GetAnswers = async (boardId: number, status: number) => {
   try {
     const response = await axios.get(
       `${URL}/answers?board-id=${boardId}&status=${status}`,
@@ -18,7 +18,7 @@ export const GetComments = async (boardId: number, status: number) => {
   }
 };
 
-export const PostComment = async (boardId: number, contents: string) => {
+export const PostAnswer = async (boardId: number, contents: string) => {
   console.log(boardId, contents);
   try {
     const response = await axios.post(
@@ -40,7 +40,7 @@ export const PostComment = async (boardId: number, contents: string) => {
   }
 };
 
-export const EditComment = async (id: number, contents: string) => {
+export const UpdateAnswer = async (id: number, contents: string) => {
   try {
     const response = await axios.patch(
       `${URL}/answers/${id}`,
@@ -60,7 +60,7 @@ export const EditComment = async (id: number, contents: string) => {
   }
 };
 
-export const DeleteComment = async (id: number) => {
+export const DeleteAnswer = async (id: number) => {
   try {
     const response = await axios.delete(`${URL}/answers/${id}`, {
       headers: {
@@ -74,7 +74,7 @@ export const DeleteComment = async (id: number) => {
   }
 };
 
-export const LikeComment = async (id: number) => {
+export const LikeAnswer = async (id: number) => {
   try {
     const response = await axios.patch(`${URL}/answers/${id}/likes`, {
       headers: {
@@ -88,7 +88,7 @@ export const LikeComment = async (id: number) => {
   }
 };
 
-export const PickComment = async (
+export const PickAnswer = async (
   id: number,
   boardId: number,
   status: boolean
@@ -106,6 +106,15 @@ export const PickComment = async (
         },
       }
     );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const BestAnswer = async () => {
+  try {
+    const response = await axios.get(`${URL}/answers/best`);
     return response.data;
   } catch (error) {
     console.log(error);

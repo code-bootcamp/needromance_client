@@ -44,7 +44,7 @@ export default function Tag({ tags }: { tags: string[] }) {
   return (
     <TagBox>
       {tags?.map((tag: string) => (
-        <HashTag key={tag}>#{tag}</HashTag>
+        <HashTag key={tag}>{tag}</HashTag>
       ))}
     </TagBox>
   );

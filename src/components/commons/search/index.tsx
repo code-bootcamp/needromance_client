@@ -77,8 +77,11 @@ const Search = (props: any) => {
   return (
     <SearchWrapper>
       <SearchBox>
-        <SearchInput placeholder={props.placeholder} />
-        <SearchIcon onClick={() => console.log("검색")} />
+        <SearchInput
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+        />
+        <SearchIcon onClick={props.onClick} />
       </SearchBox>
     </SearchWrapper>
   );

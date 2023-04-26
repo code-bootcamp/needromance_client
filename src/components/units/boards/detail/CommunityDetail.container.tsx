@@ -7,8 +7,8 @@ import * as S from "./CommunityDetail.style";
 import { getDate } from "../../../../commons/libraries/getDate";
 import { DeleteBoard, GetBoard } from "../../../../commons/api/boards";
 import { useEffect, useState } from "react";
-import { getUserInfo } from "../../../../commons/api/test";
 import { accessToken } from "../../../../commons/api/token";
+import { GetUserInfo } from "../../../../commons/api/user";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../commons/store/atoms";
 
@@ -26,7 +26,7 @@ const CommunityDetailContainer = () => {
 
   // 로그인한 유저 정보
   const getUserInformation = async () => {
-    const result = await getUserInfo(""); //토큰 추후에 리코일로 교체하기
+    const result = await GetUserInfo(accessToken); //토큰 추후에 리코일로 교체하기
     setCheckUser(result);
   };
 

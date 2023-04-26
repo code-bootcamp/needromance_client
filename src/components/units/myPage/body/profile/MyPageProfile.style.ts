@@ -48,8 +48,9 @@ export const Input = styled.input`
 export const ProfileImg = styled.img`
   width: 5rem;
   height: 5rem;
-  border-radius: 50%;
   object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 `;
 
 export const IconWrap = styled.div`
@@ -66,8 +67,8 @@ export const IconWrap = styled.div`
   cursor: pointer;
 
   position: absolute;
-  top: 0;
-  left: 60px;
+  top: -5px;
+  left: 4.2rem;
 `;
 
 export const BtnWrap = styled.div`

@@ -7,11 +7,11 @@ interface IStylePropsType {
 
 export const NavWrap = styled.nav<IStylePropsType>`
   @media ${breakPoints.mobile} {
-    visibility: ${({ openNav }) => (openNav ? "visible" : "hidden")};
     position: relative;
-    transition: visibility 0.6s;
 
     ::before {
+      visibility: ${({ openNav }) => (openNav ? "visible" : "hidden")};
+      transition: visibility 0.6s;
       content: "";
       position: absolute;
       left: 0;
@@ -23,11 +23,11 @@ export const NavWrap = styled.nav<IStylePropsType>`
     }
   }
   @media ${breakPoints.tablet} {
-    visibility: ${({ openNav }) => (openNav ? "visible" : "hidden")};
     position: relative;
-    transition: visibility 0.6s;
 
     ::before {
+      visibility: ${({ openNav }) => (openNav ? "visible" : "hidden")};
+      transition: visibility 0.6s;
       content: "";
       position: absolute;
       left: 0;
@@ -97,8 +97,9 @@ export const ProfileWrap = styled.div`
 export const ProfileImg = styled.img`
   width: 6.25rem;
   height: 6.25rem;
-  border-radius: 50%;
+  border-radius: 8px;
   object-fit: cover;
+  border: 1px solid #ccc;
 `;
 
 export const Nickname = styled.p`
@@ -139,6 +140,6 @@ export const MenuBtn = styled.div`
   cursor: pointer;
   position: absolute;
   font-size: var(--font-size-md);
-  top: 124px;
+  top: -35px;
   left: 20px;
 `;

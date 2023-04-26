@@ -1,15 +1,21 @@
 import { useState } from "react";
 import MyPageProfileDetail from "./detail/MyPageProfile.detail.container";
 import MyPageProfileEdit from "./edit/MyPageProfile.edit.container";
+import { IMyPageProps } from "../../MyPage.type";
 
-const MyPageProfile = () => {
+const MyPageProfile = ({ myData, setMyData }: IMyPageProps) => {
   const [IsEdit, setIsEdit] = useState<boolean>(false);
+
   return (
     <>
       {IsEdit ? (
-        <MyPageProfileEdit setIsEdit={setIsEdit} />
+        <MyPageProfileEdit
+          myData={myData}
+          setMyData={setMyData}
+          setIsEdit={setIsEdit}
+        />
       ) : (
-        <MyPageProfileDetail setIsEdit={setIsEdit} />
+        <MyPageProfileDetail myData={myData} setIsEdit={setIsEdit} />
       )}
     </>
   );
