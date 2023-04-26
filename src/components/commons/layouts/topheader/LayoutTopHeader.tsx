@@ -1,8 +1,13 @@
 import styled from "@emotion/styled";
 import { googleLogout } from "@react-oauth/google";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { userProfileState } from "../../../../commons/store/\batoms";
+import { getUserInfo } from "../../../../commons/api/test";
+import {
+  accessTokenState,
+  userProfileState,
+} from "../../../../commons/store/atoms";
 
 const TopHeader = styled.header`
   width: 100vw;
@@ -49,7 +54,16 @@ const Profile = styled.div`
 `;
 export default function LayoutTopHeader() {
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
+  // useEffect(() => {
+  //   getUserInformation();
+  // }, [accessToken]);
+
+  // const getUserInformation = async () => {
+  //   const data = await getUserInfo(accessToken);
+  //   // console.log(data);
+  // };
   const GoogleLogout = () => {
     googleLogout();
     setUserProfile([]);
@@ -60,8 +74,8 @@ export default function LayoutTopHeader() {
     <TopHeader>
       {userProfile.length !== 0 && (
         <Profile>
-          <img src={userProfile.picture} alt="프로필 사진" />
-          <span>{userProfile.name}</span>
+          <img src={userProfile?.picture} alt="프로필 사진" />
+          <span>{userProfile?.name}</span>
         </Profile>
       )}
       {userProfile.length === 0 ? (
