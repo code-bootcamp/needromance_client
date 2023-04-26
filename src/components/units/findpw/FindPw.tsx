@@ -1,14 +1,17 @@
 import Link from "next/link";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   checkVerificationEmail,
   sendVerificationEmail,
 } from "../../../commons/api/test";
-import CustomBtn from "../../commons/buttons/CustomBtn";
 import BorderInput from "../../commons/input/Input";
+import Loader from "../../commons/loader/Loader";
+import CustomModal from "../../commons/modals/CustomModal";
 import * as S from "./FindPw.styles";
 
 export default function FindPw() {
+  // modal
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailVerifying, setIsEmailVerifying] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -18,6 +21,14 @@ export default function FindPw() {
     password: "",
   });
 
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
   const handleSendVerificationButton = async () => {
     // 인증번호 전송을 누르면,
     setIsLoading(true);
@@ -25,7 +36,7 @@ export default function FindPw() {
     // 상태코드로 확인이 가능하다...
     setIsLoading(false);
 
-    if (data === "OK") {
+    if (data === 200) {
       setIsEmailVerifying(true);
     } else {
       alert("다시 시도해주세요.");
@@ -52,14 +63,13 @@ export default function FindPw() {
         <S.Menu> 비밀번호 찾기</S.Menu>
         <S.SignInForm>
           <S.InputWrapper>
-            <BorderInput check={true} label="Email" style={{}} />
+            <BorderInput
+              check={true}
+              label="Email"
+              style={{}}
+              onChange={handleInput}
+            />
           </S.InputWrapper>
-          {/* <S.InputWrapper style={{ width: "140px" }}>
-              <BorderInput style={{}} />
-            </S.InputWrapper>
-            <CustomBtn type="Sm" fill={false} text="인증번호 발송" /> */}
-          {/* <CustomBtn type="Sm" fill={true} text="인증번호 발송" /> */}
-
           <S.ValidationWrapper>
             <BorderInput
               placeholder="인증번호를 입력하세요."
@@ -92,7 +102,11 @@ export default function FindPw() {
               </>
             )}
           </S.ValidationWrapper>
-
+          {isEmailVerified && (
+            <S.ValidationWrapper>
+              <BorderInput placeholder="변경할 비밀번호를 입력하세요." />
+            </S.ValidationWrapper>
+          )}
           <S.ButtonWrapper>
             <S.ResetButton>비밀번호 재설정</S.ResetButton>
           </S.ButtonWrapper>
@@ -103,6 +117,15 @@ export default function FindPw() {
           </Link>
         </S.BottomWrapper>
       </S.SignInWindow>
+      {isLoading && <Loader />}
+      <CustomModal
+        type="alert"
+        setOpenModal={setIsOpenModal}
+        openModal={isOpenModal}
+        handleTestFn={() => setIsOpenModal(false)}
+      >
+        다시 시도해주세요.
+      </CustomModal>
     </S.Wrapper>
   );
 }
