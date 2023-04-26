@@ -15,7 +15,7 @@ import {
 import BorderInput from "../../commons/input/Input";
 import Loader from "../../commons/loader/Loader";
 import CustomModal from "../../commons/modals/CustomModal";
-import GoogleSignIn from "../signin/GoogleSignIn";
+import GoogleSignIn from "../signIn/GoogleSignIn";
 
 // styles
 import * as S from "./SignUp.styles";

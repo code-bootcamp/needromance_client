@@ -3,11 +3,61 @@ import { googleLogout } from "@react-oauth/google";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { getUserInfo } from "../../../../commons/api/test";
+import { getUserInfo, logout } from "../../../../commons/api/test";
 import {
   accessTokenState,
   userProfileState,
 } from "../../../../commons/store/atoms";
+
+export default function LayoutTopHeader() {
+  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
+  useEffect(() => {
+    getUserInformation();
+  }, [accessToken]);
+
+  const getUserInformation = async () => {
+    const data = await getUserInfo(accessToken);
+    console.log(data);
+    setUserProfile(data);
+  };
+
+  const GoogleLogout = () => {
+    googleLogout();
+    setUserProfile([]);
+  };
+
+  const logOut = () => {
+    logout(accessToken);
+  };
+
+  console.log("headerUser", userProfile);
+  return (
+    <TopHeader>
+      {userProfile.length !== 0 && (
+        <Profile>
+          <ProfileImg
+            src={userProfile?.picture || `/img/community/default_userImg.png`}
+            alt="프로필 사진"
+          />
+          <span>{userProfile?.name || userProfile?.nickname}</span>
+        </Profile>
+      )}
+      {userProfile.length === 0 ? (
+        <Link href={"/signin"}>
+          <Menu>로그인</Menu>
+        </Link>
+      ) : (
+        <span onClick={logOut}>로그아웃</span>
+      )}
+
+      <Link href={"/signup"}>
+        <Menu>회원가입</Menu>
+      </Link>
+    </TopHeader>
+  );
+}
 
 const TopHeader = styled.header`
   width: 100vw;
@@ -52,43 +102,8 @@ const Profile = styled.div`
     border-radius: 100%;
   }
 `;
-export default function LayoutTopHeader() {
-  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  // useEffect(() => {
-  //   getUserInformation();
-  // }, [accessToken]);
-
-  // const getUserInformation = async () => {
-  //   const data = await getUserInfo(accessToken);
-  //   // console.log(data);
-  // };
-  const GoogleLogout = () => {
-    googleLogout();
-    setUserProfile([]);
-  };
-
-  console.log("headerUser", userProfile);
-  return (
-    <TopHeader>
-      {userProfile.length !== 0 && (
-        <Profile>
-          <img src={userProfile?.picture} alt="프로필 사진" />
-          <span>{userProfile?.name}</span>
-        </Profile>
-      )}
-      {userProfile.length === 0 ? (
-        <Link href={"/signin"}>
-          <Menu>로그인</Menu>
-        </Link>
-      ) : (
-        <span onClick={GoogleLogout}>로그아웃</span>
-      )}
-
-      <Link href={"/signup"}>
-        <Menu>회원가입</Menu>
-      </Link>
-    </TopHeader>
-  );
-}
+const ProfileImg = styled.img`
+  background-color: white;
+  border-radius: 100%;
+`;

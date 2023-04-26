@@ -39,3 +39,12 @@ export const DeleteBoard = async (id: number) => {
     console.log(err);
   }
 };
+
+export const getBoards = async (page: number) => {
+  try {
+    const response = await axios.get(`${URL}/boards?page=${page}`, {});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
