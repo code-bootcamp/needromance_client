@@ -6,7 +6,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 interface IModalProps {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
-  type: "userBan" | "test" | "alert"; // 사용하고 싶은 모달의 사용 목적에 따라 이름을 지어주세요.
+  type: "userBan" | "deleteBoard" | "alert"; // 사용하고 싶은 모달의 사용 목적에 따라 이름을 지어주세요.
   handleTestFn?: () => void; // 모달의 ok 버튼을 누를시에 작동시키고 싶은 함수를 적어주세요. handle~~..
   children?: string;
 }
@@ -42,6 +42,7 @@ export default function CustomModal(props: IModalProps) {
           bodyStyle={modalBodyStyle}
           footer={null}
           open={props.openModal}
+          // maskStyle={{ display: "none" }}
         >
           <S.ModalWrapper>
             <ExclamationCircleOutlined
@@ -61,7 +62,7 @@ export default function CustomModal(props: IModalProps) {
           </S.ModalWrapper>
         </Modal>
       )}
-      {props.type === "test" && (
+      {props.type === "deleteBoard" && (
         <Modal
           width={400}
           closable={false}
@@ -69,6 +70,7 @@ export default function CustomModal(props: IModalProps) {
           bodyStyle={modalBodyStyle}
           footer={null}
           open={props.openModal}
+          // mask={false}
         >
           <S.ModalWrapper>
             {/* 다른 아이콘을 사용하시면, antd 아이콘에서 찾아서 원하시는거 적용하시면 됩니다. */}
@@ -80,7 +82,7 @@ export default function CustomModal(props: IModalProps) {
               }}
             />
             <S.ContentWrapper>
-              <div>테스트입니다</div>
+              <div>게시글을 삭제하시겠습니까?</div>
             </S.ContentWrapper>
             <S.BtnWrapper>
               <button onClick={() => props.setOpenModal(false)}>취소</button>

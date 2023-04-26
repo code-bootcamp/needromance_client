@@ -14,6 +14,13 @@ export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   position: relative;
+  // antd table pagination style
+  .ant-pagination-item-active {
+    border: 1.5px solid var(--point-color-light-green);
+    a {
+      color: var(--point-color-light-green);
+    }
+  }
 `;
 
 export const TabsMenu = styled.div<ITabsItemProps>`

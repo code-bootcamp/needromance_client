@@ -1,6 +1,8 @@
 import axios from "axios";
 import { AllUsers } from "../../components/units/admin/Admin.types";
-const server = "https://need-romance.site";
+import config from "./config";
+
+const server = config.backend.baseURL;
 
 export const getAllUsers = async (): Promise<AllUsers[]> => {
   try {
@@ -10,7 +12,7 @@ export const getAllUsers = async (): Promise<AllUsers[]> => {
       headers: {
         Authorization:
           "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNDk4NDU0LCJleHAiOjE2ODI1MDU2NTR9.phlbhu-pQr4bz0XA6hGt-rXJJ86eSihyfsHAnB9JWoQ",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNTI0NTIwLCJleHAiOjE2ODI1MzE3MjB9.NUYp7xKlGtgbmk09MbP_rgAhdkDWTm4CIiaP29n5WPg",
       },
     });
     return response.data;
@@ -56,7 +58,7 @@ export const getAllBoards = async () => {
       headers: {
         Authorization:
           "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNDk4NDU0LCJleHAiOjE2ODI1MDU2NTR9.phlbhu-pQr4bz0XA6hGt-rXJJ86eSihyfsHAnB9JWoQ",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNTI0NTIwLCJleHAiOjE2ODI1MzE3MjB9.NUYp7xKlGtgbmk09MbP_rgAhdkDWTm4CIiaP29n5WPg",
       },
     });
     console.log(response.data);

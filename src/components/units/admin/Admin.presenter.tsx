@@ -34,6 +34,9 @@ export default function AdminUI({
   allBoards,
   setAllBoards,
 }: IAdminProps) {
+  // modal id 값을 기준으로 on off
+  const [getDeleteId, setGetDeleteId] = useState("");
+  const [getBanId, setGetBanId] = useState("");
   const userColumns: ColumnsType<AllUsers> = [
     {
       title: "닉네임",
@@ -74,19 +77,26 @@ export default function AdminUI({
       title: "관리",
       dataIndex: "id",
       key: "idU",
-      render: () => (
-        <>
-          <CustomModal
-            type="userBan"
-            setOpenModal={setOpenModal}
-            openModal={openModal}
-            handleTestFn={handleTestFn}
-          />
+      render: (el) => (
+        <div
+          id={el}
+          onClick={(e) => {
+            setGetBanId(e.currentTarget.id);
+          }}
+        >
+          {el === getBanId && (
+            <CustomModal
+              type="userBan"
+              setOpenModal={setOpenModal}
+              openModal={openModal}
+              handleTestFn={handleTestFn}
+            />
+          )}
           <SettingOutlined
             style={{ cursor: "pointer" }}
             onClick={() => setOpenModal(true)}
           />
-        </>
+        </div>
       ),
     },
   ];
@@ -111,19 +121,26 @@ export default function AdminUI({
       title: "관리",
       dataIndex: "id",
       key: "idB",
-      render: () => (
-        <>
-          <CustomModal
-            type="userBan"
-            setOpenModal={setOpenModal}
-            openModal={openModal}
-            handleTestFn={handleTestFn}
-          />
+      render: (el) => (
+        <div
+          id={el}
+          onClick={(e) => {
+            setGetDeleteId(e.currentTarget.id);
+          }}
+        >
+          {el === Number(getDeleteId) && (
+            <CustomModal
+              type="deleteBoard"
+              setOpenModal={setOpenModal}
+              openModal={openModal}
+              handleTestFn={handleTestFn}
+            />
+          )}
           <DeleteOutlined
             style={{ cursor: "pointer" }}
             onClick={() => setOpenModal(true)}
           />
-        </>
+        </div>
       ),
     },
   ];
@@ -266,7 +283,10 @@ export default function AdminUI({
                     {searchBoardFilter}
                   </Button>
                 </Dropdown>
-                <input type="text" placeholder="검색어를 입력해 주세요." />
+                <input
+                  type="text"
+                  placeholder="검색기준: 게시글 제목, 닉네임"
+                />
               </S.SearchFilterBox>
             </S.TableSearchBox>
             {/* table */}
