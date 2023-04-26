@@ -93,13 +93,14 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-export const logout = async (param: any) => {
+export const logout = async (accessToken: string) => {
   try {
+    console.log("d", accessToken);
     const response = await axios({
       method: "post",
-      url: server + "/auth/logout",
+      url: URL + "/auth/logout",
       headers: {
-        authorization: `bearer ${param.token}`,
+        Authorization: `bearer ${accessToken}`,
       },
     });
     console.log(response);
@@ -111,13 +112,12 @@ export const logout = async (param: any) => {
 
 export const getUserInfo = async (accessToken: any) => {
   try {
-    const response = await axios.get(`${server}/user/login`, {
+    const response = await axios.get(`${URL}/user/login`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
       },
     });
-    console.log(response);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
     return error;
@@ -128,12 +128,13 @@ export const getUserInfo = async (accessToken: any) => {
 //   try {
 //     await axios({
 //       method: "get",
-//       url: server + "/user/login",
+//       url: URL + "/user/login",
 //       headers: {
 //         authorization: `bearer ${param}`,
 //       },
 //     }).then((res) => {
-//       return res;
+//       console.log(res);
+//       return res.data;
 //     });
 //   } catch (error) {
 //     console.log(error);

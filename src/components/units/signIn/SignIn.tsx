@@ -3,8 +3,8 @@ import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
 import GoogleSignIn from "./GoogleSignIn";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { getUserInfo, login } from "../../../commons/api/test";
-import { useState } from "react";
+import { login } from "../../../commons/api/test";
+import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store/atoms";
 
@@ -13,7 +13,7 @@ export default function SignIn() {
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  const handleInput = (event) => {
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
     setInputs({
       ...inputs,
@@ -28,12 +28,7 @@ export default function SignIn() {
     });
   };
 
-  const getUserInformation = async () => {
-    const data = await getUserInfo("accessToken");
-    // console.log(data);
-  };
-
-  console.log("accessToken::", accessToken);
+  console.log("accessToken", accessToken);
   return (
     <S.Wrapper>
       <S.SignInWindow>

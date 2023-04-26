@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { getBoards } from "../../../../commons/api/boards";
 import CustomBtn from "../../../commons/buttons/CustomBtn";
 import Tag from "../../../commons/hashtag/HashTag";
 import Answer from "../answer/Answer";
@@ -6,6 +8,14 @@ import Writing from "../writing/Writing";
 import * as S from "./CommunityList.styles";
 
 export default function CommunityList() {
+  useEffect(() => {
+    getBoardsList(1);
+  }, []);
+
+  const getBoardsList = async (page: number) => {
+    const data = await getBoards(page);
+    console.log(data);
+  };
   return (
     <S.Wrapper>
       <S.Ranking>
