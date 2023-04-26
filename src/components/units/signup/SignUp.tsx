@@ -38,6 +38,8 @@ export default function SignUp() {
   const [isActive, setIsActive] = useState(false);
   const [emailChecker, setEmailChecker] = useState("");
   const [nicknameChecker, setNicknameChecker] = useState("");
+  const [tokenChecker, setTokenChecker] = useState("");
+
   const [isEmailChecking, setIsEmailChecking] = useState(false);
   const [validatePassword, setValidatePassword] = useState("");
   const [isEmailVerifying, setIsEmailVerifying] = useState(false);
@@ -116,6 +118,9 @@ export default function SignUp() {
     if (data) {
       setIsEmailVerifying(false); // 인증하는 화면 사라져!
       setIsEmailVerified(true); // 인증 완료
+      setTokenChecker("인증되었습니다.");
+    } else {
+      setTokenChecker("");
     }
   };
 
@@ -138,6 +143,7 @@ export default function SignUp() {
       }
     }
     if (inputs.password !== inputs.password2) return;
+    if (nicknameChecker !== "사용가능한 닉네임입니다.") return;
     setIsActive(true);
     // 모두 다 채워졌다면 isActive true
   };
@@ -185,7 +191,7 @@ export default function SignUp() {
                       onClick={handleSendVerificationButton}
                       disabled={isEmailVerified}
                     >
-                      인증번호 전송
+                      {tokenChecker ? "인증 완료" : "인증번호 전송"}
                     </S.ValidationButton>
                   </>
                 ) : (
@@ -260,7 +266,7 @@ export default function SignUp() {
         </S.SignInForm>
         <S.BottomWrapper>
           <S.Line />
-          {/* <GoogleSignIn /> */}
+          <GoogleSignIn />
           <S.SignInLink>
             <Link href={"/signin"}>
               <a>로그인</a>
