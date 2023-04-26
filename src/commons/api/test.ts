@@ -1,5 +1,8 @@
 import axios from "axios";
+import config from "./config";
 const URL = "https://need-romance.site";
+
+const server = config.backend.baseURL;
 
 export const checkDuplicateEmail = async (email: string) => {
   try {
@@ -83,8 +86,56 @@ export const login = async (email: string, password: string) => {
         password,
       },
     });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const logout = async (param: any) => {
+  try {
+    const response = await axios({
+      method: "post",
+      url: server + "/auth/logout",
+      headers: {
+        authorization: `bearer ${param.token}`,
+      },
+    });
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
   }
 };
+
+export const getUserInfo = async (accessToken: any) => {
+  try {
+    const response = await axios.get(`${server}/user/login`, {
+      headers: {
+        Authorization: `bearer ${accessToken}`,
+      },
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+// export const getUserInfo = async (param: string) => {
+//   try {
+//     await axios({
+//       method: "get",
+//       url: server + "/user/login",
+//       headers: {
+//         authorization: `bearer ${param}`,
+//       },
+//     }).then((res) => {
+//       return res;
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

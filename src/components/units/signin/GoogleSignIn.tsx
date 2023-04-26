@@ -4,7 +4,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { userProfileState } from "../../../commons/store/\batoms";
+import { userProfileState } from "../../../commons/store/atoms";
 
 const GoogleLoginButton = styled.div`
   position: relative;
