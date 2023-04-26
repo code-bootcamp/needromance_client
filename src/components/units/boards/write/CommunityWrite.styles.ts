@@ -20,11 +20,13 @@ export const TitleInputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const InputWrapper = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 910px;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -32,11 +34,13 @@ export const InputWrapper = styled.div`
 
 export const InfoTitle = styled.div`
   width: 50px;
+  font-size: 1.3rem;
 `;
 
 export const ContentBox = styled.div`
   width: 100%;
-  margin-bottom: 2em;
+  margin: 2em 0px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 `;

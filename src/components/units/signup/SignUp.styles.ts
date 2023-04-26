@@ -7,6 +7,7 @@ interface ISignUpProps {
 }
 
 export const Wrapper = styled.section`
+  position: relative;
   padding: 50px 0px;
   display: flex;
   flex-direction: column;

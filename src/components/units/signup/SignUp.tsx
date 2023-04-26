@@ -85,7 +85,9 @@ export default function SignUp() {
 
   // 이메일 중복 검사
   const handleEmailCheckButton = async () => {
-    if (!inputs.email) return;
+    if (!inputs.email) {
+      return;
+    }
     const data = await checkDuplicateEmail(inputs.email);
     if (data === true) {
       setEmailChecker("사용가능한 이메일입니다.");
@@ -100,6 +102,7 @@ export default function SignUp() {
     // 인증번호 전송을 누르면,
     setIsLoading(true);
     const data = await sendVerificationEmail(inputs.email);
+    console.log(data);
     // 상태코드로 확인이 가능하다...
     setIsLoading(false);
 
@@ -136,7 +139,7 @@ export default function SignUp() {
   };
 
   const checkFormValidity = () => {
-    for (let key in inputs) {
+    for (const key in inputs) {
       if (!inputs[key] || !isEmailVerified) {
         return;
         // 비어있는 칸이 있으면 return

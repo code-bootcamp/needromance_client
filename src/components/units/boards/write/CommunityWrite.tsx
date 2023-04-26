@@ -42,7 +42,7 @@ export default function CommunityWrite() {
         />
       </S.ContentBox>
 
-      <S.InputWrapper>
+      <S.TitleInputWrapper>
         <S.InfoTitle>태그</S.InfoTitle>
         <Tag
           tagItem={tagItem}
@@ -51,7 +51,7 @@ export default function CommunityWrite() {
           setTagList={setTagList}
           // editData={editData}
         />
-      </S.InputWrapper>
+      </S.TitleInputWrapper>
     </S.Wrapper>
   );
 }

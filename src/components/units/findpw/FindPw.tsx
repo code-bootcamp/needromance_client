@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
+  checkDuplicateEmail,
   checkVerificationEmail,
   sendVerificationEmail,
 } from "../../../commons/api/test";
@@ -13,20 +14,42 @@ export default function FindPw() {
   // modal
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [emailChecker, setEmailChecker] = useState("");
   const [isEmailVerifying, setIsEmailVerifying] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isEmailChecking, setIsEmailChecking] = useState(false);
   const [token, setToken] = useState("");
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
+  useEffect(() => {}, []);
+
+  const onSubmitFindPw = () => {
+    event?.preventDefault();
+  };
+
+  // 이메일 중복 검사
+  const onChangeCheckEmail = async (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.value) {
+      setEmailChecker("");
+      return;
+    }
+    const { name, value } = event.target;
     setInputs({
       ...inputs,
       [name]: value,
     });
+    const data = await checkDuplicateEmail(event.target.value);
+
+    if (data === true) {
+      setIsEmailChecking(false);
+      setEmailChecker("입력하신 이메일로 조회되는 아이디가 없습니다.");
+    } else {
+      setIsEmailChecking(true);
+      setEmailChecker("이메일 인증을 진행해주세요.");
+    }
   };
 
   const handleSendVerificationButton = async () => {
@@ -61,52 +84,56 @@ export default function FindPw() {
           <S.LogoImage src="img/logo/INR_logo.png" alt="로필 로고" />
         </S.Logo>
         <S.Menu> 비밀번호 찾기</S.Menu>
-        <S.SignInForm>
+        <S.SignInForm onSubmit={onSubmitFindPw}>
           <S.InputWrapper>
             <BorderInput
               check={true}
               label="Email"
-              style={{}}
-              onChange={handleInput}
+              name="email"
+              placeholder="이메일을 입력하세요."
+              onChange={onChangeCheckEmail}
             />
+            <S.Checker
+              isExistId={emailChecker === "이메일 인증을 진행해주세요."}
+            >
+              {emailChecker}
+            </S.Checker>
           </S.InputWrapper>
-          <S.ValidationWrapper>
-            <BorderInput
-              placeholder="인증번호를 입력하세요."
-              onChange={(event) => setToken(event?.target.value)}
-              style={{ width: "180px" }}
-            />
+          {isEmailChecking && (
+            <S.ValidationWrapper>
+              <BorderInput
+                placeholder="인증번호를 입력하세요."
+                onChange={(event) => setToken(event?.target.value)}
+                style={{ width: "180px" }}
+              />
 
-            {!isEmailVerifying ? (
-              <S.ValidationButton
-                type="button"
-                onClick={handleSendVerificationButton}
-                disabled={isEmailVerified}
-              >
-                인증번호 전송
-              </S.ValidationButton>
-            ) : (
-              <>
-                <S.ValidationButton
-                  type="button"
-                  onClick={handleCheckVerificationButton}
-                >
-                  확인
-                </S.ValidationButton>
+              {!isEmailVerifying ? (
                 <S.ValidationButton
                   type="button"
                   onClick={handleSendVerificationButton}
+                  disabled={isEmailVerified}
                 >
-                  재전송
+                  인증번호 전송
                 </S.ValidationButton>
-              </>
-            )}
-          </S.ValidationWrapper>
-          {isEmailVerified && (
-            <S.ValidationWrapper>
-              <BorderInput placeholder="변경할 비밀번호를 입력하세요." />
+              ) : (
+                <>
+                  <S.ValidationButton
+                    type="button"
+                    onClick={handleCheckVerificationButton}
+                  >
+                    확인
+                  </S.ValidationButton>
+                  <S.ValidationButton
+                    type="button"
+                    onClick={handleSendVerificationButton}
+                  >
+                    재전송
+                  </S.ValidationButton>
+                </>
+              )}
             </S.ValidationWrapper>
           )}
+
           <S.ButtonWrapper>
             <S.ResetButton>비밀번호 재설정</S.ResetButton>
           </S.ButtonWrapper>

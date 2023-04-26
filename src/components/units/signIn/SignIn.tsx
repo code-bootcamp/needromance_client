@@ -59,12 +59,8 @@ export default function SignIn() {
         </S.SignInForm>
         <S.BottomWrapper>
           <S.FindID>
-            <Link href="/findid">
-              <a>아이디</a>
-            </Link>
-            /
             <Link href="/findpw">
-              <a>비밀번호</a>
+              <a>아이디/비밀번호</a>
             </Link>
             를 잊으셨나요?
           </S.FindID>
