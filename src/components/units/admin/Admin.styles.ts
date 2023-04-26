@@ -10,7 +10,7 @@ interface ITabsItemProps {
 }
 
 export const Wrapper = styled.div`
-  min-height: 100vh;
+  min-height: 125vh;
   width: 100%;
   display: flex;
   position: relative;
@@ -45,7 +45,6 @@ export const TabsWrapper = styled.li<ITabsItemProps>`
   padding: 3.125rem;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   background-color: #fff;
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
