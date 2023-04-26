@@ -6,8 +6,9 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 interface IModalProps {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
-  type: "userBan" | "test"; // 사용하고 싶은 모달의 사용 목적에 따라 이름을 지어주세요.
+  type: "userBan" | "test" | "alert"; // 사용하고 싶은 모달의 사용 목적에 따라 이름을 지어주세요.
   handleTestFn?: () => void; // 모달의 ok 버튼을 누를시에 작동시키고 싶은 함수를 적어주세요. handle~~..
+  children?: string;
 }
 
 // modal body style
@@ -83,6 +84,31 @@ export default function CustomModal(props: IModalProps) {
             </S.ContentWrapper>
             <S.BtnWrapper>
               <button onClick={() => props.setOpenModal(false)}>취소</button>
+              <button onClick={handlePropsFn}>확인</button>
+            </S.BtnWrapper>
+          </S.ModalWrapper>
+        </Modal>
+      )}
+      {props.type === "alert" && (
+        <Modal
+          width={400}
+          closable={false}
+          centered={true}
+          bodyStyle={modalBodyStyle}
+          footer={null}
+          open={props.openModal}
+        >
+          <S.ModalWrapper>
+            {/* 다른 아이콘을 사용하시면, antd 아이콘에서 찾아서 원하시는거 적용하시면 됩니다. */}
+            <ExclamationCircleOutlined
+              style={{
+                fontSize: "var(--font-size-lg)",
+                color: "var(--point-color-green)",
+                marginTop: "50px",
+              }}
+            />
+            <S.ContentWrapper>{props.children}</S.ContentWrapper>
+            <S.BtnWrapper>
               <button onClick={handlePropsFn}>확인</button>
             </S.BtnWrapper>
           </S.ModalWrapper>

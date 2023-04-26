@@ -20,7 +20,7 @@ export const sendVerificationEmail = async (email: string) => {
       url: URL + `/user/sendtoken/?email=${email}`,
     });
 
-    return response.statusText;
+    return response.status;
   } catch (error) {
     console.log(error);
   }

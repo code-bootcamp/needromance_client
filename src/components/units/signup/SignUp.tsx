@@ -14,6 +14,7 @@ import {
 // components
 import BorderInput from "../../commons/input/Input";
 import Loader from "../../commons/loader/Loader";
+import CustomModal from "../../commons/modals/CustomModal";
 import GoogleSignIn from "../signin/GoogleSignIn";
 
 // styles
@@ -30,6 +31,9 @@ interface ISignUpProps {
 
 export default function SignUp() {
   const router = useRouter();
+  // modal
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [emailChecker, setEmailChecker] = useState("");
@@ -95,14 +99,13 @@ export default function SignUp() {
     setIsLoading(true);
     const data = await sendVerificationEmail(inputs.email);
     // 상태코드로 확인이 가능하다...
-    // /다시 요청해주세요
     setIsLoading(false);
 
-    if (data === "OK") {
+    if (data === 200) {
       setIsEmailVerifying(true);
     } else {
-      alert("다시 시도해주세요.");
-      // modal
+      setIsOpenModal(true);
+      // modal : 다시 시도해주세요.
     }
   };
 
@@ -118,7 +121,8 @@ export default function SignUp() {
 
   // 닉네임 중복 검사
   const handleNicknameCheckButton = async () => {
-    const data = await checkDuplicateNickname(inputs.email);
+    if (!inputs.nickname) return;
+    const data = await checkDuplicateNickname(inputs.nickname);
     if (data) {
       setNicknameChecker("사용가능한 닉네임입니다.");
     } else {
@@ -175,13 +179,15 @@ export default function SignUp() {
                 />
 
                 {!isEmailVerifying ? (
-                  <S.ValidationButton
-                    type="button"
-                    onClick={handleSendVerificationButton}
-                    disabled={isEmailVerified}
-                  >
-                    인증번호 전송
-                  </S.ValidationButton>
+                  <>
+                    <S.ValidationButton
+                      type="button"
+                      onClick={handleSendVerificationButton}
+                      disabled={isEmailVerified}
+                    >
+                      인증번호 전송
+                    </S.ValidationButton>
+                  </>
                 ) : (
                   <>
                     <S.ValidationButton
@@ -264,6 +270,14 @@ export default function SignUp() {
       </S.SignInWindow>
       {/* 로딩 */}
       {isLoading && <Loader />}
+      <CustomModal
+        type="alert"
+        setOpenModal={setIsOpenModal}
+        openModal={isOpenModal}
+        handleTestFn={() => setIsOpenModal(false)}
+      >
+        다시 시도해주세요.
+      </CustomModal>
     </S.Wrapper>
   );
 }
