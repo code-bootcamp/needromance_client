@@ -28,7 +28,6 @@ export default function SignIn() {
     });
   };
 
-  console.log("accessToken", accessToken);
   return (
     <S.Wrapper>
       <S.SignInWindow>
@@ -65,9 +64,7 @@ export default function SignIn() {
             를 잊으셨나요?
           </S.FindID>
           <S.Line />
-          <div>
-            <GoogleSignIn />
-          </div>
+          <div>{/* <GoogleSignIn /> */}</div>
           <S.SignUpLink>
             <Link href="/signup">
               <a>회원가입</a>

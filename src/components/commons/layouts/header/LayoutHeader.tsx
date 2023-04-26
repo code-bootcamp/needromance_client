@@ -1,9 +1,5 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { getUserInfo } from "../../../../commons/api/test";
-import { accessTokenState } from "../../../../commons/store/atoms";
 
 const Wrapper = styled.header`
   width: 100vw;
@@ -37,17 +33,6 @@ const LogoImage = styled.img`
 `;
 
 export default function LayoutHeader() {
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-
-  useEffect(() => {
-    getUserInformation();
-  }, [accessToken]);
-
-  const getUserInformation = async () => {
-    await getUserInfo(accessToken);
-    // console.log(data);
-  };
-
   return (
     <Wrapper>
       <Link href={"/"}>

@@ -15,6 +15,7 @@ export default function FindPw() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [emailChecker, setEmailChecker] = useState("");
+  const [tokenChecker, setTokenChecker] = useState("");
   const [isEmailVerifying, setIsEmailVerifying] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [isEmailChecking, setIsEmailChecking] = useState(false);
@@ -74,6 +75,7 @@ export default function FindPw() {
     if (data) {
       setIsEmailVerifying(false); // 인증하는 화면 사라져!
       setIsEmailVerified(true); // 인증 완료
+      setTokenChecker(true); // tokenChecker true
     }
   };
 
@@ -104,7 +106,7 @@ export default function FindPw() {
               <BorderInput
                 placeholder="인증번호를 입력하세요."
                 onChange={(event) => setToken(event?.target.value)}
-                style={{ width: "180px" }}
+                // style={{ width: "150px" }}
               />
 
               {!isEmailVerifying ? (
@@ -113,7 +115,7 @@ export default function FindPw() {
                   onClick={handleSendVerificationButton}
                   disabled={isEmailVerified}
                 >
-                  인증번호 전송
+                  {tokenChecker ? "인증 완료" : "인증번호 전송"}
                 </S.ValidationButton>
               ) : (
                 <>
@@ -133,7 +135,17 @@ export default function FindPw() {
               )}
             </S.ValidationWrapper>
           )}
-
+          {isEmailVerified && (
+            <S.InputWrapper>
+              <BorderInput
+                check={true}
+                label="Password"
+                name="password"
+                placeholder="비밀번호를 입력하세요."
+                onChange={onChangeCheckEmail}
+              />
+            </S.InputWrapper>
+          )}
           <S.ButtonWrapper>
             <S.ResetButton>비밀번호 재설정</S.ResetButton>
           </S.ButtonWrapper>

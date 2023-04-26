@@ -14,7 +14,11 @@ export default function LayoutTopHeader() {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
   useEffect(() => {
-    getUserInformation();
+    console.log("acc", accessToken);
+    if (accessToken) {
+      console.log("발동됨");
+      getUserInformation();
+    }
   }, [accessToken]);
 
   const getUserInformation = async () => {
@@ -35,10 +39,10 @@ export default function LayoutTopHeader() {
   console.log("headerUser", userProfile);
   return (
     <TopHeader>
-      {userProfile.length !== 0 && (
+      {userProfile.length !== 0 && userProfile && (
         <Profile>
           <ProfileImg
-            src={userProfile?.picture || `/img/community/default_userImg.png`}
+            src={userProfile?.picture || "/img/community/default_userImg.png"}
             alt="프로필 사진"
           />
           <span>{userProfile?.name || userProfile?.nickname}</span>

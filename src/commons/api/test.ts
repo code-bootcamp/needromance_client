@@ -79,6 +79,18 @@ export const signUp = async (inputs: {
 
 export const login = async (email: string, password: string) => {
   try {
+    // await axios
+    //   .post(
+    //     `${URL}/auth/login`,
+    //     {
+    //       data: {
+    //         email,
+    //         password,
+    //       },
+    //     },
+    //     { withCredentials: true }
+    //   )
+    //   .then((res) => console.log(res));
     const response = await axios({
       method: "post",
       url: URL + "/auth/login",
@@ -97,21 +109,23 @@ export const login = async (email: string, password: string) => {
 export const logout = async (accessToken: string) => {
   try {
     console.log("d", accessToken);
-    const response = await axios({
-      method: "post",
-      url: URL + "/auth/logout",
-      headers: {
-        Authorization: `bearer ${accessToken}`,
-      },
-    });
-    console.log(response);
-    return response;
+    await axios
+      .post(
+        `${URL}/auth/logout`,
+        {
+          headers: {
+            Authorization: `bearer ${accessToken}`,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((res) => console.log(res));
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getUserInfo = async (accessToken: any) => {
+export const getUserInfo = async (accessToken: string) => {
   try {
     const response = await axios.get(`${URL}/user/login`, {
       headers: {
@@ -125,6 +139,22 @@ export const getUserInfo = async (accessToken: any) => {
   }
 };
 
+export const resetPassword = async (email: string, password: string) => {
+  try {
+    const response = await axios({
+      method: "post",
+      url: URL + "user/find/password",
+      data: {
+        email,
+        password,
+      },
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 // export const getUserInfo = async (param: string) => {
 //   try {
 //     await axios({
