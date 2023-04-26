@@ -266,7 +266,10 @@ export default function AdminUI({
                     {searchBoardFilter}
                   </Button>
                 </Dropdown>
-                <input type="text" placeholder="검색어를 입력해 주세요." />
+                <input
+                  type="text"
+                  placeholder="검색기준: 게시글 제목, 닉네임"
+                />
               </S.SearchFilterBox>
             </S.TableSearchBox>
             {/* table */}
