@@ -18,6 +18,7 @@ export const checkDuplicateEmail = async (email: string) => {
 
 export const sendVerificationEmail = async (email: string) => {
   try {
+    console.log(email);
     const response = await axios({
       method: "get",
       url: URL + `/user/sendtoken/?email=${email}`,

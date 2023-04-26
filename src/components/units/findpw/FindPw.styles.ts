@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
 import { IoCheckmarkSharp } from "react-icons/io5";
 
+interface IFindPwProps {
+  isExistId?: boolean;
+}
+
 export const Wrapper = styled.section`
+  position: relative;
+  width: 100%;
   padding: 50px 0px;
   display: flex;
   flex-direction: column;
@@ -49,9 +55,10 @@ export const InputWrapper = styled.div`
   gap: 100px;
 `;
 
-export const Checker = styled(IoCheckmarkSharp)`
-  position: absolute;
-  top: 0;
+export const Checker = styled.span`
+  color: ${(props: IFindPwProps) => (props.isExistId ? "green" : "red")};
+  font-size: 13px;
+  padding-left: 3px;
 `;
 
 export const ButtonWrapper = styled.div`
