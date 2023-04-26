@@ -72,7 +72,8 @@ const CommunityDetailContainer = () => {
           <Tag tags={data?.tags} />
           <S.CreatedAt>{getDate(data?.createdAt)}</S.CreatedAt>
           <S.View>
-            <span>💌</span> 조회수 {data?.views}
+            <span>💌 조회수</span>
+            {data?.views}
           </S.View>
         </S.FooterWrap>
       </S.CardWrap>

@@ -17,15 +17,17 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
 
   const [data, setData] = useState(null);
   const [isEdit, setIsEdit] = useState<string>("");
-  const [likes, setLikes] = useState(0);
 
   const fetch = async () => {
-    const result = await GetComments(Number(boardId), 0);
+    const result1 = await GetComments(Number(boardId), 1);
+    const result2 = await GetComments(Number(boardId), 0);
+    const result = [].concat(result1, result2);
+    console.log(result);
     setData(result);
     setIsEdit("");
   };
 
-  // 화면이 맨 처음 렌더링될 떄 데이터 가져옴
+  // 화면이 맨 처음 렌더링될 떄 데이터 가져옴 + 페이지 변경시
   useEffect(() => {
     fetch();
   }, [boardId]);
@@ -48,29 +50,31 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
     await fetch();
   };
 
-  // 댓글 좋아요
-  const handleLike = async (id: string) => {
+  // 댓글 좋아요 후, refetch
+  const toggleLike = async (id: string) => {
     const result = await LikeComment(Number(id));
     console.log(result);
+    await fetch();
   };
 
-  // 댓글 픽
-  const handlePick = async (id: string) => {
-    const result = await PickComment(Number(id), Number(boardId));
-    console.log(result);
-    fetch();
+  // 댓글 픽 후,refetch
+  const togglePick = async (id: string, status: boolean) => {
+    await PickComment(Number(id), Number(boardId), !status);
+    await fetch();
   };
 
   return (
     <>
       {data?.map((list) => (
-        <S.CommentWrap key={list.id}>
-          {list.status && (
-            <S.PickedLabel>
-              <S.Picked /> 질문자 • 지식인 채택
-            </S.PickedLabel>
+        <S.CommentWrap key={list?.id}>
+          {list?.status && (
+            <S.PickedBox>
+              <S.PickedLabel>
+                <S.Picked /> 질문자 • 지식인 채택
+              </S.PickedLabel>
+            </S.PickedBox>
           )}
-          {isEdit === list.id ? (
+          {isEdit === list?.id ? (
             <CommunityCommentWriteContainer
               isEdit={isEdit}
               setIsEdit={setIsEdit}
@@ -100,7 +104,7 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
 
               <S.InnerWrap>
                 <S.LeftWrap>
-                  <S.Contents>{list.contents}</S.Contents>
+                  <S.Contents>{list?.contents}</S.Contents>
                 </S.LeftWrap>
                 <S.RigthWrap>
                   <S.StampWrap>
@@ -111,17 +115,17 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
                     )}
                     <S.SealImg src="/img/community/seal.png" />
                   </S.StampWrap>
-                  <S.Nickname> {list.user.nickname}</S.Nickname>
-                  <S.UserGrade>{list.user.point}</S.UserGrade>
+                  <S.Nickname> {list?.user?.nickname}</S.Nickname>
+                  <S.UserGrade>{list?.user?.point}</S.UserGrade>
                 </S.RigthWrap>
               </S.InnerWrap>
 
               <S.FooterWrap>
                 <div>
-                  <S.CreatedAt>{getDate(list.createdAt)}</S.CreatedAt>
+                  <S.CreatedAt>{getDate(list?.createdAt)}</S.CreatedAt>
                   <S.LikeCount>
-                    <span>💛</span>
-                    좋아요 {likes}
+                    <span>💛 좋아요</span>
+                    {list?.likedByUsers.length}
                   </S.LikeCount>
                 </div>
                 <S.BtnWrap>
@@ -129,13 +133,13 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
                     type="Sm"
                     fill={false}
                     text="좋아요"
-                    onClick={() => handleLike(list.id)}
+                    onClick={() => toggleLike(list.id)}
                   />
                   <CustomBtn
                     type="Sm"
                     fill={false}
-                    text="채택하기"
-                    onClick={() => handlePick(list.id)}
+                    text={list?.status ? "채택취소" : "채택하기"}
+                    onClick={() => togglePick(list.id, list.status)}
                   />
                 </S.BtnWrap>
               </S.FooterWrap>

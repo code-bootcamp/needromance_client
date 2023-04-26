@@ -11,7 +11,6 @@ export const GetComments = async (boardId: number, status: number) => {
       { headers: { Authorization: `Bearer ${accessToken}` } }
     );
     if (response.status === 200) {
-      console.log(response.data);
       return response.data;
     }
   } catch (error) {
@@ -34,7 +33,6 @@ export const PostComment = async (boardId: number, contents: string) => {
         },
       }
     );
-    console.log(response, "댓글 등록");
     Modal.success({ content: "답변이 등록되었습니다." });
     return response.data;
   } catch (error) {
@@ -56,7 +54,6 @@ export const EditComment = async (id: number, contents: string) => {
       }
     );
     Modal.success({ content: "답변이 수정되었습니다." });
-    console.log(response, "댓글 수정");
     return response.data;
   } catch (error) {
     console.log(error);
@@ -71,7 +68,6 @@ export const DeleteComment = async (id: number) => {
       },
     });
     Modal.success({ content: "답변이 삭제되었습니다." });
-    console.log(response, "댓글 삭제");
     return response.data;
   } catch (error) {
     console.log(error);
@@ -92,12 +88,17 @@ export const LikeComment = async (id: number) => {
   }
 };
 
-export const PickComment = async (id: number, boardId: number) => {
+export const PickComment = async (
+  id: number,
+  boardId: number,
+  status: boolean
+) => {
   try {
     const response = await axios.patch(
       `${URL}/answers/${id}/status`,
       {
         boardId,
+        status,
       },
       {
         headers: {
@@ -105,7 +106,6 @@ export const PickComment = async (id: number, boardId: number) => {
         },
       }
     );
-    console.log(response, "댓글 픽");
     return response.data;
   } catch (error) {
     console.log(error);

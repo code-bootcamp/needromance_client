@@ -145,7 +145,7 @@ export const View = styled.p`
 
   span {
     display: inline-block;
-    margin-right: 0.1rem;
+    margin-right: 0.2rem;
   }
 `;
 

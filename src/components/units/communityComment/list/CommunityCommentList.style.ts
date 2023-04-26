@@ -9,17 +9,25 @@ export const CommentWrap = styled.div`
   align-items: center;
 `;
 
-export const PickedLabel = styled.span`
-  background-color: var(--point-color-green);
-  padding: 7px 15px 5px 15px;
-  border-radius: 4px 4px 0 0;
-  margin-left: 20px;
-  color: #fff;
+export const PickedBox = styled.div`
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 `;
 
 export const Picked = styled(TrophyFilled)`
   color: #e2b776;
   margin-right: 4px;
+`;
+
+export const PickedLabel = styled.p`
+  background-color: var(--point-color-green);
+  padding: 7px 15px 5px 15px;
+  border-radius: 4px 4px 0 0;
+  margin-left: 20px;
+  color: #fff;
 `;
 
 export const CardWrap = styled.div`
