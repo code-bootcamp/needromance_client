@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { GetUserboard } from "../../../../../commons/api/user";
 import {
   Icon_Delete,
   Icon_Edit,
@@ -9,7 +11,6 @@ import { MyPageTitle } from "../MyPage.body.style";
 import * as S from "./MyPageComment.style";
 
 // 나중에 지울부분...
-const UserNickName = "연애빼고다잘해";
 const DATA_Example = [
   {
     id: "게시물 고유ID",
@@ -34,15 +35,26 @@ const DATA_Example = [
   },
 ];
 
-const MyPageComment = () => {
+const MyPageComment = ({ myData }: any) => {
   const { onClickMoveToPage } = useMoveToPage();
+
   const handleDeleteBoard = (boardId: string) => () => {
     console.log(boardId);
   };
 
+  const fetch = async () => {
+    const result = await GetUserboard();
+
+    console.log(result);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <>
-      <MyPageTitle>"{UserNickName}"님의 답변들</MyPageTitle>
+      <MyPageTitle>"{myData.nickname}"님의 답변들</MyPageTitle>
       <S.Table>
         <S.Thead>
           <tr>

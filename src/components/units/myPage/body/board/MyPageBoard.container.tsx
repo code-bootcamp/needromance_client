@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { GetUserboard } from "../../../../../commons/api/user";
 import { Icon_Delete, Icon_Edit } from "../../../../../commons/styles/icons";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import Search from "../../../../commons/search";
@@ -5,7 +7,6 @@ import { MyPageTitle } from "../MyPage.body.style";
 import * as S from "./MyPageBoard.style";
 
 // 나중에 지울부분... =============
-const UserNickName = "연애빼고다잘해";
 const DATA_Example = [
   {
     id: "게시물 고유ID",
@@ -28,15 +29,24 @@ const DATA_Example = [
 ];
 // ===============================
 
-const MyPageBoard = () => {
+const MyPageBoard = ({ myData }: any) => {
   const { onClickMoveToPage } = useMoveToPage();
   const handleDeleteBoard = (boardId: string) => () => {
     console.log(boardId);
   };
 
+  const fetch = async () => {
+    const result = await GetUserboard();
+    console.log(result);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <>
-      <MyPageTitle>"{UserNickName}"님의 이야기들</MyPageTitle>
+      <MyPageTitle>"{myData.nickname}"님의 이야기들</MyPageTitle>
       <Search placeholder="내가 작성한 글을 검색해보세요 ex) 고백" />
       <S.Table>
         <S.Thead>

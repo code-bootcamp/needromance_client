@@ -120,27 +120,38 @@ const Heart = styled.div`
 `;
 
 export default function Answer({
+  userImg,
   name,
   content,
+  index,
+  likes,
 }: {
+  userImg: string;
   name: string;
   content: string;
+  index: number;
+  likes: number;
 }) {
   return (
     <Wrapper>
       <Answerer>
-        <AnswererImg src="img/community/default_profile.jpg" />
+        {userImg ? (
+          <AnswererImg src={userImg} />
+        ) : (
+          <AnswererImg src="img/community/default_profile.jpg" />
+        )}
+
         <AnswererName>{name}</AnswererName>
       </Answerer>
       <AnswererText>{content}</AnswererText>
 
       <RankingSeal>
-        <RankingText>Best1</RankingText>
+        <RankingText>{index}</RankingText>
       </RankingSeal>
       <TagHeartWrapper>
         <Heart>
           <TiHeart style={{ color: "#ff7d93", fontSize: "20px" }} />
-          <span>22</span>
+          <span>{likes}</span>
         </Heart>
       </TagHeartWrapper>
     </Wrapper>

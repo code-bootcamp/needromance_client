@@ -3,68 +3,63 @@ import CustomBtn from "../../../commons/buttons/CustomBtn";
 import CommunityCommentWriteContainer from "../write/CommunityCommentWrite.container";
 import * as S from "./CommunityCommentList.style";
 import {
-  DeleteComment,
-  EditComment,
-  GetComments,
-  LikeComment,
-  PickComment,
-  PostComment,
-} from "../../../../commons/api/comment";
+  DeleteAnswer,
+  UpdateAnswer,
+  GetAnswers,
+  LikeAnswer,
+  PickAnswer,
+  PostAnswer,
+} from "../../../../commons/api/answers";
 import { useEffect, useState } from "react";
 
-const CummunityCommentListContainer = ({
-  boardId,
-  writer,
-  checkUser,
-  onlyWriter,
-}: any) => {
-  console.log(boardId, writer, onlyWriter);
+const CummunityCommentListContainer = ({ boardId, writer }: any) => {
+  console.log(boardId, writer);
 
   const [data, setData] = useState(null);
   const [isEdit, setIsEdit] = useState<string>("");
 
   const fetch = async () => {
-    const result1 = await GetComments(Number(boardId), 1);
-    const result2 = await GetComments(Number(boardId), 0);
+    const result1 = await GetAnswers(Number(boardId), 1);
+    const result2 = await GetAnswers(Number(boardId), 0);
     const result = [].concat(result1, result2);
     console.log(result);
     setData(result);
     setIsEdit("");
   };
 
-  // 화면이 맨 처음 렌더링될 떄 데이터 가져옴 + 페이지 변경시
+  // 화면이 맨 처음 렌더링될 떄 데이터 가져옴
   useEffect(() => {
     fetch();
   }, [boardId]);
 
   // 댓글 수정 후. refetch
-  const handleEditComment = async (contents: string) => {
-    await EditComment(Number(isEdit), contents);
+  const handleUpdateAnswer = async (contents: string) => {
+    await UpdateAnswer(Number(isEdit), contents);
     await fetch();
   };
 
   // 댓글 삭제후, refetch
-  const handleDeleteComment = async (id: string) => {
-    await DeleteComment(Number(id));
+  const handleDeleteAnswer = async (id: string) => {
+    await DeleteAnswer(Number(id));
     await fetch();
   };
 
   // 댓글 작성 후, refetch
-  const handlePostComment = async (contents: string) => {
-    await PostComment(Number(boardId), contents);
+  const handlePostAnswer = async (contents: string) => {
+    await PostAnswer(Number(boardId), contents);
     await fetch();
   };
 
-  // 댓글 좋아요 후, refetch
+  // 댓글 좋아요,refetch
   const toggleLike = async (id: string) => {
-    const result = await LikeComment(Number(id));
+    const result = await LikeAnswer(Number(id));
     console.log(result);
     await fetch();
   };
 
   // 댓글 픽 후,refetch
   const togglePick = async (id: string, status: boolean) => {
-    await PickComment(Number(id), Number(boardId), !status);
+    await PickAnswer(Number(id), Number(boardId), !status);
     await fetch();
   };
 
@@ -84,27 +79,24 @@ const CummunityCommentListContainer = ({
               isEdit={isEdit}
               setIsEdit={setIsEdit}
               defaultContents={list.contents}
-              handleEditComment={handleEditComment}
+              handleUpdateAnswer={handleUpdateAnswer}
             />
           ) : (
             <S.CardWrap>
-              {checkUser?.id === list?.user?.id && (
-                <S.BtnWrap>
-                  <CustomBtn
-                    type="Sm"
-                    fill={false}
-                    text="수정"
-                    onClick={() => setIsEdit(list.id)}
-                  />
-                  <CustomBtn
-                    type="Sm"
-                    fill={true}
-                    text="삭제"
-                    onClick={() => handleDeleteComment(list.id)}
-                  />
-                </S.BtnWrap>
-              )}
-
+              <S.BtnWrap>
+                <CustomBtn
+                  type="Sm"
+                  fill={false}
+                  text="수정"
+                  onClick={() => setIsEdit(list.id)}
+                />
+                <CustomBtn
+                  type="Sm"
+                  fill={true}
+                  text="삭제"
+                  onClick={() => handleDeleteAnswer(list.id)}
+                />
+              </S.BtnWrap>
               <S.NameTo>
                 <span>To.</span>
                 {writer}
@@ -133,7 +125,7 @@ const CummunityCommentListContainer = ({
                   <S.CreatedAt>{getDate(list?.createdAt)}</S.CreatedAt>
                   <S.LikeCount>
                     <span>💛 좋아요</span>
-                    {list?.likedByUsers.length}
+                    {list?.likedByUsers?.length}
                   </S.LikeCount>
                 </div>
                 <S.BtnWrap>
@@ -143,21 +135,19 @@ const CummunityCommentListContainer = ({
                     text="좋아요"
                     onClick={() => toggleLike(list.id)}
                   />
-                  {onlyWriter && (
-                    <CustomBtn
-                      type="Sm"
-                      fill={false}
-                      text={list?.status ? "채택취소" : "채택하기"}
-                      onClick={() => togglePick(list.id, list.status)}
-                    />
-                  )}
+                  <CustomBtn
+                    type="Sm"
+                    fill={false}
+                    text={list?.status ? "채택취소" : "채택하기"}
+                    onClick={() => togglePick(list.id, list.status)}
+                  />
                 </S.BtnWrap>
               </S.FooterWrap>
             </S.CardWrap>
           )}
         </S.CommentWrap>
       ))}
-      <CommunityCommentWriteContainer handlePostComment={handlePostComment} />
+      <CommunityCommentWriteContainer handlePostAnswer={handlePostAnswer} />
     </>
   );
 };

@@ -6,7 +6,7 @@ import MyPageProfile from "./profile/MyPageProfile.container";
 import MyPageNotification from "./notification/MyPageNotification.container";
 import MyPageWithdrawal from "./withdrawal/MyPageWithdrawal.Modal";
 
-const MyPageContent = ({ IsActive }: IMyPageProps) => {
+const MyPageContent = ({ myData, setMyData, IsActive }: IMyPageProps) => {
   switch (IsActive) {
     case "notification":
       return (
@@ -17,19 +17,19 @@ const MyPageContent = ({ IsActive }: IMyPageProps) => {
     case "board":
       return (
         <S.Wrap>
-          <MyPageBoard />
+          <MyPageBoard myData={myData} />
         </S.Wrap>
       );
     case "comment":
       return (
         <S.Wrap>
-          <MyPageComment />
+          <MyPageComment myData={myData} />
         </S.Wrap>
       );
     case "myProfile":
       return (
         <S.Wrap>
-          <MyPageProfile />
+          <MyPageProfile myData={myData} setMyData={setMyData} />
         </S.Wrap>
       );
     case "withdrawal":

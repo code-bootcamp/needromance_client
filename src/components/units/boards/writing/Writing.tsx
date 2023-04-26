@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { FaCommentDots } from "react-icons/fa";
 import { breakPoints } from "../../../../commons/styles/media";
 import Tag from "../../../commons/hashtag/HashTag";
+import { getDate2 } from "../../../../commons/libraries/getDate";
 
 const Wrapper = styled.div`
   position: relative;
@@ -141,12 +142,17 @@ const Heart = styled.div``;
 export default function Writing({
   name,
   content,
-  tags,
+  hashtags,
+  createdAt,
+  answers,
 }: {
   name: string;
   content: string;
-  tags?: string[];
+  hashtags?: string[];
+  createdAt: string;
+  answers: number;
 }) {
+  const tags = hashtags?.map((el) => el.tag);
   return (
     <Wrapper>
       <Counselee>
@@ -163,9 +169,9 @@ export default function Writing({
       <CommentDateWrapper>
         <CommentCount>
           <FaCommentDots />
-          <span>27</span>
+          <span>{answers}</span>
         </CommentCount>
-        <Date>2023.04.18</Date>
+        <Date>{getDate2(createdAt)}</Date>
       </CommentDateWrapper>
     </Wrapper>
   );

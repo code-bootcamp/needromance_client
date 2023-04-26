@@ -4,11 +4,16 @@ import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
 // axios.defaults.withCredentials = true;
-// const baseURL = "https://need-romance.site";
-// const app = axios.create({
-//   baseURL,
-//   withCredentials: true,
-// });
+
+export const GetBoards = async (page: string) => {
+  try {
+    const response = await axios.get(`${URL}/boards?page=${page}`);
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const GetBoard = async (id: number) => {
   try {
