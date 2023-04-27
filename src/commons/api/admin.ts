@@ -12,7 +12,7 @@ export const getAllUsers = async (): Promise<AllUsers[]> => {
       headers: {
         Authorization:
           "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNTI0NTIwLCJleHAiOjE2ODI1MzE3MjB9.NUYp7xKlGtgbmk09MbP_rgAhdkDWTm4CIiaP29n5WPg",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNTU4OTY5LCJleHAiOjE2ODI1NjYxNjl9.CnTVgSMfSWWel0sbItWN8IknJ7RNXxj3fZYI9BPOZR4",
       },
     });
     return response.data;
@@ -58,7 +58,7 @@ export const getAllBoards = async () => {
       headers: {
         Authorization:
           "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNTI0NTIwLCJleHAiOjE2ODI1MzE3MjB9.NUYp7xKlGtgbmk09MbP_rgAhdkDWTm4CIiaP29n5WPg",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNTU4OTY5LCJleHAiOjE2ODI1NjYxNjl9.CnTVgSMfSWWel0sbItWN8IknJ7RNXxj3fZYI9BPOZR4",
       },
     });
     console.log(response.data);

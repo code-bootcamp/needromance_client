@@ -7,13 +7,13 @@ export default function Admin() {
   const [pageTabs, setPageTabs] = useState(0);
   const [openTabs, setOpenTabs] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [browserWidth, setBrowserWidth] = useState<number | null>(769);
-  const [searchUserFilter, setSearchUserFilter] = useState("nickname");
-  const [searchBoardFilter, setSearchBoardFilter] = useState("nickname");
+  const [browserWidth, setBrowserWidth] = useState(0);
   // 유저목록
   const [allUsers, setAllUsers] = useState<AllUsers[]>([]);
   // 게시글목록
   const [allBoards, setAllBoards] = useState<AllBoards[]>([]);
+  // 검색 value
+  const [searchValue, setSearchValue] = useState({ user: "", board: "" });
 
   // 유저목록 상태변경시 최신화
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function Admin() {
   // 반응형 햄버거 view ture, false
   useEffect(() => {
     function handleBrowserResize() {
-      setBrowserWidth(window.innerWidth);
+      setBrowserWidth(document.documentElement.clientWidth);
     }
     window.addEventListener("resize", handleBrowserResize);
 
@@ -69,14 +69,12 @@ export default function Admin() {
       setOpenTabs={setOpenTabs}
       browserWidth={browserWidth}
       togleTabs={togleTabs}
-      searchUserFilter={searchUserFilter}
-      setSearchUserFilter={setSearchUserFilter}
-      searchBoardFilter={searchBoardFilter}
-      setSearchBoardFilter={setSearchBoardFilter}
       setAllUsers={setAllUsers}
       allUsers={allUsers}
       setAllBoards={setAllBoards}
       allBoards={allBoards}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
     />
   );
 }
