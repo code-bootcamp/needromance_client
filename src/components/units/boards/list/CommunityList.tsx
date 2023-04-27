@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
-import { GetBoards, getBoards } from "../../../../commons/api/boards";
-import CustomBtn from "../../../commons/buttons/CustomBtn";
-import Tag from "../../../commons/hashtag/HashTag";
-import Answer from "../answer/Answer";
-import Medal from "../medal/Medal";
-import Writing from "../writing/Writing";
 import * as S from "./CommunityList.styles";
+import { v4 as uuidv4 } from "uuid";
+
+// api
+import { GetBoards, getBoards } from "../../../../commons/api/boards";
 import { BestUsers } from "../../../../commons/api/user";
 import { BestAnswer } from "../../../../commons/api/answers";
+
+// components
+import CustomBtn from "../../../commons/buttons/CustomBtn";
+import Tag from "../../../commons/hashtag/HashTag";
+import Medal from "../medal/Medal";
+import Answer from "../answer/Answer";
+import Writing from "../writing/Writing";
 
 export default function CommunityList() {
   const [ranking, setRanking] = useState<Array>([]);
@@ -51,7 +56,7 @@ export default function CommunityList() {
       <S.BestAnswerWrapper>
         {answers.map((answer: any, index: number) => (
           <Answer
-            key={answer.nickname}
+            key={uuidv4()}
             name={answer.nickname}
             content={answer.contents}
             userImg={answer.userImg}
@@ -82,9 +87,10 @@ export default function CommunityList() {
       <S.CounselWrapper>
         <S.LatestCounsel>
           <p>최신 상담 List</p>
-          <CustomBtn fill={false} type="Md" text="글 작성하기" />
           <CustomBtn fill={false} type="Md">
-            <a href="/boards/write">글 작성하기</a>
+            <a style={{ color: "white" }} href="/boards/write">
+              글 작성하기
+            </a>
           </CustomBtn>
           {/* <button>글 작성하기</button> */}
         </S.LatestCounsel>

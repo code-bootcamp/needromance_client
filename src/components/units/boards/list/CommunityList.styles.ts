@@ -53,6 +53,7 @@ export const MedalWrapper = styled.div`
 `;
 
 export const BestAnswerWrapper = styled.section`
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 30px 0px;
@@ -191,8 +192,8 @@ export const LatestCounsel = styled.div`
 `;
 
 export const LatestCounselWriting = styled.div`
-  /* width: 100%; */
-
+  width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 30px 0px;
 `;
