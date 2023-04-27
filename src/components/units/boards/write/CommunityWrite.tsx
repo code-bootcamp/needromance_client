@@ -7,6 +7,7 @@ import { createRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import Tag from "../../../commons/tag/Tag";
 import BorderInput from "../../../commons/input/Input";
+import useAuth from "../../../commons/hooks/customs/useAuth";
 
 const ToastEditor = dynamic(() => import("../../../commons/toast-ui/Toast"), {
   ssr: false,
@@ -23,6 +24,7 @@ export default function CommunityWrite() {
     // setValue("content", inputs);
   };
 
+  useAuth();
   return (
     <S.Wrapper>
       <S.Title>게시글 작성/수정</S.Title>

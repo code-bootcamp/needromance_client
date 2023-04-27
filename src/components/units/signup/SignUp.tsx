@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 // api
 import {
@@ -158,6 +160,19 @@ export default function SignUp() {
       router.push("/");
     }
   };
+
+  const SignupSchema = Yup.object().shape({
+    firstName: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    lastName: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    email: Yup.string().email("Invalid email").required("Required"),
+  });
+
   return (
     <S.Wrapper>
       <S.SignInWindow>
@@ -165,108 +180,116 @@ export default function SignUp() {
           <S.LogoImage src="img/logo/INR_logo.png" alt="로필 로고" />
           당신의 연애 고민, 저희가 들어드릴게요!
         </S.Logo>
-        <S.SignInForm>
-          <S.InputWrapper>
-            <BorderInput
-              label="Email"
-              name="email"
-              onChange={handleInput}
-              placeholder="이메일을 입력하세요."
-              disabled={isEmailChecking}
-            />
-            <S.GreenButton type="button" onClick={handleEmailCheckButton}>
-              이메일 중복검사
-            </S.GreenButton>
-            <S.Checker isValidate={emailChecker === "사용가능한 이메일입니다."}>
-              {emailChecker}
-            </S.Checker>
-            {isEmailChecking && (
-              <S.ValidationWrapper>
-                <BorderInput
-                  placeholder="인증번호를 입력하세요."
-                  onChange={(event) => setToken(event?.target.value)}
-                />
+        <Formik
+          initialValues={{ email: "", nickname: "", password: "" }}
+          validationSchema={SignupSchema}
+          onSubmit={handleSignUpButton}
+        >
+          <S.SignInForm>
+            <S.InputWrapper>
+              <BorderInput
+                label="Email"
+                name="email"
+                onChange={handleInput}
+                placeholder="이메일을 입력하세요."
+                disabled={isEmailChecking}
+              />
+              <S.GreenButton type="button" onClick={handleEmailCheckButton}>
+                이메일 중복검사
+              </S.GreenButton>
+              <S.Checker
+                isValidate={emailChecker === "사용가능한 이메일입니다."}
+              >
+                {emailChecker}
+              </S.Checker>
+              {isEmailChecking && (
+                <S.ValidationWrapper>
+                  <BorderInput
+                    placeholder="인증번호를 입력하세요."
+                    onChange={(event) => setToken(event?.target.value)}
+                  />
 
-                {!isEmailVerifying ? (
-                  <>
-                    <S.ValidationButton
-                      type="button"
-                      onClick={handleSendVerificationButton}
-                      disabled={isEmailVerified}
-                    >
-                      {tokenChecker ? "인증 완료" : "인증번호 전송"}
-                    </S.ValidationButton>
-                  </>
-                ) : (
-                  <>
-                    <S.ValidationButton
-                      type="button"
-                      onClick={handleCheckVerificationButton}
-                    >
-                      확인
-                    </S.ValidationButton>
-                    <S.ValidationButton
-                      type="button"
-                      onClick={handleSendVerificationButton}
-                    >
-                      재전송
-                    </S.ValidationButton>
-                  </>
-                )}
-              </S.ValidationWrapper>
-            )}
-          </S.InputWrapper>
+                  {!isEmailVerifying ? (
+                    <>
+                      <S.ValidationButton
+                        type="button"
+                        onClick={handleSendVerificationButton}
+                        disabled={isEmailVerified}
+                      >
+                        {tokenChecker ? "인증 완료" : "인증번호 전송"}
+                      </S.ValidationButton>
+                    </>
+                  ) : (
+                    <>
+                      <S.ValidationButton
+                        type="button"
+                        onClick={handleCheckVerificationButton}
+                      >
+                        확인
+                      </S.ValidationButton>
+                      <S.ValidationButton
+                        type="button"
+                        onClick={handleSendVerificationButton}
+                      >
+                        재전송
+                      </S.ValidationButton>
+                    </>
+                  )}
+                </S.ValidationWrapper>
+              )}
+            </S.InputWrapper>
 
-          <S.InputWrapper>
-            <BorderInput
-              label="Nickname"
-              name="nickname"
-              onChange={handleInput}
-              placeholder="닉네임을 입력하세요."
-            />
-            <S.GreenButton type="button" onClick={handleNicknameCheckButton}>
-              닉네임 중복검사
-            </S.GreenButton>
-            <S.Checker
-              isValidate={nicknameChecker === "사용가능한 닉네임입니다."}
-            >
-              {nicknameChecker}
-            </S.Checker>
-          </S.InputWrapper>
-          <S.InputWrapper>
-            <BorderInput
-              label="Password"
-              type="password"
-              name="password"
-              onChange={handleInput}
-              placeholder="비밀번호를 입력하세요."
-            />
-          </S.InputWrapper>
-          <S.InputWrapper>
-            <BorderInput
-              label="Password Confirm"
-              type="password"
-              name="password2"
-              onChange={handleInput}
-              placeholder="비밀번호를 한번 더 입력하세요."
-            />
-            <S.Checker
-              isValidate={validatePassword === "비밀번호가 일치합니다."}
-            >
-              {validatePassword}
-            </S.Checker>
-          </S.InputWrapper>
+            <S.InputWrapper>
+              <BorderInput
+                label="Nickname"
+                name="nickname"
+                onChange={handleInput}
+                placeholder="닉네임을 입력하세요."
+              />
+              <S.GreenButton type="button" onClick={handleNicknameCheckButton}>
+                닉네임 중복검사
+              </S.GreenButton>
+              <S.Checker
+                isValidate={nicknameChecker === "사용가능한 닉네임입니다."}
+              >
+                {nicknameChecker}
+              </S.Checker>
+            </S.InputWrapper>
+            <S.InputWrapper>
+              <BorderInput
+                label="Password"
+                type="password"
+                name="password"
+                onChange={handleInput}
+                placeholder="비밀번호를 입력하세요."
+              />
+            </S.InputWrapper>
+            <S.InputWrapper>
+              <BorderInput
+                label="Password Confirm"
+                type="password"
+                name="password2"
+                onChange={handleInput}
+                placeholder="비밀번호를 한번 더 입력하세요."
+              />
+              <S.Checker
+                isValidate={validatePassword === "비밀번호가 일치합니다."}
+              >
+                {validatePassword}
+              </S.Checker>
+            </S.InputWrapper>
 
-          <S.ButtonWrapper>
-            <S.SignUpButton
-              onClick={handleSignUpButton}
-              isActive={isActive}
-              disabled={!isActive}
-            >
-              SignUp
-            </S.SignUpButton>
-          </S.ButtonWrapper>
-        </S.SignInForm>
+            <S.ButtonWrapper>
+              <S.SignUpButton
+                onClick={handleSignUpButton}
+                isActive={isActive}
+                disabled={!isActive}
+              >
+                SignUp
+              </S.SignUpButton>
+            </S.ButtonWrapper>
+          </S.SignInForm>
+        </Formik>
         <S.BottomWrapper>
           <S.Line />
           <GoogleSignIn />
