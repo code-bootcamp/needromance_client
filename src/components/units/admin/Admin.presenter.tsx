@@ -31,6 +31,8 @@ export default function AdminUI({
   setAllBoards,
   searchValue,
   setSearchValue,
+  handleSearchInput,
+  submitSearch,
 }: IAdminProps) {
   // modal id 값을 기준으로 on off
   const [getDeleteId, setGetDeleteId] = useState("");
@@ -146,10 +148,6 @@ export default function AdminUI({
   const handleTestFn = () => {
     console.log("testFn");
   };
-  const TextTest = (e) => {
-    setSearchValue(e.target.value);
-    console.log(e.target.value);
-  };
   return (
     <S.Wrapper>
       <S.TabsMenu browserWidth={browserWidth}>
@@ -183,13 +181,14 @@ export default function AdminUI({
             </S.SearchTitle>
             <S.TableSearchBox>
               <S.SearchFilterBox>
-                <input
+                {/* <input type="text" name="user" onChange={handleSearchInput} /> */}
+                <Search
+                  placeholder="검색기준: 닉네임, 이메일"
                   type="text"
                   name="user"
-                  onChange={TextTest}
-                  value={searchValue.user}
+                  onChange={handleSearchInput}
+                  onClick={submitSearch}
                 />
-                <Search placeholder="검색기준: 닉네임, 이메일" onChange />
               </S.SearchFilterBox>
             </S.TableSearchBox>
             {/* table */}
@@ -212,8 +211,14 @@ export default function AdminUI({
             </S.SearchTitle>
             <S.TableSearchBox>
               <S.SearchFilterBox>
-                <input type="text" name="board" />
-                <Search placeholder="검색기준: 닉네임, 제목" />
+                {/* <input type="text" name="board" onChange={handleSearchInput} /> */}
+                <Search
+                  type="text"
+                  name="board"
+                  onChange={handleSearchInput}
+                  onClick={submitSearch}
+                  placeholder="검색기준: 닉네임, 제목"
+                />
               </S.SearchFilterBox>
             </S.TableSearchBox>
             {/* table */}

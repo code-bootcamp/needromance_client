@@ -8,8 +8,10 @@ import {
   accessTokenState,
   userProfileState,
 } from "../../../../commons/store/atoms";
+import { useRouter } from "next/router";
 
 export default function LayoutTopHeader() {
+  const router = useRouter();
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
@@ -25,6 +27,11 @@ export default function LayoutTopHeader() {
     const data = await getUserInfo(accessToken);
     console.log(data);
     setUserProfile(data);
+
+    // 어드민 계정일 경우 어드민 페이지로 라우팅
+    if (data.email === "admin@romance.com" && data.nickname === "admin") {
+      router.push("/admin");
+    }
   };
 
   const GoogleLogout = () => {

@@ -55,7 +55,7 @@ export const TabsWrapper = styled.li<ITabsItemProps>`
   background-color: #fff;
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
-  z-index: 1001;
+  z-index: 998;
   min-height: 125vh;
 
   left: ${({ openTabs }) => (openTabs ? "0px" : "-250px")};
