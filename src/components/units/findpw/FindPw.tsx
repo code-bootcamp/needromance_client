@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import {
   checkDuplicateEmail,
   checkVerificationEmail,
+  resetPassword,
   sendVerificationEmail,
 } from "../../../commons/api/test";
 import BorderInput from "../../commons/input/Input";
@@ -11,8 +13,9 @@ import CustomModal from "../../commons/modals/CustomModal";
 import * as S from "./FindPw.styles";
 
 export default function FindPw() {
+  const router = useRouter();
   // modal
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isRetryOpenModal, setIsRetryOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [emailChecker, setEmailChecker] = useState("");
   const [tokenChecker, setTokenChecker] = useState("");
@@ -27,8 +30,15 @@ export default function FindPw() {
 
   useEffect(() => {}, []);
 
-  const onSubmitFindPw = () => {
+  const onSubmitFindPw = async () => {
     event?.preventDefault();
+    if (!tokenChecker) return;
+
+    const response = await resetPassword(inputs.email, inputs.password);
+
+    if (response?.data === "비밀번호 재설정 성공") {
+      router.push("/findpw/success");
+    }
   };
 
   // 이메일 중복 검사
@@ -83,9 +93,9 @@ export default function FindPw() {
     <S.Wrapper>
       <S.SignInWindow>
         <S.Logo>
-          <S.LogoImage src="img/logo/INR_logo.png" alt="로필 로고" />
+          <S.LogoImage src="/img/logo/INR_logo.png" alt="로필 로고" />
         </S.Logo>
-        <S.Menu> 비밀번호 찾기</S.Menu>
+        <S.Menu> 비밀번호 재설정</S.Menu>
         <S.SignInForm onSubmit={onSubmitFindPw}>
           <S.InputWrapper>
             <BorderInput
@@ -106,7 +116,6 @@ export default function FindPw() {
               <BorderInput
                 placeholder="인증번호를 입력하세요."
                 onChange={(event) => setToken(event?.target.value)}
-                // style={{ width: "150px" }}
               />
 
               {!isEmailVerifying ? (
@@ -141,8 +150,11 @@ export default function FindPw() {
                 check={true}
                 label="Password"
                 name="password"
+                type="password"
                 placeholder="비밀번호를 입력하세요."
-                onChange={onChangeCheckEmail}
+                onChange={(event) =>
+                  setInputs({ ...inputs, password: event.target.value })
+                }
               />
             </S.InputWrapper>
           )}
@@ -157,11 +169,21 @@ export default function FindPw() {
         </S.BottomWrapper>
       </S.SignInWindow>
       {isLoading && <Loader />}
+      {isRetryOpenModal && (
+        <CustomModal
+          type="alert"
+          setOpenModal={setIsRetryOpenModal}
+          openModal={isRetryOpenModal}
+          handleTestFn={() => setIsRetryOpenModal(false)}
+        >
+          다시 시도해주세요.
+        </CustomModal>
+      )}
       <CustomModal
         type="alert"
-        setOpenModal={setIsOpenModal}
-        openModal={isOpenModal}
-        handleTestFn={() => setIsOpenModal(false)}
+        setOpenModal={setIsRetryOpenModal}
+        openModal={isRetryOpenModal}
+        handleTestFn={() => setIsRetryOpenModal(false)}
       >
         다시 시도해주세요.
       </CustomModal>

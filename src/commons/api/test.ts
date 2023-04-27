@@ -1,3 +1,4 @@
+import { accessToken } from "./token";
 import axios from "axios";
 import config from "./config";
 const URL = "https://need-romance.site";
@@ -79,28 +80,29 @@ export const signUp = async (inputs: {
 
 export const login = async (email: string, password: string) => {
   try {
-    await axios
-      .post(
-        `${URL}/auth/login`,
-        {
-          data: {
-            email,
-            password,
-          },
-        },
-        { withCredentials: true }
-      )
-      .then((res) => console.log(res));
-    // const response = await axios({
-    //   method: "post",
-    //   url: URL + "/auth/login",
-    //   data: {
-    //     email,
-    //     password,
-    //   },
-    // });
+    // await axios
+    //   .post(
+    //     `${URL}/auth/login`,
+    //     {
+    //       data: {
+    //         email,
+    //         password,
+    //       },
+    //     }
+    //     // { withCredentials: true }
+    //   )
+    //   .then((res) => console.log(res));
+    const response = await axios({
+      method: "post",
+      url: URL + "/auth/login",
+      data: {
+        email,
+        password,
+      },
+      withCredentials: true,
+    });
 
-    // return response.data;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -109,17 +111,16 @@ export const login = async (email: string, password: string) => {
 export const logout = async (accessToken: string) => {
   try {
     console.log("d", accessToken);
-    await axios
-      .post(
-        `${URL}/auth/logout`,
-        {
-          headers: {
-            Authorization: `bearer ${accessToken}`,
-          },
-        },
-        { withCredentials: true }
-      )
-      .then((res) => console.log(res));
+
+    const response = await axios({
+      method: "post",
+      url: URL + "/auth/logout",
+      headers: {
+        accessToken,
+      },
+    });
+    console.log("re", response);
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -142,8 +143,8 @@ export const getUserInfo = async (accessToken: string) => {
 export const resetPassword = async (email: string, password: string) => {
   try {
     const response = await axios({
-      method: "post",
-      url: URL + "user/find/password",
+      method: "patch",
+      url: URL + "/user/find/password",
       data: {
         email,
         password,

@@ -7,8 +7,10 @@ import { login } from "../../../commons/api/test";
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store/atoms";
+import { useRouter } from "next/router";
 
 export default function SignIn() {
+  const router = useRouter();
   const { data: session } = useSession();
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -24,9 +26,18 @@ export default function SignIn() {
   const handleLoginButton = async () => {
     event?.preventDefault();
     await login(inputs.email, inputs.password).then((data) => {
+      console.log(data);
       setAccessToken(data);
       console.log(data);
     });
+
+    // const response = await login(inputs.email, inputs.password);
+
+    // if (response) {
+    //   const prevPage = localStorage.getItem("prevPage") || "/";
+    //   console.log(prevPage);
+    //   router.push(prevPage);
+    // }
   };
 
   return (
