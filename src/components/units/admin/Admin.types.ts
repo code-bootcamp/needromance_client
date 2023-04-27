@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 export interface IAdminProps {
   pageTabs: number;
@@ -15,8 +15,9 @@ export interface IAdminProps {
   setAllUsers: Dispatch<SetStateAction<AllUsers[]>>;
   setAllBoards: Dispatch<SetStateAction<AllBoards[]>>;
   togleTabs: (prev: boolean) => void;
+  handleSearchInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  submitSearch: () => void;
 }
-
 export interface AllUsers {
   createdAt: string;
   email: string;
@@ -26,7 +27,6 @@ export interface AllUsers {
   state: boolean;
   userImg: string | null;
 }
-
 export interface AllBoards {
   id: number;
   title: string;

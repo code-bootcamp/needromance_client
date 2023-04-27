@@ -25,6 +25,7 @@ export default function SignIn() {
     event?.preventDefault();
     await login(inputs.email, inputs.password).then((data) => {
       setAccessToken(data);
+      console.log(data);
     });
   };
 

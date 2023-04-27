@@ -4,15 +4,18 @@ import config from "./config";
 
 const server = config.backend.baseURL;
 
-export const getAllUsers = async (): Promise<AllUsers[]> => {
+interface ISearchInput {
+  searchValue: string;
+  accessToken: string;
+}
+
+export const getAllUsers = async (accessToken: string): Promise<AllUsers[]> => {
   try {
     const response = await axios({
       method: "get",
       url: server + "/admin/users",
       headers: {
-        Authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNTU4OTY5LCJleHAiOjE2ODI1NjYxNjl9.CnTVgSMfSWWel0sbItWN8IknJ7RNXxj3fZYI9BPOZR4",
+        Authorization: "Bearer " + accessToken,
       },
     });
     return response.data;
@@ -50,15 +53,13 @@ export const getAllUsers = async (): Promise<AllUsers[]> => {
 //   }
 // };
 
-export const getAllBoards = async () => {
+export const getAllBoards = async (accessToken: string) => {
   try {
     const response = await axios({
       method: "get",
       url: server + "/admin/boards",
       headers: {
-        Authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNTU4OTY5LCJleHAiOjE2ODI1NjYxNjl9.CnTVgSMfSWWel0sbItWN8IknJ7RNXxj3fZYI9BPOZR4",
+        Authorization: "Bearer " + accessToken,
       },
     });
     console.log(response.data);

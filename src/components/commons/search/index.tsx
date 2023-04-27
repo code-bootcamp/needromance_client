@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "../../../commons/styles/media";
 import { BsSearchHeartFill } from "react-icons/bs";
+import { ChangeEvent } from "react";
 
 export const SearchSection = styled.section`
   width: 100vw;
@@ -72,12 +73,21 @@ export const SearchIcon = styled(BsSearchHeartFill)`
     cursor: pointer;
   }
 `;
+interface IInputProps {
+  type: string;
+  name?: string;
+  placeholder: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
+}
 
-const Search = (props: any) => {
+const Search = (props: IInputProps) => {
   return (
     <SearchWrapper>
       <SearchBox>
         <SearchInput
+          type={props.type}
+          name={props.name}
           placeholder={props.placeholder}
           onChange={props.onChange}
         />

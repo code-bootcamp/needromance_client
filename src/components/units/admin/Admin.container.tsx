@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import AdminUI from "./Admin.presenter";
 import { getAllBoards, getAllUsers } from "../../../commons/api/admin";
 import { AllBoards, AllUsers } from "./Admin.types";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../commons/store/atoms";
 
 export default function Admin() {
+  // accessToken
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [pageTabs, setPageTabs] = useState(0);
   const [openTabs, setOpenTabs] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -21,7 +25,7 @@ export default function Admin() {
   }, [setAllUsers]);
 
   const getAllUsersData = async () => {
-    await getAllUsers()
+    await getAllUsers(accessToken)
       .then((res) => {
         setAllUsers((prev) => [...prev, ...res]);
       })
@@ -36,13 +40,26 @@ export default function Admin() {
   }, [setAllBoards]);
 
   const getAllBoardsData = async () => {
-    await getAllBoards()
+    await getAllBoards(accessToken)
       .then((res) => {
         setAllBoards((prev) => [...prev, ...res]);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+  // 검색어 input 관리
+  const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue({
+      ...searchValue,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+    console.log(searchValue);
+  };
+
+  // 게시글 검색 요청
+  const submitSearch = () => {
+    console.log("요청");
   };
 
   // 반응형 햄버거 view ture, false
@@ -75,6 +92,8 @@ export default function Admin() {
       allBoards={allBoards}
       searchValue={searchValue}
       setSearchValue={setSearchValue}
+      handleSearchInput={handleSearchInput}
+      submitSearch={submitSearch}
     />
   );
 }
