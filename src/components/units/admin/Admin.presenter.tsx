@@ -1,8 +1,7 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useState } from "react";
 import * as S from "./Admin.styles";
-import { MenuProps, Space, TableProps } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { Button, Dropdown, Table } from "antd";
+import { Table } from "antd";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
@@ -10,9 +9,10 @@ import {
   MenuOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import CustomModal from "../../commons/modals/CustomModal";
 
+import CustomModal from "../../commons/modals/CustomModal";
 import { AllBoards, AllUsers, IAdminProps } from "./Admin.types";
+import Search from "../../commons/search";
 
 const TabsItems = ["유저관리", "게시글관리"];
 const dummyName = "Admin123";
@@ -21,10 +21,6 @@ export default function AdminUI({
   pageTabs,
   setPageTabs,
   browserWidth,
-  searchUserFilter,
-  setSearchUserFilter,
-  searchBoardFilter,
-  setSearchBoardFilter,
   togleTabs,
   openTabs,
   openModal,
@@ -33,6 +29,8 @@ export default function AdminUI({
   setAllUsers,
   allBoards,
   setAllBoards,
+  searchValue,
+  setSearchValue,
 }: IAdminProps) {
   // modal id 값을 기준으로 on off
   const [getDeleteId, setGetDeleteId] = useState("");
@@ -145,65 +143,20 @@ export default function AdminUI({
     },
   ];
 
-  const userItems: MenuProps["items"] = [
-    {
-      key: "0",
-      label: <span>nickname</span>,
-      style: {
-        backgroundColor:
-          searchUserFilter === "nickname" ? "var(--point-color-beige)" : "",
-      },
-      onClick: () => {
-        setSearchUserFilter("nickname");
-      },
-    },
-    {
-      key: "1",
-      label: <span>email</span>,
-      style: {
-        backgroundColor:
-          searchUserFilter === "email" ? "var(--point-color-beige)" : "",
-      },
-      onClick: () => {
-        setSearchUserFilter("email");
-      },
-    },
-  ];
-  const boardItems: MenuProps["items"] = [
-    {
-      key: "2",
-      label: <span>nickname</span>,
-      style: {
-        backgroundColor:
-          searchBoardFilter === "nickname" ? "var(--point-color-beige)" : "",
-      },
-      onClick: () => {
-        setSearchBoardFilter("nickname");
-      },
-    },
-    {
-      key: "3",
-      label: <span>title</span>,
-      style: {
-        backgroundColor:
-          searchBoardFilter === "title" ? "var(--point-color-beige)" : "",
-      },
-      onClick: () => {
-        setSearchBoardFilter("title");
-      },
-    },
-  ];
   const handleTestFn = () => {
     console.log("testFn");
   };
-
+  const TextTest = (e) => {
+    setSearchValue(e.target.value);
+    console.log(e.target.value);
+  };
   return (
     <S.Wrapper>
       <S.TabsMenu browserWidth={browserWidth}>
         <MenuOutlined onClick={() => togleTabs(openTabs)} />
       </S.TabsMenu>
       {/* tabs */}
-      <S.TabsWrapper openTabs={openTabs}>
+      <S.TabsWrapper openTabs={openTabs} onClick={() => togleTabs(openTabs)}>
         {TabsItems.map((el, index) => (
           <S.TabsItem
             pageTabs={pageTabs}
@@ -230,22 +183,13 @@ export default function AdminUI({
             </S.SearchTitle>
             <S.TableSearchBox>
               <S.SearchFilterBox>
-                <Dropdown
-                  className="DropdownBtn"
-                  menu={{ items: userItems }}
-                  placement="bottomLeft"
-                  overlayStyle={{
-                    border: "1px solid var(--point-color-beige)",
-                  }}
-                >
-                  <Button
-                    type="text"
-                    style={{ border: "1px solid var(--point-color-beige)" }}
-                  >
-                    {searchUserFilter}
-                  </Button>
-                </Dropdown>
-                <input type="text" placeholder="검색어를 입력해 주세요." />
+                <input
+                  type="text"
+                  name="user"
+                  onChange={TextTest}
+                  value={searchValue.user}
+                />
+                <Search placeholder="검색기준: 닉네임, 이메일" onChange />
               </S.SearchFilterBox>
             </S.TableSearchBox>
             {/* table */}
@@ -268,25 +212,8 @@ export default function AdminUI({
             </S.SearchTitle>
             <S.TableSearchBox>
               <S.SearchFilterBox>
-                <Dropdown
-                  className="DropdownBtn"
-                  menu={{ items: boardItems }}
-                  placement="bottomLeft"
-                  overlayStyle={{
-                    border: "1px solid var(--point-color-beige)",
-                  }}
-                >
-                  <Button
-                    type="text"
-                    style={{ border: "1px solid var(--point-color-beige)" }}
-                  >
-                    {searchBoardFilter}
-                  </Button>
-                </Dropdown>
-                <input
-                  type="text"
-                  placeholder="검색기준: 게시글 제목, 닉네임"
-                />
+                <input type="text" name="board" />
+                <Search placeholder="검색기준: 닉네임, 제목" />
               </S.SearchFilterBox>
             </S.TableSearchBox>
             {/* table */}

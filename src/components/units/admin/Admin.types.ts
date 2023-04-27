@@ -2,21 +2,19 @@ import { Dispatch, SetStateAction } from "react";
 
 export interface IAdminProps {
   pageTabs: number;
-  setPageTabs: Dispatch<SetStateAction<number>>;
-  browserWidth: number | null;
+  browserWidth: number;
   openTabs: boolean;
   openModal: boolean;
+  allUsers: AllUsers[];
+  allBoards: AllBoards[];
+  searchValue: { user: string; board: string };
+  setSearchValue: Dispatch<SetStateAction<{ user: string; board: string }>>;
+  setPageTabs: Dispatch<SetStateAction<number>>;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   setOpenTabs: Dispatch<SetStateAction<boolean>>;
-  searchUserFilter: string;
-  togleTabs: (prev: boolean) => void;
-  setSearchUserFilter: Dispatch<SetStateAction<string>>;
-  searchBoardFilter: string;
-  setSearchBoardFilter: Dispatch<SetStateAction<string>>;
   setAllUsers: Dispatch<SetStateAction<AllUsers[]>>;
-  allUsers: AllUsers[];
   setAllBoards: Dispatch<SetStateAction<AllBoards[]>>;
-  allBoards: AllBoards[];
+  togleTabs: (prev: boolean) => void;
 }
 
 export interface AllUsers {

@@ -4,8 +4,7 @@ import { breakPoints } from "../../../commons/styles/media";
 interface ITabsItemProps {
   pageTabs?: number;
   index?: number;
-  // browserWidth?: number | null;
-  browserWidth?: any;
+  browserWidth?: number;
   openTabs?: boolean;
 }
 
@@ -28,7 +27,8 @@ export const TabsMenu = styled.div<ITabsItemProps>`
   font-size: var(--font-size-md);
   top: -35px;
   left: 20px;
-  display: ${({ browserWidth }) => (browserWidth <= 768 ? "block" : "none")};
+  display: ${({ browserWidth = 769 }) =>
+    browserWidth <= 768 ? "block" : "none"};
 `;
 
 export const TabsWrapper = styled.li<ITabsItemProps>`
@@ -55,7 +55,8 @@ export const TabsWrapper = styled.li<ITabsItemProps>`
   background-color: #fff;
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
-  z-index: 999;
+  z-index: 1001;
+  min-height: 125vh;
 
   left: ${({ openTabs }) => (openTabs ? "0px" : "-250px")};
   animation: ${({ openTabs }) =>
@@ -70,11 +71,13 @@ export const TabsWrapper = styled.li<ITabsItemProps>`
     ::before {
       content: "";
       position: absolute;
-      left: 0;
-      width: 100vw;
-      height: 100vw;
+      left: 0px;
+      top: 0;
+      width: 125vw;
+      min-height: 125vh;
       backdrop-filter: blur(2px);
       z-index: -1;
+      display: ${({ openTabs }) => (openTabs ? "flex" : "none")};
     }
   }
   @media ${breakPoints.mobile} {
@@ -85,10 +88,12 @@ export const TabsWrapper = styled.li<ITabsItemProps>`
       content: "";
       position: absolute;
       left: 0;
-      width: 100vw;
-      height: 100vw;
+      top: 0;
+      width: 125vw;
+      min-height: 125vw;
       backdrop-filter: blur(2px);
       z-index: -1;
+      display: ${({ openTabs }) => (openTabs ? "flex" : "none")};
     }
   }
 `;
@@ -137,27 +142,6 @@ export const SearchTitle = styled.div`
 export const SearchFilterBox = styled.div`
   display: flex;
   align-items: center;
-  > input {
-    border: 1px solid var(--point-color-beige);
-    width: 300px;
-    padding: 10px;
-    background-color: var(--sub-bg-color);
-    margin-left: 10px;
-    ::placeholder {
-      color: #2c2c2c;
-    }
-  }
-  .DropdownBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    :hover {
-      border: 1px solid var(--point-color-beige);
-      color: #2c2c2c;
-    }
-    width: 80px;
-    height: 45px;
-  }
 `;
 export const TableBoardWrapper = styled.div`
   padding: 50px;
