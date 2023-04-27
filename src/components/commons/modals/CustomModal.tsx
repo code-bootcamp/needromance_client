@@ -42,7 +42,6 @@ export default function CustomModal(props: IModalProps) {
           bodyStyle={modalBodyStyle}
           footer={null}
           open={props.openModal}
-          // maskStyle={{ display: "none" }}
         >
           <S.ModalWrapper>
             <ExclamationCircleOutlined
@@ -70,7 +69,6 @@ export default function CustomModal(props: IModalProps) {
           bodyStyle={modalBodyStyle}
           footer={null}
           open={props.openModal}
-          // mask={false}
         >
           <S.ModalWrapper>
             {/* 다른 아이콘을 사용하시면, antd 아이콘에서 찾아서 원하시는거 적용하시면 됩니다. */}
