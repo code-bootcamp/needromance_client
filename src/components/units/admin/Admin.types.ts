@@ -7,8 +7,8 @@ export interface IAdminProps {
   openModal: boolean;
   allUsers: AllUsers[];
   allBoards: AllBoards[];
-  searchValue: { user: string; board: string };
-  setSearchValue: Dispatch<SetStateAction<{ user: string; board: string }>>;
+  keyword: { user: string; board: string };
+  setKeyword: Dispatch<SetStateAction<{ user: string; board: string }>>;
   setPageTabs: Dispatch<SetStateAction<number>>;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   setOpenTabs: Dispatch<SetStateAction<boolean>>;
@@ -16,7 +16,8 @@ export interface IAdminProps {
   setAllBoards: Dispatch<SetStateAction<AllBoards[]>>;
   togleTabs: (prev: boolean) => void;
   handleSearchInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  submitSearch: () => void;
+  submitUserSearch: () => void;
+  submitBoardSearch: () => void;
 }
 export interface AllUsers {
   createdAt: string;

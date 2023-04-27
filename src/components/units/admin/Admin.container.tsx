@@ -1,6 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import AdminUI from "./Admin.presenter";
-import { getAllBoards, getAllUsers } from "../../../commons/api/admin";
+import {
+  getAllBoards,
+  getAllUsers,
+  getSearchUser,
+} from "../../../commons/api/admin";
 import { AllBoards, AllUsers } from "./Admin.types";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store/atoms";
@@ -17,12 +21,14 @@ export default function Admin() {
   // 게시글목록
   const [allBoards, setAllBoards] = useState<AllBoards[]>([]);
   // 검색 value
-  const [searchValue, setSearchValue] = useState({ user: "", board: "" });
+  const [keyword, setKeyword] = useState({ user: "", board: "" });
 
-  // 유저목록 상태변경시 최신화
+  // 유저목록 검색어 초기화시 리스트 리렌더링
   useEffect(() => {
-    getAllUsersData();
-  }, [setAllUsers]);
+    if (keyword.user === "") {
+      getAllUsersData();
+    }
+  }, [setAllUsers, keyword.user]);
 
   const getAllUsersData = async () => {
     await getAllUsers(accessToken)
@@ -34,10 +40,13 @@ export default function Admin() {
       });
   };
 
-  // 게시글목록 상태변경시 최신화
+  // 게시글 검색어 초기화시 리스트 리렌더링
   useEffect(() => {
-    getAllBoardsData();
-  }, [setAllBoards]);
+    if (keyword.board === "") {
+      getAllBoardsData();
+    }
+    // getAllBoardsData();
+  }, [setAllBoards, keyword.board]);
 
   const getAllBoardsData = async () => {
     await getAllBoards(accessToken)
@@ -48,18 +57,29 @@ export default function Admin() {
         console.log(error);
       });
   };
+
   // 검색어 input 관리
   const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue({
-      ...searchValue,
+    setKeyword({
+      ...keyword,
       [e.currentTarget.name]: e.currentTarget.value,
     });
-    console.log(searchValue);
+    console.log(keyword);
   };
-
+  // 유저 검색 요청
+  const submitUserSearch = () => {
+    getSearchUser({ keyword, accessToken }).then((res) => {
+      if (res.status === 422) {
+        // 모달 개선후에 적용예정
+        alert("검색결과가 없습니다.");
+        return;
+      }
+      setAllUsers(() => [...res]);
+    });
+  };
   // 게시글 검색 요청
-  const submitSearch = () => {
-    console.log("요청");
+  const submitBoardSearch = () => {
+    console.log("aa");
   };
 
   // 반응형 햄버거 view ture, false
@@ -90,10 +110,11 @@ export default function Admin() {
       allUsers={allUsers}
       setAllBoards={setAllBoards}
       allBoards={allBoards}
-      searchValue={searchValue}
-      setSearchValue={setSearchValue}
+      keyword={keyword}
+      setKeyword={setKeyword}
       handleSearchInput={handleSearchInput}
-      submitSearch={submitSearch}
+      submitUserSearch={submitUserSearch}
+      submitBoardSearch={submitBoardSearch}
     />
   );
 }

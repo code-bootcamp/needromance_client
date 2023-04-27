@@ -29,10 +29,11 @@ export default function AdminUI({
   setAllUsers,
   allBoards,
   setAllBoards,
-  searchValue,
-  setSearchValue,
+  keyword,
+  setKeyword,
   handleSearchInput,
-  submitSearch,
+  submitUserSearch,
+  submitBoardSearch,
 }: IAdminProps) {
   // modal id 값을 기준으로 on off
   const [getDeleteId, setGetDeleteId] = useState("");
@@ -171,9 +172,7 @@ export default function AdminUI({
         {pageTabs === 0 && (
           <S.TableUserWrapper>
             <S.TableTitle>
-              <div onClick={() => setOpenModal(true)}>
-                {dummyName}님 안녕하세요!
-              </div>
+              <div>{dummyName}님 안녕하세요!</div>
             </S.TableTitle>
             <S.SearchTitle>
               <div>회원관리</div>
@@ -187,7 +186,7 @@ export default function AdminUI({
                   type="text"
                   name="user"
                   onChange={handleSearchInput}
-                  onClick={submitSearch}
+                  onClick={submitUserSearch}
                 />
               </S.SearchFilterBox>
             </S.TableSearchBox>
@@ -216,7 +215,7 @@ export default function AdminUI({
                   type="text"
                   name="board"
                   onChange={handleSearchInput}
-                  onClick={submitSearch}
+                  onClick={submitBoardSearch}
                   placeholder="검색기준: 닉네임, 제목"
                 />
               </S.SearchFilterBox>

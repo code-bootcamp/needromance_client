@@ -4,8 +4,12 @@ import config from "./config";
 
 const server = config.backend.baseURL;
 
-interface ISearchInput {
-  searchValue: string;
+interface ISearchInputData {
+  keyword: { user: string; board: string };
+  accessToken: string;
+}
+interface IBanData {
+  id: string;
   accessToken: string;
 }
 
@@ -30,28 +34,52 @@ export const getAllUsers = async (accessToken: string): Promise<AllUsers[]> => {
   }
 };
 
-// export const getSearchUser = async (data: any) => {
-//   try {
-//     const response = await axios({
-//       method: "get",
-//       url:
-//         server + `/admin/users?search=${data.keyword}&category=${data.filter}`,
-//       headers: {
-//         Authorization:
-//           "Bearer " +
-//           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJuaWNrbmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkByb21hbmNlLmNvbSIsInN1YiI6MSwiaWF0IjoxNjgyNDc3MDI4LCJleHAiOjE2ODI0ODQyMjh9.mpUEC2JubYVXdKtGSCed13FAmngHm6akR-w7PPsvCw0",
-//       },
-//     });
-//     console.log(response.data);
-//     return response.data;
-//   } catch (error) {
-//     if (axios.isAxiosError(error)) {
-//       console.log(error.response?.data || error.message);
-//     } else {
-//       console.log(error);
-//     }
-//   }
-// };
+export const getSearchUser = async (data: ISearchInputData) => {
+  const { keyword, accessToken } = data;
+
+  try {
+    const response = await axios({
+      method: "get",
+      url: server + `/admin/user/search?keyword=${keyword.user}`,
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log(error.response?.data || error.message);
+      // 검색결과가 없다면 error status 422 code를 받아 alert modal 호출
+      return error.response;
+    } else {
+      console.log(error);
+      return [];
+    }
+  }
+};
+export const fetchUserState = async (data: IBanData) => {
+  const { id, accessToken } = data;
+
+  try {
+    const response = await axios({
+      method: "fetch",
+      url: server + "/admin/user/status",
+      headers: {
+        Authorization: "Bearer " + accessToken,
+      },
+      data: { id },
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.log(error.response?.data || error.message);
+    } else {
+      console.log(error);
+    }
+    return [];
+  }
+};
 
 export const getAllBoards = async (accessToken: string) => {
   try {
