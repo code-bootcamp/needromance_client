@@ -79,28 +79,28 @@ export const signUp = async (inputs: {
 
 export const login = async (email: string, password: string) => {
   try {
-    // await axios
-    //   .post(
-    //     `${URL}/auth/login`,
-    //     {
-    //       data: {
-    //         email,
-    //         password,
-    //       },
-    //     },
-    //     { withCredentials: true }
-    //   )
-    //   .then((res) => console.log(res));
-    const response = await axios({
-      method: "post",
-      url: URL + "/auth/login",
-      data: {
-        email,
-        password,
-      },
-    });
+    await axios
+      .post(
+        `${URL}/auth/login`,
+        {
+          data: {
+            email,
+            password,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((res) => console.log(res));
+    // const response = await axios({
+    //   method: "post",
+    //   url: URL + "/auth/login",
+    //   data: {
+    //     email,
+    //     password,
+    //   },
+    // });
 
-    return response.data;
+    // return response.data;
   } catch (error) {
     console.log(error);
   }

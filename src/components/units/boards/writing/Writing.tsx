@@ -54,6 +54,7 @@ const CounseleeImg = styled.img`
 
 const CounseleeName = styled.span`
   font-size: 1rem;
+  letter-spacing: -1px;
 
   @media ${breakPoints.tablet} {
     font-size: 0.9rem;
@@ -163,7 +164,7 @@ export default function Writing({
       <ContentWrapper>
         <Content>{content}</Content>
         <HashtagWrapper>
-          <Tag tags={tags} />
+          <Tag tags={tags!} />
         </HashtagWrapper>
       </ContentWrapper>
       <CommentDateWrapper>
