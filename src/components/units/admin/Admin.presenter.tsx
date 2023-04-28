@@ -13,10 +13,8 @@ import {
 import CustomModal from "../../commons/modals/CustomModal";
 import { AllBoards, AllUsers, IAdminProps } from "./Admin.types";
 import CustomSearchInput from "../../commons/search/CustomSearchInput";
-import TestModal from "../../commons/modals/CustomModal";
 
 const TabsItems = ["유저관리", "게시글관리"];
-const dummyName = "Admin123";
 
 export default function AdminUI({
   pageTabs,
@@ -41,7 +39,9 @@ export default function AdminUI({
   setGetBanId,
   getDeleteId,
   setGetDeleteId,
+  userProfile,
 }: IAdminProps) {
+  console.log(userProfile.nickname);
   const userColumns: ColumnsType<AllUsers> = [
     {
       title: "닉네임",
@@ -110,24 +110,23 @@ export default function AdminUI({
   const boardColumns: ColumnsType<AllBoards> = [
     {
       title: "닉네임",
-      dataIndex: "nickname",
+      dataIndex: "user_nickname",
       key: "nicknameB",
-      render: (el) => <span>{el?.nickname}</span>,
     },
     {
       title: "제목",
-      dataIndex: "title",
+      dataIndex: "board_title",
       key: "titleB",
     },
     {
       title: "작성일",
-      dataIndex: "createdAt",
+      dataIndex: "board_createdAt",
       key: "createdAtB",
       render: (el) => <span>{el.split("T")[0]}</span>,
     },
     {
       title: "관리",
-      dataIndex: "id",
+      dataIndex: "board_id",
       key: "idB",
       render: (el) => (
         <div
@@ -178,7 +177,7 @@ export default function AdminUI({
         {pageTabs === 0 && (
           <S.TableUserWrapper>
             <S.TableTitle>
-              <div>{dummyName}님 안녕하세요!</div>
+              <div>{userProfile.nickname}님 안녕하세요!</div>
             </S.TableTitle>
             <S.SearchTitle>
               <div>회원관리</div>
@@ -207,7 +206,7 @@ export default function AdminUI({
         {pageTabs === 1 && (
           <S.TableBoardWrapper>
             <S.TableTitle>
-              <div>{dummyName}님 안녕하세요!</div>
+              <div>{userProfile.nickname}님 안녕하세요!</div>
             </S.TableTitle>
             <S.SearchTitle>
               <div>게시글관리</div>
