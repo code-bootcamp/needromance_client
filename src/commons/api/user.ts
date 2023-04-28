@@ -1,6 +1,5 @@
 import axios from "axios";
 import { accessToken } from "./token";
-import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
 
@@ -11,7 +10,6 @@ export const GetUserInfo = async (accessToken: any) => {
         Authorization: `bearer ${accessToken}`,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -33,9 +31,7 @@ export const UpdateUser = async (nickname: string, img: string) => {
         },
       }
     );
-    console.log(response.data);
     if (response.status === 200) {
-      Modal.success({ content: "정보가 수정되었습니다." });
       return response.data;
     }
   } catch (err) {
@@ -74,8 +70,20 @@ export const GetUserAnswer = async () => {
 export const BestUsers = async () => {
   try {
     const response = await axios.get(`${URL}/user?sort=point`);
-    console.log(response);
     return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const DeleteUser = async (email: string, password: string) => {
+  try {
+    const response = await axios.delete(`${URL}/user/delete`, {
+      email,
+      password,
+    });
+    console.log(response);
+    if (response.status === 200) return response.data;
   } catch (error) {
     console.log(error);
     return error;
