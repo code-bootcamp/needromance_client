@@ -74,11 +74,13 @@ export const SearchIcon = styled(BsSearchHeartFill)`
   }
 `;
 interface IInputProps {
-  type: string;
+  type?: string;
   name?: string;
   placeholder: string;
+  value?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
+  onKeyPress: (e: any) => void;
 }
 
 const CustomSearchInput = (props: IInputProps) => {
@@ -89,7 +91,9 @@ const CustomSearchInput = (props: IInputProps) => {
           type={props.type}
           name={props.name}
           placeholder={props.placeholder}
+          value={props.value}
           onChange={props.onChange}
+          onKeyPress={props.onKeyPress}
         />
         <SearchIcon onClick={props.onClick} />
       </SearchBox>
