@@ -1,6 +1,7 @@
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import AdminUI from "./Admin.presenter";
 import {
+  deleteUserBoard,
   fetchUserState,
   getAllBoards,
   getAllUsers,
@@ -9,11 +10,16 @@ import {
 } from "../../../commons/api/admin";
 import { AllBoards, AllUsers } from "./Admin.types";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../commons/store/atoms";
+import {
+  accessTokenState,
+  userProfileState,
+} from "../../../commons/store/atoms";
 
 export default function Admin() {
   // accessToken
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
+
   const [pageTabs, setPageTabs] = useState(0);
   const [openTabs, setOpenTabs] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -109,7 +115,16 @@ export default function Admin() {
   // 유저 게시글 삭제하기
   const handleBoardDelete = async () => {
     console.log(getDeleteId);
-    // await
+    await deleteUserBoard({ accessToken, id: Number(getDeleteId) }).then(() => {
+      getAllBoards(accessToken)
+        .then((res) => {
+          setAllBoards([...res]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      setOpenModal(false);
+    });
   };
 
   // 반응형 햄버거 view ture, false
@@ -151,6 +166,7 @@ export default function Admin() {
       getDeleteId={getDeleteId}
       setGetBanId={setGetBanId}
       getBanId={getBanId}
+      userProfile={userProfile}
     />
   );
 }

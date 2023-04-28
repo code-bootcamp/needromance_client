@@ -24,6 +24,7 @@ export interface IAdminProps {
   setGetBanId: Dispatch<SetStateAction<string>>;
   getDeleteId: string;
   getBanId: string;
+  userProfile: any;
 }
 export interface AllUsers {
   createdAt: string;
@@ -38,4 +39,9 @@ export interface AllBoards {
   id: number;
   title: string;
   createdAt: string;
+}
+export interface userProfile {
+  id: string;
+  email: string;
+  nickname: string;
 }
