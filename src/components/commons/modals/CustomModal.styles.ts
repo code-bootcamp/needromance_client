@@ -14,7 +14,11 @@ export const ContentWrapper = styled.div`
 export const BtnWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
   > button {
     font-size: var(--font-size-md);
     width: var(--btn-width-md);
@@ -31,7 +35,7 @@ const CommonBtnStyle = styled.button`
 `;
 
 export const CancelBtn = styled(CommonBtnStyle)`
-  background-color: #fff;
+  /* background-color: #fff; */
   color: var(--point-color-green);
   border: 1px solid var(--point-color-green);
 `;

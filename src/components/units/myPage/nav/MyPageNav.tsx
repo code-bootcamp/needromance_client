@@ -2,34 +2,28 @@ import * as S from "./MyPageNav.style";
 import { IMyPageProps } from "../MyPage.type";
 import {
   ConfirmModal,
+  InputModal,
   WidthdrawalModal,
 } from "../body/withdrawal/MyPageWithdrawal.Modal";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { MenuOutlined } from "@ant-design/icons";
-
-///// 나중에 지울부분
-const USER_INFO = [
-  {
-    id: "sad12345",
-    nickname: "닉네임입니당",
-    profileImg: "./img/imgThumb.png",
-  },
-];
-/////////////////
+import Popup from "../../../commons/modals/PopupModal";
 
 const NAV_LISTS = [
   { id: "myProfile", name: "내 정보" },
   { id: "board", name: "내 게시글 조회" },
   { id: "comment", name: "내 답변 조회" },
-  { id: "notification", name: "알람" },
+  // { id: "notification", name: "알람" },
   // { id: "withdrawal", name: "회원탈퇴" },
 ];
 
 const MyPageNav = ({ myData, IsActive, setIsActive }: IMyPageProps) => {
-  const [confirm, setConfirm] = useState(false);
   const [openNav, setOpenNav] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [check, setCheck] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [warning, setWarning] = useState(false);
   const NavIcon = useMediaQuery({
     query: "(max-width:768px)",
   });
@@ -81,9 +75,21 @@ const MyPageNav = ({ myData, IsActive, setIsActive }: IMyPageProps) => {
       <WidthdrawalModal
         open={openModal}
         setOpen={setOpenModal}
-        setConfirm={setConfirm}
+        setCheck={setCheck}
       />
-      <ConfirmModal confirm={confirm} setConfirm={setConfirm} />
+      <InputModal
+        check={check}
+        setCheck={setCheck}
+        setConfirm={setConfirm}
+        setWarning={setWarning}
+      />
+      <Popup
+        text="회원탈퇴가 완료되었습니다."
+        confirm={confirm}
+        setConfirm={setConfirm}
+        warning={warning}
+        setWarning={setWarning}
+      />
     </>
   );
 };

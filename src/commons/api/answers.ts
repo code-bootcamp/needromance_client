@@ -53,7 +53,6 @@ export const UpdateAnswer = async (id: number, contents: string) => {
         },
       }
     );
-    Modal.success({ content: "답변이 수정되었습니다." });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -67,7 +66,6 @@ export const DeleteAnswer = async (id: number) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    Modal.success({ content: "답변이 삭제되었습니다." });
     return response.data;
   } catch (error) {
     console.log(error);
