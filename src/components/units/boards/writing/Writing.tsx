@@ -59,10 +59,6 @@ const CounseleeImg = styled.img`
   }
 `;
 
-interface IPropsType {
-  isKeyword: boolean;
-}
-
 const CounseleeName = styled.span`
   font-size: 1rem;
   letter-spacing: -1px;
@@ -96,7 +92,7 @@ const Content = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-const Keyword = styled.span<IPropsType>`
+const Keyword = styled.span<{ isKeyword: boolean }>`
   color: ${({ isKeyword }) =>
     isKeyword ? "var(--point-color-green)" : "inherit"};
 `;
