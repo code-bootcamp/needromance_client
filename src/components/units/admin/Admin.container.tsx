@@ -1,8 +1,10 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import AdminUI from "./Admin.presenter";
 import {
+  fetchUserState,
   getAllBoards,
   getAllUsers,
+  getSearchBoard,
   getSearchUser,
 } from "../../../commons/api/admin";
 import { AllBoards, AllUsers } from "./Admin.types";
@@ -22,6 +24,9 @@ export default function Admin() {
   const [allBoards, setAllBoards] = useState<AllBoards[]>([]);
   // 검색 value
   const [keyword, setKeyword] = useState({ user: "", board: "" });
+  // modal id 값을 기준으로 on off
+  const [getDeleteId, setGetDeleteId] = useState("");
+  const [getBanId, setGetBanId] = useState("");
 
   // 유저목록 검색어 초기화시 리스트 리렌더링
   useEffect(() => {
@@ -33,7 +38,7 @@ export default function Admin() {
   const getAllUsersData = async () => {
     await getAllUsers(accessToken)
       .then((res) => {
-        setAllUsers((prev) => [...prev, ...res]);
+        setAllUsers(() => [...res]);
       })
       .catch((error) => {
         console.log(error);
@@ -45,13 +50,12 @@ export default function Admin() {
     if (keyword.board === "") {
       getAllBoardsData();
     }
-    // getAllBoardsData();
   }, [setAllBoards, keyword.board]);
 
   const getAllBoardsData = async () => {
     await getAllBoards(accessToken)
       .then((res) => {
-        setAllBoards((prev) => [...prev, ...res]);
+        setAllBoards([...res]);
       })
       .catch((error) => {
         console.log(error);
@@ -70,16 +74,42 @@ export default function Admin() {
   const submitUserSearch = () => {
     getSearchUser({ keyword, accessToken }).then((res) => {
       if (res.status === 422) {
-        // 모달 개선후에 적용예정
-        alert("검색결과가 없습니다.");
+        setAllUsers([]);
         return;
       }
-      setAllUsers(() => [...res]);
+      setAllUsers([...res]);
     });
   };
   // 게시글 검색 요청
   const submitBoardSearch = () => {
-    console.log("aa");
+    getSearchBoard({ keyword, accessToken }).then((res) => {
+      if (res.status === 422) {
+        setAllBoards([]);
+        return;
+      }
+      setAllBoards([...res]);
+    });
+  };
+
+  // 유저 활성화 비활성화
+  const handleUserState = async () => {
+    console.log(getBanId);
+
+    await fetchUserState({ accessToken, id: getBanId }).then(() => {
+      getAllUsers(accessToken)
+        .then((res) => {
+          setAllUsers([...res]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      setOpenModal(false);
+    });
+  };
+  // 유저 게시글 삭제하기
+  const handleBoardDelete = async () => {
+    console.log(getDeleteId);
+    // await
   };
 
   // 반응형 햄버거 view ture, false
@@ -115,6 +145,12 @@ export default function Admin() {
       handleSearchInput={handleSearchInput}
       submitUserSearch={submitUserSearch}
       submitBoardSearch={submitBoardSearch}
+      handleUserState={handleUserState}
+      handleBoardDelete={handleBoardDelete}
+      setGetDeleteId={setGetDeleteId}
+      getDeleteId={getDeleteId}
+      setGetBanId={setGetBanId}
+      getBanId={getBanId}
     />
   );
 }

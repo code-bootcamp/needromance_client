@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { GetUserboard } from "../../../../../commons/api/user";
 import { Icon_Delete, Icon_Edit } from "../../../../../commons/styles/icons";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
-import Search from "../../../../commons/search";
+import Search from "../../../../commons/search/CustomSearchInput";
 import { MyPageTitle } from "../MyPage.body.style";
 import * as S from "./MyPageBoard.style";
 
