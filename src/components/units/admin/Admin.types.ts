@@ -18,6 +18,12 @@ export interface IAdminProps {
   handleSearchInput: (e: ChangeEvent<HTMLInputElement>) => void;
   submitUserSearch: () => void;
   submitBoardSearch: () => void;
+  handleUserState: () => void;
+  handleBoardDelete: () => void;
+  setGetDeleteId: Dispatch<SetStateAction<string>>;
+  setGetBanId: Dispatch<SetStateAction<string>>;
+  getDeleteId: string;
+  getBanId: string;
 }
 export interface AllUsers {
   createdAt: string;

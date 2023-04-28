@@ -81,7 +81,7 @@ interface IInputProps {
   onClick: () => void;
 }
 
-const Search = (props: IInputProps) => {
+const CustomSearchInput = (props: IInputProps) => {
   return (
     <SearchWrapper>
       <SearchBox>
@@ -97,4 +97,4 @@ const Search = (props: IInputProps) => {
   );
 };
 
-export default Search;
+export default CustomSearchInput;

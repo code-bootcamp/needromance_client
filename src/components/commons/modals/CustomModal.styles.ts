@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { breakPoints } from "../../../commons/styles/media";
 
 export const ModalWrapper = styled.div`
   display: flex;
@@ -22,13 +21,27 @@ export const BtnWrapper = styled.div`
     height: var(--btn-height);
     border-radius: var(--btn-radius);
   }
-  > button:nth-of-type(1) {
-    background-color: #fff;
-    color: var(--point-color-green);
-    border: 1px solid var(--point-color-green);
-  }
-  > button:nth-of-type(2) {
-    background-color: var(--point-color-green);
-    color: #fff;
-  }
+`;
+
+const CommonBtnStyle = styled.button`
+  font-size: var(--font-size-md);
+  width: var(--btn-width-md);
+  height: var(--btn-height);
+  border-radius: var(--btn-radius);
+`;
+
+export const CancelBtn = styled(CommonBtnStyle)`
+  background-color: #fff;
+  color: var(--point-color-green);
+  border: 1px solid var(--point-color-green);
+`;
+
+export const OkBtn = styled(CommonBtnStyle)`
+  background-color: var(--point-color-green);
+  color: #fff;
+`;
+
+export const ConfirmBtn = styled(CommonBtnStyle)`
+  background-color: var(--point-color-green);
+  color: #fff;
 `;

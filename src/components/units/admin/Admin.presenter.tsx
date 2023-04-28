@@ -12,7 +12,8 @@ import {
 
 import CustomModal from "../../commons/modals/CustomModal";
 import { AllBoards, AllUsers, IAdminProps } from "./Admin.types";
-import Search from "../../commons/search";
+import CustomSearchInput from "../../commons/search/CustomSearchInput";
+import TestModal from "../../commons/modals/CustomModal";
 
 const TabsItems = ["유저관리", "게시글관리"];
 const dummyName = "Admin123";
@@ -34,10 +35,13 @@ export default function AdminUI({
   handleSearchInput,
   submitUserSearch,
   submitBoardSearch,
+  handleUserState,
+  handleBoardDelete,
+  getBanId,
+  setGetBanId,
+  getDeleteId,
+  setGetDeleteId,
 }: IAdminProps) {
-  // modal id 값을 기준으로 on off
-  const [getDeleteId, setGetDeleteId] = useState("");
-  const [getBanId, setGetBanId] = useState("");
   const userColumns: ColumnsType<AllUsers> = [
     {
       title: "닉네임",
@@ -87,10 +91,12 @@ export default function AdminUI({
         >
           {el === getBanId && (
             <CustomModal
-              type="userBan"
-              setOpenModal={setOpenModal}
               openModal={openModal}
-              handleTestFn={handleTestFn}
+              text="유저의 계정상태를 관리할 수 있습니다."
+              ok="변경하기"
+              cancel="취소"
+              onClickOk={handleUserState}
+              onClickCancel={() => setOpenModal(false)}
             />
           )}
           <SettingOutlined
@@ -106,6 +112,7 @@ export default function AdminUI({
       title: "닉네임",
       dataIndex: "nickname",
       key: "nicknameB",
+      render: (el) => <span>{el?.nickname}</span>,
     },
     {
       title: "제목",
@@ -131,10 +138,12 @@ export default function AdminUI({
         >
           {el === Number(getDeleteId) && (
             <CustomModal
-              type="deleteBoard"
-              setOpenModal={setOpenModal}
               openModal={openModal}
-              handleTestFn={handleTestFn}
+              text="게시글을 삭제하시겠습니까?"
+              ok="삭제하기"
+              cancel="취소"
+              onClickOk={handleBoardDelete}
+              onClickCancel={() => setOpenModal(false)}
             />
           )}
           <DeleteOutlined
@@ -146,9 +155,6 @@ export default function AdminUI({
     },
   ];
 
-  const handleTestFn = () => {
-    console.log("testFn");
-  };
   return (
     <S.Wrapper>
       <S.TabsMenu browserWidth={browserWidth}>
@@ -180,8 +186,7 @@ export default function AdminUI({
             </S.SearchTitle>
             <S.TableSearchBox>
               <S.SearchFilterBox>
-                {/* <input type="text" name="user" onChange={handleSearchInput} /> */}
-                <Search
+                <CustomSearchInput
                   placeholder="검색기준: 닉네임, 이메일"
                   type="text"
                   name="user"
@@ -210,8 +215,7 @@ export default function AdminUI({
             </S.SearchTitle>
             <S.TableSearchBox>
               <S.SearchFilterBox>
-                {/* <input type="text" name="board" onChange={handleSearchInput} /> */}
-                <Search
+                <CustomSearchInput
                   type="text"
                   name="board"
                   onChange={handleSearchInput}

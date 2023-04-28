@@ -1,17 +1,7 @@
 import { Modal } from "antd";
-import { Dispatch, SetStateAction } from "react";
 import * as S from "./CustomModal.styles";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 
-interface IModalProps {
-  openModal: boolean;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
-  type: "userBan" | "deleteBoard" | "alert"; // 사용하고 싶은 모달의 사용 목적에 따라 이름을 지어주세요.
-  handleTestFn?: () => void; // 모달의 ok 버튼을 누를시에 작동시키고 싶은 함수를 적어주세요. handle~~..
-  children?: string;
-}
-
-// modal body style
 const modalBodyStyle = {
   padding: "0px",
   margin: "-10px",
@@ -20,100 +10,57 @@ const modalBodyStyle = {
   borderRadius: "5px",
 };
 
-export default function CustomModal(props: IModalProps) {
-  // Admin.presenter.tsx  213 ~ 221 번째 줄에 모달 컴포넌트 적용시킨 예시가 있습니다.
+interface IModalProps {
+  openModal: boolean;
+  text: string;
+  ok?: string;
+  cancel?: string;
+  confirm?: string;
+  onClickOk?: () => void | ((args: any) => void);
+  onClickCancel?: () => void | ((args: any) => void);
+  onClickConfirm?: () => void | ((args: any) => void);
+  children?: JSX.Element | React.FC;
+}
 
-  const handlePropsFn = () => {
-    // 각자의 모달에서 props로 전달받은 함수를 작동시키기 위한 분기점
-    if (props.handleTestFn) {
-      props.handleTestFn();
-      props.setOpenModal(false);
-    }
-    // 확인 버튼 누른 후 notice 확인 모달이 추가로 만들어져야한다면, 각자의 컴포넌트에서 추가로 만들어주세요.
-  };
+export default function TestModal(props: IModalProps) {
   return (
     <>
-      {/* props로 type을 넘겨받은 문자열이 일치하는 것에 모달이 생성됩니다.(분기점)*/}
-      {props.type === "userBan" && (
-        <Modal
-          width={400}
-          closable={false}
-          centered={true}
-          bodyStyle={modalBodyStyle}
-          footer={null}
-          open={props.openModal}
-        >
-          <S.ModalWrapper>
-            <ExclamationCircleOutlined
-              style={{
-                fontSize: "var(--font-size-lg)",
-                color: "var(--point-color-green)",
-                marginTop: "50px",
-              }}
-            />
-            <S.ContentWrapper>
-              <div>유저의 계정을 비활성화 하시겠습니까?</div>
-            </S.ContentWrapper>
-            <S.BtnWrapper>
-              <button onClick={() => props.setOpenModal(false)}>취소</button>
-              <button onClick={handlePropsFn}>확인</button>
-            </S.BtnWrapper>
-          </S.ModalWrapper>
-        </Modal>
-      )}
-      {props.type === "deleteBoard" && (
-        <Modal
-          width={400}
-          closable={false}
-          centered={true}
-          bodyStyle={modalBodyStyle}
-          footer={null}
-          open={props.openModal}
-        >
-          <S.ModalWrapper>
-            {/* 다른 아이콘을 사용하시면, antd 아이콘에서 찾아서 원하시는거 적용하시면 됩니다. */}
-            <ExclamationCircleOutlined
-              style={{
-                fontSize: "var(--font-size-lg)",
-                color: "var(--point-color-green)",
-                marginTop: "50px",
-              }}
-            />
-            <S.ContentWrapper>
-              <div>게시글을 삭제하시겠습니까?</div>
-            </S.ContentWrapper>
-            <S.BtnWrapper>
-              <button onClick={() => props.setOpenModal(false)}>취소</button>
-              <button onClick={handlePropsFn}>확인</button>
-            </S.BtnWrapper>
-          </S.ModalWrapper>
-        </Modal>
-      )}
-      {props.type === "alert" && (
-        <Modal
-          width={400}
-          closable={false}
-          centered={true}
-          bodyStyle={modalBodyStyle}
-          footer={null}
-          open={props.openModal}
-        >
-          <S.ModalWrapper>
-            {/* 다른 아이콘을 사용하시면, antd 아이콘에서 찾아서 원하시는거 적용하시면 됩니다. */}
-            <ExclamationCircleOutlined
-              style={{
-                fontSize: "var(--font-size-lg)",
-                color: "var(--point-color-green)",
-                marginTop: "50px",
-              }}
-            />
-            <S.ContentWrapper>{props.children}</S.ContentWrapper>
-            <S.BtnWrapper>
-              <button onClick={handlePropsFn}>확인</button>
-            </S.BtnWrapper>
-          </S.ModalWrapper>
-        </Modal>
-      )}
+      <Modal
+        width={400}
+        closable={false}
+        centered={true}
+        bodyStyle={modalBodyStyle}
+        footer={null}
+        open={props.openModal}
+      >
+        <S.ModalWrapper>
+          <ExclamationCircleOutlined
+            style={{
+              fontSize: "var(--font-size-lg)",
+              color: "var(--point-color-green)",
+              marginTop: "50px",
+            }}
+          />
+          <S.ContentWrapper>
+            <div>{props.text}</div>
+          </S.ContentWrapper>
+          <S.BtnWrapper>
+            {props.ok && (
+              <S.OkBtn onClick={props.onClickOk}>{props.ok}</S.OkBtn>
+            )}
+            {props.cancel && (
+              <S.CancelBtn onClick={props.onClickCancel}>
+                {props.cancel}
+              </S.CancelBtn>
+            )}
+            {props.confirm && (
+              <S.ConfirmBtn onClick={props.onClickConfirm}>
+                {props.confirm}
+              </S.ConfirmBtn>
+            )}
+          </S.BtnWrapper>
+        </S.ModalWrapper>
+      </Modal>
     </>
   );
 }
