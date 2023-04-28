@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { BsSearchHeartFill } from "react-icons/bs";
 import { breakPoints } from "../../../../commons/styles/media";
 
 export const Wrapper = styled.main`

@@ -94,6 +94,7 @@ export default function CommunityList() {
               onChange={(e) => setKeyword(e.target.value)}
               onClick={() => fetchSearch()}
               onKeyPress={enter}
+              setKeyword={setKeyword}
             />
           </S.SearchBox>
           <S.TagBox>

@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "../../../commons/styles/media";
 import { BsSearchHeartFill } from "react-icons/bs";
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { Icon_Close } from "../../../commons/styles/icons";
+import { CloseOutlined } from "@ant-design/icons";
 
 export const SearchSection = styled.section`
   width: 100vw;
@@ -62,17 +64,37 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const SearchIcon = styled(BsSearchHeartFill)`
-  position: absolute;
+export const BtnWrap = styled.div`
   color: var(--point-color-beige);
   font-size: var(--font-size-md);
+
+  position: absolute;
   right: 15px;
   top: 12px;
+  display: flex;
+  gap: 10px;
+`;
+
+export const ResetBtn = styled(CloseOutlined)`
+  color: #fff;
+  font-size: 0.7rem;
+  width: var(--font-size-md);
+  height: var(--font-size-md);
+  line-height: var(--font-size-md);
+  text-align: center;
+  background-color: #eee;
+  border-radius: 50%;
+`;
+
+export const SearchIcon = styled(BsSearchHeartFill)`
+  color: var(--point-color-beige);
+  font-size: var(--font-size-md);
 
   &:hover {
     cursor: pointer;
   }
 `;
+
 interface IInputProps {
   type?: string;
   name?: string;
@@ -81,6 +103,7 @@ interface IInputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
   onKeyPress: (e: any) => void;
+  setKeyword: Dispatch<SetStateAction<string>>;
 }
 
 const CustomSearchInput = (props: IInputProps) => {
@@ -95,7 +118,10 @@ const CustomSearchInput = (props: IInputProps) => {
           onChange={props.onChange}
           onKeyPress={props.onKeyPress}
         />
-        <SearchIcon onClick={props.onClick} />
+        <BtnWrap>
+          <ResetBtn onClick={() => props.setKeyword("")} />
+          <SearchIcon onClick={props.onClick} />
+        </BtnWrap>
       </SearchBox>
     </SearchWrapper>
   );
