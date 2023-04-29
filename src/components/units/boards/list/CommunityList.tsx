@@ -54,6 +54,10 @@ export default function CommunityList() {
       fetchSearch();
     }
   };
+
+  const onClickClear = () => {
+    setKeyword("");
+  };
   console.log(searchs);
 
   return (
@@ -94,7 +98,7 @@ export default function CommunityList() {
               onChange={(e) => setKeyword(e.target.value)}
               onClick={() => fetchSearch()}
               onKeyPress={enter}
-              setKeyword={setKeyword}
+              onClickClear={onClickClear}
             />
           </S.SearchBox>
           <S.TagBox>
