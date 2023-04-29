@@ -26,6 +26,8 @@ export interface IAdminProps {
   getBanId: string;
   userProfile: any;
   handleClearInput: () => void;
+  submitKeyPressBoardSearch: (e: KeyboardEvent) => void;
+  submitKeyPressUserSearch: (e: KeyboardEvent) => void;
 }
 export interface AllUsers {
   createdAt: string;
