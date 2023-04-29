@@ -36,24 +36,32 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
 
   // 댓글 수정 후. refetch
   const handleUpdateAnswer = async (contents: string) => {
-    await UpdateAnswer(Number(isEdit), contents);
-    await fetch();
-    setConfirm(true);
-    await setTimeout(() => {
-      setConfirm(false);
-      setIsEdit("");
-    }, 1200);
+    try {
+      await UpdateAnswer(Number(isEdit), contents);
+      await fetch();
+      setConfirm(true);
+      setTimeout(() => {
+        setConfirm(false);
+        setIsEdit("");
+      }, 1200);
+    } catch (error) {
+      setWarning(true);
+    }
   };
 
   // 댓글 삭제후, refetch
   const handleDeleteAnswer = async (id: string) => {
-    await DeleteAnswer(Number(id));
-    await fetch();
-    setConfirm(true);
-    await setTimeout(() => {
-      setConfirm(false);
-      setIsEdit("");
-    }, 1200);
+    try {
+      await DeleteAnswer(Number(id));
+      await fetch();
+      setConfirm(true);
+      setTimeout(() => {
+        setConfirm(false);
+        setIsEdit("");
+      }, 1200);
+    } catch (error) {
+      setWarning(true);
+    }
   };
 
   // 댓글 작성 후, refetch

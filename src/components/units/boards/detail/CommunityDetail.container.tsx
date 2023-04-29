@@ -44,7 +44,7 @@ const CommunityDetailContainer = () => {
     try {
       await DeleteBoard(Number(router.query.communityId));
       setConfirm(true);
-      await setTimeout(() => {
+      setTimeout(() => {
         setConfirm(false);
         router.push("/boards");
       }, 1200);

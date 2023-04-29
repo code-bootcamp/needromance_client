@@ -1,57 +1,44 @@
-import { useEffect } from "react";
-import { GetUserboard } from "../../../../../commons/api/user";
+import { useEffect, useState } from "react";
+import { GetUserAnswer } from "../../../../../commons/api/user";
 import {
   Icon_Delete,
-  Icon_Edit,
   Icon_Heart,
   Icon_HeartFilled,
 } from "../../../../../commons/styles/icons";
-import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import { MyPageTitle } from "../MyPage.body.style";
 import * as S from "./MyPageComment.style";
-
-// 나중에 지울부분...
-const DATA_Example = [
-  {
-    id: "게시물 고유ID",
-    title: "고민상담 제목입니다....abcdefg",
-    created: "2023.04.16",
-    pick: true,
-    likeCount: 100,
-  },
-  {
-    id: "게시물 고유ID",
-    title: "고민상담 제목입니다....abcdefg",
-    created: "2023.04.16",
-    pick: true,
-    likeCount: 100,
-  },
-  {
-    id: "게시물 고유ID",
-    title: "고민상담 제목입니다....abcdefg",
-    created: "2023.04.16",
-    pick: false,
-    likeCount: 100,
-  },
-];
+import { getDate } from "../../../../../commons/libraries/getDate";
+import { DeleteAnswer } from "../../../../../commons/api/answers";
+import Popup from "../../../../commons/modals/PopupModal";
 
 const MyPageComment = ({ myData }: any) => {
-  const { onClickMoveToPage } = useMoveToPage();
-
-  const handleDeleteBoard = (boardId: string) => () => {
-    console.log(boardId);
-  };
-
-  const fetch = async () => {
-    const result = await GetUserboard();
-
-    console.log(result);
-  };
+  const [comments, setComments] = useState<Array>([]);
+  const [confirm, setConfirm] = useState(false);
+  const [warning, setWarning] = useState(false);
 
   useEffect(() => {
     fetch();
   }, []);
 
+  const fetch = async () => {
+    const result = await GetUserAnswer();
+    setComments(result[0]?.answers);
+  };
+
+  const handleDeleteAnswer = async (id: number) => {
+    try {
+      await DeleteAnswer(Number(id));
+      await fetch();
+      setConfirm(true);
+      setTimeout(() => {
+        setConfirm(false);
+      }, 1200);
+    } catch (error) {
+      setWarning(true);
+    }
+  };
+
+  console.log(comments);
   return (
     <>
       <MyPageTitle>"{myData.nickname}"님의 답변들</MyPageTitle>
@@ -59,28 +46,26 @@ const MyPageComment = ({ myData }: any) => {
         <S.Thead>
           <tr>
             <S.TH>No</S.TH>
-            <S.TH>제목</S.TH>
-            <S.TH>작성일</S.TH>
+            <S.TH>내용</S.TH>
             <S.TH>채택</S.TH>
-            <S.TH>좋아요</S.TH>
             <S.TH>관리</S.TH>
           </tr>
         </S.Thead>
         <S.Tbody>
-          {DATA_Example.map((data, idx) => (
+          {comments.map((data, idx) => (
             <S.TR key={data.id}>
-              <S.TD>{String(DATA_Example.length - idx).padStart(2, "0")}</S.TD>
-              <S.TD>{data.title}</S.TD>
-              <S.TD>{data.created}</S.TD>
-              <S.TD>{data.pick ? <Icon_HeartFilled /> : <Icon_Heart />}</S.TD>
-              <S.TD>{data.likeCount}</S.TD>
+              <S.TD>{String(comments.length - idx).padStart(2, "0")}</S.TD>
+              <S.TD>
+                <p>{data.contents}</p>
+                <br />
+                {getDate(data.createdAt)}
+              </S.TD>
+              <S.TD>{data.status ? <Icon_HeartFilled /> : <Icon_Heart />}</S.TD>
+              {/* <S.TD>{data.likeCount}</S.TD> */}
               <S.TD>
                 <S.ControlsWrap>
-                  <S.IconBox onClick={onClickMoveToPage(data.id)}>
-                    <Icon_Edit />
-                  </S.IconBox>
                   <S.IconBox>
-                    <Icon_Delete onClick={handleDeleteBoard(data.id)} />
+                    <Icon_Delete onClick={() => handleDeleteAnswer(data.id)} />
                   </S.IconBox>
                 </S.ControlsWrap>
               </S.TD>
@@ -88,6 +73,14 @@ const MyPageComment = ({ myData }: any) => {
           ))}
         </S.Tbody>
       </S.Table>
+
+      <Popup
+        text="답변이 삭제되었습니다."
+        confirm={confirm}
+        setConfirm={setConfirm}
+        warning={warning}
+        setWarning={setWarning}
+      />
     </>
   );
 };

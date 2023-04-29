@@ -58,7 +58,6 @@ export default function CommunityList() {
   const onClickClear = () => {
     setKeyword("");
   };
-  console.log(searchs);
 
   return (
     <S.Wrapper>

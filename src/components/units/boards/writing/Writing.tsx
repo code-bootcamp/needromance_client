@@ -1,9 +1,9 @@
+import { v4 as uuidv4 } from "uuid";
 import styled from "@emotion/styled";
 import { FaCommentDots } from "react-icons/fa";
-import { breakPoints } from "../../../../commons/styles/media";
 import Tag from "../../../commons/hashtag/HashTag";
+import { breakPoints } from "../../../../commons/styles/media";
 import { getDate2 } from "../../../../commons/libraries/getDate";
-import { v4 as uuidv4 } from "uuid";
 
 const Wrapper = styled.div`
   position: relative;

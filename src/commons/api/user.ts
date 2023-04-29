@@ -39,15 +39,29 @@ export const UpdateUser = async (nickname: string, img: string) => {
   }
 };
 
-export const GetUserboard = async () => {
+export const GetUserBoard = async () => {
   try {
-    const response = await axios.get(`${URL}/user/board`, {
+    const response = await axios.get(`${URL}/user/boards`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response.data);
     return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const SearchUserBoard = async (keyword: string) => {
+  try {
+    const response = await axios.get(`${URL}/user/answer?keyword=${keyword}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (response.status === 200) {
+      return response.data;
+    }
   } catch (err) {
     console.log(err);
   }
@@ -55,12 +69,11 @@ export const GetUserboard = async () => {
 
 export const GetUserAnswer = async () => {
   try {
-    const response = await axios.get(`${URL}/user/answer`, {
+    const response = await axios.get(`${URL}/user/answers`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response.data);
     return response.data;
   } catch (err) {
     console.log(err);
