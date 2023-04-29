@@ -25,6 +25,7 @@ export interface IAdminProps {
   getDeleteId: string;
   getBanId: string;
   userProfile: any;
+  handleClearInput: () => void;
 }
 export interface AllUsers {
   createdAt: string;
@@ -36,9 +37,11 @@ export interface AllUsers {
   userImg: string | null;
 }
 export interface AllBoards {
-  id: number;
-  title: string;
-  createdAt: string;
+  board_id: number;
+  board_title: string;
+  board_createdAt: string;
+  user_id: string;
+  user_nickname: string;
 }
 export interface userProfile {
   id: string;
