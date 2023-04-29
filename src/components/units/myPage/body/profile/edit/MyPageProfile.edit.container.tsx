@@ -27,7 +27,7 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
       const result = await UpdateUser(nickname, userImg);
       setMyData(result);
       setConfirm(true);
-      await setTimeout(() => {
+      setTimeout(() => {
         setConfirm(false);
         setIsEdit(false);
       }, 1200);

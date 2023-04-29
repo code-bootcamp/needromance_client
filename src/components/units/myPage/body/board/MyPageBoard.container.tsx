@@ -1,77 +1,135 @@
-import { useEffect } from "react";
-import { GetUserboard } from "../../../../../commons/api/user";
-import { Icon_Delete, Icon_Edit } from "../../../../../commons/styles/icons";
-import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
-import Search from "../../../../commons/search/CustomSearchInput";
-import { MyPageTitle } from "../MyPage.body.style";
+import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from "react";
 import * as S from "./MyPageBoard.style";
-
-// 나중에 지울부분... =============
-const DATA_Example = [
-  {
-    id: "게시물 고유ID",
-    title: "고민상담 제목입니다....abcdefg",
-    created: "2023.04.16",
-    commentCount: 10,
-  },
-  {
-    id: "게시물 고유ID",
-    title: "고민상담 제목입니다....abcdefg",
-    created: "2023.04.16",
-    commentCount: 100,
-  },
-  {
-    id: "게시물 고유ID",
-    title: "고민상담 제목입니다....abcdefg",
-    created: "2023.04.16",
-    commentCount: 100,
-  },
-];
-// ===============================
+import { Icon_Delete, Icon_Edit } from "../../../../../commons/styles/icons";
+import { MyPageTitle } from "../MyPage.body.style";
+import { getDate } from "../../../../../commons/libraries/getDate";
+import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
+import { GetUserBoard, SearchUserBoard } from "../../../../../commons/api/user";
+import { DeleteBoard } from "../../../../../commons/api/boards";
+import Popup from "../../../../commons/modals/PopupModal";
+import CustomSearchInput from "../../../../commons/search/CustomSearchInput";
 
 const MyPageBoard = ({ myData }: any) => {
   const { onClickMoveToPage } = useMoveToPage();
-  const handleDeleteBoard = (boardId: string) => () => {
-    console.log(boardId);
-  };
-
-  const fetch = async () => {
-    const result = await GetUserboard();
-    console.log(result);
-  };
+  const [boards, setBoards] = useState<Array>([]);
+  const [confirm, setConfirm] = useState(false);
+  const [warning, setWarning] = useState(false);
+  const [searchs, setSearchs] = useState<Array>([]);
+  const [isSearch, setIsSearch] = useState<boolean>(false);
+  const [keyword, setKeyword] = useState<string>("");
+  // const [keywordStore, setKeywordStore] = useState<string>("");
 
   useEffect(() => {
     fetch();
   }, []);
 
+  const fetch = async () => {
+    const result = await GetUserBoard();
+    setBoards(result[0]?.boards);
+  };
+
+  const handleDeleteBoard = async (boardId: number) => {
+    try {
+      await DeleteBoard(Number(boardId));
+      await fetch();
+      setConfirm(true);
+      setTimeout(() => {
+        setConfirm(false);
+      }, 1200);
+    } catch (error) {
+      setWarning(true);
+    }
+  };
+
+  const fetchSearch = async () => {
+    if (keyword === "" || keyword === " ") return;
+    const result = await SearchUserBoard(keyword);
+    setSearchs(result);
+    setIsSearch(true);
+    // setKeywordStore(keyword);
+  };
+
+  const enter = (event: any) => {
+    if (keyword === "" || keyword === " ") return;
+    if (event.charCode == 13) {
+      fetchSearch();
+    }
+  };
+
+  const onClickClear = () => {
+    setKeyword("");
+  };
+
+  const mySecretCode = uuidv4();
+  console.log(boards);
   return (
     <>
       <MyPageTitle>"{myData.nickname}"님의 이야기들</MyPageTitle>
-      <Search placeholder="내가 작성한 글을 검색해보세요 ex) 고백" />
+      <CustomSearchInput
+        placeholder="제목 / 내용을 검색하세요."
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+        onClick={() => fetchSearch()}
+        onKeyPress={enter}
+        onClickClear={onClickClear}
+      />
       <S.Table>
         <S.Thead>
           <tr>
             <S.TH>No</S.TH>
-            <S.TH>제목</S.TH>
-            <S.TH>작성일</S.TH>
+            <S.TH>제목 & 내용</S.TH>
             <S.TH>댓글</S.TH>
             <S.TH>관리</S.TH>
           </tr>
         </S.Thead>
         <S.Tbody>
-          {DATA_Example.map((data, idx) => (
+          {boards.map((data: any, idx: string) => (
             <S.TR key={data.id}>
-              <S.TD>{String(DATA_Example.length - idx).padStart(2, "0")}</S.TD>
-              <S.TD>{data.title}</S.TD>
-              <S.TD>{data.created}</S.TD>
-              <S.TD>{data.commentCount}</S.TD>
+              <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
+              <S.TD
+                style={{ cursor: "pointer" }}
+                onClick={onClickMoveToPage(`/boards/${data.id}`)}
+              >
+                <p>
+                  제목 :{" "}
+                  {(data?.title)
+                    .replaceAll(
+                      keyword,
+                      `${mySecretCode}${keyword}${mySecretCode}`
+                    )
+                    .split(mySecretCode)
+                    .map((el: any) => (
+                      <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
+                        {el}
+                      </S.Keyword>
+                    ))}
+                </p>
+                <br />
+                <p>
+                  {(data?.contents)
+                    .replaceAll(
+                      keyword,
+                      `${mySecretCode}${keyword}${mySecretCode}`
+                    )
+                    .split(mySecretCode)
+                    .map((el: any) => (
+                      <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
+                        {el}
+                      </S.Keyword>
+                    ))}
+                </p>
+                <br />
+                <p>{getDate(data?.createdAt)}</p>
+              </S.TD>
+              <S.TD>{data?.answers?.length}</S.TD>
               <S.TD>
                 <S.ControlsWrap>
-                  <S.IconBox onClick={onClickMoveToPage(data.id)}>
+                  <S.IconBox onClick={onClickMoveToPage(`/boards/${data.id}`)}>
                     <Icon_Edit />
                   </S.IconBox>
                   <S.IconBox>
-                    <Icon_Delete onClick={handleDeleteBoard(data.id)} />
+                    <Icon_Delete onClick={() => handleDeleteBoard(data.id)} />
                   </S.IconBox>
                 </S.ControlsWrap>
               </S.TD>
@@ -79,6 +137,14 @@ const MyPageBoard = ({ myData }: any) => {
           ))}
         </S.Tbody>
       </S.Table>
+
+      <Popup
+        text="게시물이 삭제되었습니다."
+        confirm={confirm}
+        setConfirm={setConfirm}
+        warning={warning}
+        setWarning={setWarning}
+      />
     </>
   );
 };
