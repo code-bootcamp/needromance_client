@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "../../../commons/styles/media";
 import { BsSearchHeartFill } from "react-icons/bs";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, MouseEvent } from "react";
 import { Icon_Close } from "../../../commons/styles/icons";
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined, CloseCircleOutlined } from "@ant-design/icons";
+
 
 export const SearchSection = styled.section`
   width: 100vw;
@@ -46,6 +47,13 @@ export const SearchBox = styled.div`
   width: 100%;
   /* max-width: 600px; */
   position: relative;
+  .anticon-close-circle {
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    font-size: var(--font-size-sm);
+    color: #999;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -102,8 +110,11 @@ interface IInputProps {
   value?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
+
   onKeyPress: (e: any) => void;
   setKeyword: Dispatch<SetStateAction<string>>;
+  onClickClear?: () => void;
+  value?: string;
 }
 
 const CustomSearchInput = (props: IInputProps) => {
@@ -111,6 +122,7 @@ const CustomSearchInput = (props: IInputProps) => {
     <SearchWrapper>
       <SearchBox>
         <SearchInput
+          value={props.value}
           type={props.type}
           name={props.name}
           placeholder={props.placeholder}
@@ -122,6 +134,8 @@ const CustomSearchInput = (props: IInputProps) => {
           <ResetBtn onClick={() => props.setKeyword("")} />
           <SearchIcon onClick={props.onClick} />
         </BtnWrap>
+        {props.value && <CloseCircleOutlined onClick={props.onClickClear} />}
+        <SearchIcon onClick={props.onClick} />
       </SearchBox>
     </SearchWrapper>
   );

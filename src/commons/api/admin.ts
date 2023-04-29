@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AllUsers } from "../../components/units/admin/Admin.types";
+import { AllBoards, AllUsers } from "../../components/units/admin/Admin.types";
 import config from "./config";
 
 const server = config.backend.baseURL;
@@ -106,7 +106,9 @@ export const getAllBoards = async (accessToken: string) => {
     return [];
   }
 };
-export const getSearchBoard = async (data: ISearchInputData) => {
+export const getSearchBoard = async (
+  data: ISearchInputData
+): Promise<AllBoards[]> => {
   const { keyword, accessToken } = data;
 
   try {
@@ -114,20 +116,12 @@ export const getSearchBoard = async (data: ISearchInputData) => {
       method: "get",
       url: server + `/admin/boards/search?keyword=${keyword.board}`,
       headers: {
-        Authorization: "Bearer " + accessToken,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.log(error.response?.data || error.message);
-      // 검색결과가 없다면 error status 422 code를 받아 alert modal 호출
-      return error.response;
-    } else {
-      console.log(error);
-      return [];
-    }
+    throw new Error();
   }
 };
 export const deleteUserBoard = async (data: IDeleteBoardData) => {
@@ -149,6 +143,7 @@ export const deleteUserBoard = async (data: IDeleteBoardData) => {
       return error.response;
     } else {
       console.log(error);
+      throw new Error();
     }
   }
 };

@@ -76,6 +76,14 @@ export default function Admin() {
     });
     console.log(keyword);
   };
+  // 검색어 초기화 함수
+  const handleClearInput = () => {
+    setKeyword({
+      ...keyword,
+      user: "",
+      board: "",
+    });
+  };
   // 유저 검색 요청
   const submitUserSearch = () => {
     getSearchUser({ keyword, accessToken }).then((res) => {
@@ -87,14 +95,22 @@ export default function Admin() {
     });
   };
   // 게시글 검색 요청
-  const submitBoardSearch = () => {
-    getSearchBoard({ keyword, accessToken }).then((res) => {
-      if (res.status === 422) {
-        setAllBoards([]);
-        return;
-      }
-      setAllBoards([...res]);
-    });
+  const submitBoardSearch = async () => {
+    try {
+      const response = await getSearchBoard({ keyword, accessToken });
+      setAllBoards([...response]);
+    } catch (error) {
+      console.log(error);
+      setAllBoards([]);
+    }
+    // getSearchBoard({ keyword, accessToken }).then((res) => {
+    //   // 일치하는 검색값이 없는 경우
+    //   if (res.status === 422) {
+    //     setAllBoards([]);
+    //     return;
+    //   }
+    //   setAllBoards([...res]);
+    // });
   };
 
   // 유저 활성화 비활성화
@@ -167,6 +183,7 @@ export default function Admin() {
       setGetBanId={setGetBanId}
       getBanId={getBanId}
       userProfile={userProfile}
+      handleClearInput={handleClearInput}
     />
   );
 }

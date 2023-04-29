@@ -7,12 +7,14 @@ import {
   CloseCircleOutlined,
   DeleteOutlined,
   MenuOutlined,
+  ProfileOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 
 import CustomModal from "../../commons/modals/CustomModal";
 import { AllBoards, AllUsers, IAdminProps } from "./Admin.types";
 import CustomSearchInput from "../../commons/search/CustomSearchInput";
+import { useRouter } from "next/router";
 
 const TabsItems = ["유저관리", "게시글관리"];
 
@@ -40,8 +42,10 @@ export default function AdminUI({
   getDeleteId,
   setGetDeleteId,
   userProfile,
+  handleClearInput,
 }: IAdminProps) {
-  console.log(userProfile.nickname);
+  const router = useRouter();
+
   const userColumns: ColumnsType<AllUsers> = [
     {
       title: "닉네임",
@@ -125,6 +129,19 @@ export default function AdminUI({
       render: (el) => <span>{el.split("T")[0]}</span>,
     },
     {
+      title: "이동",
+      dataIndex: "board_id",
+      key: "moveIdB",
+      render: (el) => (
+        <ProfileOutlined
+          id={el}
+          onClick={() => {
+            router.push(`/boards/${el}`);
+          }}
+        />
+      ),
+    },
+    {
       title: "관리",
       dataIndex: "board_id",
       key: "idB",
@@ -191,6 +208,8 @@ export default function AdminUI({
                   name="user"
                   onChange={handleSearchInput}
                   onClick={submitUserSearch}
+                  onClickClear={handleClearInput}
+                  value={keyword.user}
                 />
               </S.SearchFilterBox>
             </S.TableSearchBox>
