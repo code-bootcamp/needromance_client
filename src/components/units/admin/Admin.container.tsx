@@ -94,6 +94,16 @@ export default function Admin() {
       setAllUsers([...res]);
     });
   };
+  // 유저 검색 엔터로 요청할 때
+  const submitKeyPressUserSearch = (e: KeyboardEvent) => {
+    if (keyword.board === "") {
+      return;
+    }
+    if (e.charCode == 13) {
+      submitUserSearch();
+    }
+  };
+
   // 게시글 검색 요청
   const submitBoardSearch = async () => {
     try {
@@ -111,6 +121,15 @@ export default function Admin() {
     //   }
     //   setAllBoards([...res]);
     // });
+  };
+  // 게시글 검색 엔터로 요청할 때
+  const submitKeyPressBoardSearch = (e: KeyboardEvent) => {
+    if (keyword.board === "") {
+      return;
+    }
+    if (e.charCode == 13) {
+      submitBoardSearch();
+    }
   };
 
   // 유저 활성화 비활성화
@@ -184,6 +203,8 @@ export default function Admin() {
       getBanId={getBanId}
       userProfile={userProfile}
       handleClearInput={handleClearInput}
+      submitKeyPressBoardSearch={submitKeyPressBoardSearch}
+      submitKeyPressUserSearch={submitKeyPressUserSearch}
     />
   );
 }

@@ -5,7 +5,6 @@ import { ChangeEvent, Dispatch, SetStateAction, MouseEvent } from "react";
 import { Icon_Close } from "../../../commons/styles/icons";
 import { CloseOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
-
 export const SearchSection = styled.section`
   width: 100vw;
   // 양쪽에 꽉차게 하기 위한 옵션
@@ -110,11 +109,8 @@ interface IInputProps {
   value?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
-
   onKeyPress: (e: any) => void;
-  setKeyword: Dispatch<SetStateAction<string>>;
   onClickClear?: () => void;
-  value?: string;
 }
 
 const CustomSearchInput = (props: IInputProps) => {
@@ -126,16 +122,13 @@ const CustomSearchInput = (props: IInputProps) => {
           type={props.type}
           name={props.name}
           placeholder={props.placeholder}
-          value={props.value}
           onChange={props.onChange}
           onKeyPress={props.onKeyPress}
         />
         <BtnWrap>
-          <ResetBtn onClick={() => props.setKeyword("")} />
+          {props.value && <ResetBtn onClick={props.onClickClear} />}
           <SearchIcon onClick={props.onClick} />
         </BtnWrap>
-        {props.value && <CloseCircleOutlined onClick={props.onClickClear} />}
-        <SearchIcon onClick={props.onClick} />
       </SearchBox>
     </SearchWrapper>
   );

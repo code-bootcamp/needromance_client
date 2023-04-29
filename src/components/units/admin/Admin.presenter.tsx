@@ -43,6 +43,8 @@ export default function AdminUI({
   setGetDeleteId,
   userProfile,
   handleClearInput,
+  submitKeyPressBoardSearch,
+  submitKeyPressUserSearch,
 }: IAdminProps) {
   const router = useRouter();
 
@@ -203,13 +205,14 @@ export default function AdminUI({
             <S.TableSearchBox>
               <S.SearchFilterBox>
                 <CustomSearchInput
+                  value={keyword.user}
                   placeholder="검색기준: 닉네임, 이메일"
                   type="text"
                   name="user"
                   onChange={handleSearchInput}
                   onClick={submitUserSearch}
                   onClickClear={handleClearInput}
-                  value={keyword.user}
+                  onKeyPress={submitKeyPressUserSearch}
                 />
               </S.SearchFilterBox>
             </S.TableSearchBox>
@@ -234,11 +237,14 @@ export default function AdminUI({
             <S.TableSearchBox>
               <S.SearchFilterBox>
                 <CustomSearchInput
+                  value={keyword.board}
+                  placeholder="검색기준: 닉네임, 제목"
                   type="text"
                   name="board"
                   onChange={handleSearchInput}
                   onClick={submitBoardSearch}
-                  placeholder="검색기준: 닉네임, 제목"
+                  onClickClear={handleClearInput}
+                  onKeyPress={submitKeyPressBoardSearch}
                 />
               </S.SearchFilterBox>
             </S.TableSearchBox>
