@@ -5,7 +5,7 @@ import { Modal } from "antd";
 const URL = "https://need-romance.site";
 // axios.defaults.withCredentials = true;
 
-export const GetBoards = async (page: string) => {
+export const GetBoards = async (page: number) => {
   try {
     const response = await axios.get(`${URL}/boards?page=${page}`);
     console.log(response.data);
@@ -45,11 +45,13 @@ export const DeleteBoard = async (id: number) => {
   }
 };
 
-export const getBoards = async (page: number) => {
+export const SearchBoard = async (keyword: string) => {
   try {
-    const response = await axios.get(`${URL}/boards?page=${page}`, {});
-    return response;
-  } catch (error) {
-    console.log(error);
+    const response = await axios.get(
+      `${URL}/boards/search?keyword=${keyword}&page=1`
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err);
   }
 };

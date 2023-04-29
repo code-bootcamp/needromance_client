@@ -3,44 +3,59 @@ import * as S from "./CommunityList.styles";
 import { v4 as uuidv4 } from "uuid";
 
 // api
-import { GetBoards, getBoards } from "../../../../commons/api/boards";
+import { GetBoards, SearchBoard } from "../../../../commons/api/boards";
 import { BestUsers } from "../../../../commons/api/user";
 import { BestAnswer } from "../../../../commons/api/answers";
 
 // components
 import CustomBtn from "../../../commons/buttons/CustomBtn";
 import Tag from "../../../commons/hashtag/HashTag";
-import Medal from "../medal/Medal";
-import Answer from "../answer/Answer";
+import Medal from "../medal/medal";
+import Answer from "../answer/answer";
 import Writing from "../writing/Writing";
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import CustomSearchInput from "../../../commons/search/CustomSearchInput";
 
 export default function CommunityList() {
+  const { onClickMoveToPage } = useMoveToPage();
   const [ranking, setRanking] = useState<Array>([]);
   const [answers, setAnswers] = useState<Array>([]);
   const [boards, setBoards] = useState<Array>([]);
-
-  const fetch = async () => {
-    const ranking = await BestUsers();
-    const answers = await BestAnswer();
-    const boards = await GetBoards(1);
-    const rankingUser = ranking?.map((user) => user.nickname);
-    setRanking(rankingUser);
-    setAnswers(answers);
-    setBoards(boards);
-  };
+  const [searchs, setSearchs] = useState<Array>([]);
+  const [isSearch, setIsSearch] = useState<boolean>(false);
+  const [keyword, setKeyword] = useState<string>("");
+  const [keywordStore, setKeywordStore] = useState<string>("");
 
   useEffect(() => {
     fetch();
   }, []);
 
-  // useEffect(() => {
-  //   getBoardsList(1);
-  // }, []);
+  const fetch = async () => {
+    const ranking = await BestUsers();
+    const answers = await BestAnswer();
+    const boards = await GetBoards(1);
+    const rankingUser = ranking?.map((user: any) => user.nickname);
+    setRanking(rankingUser);
+    setAnswers(answers);
+    setBoards(boards);
+  };
 
-  // const getBoardsList = async (page: number) => {
-  //   const data = await getBoards(page);
-  //   console.log(data);
-  // };
+  const fetchSearch = async () => {
+    if (keyword === "" || keyword === " ") return;
+    const result = await SearchBoard(keyword);
+    setSearchs(result);
+    setKeywordStore(keyword);
+    setIsSearch(true);
+  };
+
+  const enter = (event: any) => {
+    if (keyword === "" || keyword === " ") return;
+    if (event.charCode == 13) {
+      fetchSearch();
+    }
+  };
+  console.log(searchs);
+
   return (
     <S.Wrapper>
       <S.Ranking>
@@ -54,7 +69,7 @@ export default function CommunityList() {
         </S.MedalWrapper>
       </S.Ranking>
       <S.BestAnswerWrapper>
-        {answers.map((answer: any, index: number) => (
+        {answers?.map((answer: any, index: number) => (
           <Answer
             key={uuidv4()}
             name={answer.nickname}
@@ -73,8 +88,14 @@ export default function CommunityList() {
         </S.InfoText>
         <S.SearchWrapper>
           <S.SearchBox>
-            <S.SearchInput placeholder="검색어를 입력하세요." />
-            <S.SearchIcon />
+            <CustomSearchInput
+              placeholder="제목, 작성자를 검색하세요."
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              onClick={() => fetchSearch()}
+              onKeyPress={enter}
+              setKeyword={setKeyword}
+            />
           </S.SearchBox>
           <S.TagBox>
             <Tag tags={["장거리", "100일선물"]} />
@@ -84,16 +105,49 @@ export default function CommunityList() {
       <section>
         <input />
       </section>
+
+      {isSearch && (
+        <S.CounselWrapper>
+          <S.LatestCounsel>
+            <p>
+              {searchs.length === 0
+                ? `"${keywordStore}"에 대한 검색 결과가 없습니다.`
+                : "검색 결과 List"}
+            </p>
+          </S.LatestCounsel>
+          {searchs.length == 0 && (
+            <S.AskCounsel onClick={onClickMoveToPage("/boards/write")}>
+              지금 바로 고민을 남기고 다른 사람의 도움을 받아보세요.
+            </S.AskCounsel>
+          )}
+          <S.LatestCounselWriting>
+            {searchs?.map((board: any) => (
+              <Writing
+                key={board.id}
+                name={board.user.nickname}
+                content={board.title}
+                hashtags={board.hashtags}
+                createdAt={board.createdAt}
+                answers={board.answers.length}
+                onClick={onClickMoveToPage(`/boards/${board.id}`)}
+                keyword={keyword}
+              />
+            ))}
+          </S.LatestCounselWriting>
+        </S.CounselWrapper>
+      )}
+
       <S.CounselWrapper>
         <S.LatestCounsel>
           <p>최신 상담 List</p>
-          <CustomBtn fill={false} type="Md">
-            <a style={{ color: "white" }} href="/boards/write">
-              글 작성하기
-            </a>
-          </CustomBtn>
-          {/* <button>글 작성하기</button> */}
+          <CustomBtn
+            fill={false}
+            type="Md"
+            text="글 작성하기"
+            onClick={onClickMoveToPage("/boards/write")}
+          />
         </S.LatestCounsel>
+
         <S.LatestCounselWriting>
           {boards?.map((board: any) => (
             <Writing
@@ -103,6 +157,7 @@ export default function CommunityList() {
               hashtags={board.hashtags}
               createdAt={board.createdAt}
               answers={board.answers.length}
+              onClick={onClickMoveToPage(`/boards/${board.id}`)}
             />
           ))}
         </S.LatestCounselWriting>

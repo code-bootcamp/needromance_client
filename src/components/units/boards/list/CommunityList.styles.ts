@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { BsSearchHeartFill } from "react-icons/bs";
 import { breakPoints } from "../../../../commons/styles/media";
 
 export const Wrapper = styled.main`
@@ -103,31 +102,6 @@ export const SearchBox = styled.div`
   position: relative;
 `;
 
-export const SearchInput = styled.input`
-  display: block;
-  width: 100%;
-  height: 45px;
-  border-radius: 50px;
-  padding: 15px;
-  border: 1px solid var(--point-color-beige);
-  background-color: white;
-
-  @media ${breakPoints.mobile} {
-  }
-`;
-
-export const SearchIcon = styled(BsSearchHeartFill)`
-  position: absolute;
-  color: var(--point-color-beige);
-  font-size: var(--font-size-md);
-  right: 15px;
-  top: 12px;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 export const TagBox = styled.div`
   width: 100%;
   max-width: 600px;
@@ -169,6 +143,7 @@ export const LatestCounsel = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px 0px;
+
   p {
     font-size: var(--font-size-lg);
     margin: 0px;
@@ -196,4 +171,10 @@ export const LatestCounselWriting = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px 0px;
+`;
+
+export const AskCounsel = styled.p`
+  text-decoration: underline;
+  color: var(--point-color-green);
+  cursor: pointer;
 `;

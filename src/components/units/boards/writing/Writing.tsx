@@ -3,6 +3,7 @@ import { FaCommentDots } from "react-icons/fa";
 import { breakPoints } from "../../../../commons/styles/media";
 import Tag from "../../../commons/hashtag/HashTag";
 import { getDate2 } from "../../../../commons/libraries/getDate";
+import { v4 as uuidv4 } from "uuid";
 
 const Wrapper = styled.div`
   position: relative;
@@ -17,6 +18,12 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 30px 30px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 
   @media ${breakPoints.tablet} {
     padding: 20px;
@@ -85,6 +92,11 @@ const Content = styled.div`
   -webkit-box-orient: vertical;
 `;
 
+const Keyword = styled.span<{ isKeyword: boolean }>`
+  color: ${({ isKeyword }) =>
+    isKeyword ? "var(--point-color-green)" : "inherit"};
+`;
+
 const HashtagWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -146,23 +158,49 @@ export default function Writing({
   hashtags,
   createdAt,
   answers,
+  keyword,
+  onClick,
 }: {
   name: string;
   content: string;
   hashtags?: string[];
   createdAt: string;
   answers: number;
+  keyword?: string;
+  onClick: () => void;
 }) {
+  // tags
   const tags = hashtags?.map((el) => el.tag);
+  // 시크릿코드
+  const mySecretCode = uuidv4();
+
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Counselee>
         <CounseleeImg src="img/community/default_profile.jpg" />
-        <CounseleeName>{name}</CounseleeName>
+        <CounseleeName>
+          {name
+            .replaceAll(keyword, `${mySecretCode}${keyword}${mySecretCode}`)
+            .split(mySecretCode)
+            .map((el) => (
+              <Keyword key={uuidv4()} isKeyword={el === keyword}>
+                {el}
+              </Keyword>
+            ))}
+        </CounseleeName>
       </Counselee>
 
       <ContentWrapper>
-        <Content>{content}</Content>
+        <Content>
+          {content
+            .replaceAll(keyword, `${mySecretCode}${keyword}${mySecretCode}`)
+            .split(mySecretCode)
+            .map((el) => (
+              <Keyword key={uuidv4()} isKeyword={el === keyword}>
+                {el}
+              </Keyword>
+            ))}
+        </Content>
         <HashtagWrapper>
           <Tag tags={tags!} />
         </HashtagWrapper>

@@ -1,127 +1,101 @@
-import styled from "@emotion/styled";
+import { DeleteUser, GetUserInfo } from "../../../../../commons/api/user";
+import { ChangeEvent, useEffect, useState } from "react";
+import { accessToken } from "../../../../../commons/api/token";
+import CustomModal from "../../../../commons/modals/CustomModal";
 import { Modal } from "antd";
-import {
-  Icon_Bell,
-  Icon_Exclamation,
-} from "../../../../../commons/styles/icons";
+import * as S from "../../../../commons/modals/CustomModal.styles";
+import BorderInput from "../../../../commons/input/Input";
+import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 
-export const ModalWrap = styled(Modal)`
-  .ant-modal-content {
-    width: 20rem;
-    height: 18rem;
-    background-color: #f0e9e0;
-    border-radius: 8px;
-    padding: 2rem;
-  }
+const modalBodyStyle = {
+  padding: "0px",
+  margin: "-10px",
+  background: "var(--sub-bg-color)",
+  minHeight: "300px",
+  borderRadius: "5px",
+};
 
-  .ant-modal-header {
-    display: none;
-  }
-
-  .ant-modal-body {
-    padding: 0;
-  }
-
-  .ant-modal-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .ant-modal-footer {
-    border-top: 0;
-    margin-top: 2rem;
-  }
-
-  .ant-btn {
-    background: none;
-    border: none;
-    font-size: var(--btn-font-size);
-    padding: var(--btn-padding);
-    border-radius: var(--btn-radius-lg);
-    font-family: inherit;
-    height: var(--btn-height);
-    width: var(--btn-width-md);
-  }
-
-  .ant-btn-default {
-    border: 1px solid var(--point-color-green);
-
-    span {
-      color: var(--point-color-green);
-    }
-  }
-
-  .ant-btn-primary {
-    background-color: var(--point-color-green);
-    span {
-      color: #ffffff;
-    }
-  }
-`;
-
-const ConfirmWrap = styled(ModalWrap)`
-  .ant-btn-default {
-    display: none;
-  }
-`;
-
-const TextWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Icon = styled.div`
-  margin-bottom: 20px;
-  font-size: 40px;
-  color: var(--point-color-light-green);
-`;
-
-const Text = styled.p`
-  font-size: var(--font-size-sm);
-  color: #2c2c2c;
-  margin: 0;
-`;
-
-export const WidthdrawalModal = ({ open, setOpen, setConfirm }) => {
+export const WidthdrawalModal = ({ open, setOpen, setCheck }) => {
   return (
-    <ModalWrap
-      centered
-      open={open}
-      onOk={() => {
+    <CustomModal
+      icontype="warning"
+      openModal={open}
+      text="정말 회원을 탈퇴하시겠어요?"
+      ok="다음"
+      cancel="취소"
+      onClickOk={() => {
         setOpen(false);
-        setConfirm(true);
+        setCheck(true);
       }}
-      onCancel={() => setOpen(false)}
-      width="20rem"
-    >
-      <TextWrap>
-        <Icon>
-          <Icon_Exclamation />
-        </Icon>
-        <Text>정말 회원을 탈퇴하시겠어요?</Text>
-        {/* <Text>회원 탈퇴를 하시면 지금까지 받은 상담내용이 사라집니다.</Text> */}
-      </TextWrap>
-    </ModalWrap>
+      onClickCancel={() => setOpen(false)}
+    />
   );
 };
 
-export const ConfirmModal = ({ confirm, setConfirm }) => {
+export const InputModal = ({ check, setCheck, setConfirm, setWarning }) => {
+  const [inputs, setInputs] = useState({ email: "", password: "" });
+  const { onClickMoveToPage } = useMoveToPage();
+
+  const onChangeInput =
+    (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      setInputs({ ...inputs, [name]: value });
+    };
+
+  const Withdrawal = async () => {
+    const { email, password } = inputs;
+    if (email === "" && password === "") return;
+
+    try {
+      const result = await DeleteUser(email, password);
+      if (result.response.status === 401) {
+        setCheck(false);
+        setWarning(true);
+        return;
+      }
+      setConfirm(true);
+      onClickMoveToPage("/");
+    } catch (error) {
+      setWarning(true);
+      setInputs({ email: "", password: "" });
+    }
+  };
+
   return (
-    <ConfirmWrap
-      centered
-      open={confirm}
-      onOk={() => setConfirm(false)}
-      // onCancel={() => setConfirm(false)}
+    <Modal
       width="20rem"
+      closable={false}
+      centered={true}
+      bodyStyle={modalBodyStyle}
+      footer={null}
+      open={check}
     >
-      <TextWrap>
-        <Icon>
-          <Icon_Bell />
-        </Icon>
-        <Text>탈퇴처리가 완료되었습니다.</Text>
-      </TextWrap>
-    </ConfirmWrap>
+      <S.ModalWrapper>
+        <S.ContentWrapper>
+          <p>본인인증</p>
+          <BorderInput
+            placeholder="이메일"
+            onChange={onChangeInput("email")}
+            autoComplete="off"
+          />
+          <BorderInput
+            type="password"
+            placeholder="비밀번호"
+            onChange={onChangeInput("password")}
+            autoComplete="off"
+          />
+        </S.ContentWrapper>
+        <S.BtnWrapper>
+          <S.CancelBtn onClick={() => setCheck(false)}>취소</S.CancelBtn>
+          <S.OkBtn
+            onClick={() => {
+              Withdrawal();
+            }}
+          >
+            탈퇴
+          </S.OkBtn>
+        </S.BtnWrapper>
+      </S.ModalWrapper>
+    </Modal>
   );
 };

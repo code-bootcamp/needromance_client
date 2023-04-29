@@ -11,13 +11,17 @@ import { accessToken } from "../../../../commons/api/token";
 import { GetUserInfo } from "../../../../commons/api/user";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../commons/store/atoms";
+import CustomModal from "../../../commons/modals/CustomModal";
+import Popup from "../../../commons/modals/PopupModal";
 
 const CommunityDetailContainer = () => {
   const router = useRouter();
+  const { onClickMoveToPage } = useMoveToPage();
   // const accessToken = useRecoilValue(accessTokenState);
   const [data, setData] = useState(null);
   const [checkUser, setCheckUser] = useState("");
-  const { onClickMoveToPage } = useMoveToPage();
+  const [confirm, setConfirm] = useState(false);
+  const [warning, setWarning] = useState(false);
 
   const fetch = async () => {
     const result = await GetBoard(Number(router.query.communityId));
@@ -37,76 +41,94 @@ const CommunityDetailContainer = () => {
   }, [router.query.communityId]);
 
   const handleDeleteBoard = async () => {
-    await DeleteBoard(Number(router.query.communityId));
-    await router.push("/boards");
+    try {
+      await DeleteBoard(Number(router.query.communityId));
+      setConfirm(true);
+      await setTimeout(() => {
+        setConfirm(false);
+        router.push("/boards");
+      }, 1200);
+    } catch (error) {
+      setWarning(true);
+    }
   };
 
   console.log(checkUser, data);
   return (
-    <S.Wrap>
-      <S.CardWrap>
-        {checkUser?.id === data?.user?.id && (
-          <S.BtnWrap>
-            <CustomBtn
-              type="Sm"
-              fill={false}
-              text="수정"
-              onClick={onClickMoveToPage(
-                `/boards/${router.query.communityId}/edit`
-              )}
-            />
-            <CustomBtn
-              type="Sm"
-              fill={false}
-              text="삭제"
-              onClick={() => handleDeleteBoard()}
-            />
-          </S.BtnWrap>
-        )}
-        <S.Title>
-          <span>Q.</span>
-          {data?.title}
-        </S.Title>
-        <S.InnerWrap>
-          <S.LeftWrap>
-            <S.Contents>{data?.contents}</S.Contents>
-          </S.LeftWrap>
-          <S.RigthWrap>
-            <S.StampWrap>
-              {data?.user?.profileImg ? (
-                <S.ProfileImg src={data?.user?.profileImg} />
-              ) : (
-                <S.ProfileImg src="/img/community/default_userImg.png" />
-              )}
-              <S.SealImg src="/img/community/seal.png" />
-            </S.StampWrap>
-            <S.Nickname>{data?.user?.nickname}</S.Nickname>
-          </S.RigthWrap>
-        </S.InnerWrap>
-        <S.FooterWrap>
-          <Tag tags={data?.tags} />
-          <S.CreatedAt>{getDate(data?.createdAt)}</S.CreatedAt>
-          <S.View>
-            <span>💌 조회수</span>
-            {data?.views}
-          </S.View>
-        </S.FooterWrap>
-      </S.CardWrap>
+    <>
+      <S.Wrap>
+        <S.CardWrap>
+          {checkUser?.id === data?.user?.id && (
+            <S.BtnWrap>
+              <CustomBtn
+                type="Sm"
+                fill={false}
+                text="수정"
+                onClick={onClickMoveToPage(
+                  `/boards/${router.query.communityId}/edit`
+                )}
+              />
+              <CustomBtn
+                type="Sm"
+                fill={false}
+                text="삭제"
+                onClick={() => handleDeleteBoard()}
+              />
+            </S.BtnWrap>
+          )}
+          <S.Title>
+            <span>Q.</span>
+            {data?.title}
+          </S.Title>
+          <S.InnerWrap>
+            <S.LeftWrap>
+              <S.Contents>{data?.contents}</S.Contents>
+            </S.LeftWrap>
+            <S.RigthWrap>
+              <S.StampWrap>
+                {data?.user?.profileImg ? (
+                  <S.ProfileImg src={data?.user?.profileImg} />
+                ) : (
+                  <S.ProfileImg src="/img/community/default_userImg.png" />
+                )}
+                <S.SealImg src="/img/community/seal.png" />
+              </S.StampWrap>
+              <S.Nickname>{data?.user?.nickname}</S.Nickname>
+            </S.RigthWrap>
+          </S.InnerWrap>
+          <S.FooterWrap>
+            <Tag tags={data?.tags} />
+            <S.CreatedAt>{getDate(data?.createdAt)}</S.CreatedAt>
+            <S.View>
+              <span>💌 조회수</span>
+              {data?.views}
+            </S.View>
+          </S.FooterWrap>
+        </S.CardWrap>
 
-      <CustomBtn
-        type="Md"
-        fill={true}
-        text="목록으로"
-        onClick={onClickMoveToPage("/boards")}
-      />
+        <CustomBtn
+          type="Md"
+          fill={true}
+          text="목록으로"
+          onClick={onClickMoveToPage("/boards")}
+        />
 
-      <CummunityCommentListContainer
-        checkUser={checkUser}
-        boardId={router.query.communityId}
-        writer={data?.user?.nickname}
-        onlyWriter={data?.user?.id === checkUser?.id}
+        <CummunityCommentListContainer
+          checkUser={checkUser}
+          boardId={router.query.communityId}
+          writer={data?.user?.nickname}
+          onlyWriter={data?.user?.id === checkUser?.id}
+        />
+      </S.Wrap>
+
+      <Popup
+        text="게시물이 삭제되었습니다."
+        confirm={confirm}
+        setConfirm={setConfirm}
+        warning={warning}
+        setWarning={setWarning}
       />
-    </S.Wrap>
+    </>
   );
 };
 

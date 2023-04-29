@@ -16,6 +16,11 @@ export const Icon_Bell = styled(BellOutlined)`
   font-size: inherit;
 `;
 
+export const Icon_Exclamation = styled(ExclamationCircleOutlined)`
+  color: inherit;
+  font-size: inherit;
+`;
+
 export const Icon_Close = styled(CloseOutlined)<{ fontSize: string }>`
   color: inherit;
   font-size: ${(props) => props.fontSize};
@@ -41,17 +46,7 @@ export const Icon_Delete = styled(DeleteOutlined)`
   font-size: inherit;
 `;
 
-export const Icon_Search = styled(SearchOutlined)`
-  color: var(--point-color-light-green);
-  font-size: inherit;
-`;
-
 export const Icon_Plus = styled(PlusOutlined)`
   color: inherit;
-  font-size: inherit;
-`;
-
-export const Icon_Exclamation = styled(ExclamationCircleOutlined)`
-  color: var(--point-color-light-green);
   font-size: inherit;
 `;
