@@ -61,7 +61,7 @@ export const getSearchUser = async (data: ISearchInputData) => {
     }
   }
 };
-export const fetchUserState = async (data: IBanData) => {
+export const patchUserState = async (data: IBanData) => {
   const { accessToken, id } = data;
 
   try {

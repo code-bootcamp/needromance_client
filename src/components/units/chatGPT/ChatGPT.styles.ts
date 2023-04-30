@@ -8,12 +8,14 @@ export const Position = styled.div`
   width: 100%;
   padding-bottom: 100px;
   background-color: #fff;
+  overflow-y: scroll;
   @media ${breakPoints.mobile} {
   }
 `;
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 375px;
   margin-top: 20px;
   border-radius: var(--btn-radius-sm);
@@ -22,6 +24,47 @@ export const Wrapper = styled.div`
   }
   @media ${breakPoints.tablet} {
     margin-top: 20px;
+  }
+`;
+export const LodingWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 43px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  border-radius: var(--btn-radius-sm);
+`;
+export const LoadingNotice = styled.div`
+  @keyframes loadingAnimation {
+    0% {
+      content: "잠시만 기다려 주세요.";
+    }
+    33% {
+      content: "잠시만 기다려 주세요. .";
+    }
+    66% {
+      content: "잠시만 기다려 주세요. . .";
+    }
+    100% {
+      content: "잠시만 기다려 주세요.";
+    }
+  }
+  text-align: center;
+  width: 200px;
+  padding: 20px 10px;
+  background-color: #fff;
+  border-radius: var(--btn-radius-sm);
+  ::before {
+    content: "AI가 답변을 생각하고 있어요. ";
+  }
+  ::after {
+    content: "";
+    animation: loadingAnimation 2s infinite;
   }
 `;
 export const TitleWrapper = styled.div`
@@ -116,6 +159,7 @@ export const MessageGPT = styled.div`
     font-size: var(--font-mobile-size-sm);
   }
 `;
+
 export const WrapperInput = styled.div`
   // 반응형 맞추기
   display: flex;
@@ -130,13 +174,13 @@ export const WrapperInput = styled.div`
   }
 `;
 export const TextInput = styled.input`
-  width: 75%;
+  width: 85%;
   border-radius: var(--btn-radius-lg);
   background-color: #fff;
   padding: 10px 15px;
   @media ${breakPoints.mobile} {
     padding: 5px 10px;
-    width: 80%;
+    width: 90%;
   }
 `;
 export const SendBtn = styled.button`
