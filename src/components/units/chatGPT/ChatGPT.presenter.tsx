@@ -1,34 +1,25 @@
-import { ExclamationCircleFilled } from "@ant-design/icons";
+import { ExclamationCircleFilled, SendOutlined } from "@ant-design/icons";
 import * as S from "./ChatGPT.styles";
 import ScrollToBottom from "react-scroll-to-bottom";
+import { IChatGPTProps } from "./ChatGPT.types";
 
-export default function ChatGPTUI() {
-  const messageList = [
-    {
-      author: "user",
-      message:
-        "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요",
-    },
-    {
-      author: "gpt",
-      message:
-        "무엇을 도와드릴까요?무엇을 도와드릴까요?무엇을 도와드릴까요?무엇을 도와드릴까요?무엇을 도와드릴까요?무엇을 도와드릴까요?무엇을 도와드릴까요?",
-    },
-    { author: "user", message: "안녕하세요" },
-    { author: "gpt", message: "무엇을 도와드릴까요?" },
-    { author: "user", message: "안녕하세요" },
-    { author: "gpt", message: "무엇을 도와드릴까요?" },
-    { author: "user", message: "안녕하세요" },
-    { author: "gpt", message: "무엇을 도와드릴까요?" },
-    { author: "user", message: "안녕하세요" },
-    { author: "gpt", message: "무엇을 도와드릴까요?" },
-    { author: "user", message: "안녕하세요" },
-    { author: "gpt", message: "무엇을 도와드릴까요?" },
-  ];
+export default function ChatGPTUI({
+  userText,
+  setUserText,
+  handleChangeUserText,
+  submitUserText,
+  messageList,
+  loading,
+}: IChatGPTProps) {
   return (
     <>
       <S.Position>
         <S.Wrapper>
+          {loading && (
+            <S.LodingWrapper>
+              <S.LoadingNotice></S.LoadingNotice>
+            </S.LodingWrapper>
+          )}
           <S.TitleWrapper>
             <S.Title>당신의 고민을 들려주세요</S.Title>
             <S.Notice>
@@ -44,16 +35,16 @@ export default function ChatGPTUI() {
           <S.ChatBody>
             <ScrollToBottom>
               <S.ChatWrapper>
-                {messageList.map((data: any, index) => {
+                {messageList?.map((text: string, index: number) => {
                   return (
                     <>
-                      {data.author === "user" ? (
+                      {index % 2 === 0 ? (
                         <S.WrapperMessageUser key={index}>
-                          <S.MessageUser>{data.message}</S.MessageUser>
+                          <S.MessageUser>{text}</S.MessageUser>
                         </S.WrapperMessageUser>
                       ) : (
                         <S.WrapperMessageGPT key={index}>
-                          <S.MessageGPT>{data.message}</S.MessageGPT>
+                          <S.MessageGPT>{text}</S.MessageGPT>
                         </S.WrapperMessageGPT>
                       )}
                     </>
@@ -64,16 +55,20 @@ export default function ChatGPTUI() {
           </S.ChatBody>
           <S.WrapperInput>
             <S.TextInput
+              value={userText}
               type="text"
               placeholder="고민을 말해주세요!"
-              onChange={(e) => {
-                e.currentTarget.value;
-              }}
-              onKeyPress={(e) => {
-                // e.key === "Enter"
+              onChange={handleChangeUserText}
+              onKeyPress={(e: any) => {
+                e.key === "Enter";
               }}
             />
-            <S.SendBtn>보내기</S.SendBtn>
+            <S.SendBtn
+              onClick={submitUserText}
+              disabled={loading ? true : false}
+            >
+              <SendOutlined />
+            </S.SendBtn>
           </S.WrapperInput>
         </S.Wrapper>
       </S.Position>
