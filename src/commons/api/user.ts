@@ -102,21 +102,17 @@ export const DeleteUser = async (
   password: string
 ) => {
   try {
-    const response = await axios.delete(
-      `${URL}/user/delete`,
-      {
+    const response = await axios.delete(`${URL}/user/delete`, {
+      data: {
         email,
         password,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    console.log(response);
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     if (response.status === 200) {
-      return response.data;
+      return response;
     }
   } catch (error) {
     console.log(error);

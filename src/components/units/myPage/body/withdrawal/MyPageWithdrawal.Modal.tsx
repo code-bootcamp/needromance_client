@@ -8,6 +8,7 @@ import BorderInput from "../../../../commons/input/Input";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../../commons/store/atoms";
+import { useRouter } from "next/router";
 
 const modalBodyStyle = {
   padding: "0px",
@@ -35,8 +36,8 @@ export const WidthdrawalModal = ({ open, setOpen, setCheck }) => {
 };
 
 export const InputModal = ({ check, setCheck, setConfirm, setWarning }) => {
+  const router = useRouter();
   const [inputs, setInputs] = useState({ email: "", password: "" });
-  const { onClickMoveToPage } = useMoveToPage();
   const accessToken = useRecoilValue(accessTokenState);
 
   const onChangeInput =
@@ -50,14 +51,13 @@ export const InputModal = ({ check, setCheck, setConfirm, setWarning }) => {
     if (email === "" && password === "") return;
 
     try {
-      const result = await DeleteUser(accessToken, email, password);
-      if (result.response.status === 401) {
-        setCheck(false);
-        setWarning(true);
-        return;
-      }
+      await DeleteUser(accessToken, email, password);
+      setCheck(false);
       setConfirm(true);
-      onClickMoveToPage("/");
+      setTimeout(() => {
+        router.push("/");
+        localStorage.clear();
+      }, 1500);
     } catch (error) {
       setWarning(true);
       setInputs({ email: "", password: "" });
