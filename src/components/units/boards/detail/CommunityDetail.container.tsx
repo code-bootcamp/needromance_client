@@ -7,32 +7,23 @@ import * as S from "./CommunityDetail.style";
 import { getDate } from "../../../../commons/libraries/getDate";
 import { DeleteBoard, GetBoard } from "../../../../commons/api/boards";
 import { useEffect, useState } from "react";
-import { accessToken } from "../../../../commons/api/token";
-import { GetUserInfo } from "../../../../commons/api/user";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../commons/store/atoms";
-import CustomModal from "../../../commons/modals/CustomModal";
 import Popup from "../../../commons/modals/PopupModal";
+import { userProfileState } from "../../../../commons/store/atoms";
 
 const CommunityDetailContainer = () => {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
-  // const accessToken = useRecoilValue(accessTokenState);
+  // data
   const [data, setData] = useState(null);
   const [checkUser, setCheckUser] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [warning, setWarning] = useState(false);
-
-  const fetch = async () => {
-    const result = await GetBoard(Number(router.query.communityId));
-    setData(result);
-  };
-
-  // 로그인한 유저 정보
-  const getUserInformation = async () => {
-    const result = await GetUserInfo(accessToken); //토큰 추후에 리코일로 교체하기
-    setCheckUser(result);
-  };
+  // 유저 정보
+  const userInfo = useRecoilValue(userProfileState);
+  // 토큰
+  const accessToken = useRecoilValue(accessTokenState);
 
   // 화면이 맨 처음 렌더링될 떄 데이터 가져옴
   useEffect(() => {
@@ -40,9 +31,18 @@ const CommunityDetailContainer = () => {
     getUserInformation();
   }, [router.query.communityId]);
 
+  const fetch = async () => {
+    const result = await GetBoard(Number(router.query.communityId));
+    setData(result);
+  };
+
+  const getUserInformation = () => {
+    setCheckUser(userInfo);
+  };
+
   const handleDeleteBoard = async () => {
     try {
-      await DeleteBoard(Number(router.query.communityId));
+      await DeleteBoard(accessToken, Number(router.query.communityId));
       setConfirm(true);
       setTimeout(() => {
         setConfirm(false);
@@ -53,7 +53,9 @@ const CommunityDetailContainer = () => {
     }
   };
 
-  console.log(checkUser, data);
+  console.log("***토큰:", accessToken);
+  console.log("***유저:", checkUser);
+
   return (
     <>
       <S.Wrap>

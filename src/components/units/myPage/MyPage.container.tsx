@@ -2,23 +2,29 @@ import MyPageNav from "./nav/MyPageNav";
 import * as S from "./MyPage.style";
 import { useEffect, useState } from "react";
 import MyPageContent from "./body/MyPage.body";
-import { accessToken } from "../../../commons/api/token";
 import { GetUserInfo } from "../../../commons/api/user";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../../commons/store/atoms";
 
 const MyPageContainer = () => {
-  const [IsActive, setIsActive] = useState<string>("myProfile");
+  // data
   const [myData, setMyData] = useState<object>({});
-
-  // 로그인한 유저 정보
-  const getUserInformation = async () => {
-    const result = await GetUserInfo(accessToken); //토큰 추후에 리코일로 교체하기
-    setMyData(result);
-  };
+  // PageNav active
+  const [IsActive, setIsActive] = useState<string>("myProfile");
+  // token
+  const accessToken = useRecoilValue(accessTokenState);
 
   // 화면이 맨 처음 렌더링될 떄 데이터 가져옴
   useEffect(() => {
     getUserInformation();
   }, [setMyData]);
+
+  // 로그인한 유저 정보
+  const getUserInformation = async () => {
+    const result = await GetUserInfo(accessToken);
+    setMyData(result);
+  };
+  console.log(accessToken, "-----");
 
   return (
     <S.MyPageWrap>

@@ -1,10 +1,13 @@
 import axios from "axios";
-import { accessToken } from "./token";
 import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
 
-export const GetAnswers = async (boardId: number, status: number) => {
+export const GetAnswers = async (
+  accessToken: string,
+  boardId: number,
+  status: number
+) => {
   try {
     const response = await axios.get(
       `${URL}/answers?board-id=${boardId}&status=${status}`,
@@ -18,7 +21,11 @@ export const GetAnswers = async (boardId: number, status: number) => {
   }
 };
 
-export const PostAnswer = async (boardId: number, contents: string) => {
+export const PostAnswer = async (
+  accessToken: string,
+  boardId: number,
+  contents: string
+) => {
   console.log(boardId, contents);
   try {
     const response = await axios.post(
@@ -40,7 +47,11 @@ export const PostAnswer = async (boardId: number, contents: string) => {
   }
 };
 
-export const UpdateAnswer = async (id: number, contents: string) => {
+export const UpdateAnswer = async (
+  accessToken: string,
+  id: number,
+  contents: string
+) => {
   try {
     const response = await axios.patch(
       `${URL}/answers/${id}`,
@@ -53,26 +64,30 @@ export const UpdateAnswer = async (id: number, contents: string) => {
         },
       }
     );
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
-export const DeleteAnswer = async (id: number) => {
+export const DeleteAnswer = async (accessToken: string, id: number) => {
   try {
     const response = await axios.delete(`${URL}/answers/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
-export const LikeAnswer = async (id: number) => {
+export const LikeAnswer = async (accessToken: string, id: number) => {
   try {
     const response = await axios.patch(`${URL}/answers/${id}/likes`, {
       headers: {
@@ -87,6 +102,7 @@ export const LikeAnswer = async (id: number) => {
 };
 
 export const PickAnswer = async (
+  accessToken: string,
   id: number,
   boardId: number,
   status: boolean

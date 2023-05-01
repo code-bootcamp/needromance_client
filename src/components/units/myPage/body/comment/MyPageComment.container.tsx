@@ -10,24 +10,30 @@ import * as S from "./MyPageComment.style";
 import { getDate } from "../../../../../commons/libraries/getDate";
 import { DeleteAnswer } from "../../../../../commons/api/answers";
 import Popup from "../../../../commons/modals/PopupModal";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../../../../commons/store/atoms";
 
 const MyPageComment = ({ myData }: any) => {
   const [comments, setComments] = useState<Array>([]);
   const [confirm, setConfirm] = useState(false);
   const [warning, setWarning] = useState(false);
+  // token
+  const accessToken = useRecoilValue(accessTokenState);
 
   useEffect(() => {
     fetch();
   }, []);
 
   const fetch = async () => {
-    const result = await GetUserAnswer();
-    setComments(result[0]?.answers);
+    const result = await GetUserAnswer(accessToken);
+    if (result !== undefined) {
+      setComments(result[0]?.answers);
+    }
   };
 
   const handleDeleteAnswer = async (id: number) => {
     try {
-      await DeleteAnswer(Number(id));
+      await DeleteAnswer(accessToken, Number(id));
       await fetch();
       setConfirm(true);
       setTimeout(() => {
@@ -61,7 +67,6 @@ const MyPageComment = ({ myData }: any) => {
                 {getDate(data.createdAt)}
               </S.TD>
               <S.TD>{data.status ? <Icon_HeartFilled /> : <Icon_Heart />}</S.TD>
-              {/* <S.TD>{data.likeCount}</S.TD> */}
               <S.TD>
                 <S.ControlsWrap>
                   <S.IconBox>
