@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import AdminUI from "./Admin.presenter";
 import {
   deleteUserBoard,
-  fetchUserState,
+  patchUserState,
   getAllBoards,
   getAllUsers,
   getSearchBoard,
@@ -136,7 +136,7 @@ export default function Admin() {
   const handleUserState = async () => {
     console.log(getBanId);
 
-    await fetchUserState({ accessToken, id: getBanId }).then(() => {
+    await patchUserState({ accessToken, id: getBanId }).then(() => {
       getAllUsers(accessToken)
         .then((res) => {
           setAllUsers([...res]);
