@@ -96,6 +96,7 @@ export const IconBox = styled.div`
 `;
 
 export const Keyword = styled.span<{ isKeyword: boolean }>`
-  color: ${({ isKeyword }) =>
+  color: ${({ isKeyword }) => (isKeyword ? "#fff" : "inherit")};
+  background-color: ${({ isKeyword }) =>
     isKeyword ? "var(--point-color-green)" : "inherit"};
 `;

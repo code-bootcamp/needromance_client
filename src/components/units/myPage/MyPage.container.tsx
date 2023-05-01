@@ -24,7 +24,6 @@ const MyPageContainer = () => {
     const result = await GetUserInfo(accessToken);
     setMyData(result);
   };
-  console.log(accessToken, "-----");
 
   return (
     <S.MyPageWrap>
