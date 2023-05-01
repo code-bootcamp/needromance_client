@@ -1,5 +1,4 @@
 import axios from "axios";
-import { TOKEN } from "./token";
 
 const URL = "https://need-romance.site";
 
@@ -58,11 +57,15 @@ export const GetUserBoard = async (accessToken: string) => {
 
 export const SearchUserBoard = async (accessToken: string, keyword: string) => {
   try {
-    const response = await axios.get(`${URL}/user/answer?keyword=${keyword}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await axios.get(
+      `${URL}/user/boards/search?keyword=${keyword}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    console.log(response);
     if (response.status === 200) {
       return response.data;
     }

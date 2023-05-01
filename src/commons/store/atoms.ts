@@ -2,12 +2,18 @@ import { atom } from "recoil";
 
 export const userProfileState = atom({
   key: "userProfileState",
-  default: [],
+  default:
+    typeof window !== "undefined"
+      ? localStorage.getItem("userProfile") || ""
+      : "",
 });
 
 export const accessTokenState = atom({
   key: "accessTokenState",
-  default: "",
+  default:
+    typeof window !== "undefined"
+      ? localStorage.getItem("accessToken") || ""
+      : "",
 });
 
 export const visitedPageState = atom({

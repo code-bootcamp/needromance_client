@@ -113,7 +113,7 @@ export const logout = async (accessToken: string) => {
     console.log("d", accessToken);
 
     const response = await axios({
-      method: "post",
+      method: "get",
       url: URL + "/auth/logout",
       headers: {
         accessToken,

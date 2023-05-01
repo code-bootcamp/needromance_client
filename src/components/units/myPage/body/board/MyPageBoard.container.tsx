@@ -21,10 +21,10 @@ const MyPageBoard = ({ myData }: any) => {
   const [confirm, setConfirm] = useState(false);
   const [warning, setWarning] = useState(false);
   // search
+  const [isSearch, setIsSearch] = useState(false);
   const [keyword, setKeyword] = useState("");
   // 토큰
   const accessToken = useRecoilValue(accessTokenState);
-  console.log(accessToken, "-------");
 
   useEffect(() => {
     fetch();
@@ -51,22 +51,14 @@ const MyPageBoard = ({ myData }: any) => {
   };
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.currentTarget.value);
-
-    setTimeout(() => {
-      fetchSearch();
-    }, 1500);
+    setKeyword(event.target.value);
   };
 
   const fetchSearch = async () => {
-    if (keyword === "" || keyword === " ") {
-      return;
-    }
     const result = await SearchUserBoard(accessToken, keyword);
-    console.log(result);
     if (result !== undefined) {
       setSearchs(result[0]?.boards);
-      // setBoards(result[0]?.boards);
+      setIsSearch(true);
     }
   };
 
@@ -81,10 +73,11 @@ const MyPageBoard = ({ myData }: any) => {
 
   const onClickClear = () => {
     setKeyword("");
+    setIsSearch(false);
+    fetch();
   };
 
   const mySecretCode = uuidv4();
-  console.log(searchs);
 
   return (
     <>
@@ -108,110 +101,94 @@ const MyPageBoard = ({ myData }: any) => {
             <S.TH>관리</S.TH>
           </tr>
         </S.Thead>
-        <S.Tbody>
-          {/* {searchs?.map((data: any, idx: string) => (
-            <S.TR key={data.id}>
-              <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
-              <S.TD
-                style={{ cursor: "pointer" }}
-                onClick={onClickMoveToPage(`/boards/${data.id}`)}
-              >
-                <p>
-                  제목 :
-                  {(data?.title)
-                    .replaceAll(
-                      keyword,
-                      `${mySecretCode}${keyword}${mySecretCode}`
-                    )
-                    .split(mySecretCode)
-                    .map((el: any) => (
-                      <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
-                        {el}
-                      </S.Keyword>
-                    ))}
-                </p>
-                <br />
-                <p>
-                  {(data?.contents)
-                    .replaceAll(
-                      keyword,
-                      `${mySecretCode}${keyword}${mySecretCode}`
-                    )
-                    .split(mySecretCode)
-                    .map((el: any) => (
-                      <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
-                        {el}
-                      </S.Keyword>
-                    ))}
-                </p>
-                <br />
-                <p>{getDate(data?.createdAt)}</p>
-              </S.TD>
-              <S.TD>{data?.answers?.length}</S.TD>
-              <S.TD>
-                <S.ControlsWrap>
-                  <S.IconBox onClick={onClickMoveToPage(`/boards/${data.id}`)}>
-                    <Icon_Edit />
-                  </S.IconBox>
-                  <S.IconBox>
-                    <Icon_Delete onClick={() => handleDeleteBoard(data.id)} />
-                  </S.IconBox>
-                </S.ControlsWrap>
-              </S.TD>
-            </S.TR>
-          ))} */}
-          {boards.map((data: any, idx: string) => (
-            <S.TR key={data.id}>
-              <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
-              <S.TD
-                style={{ cursor: "pointer" }}
-                onClick={onClickMoveToPage(`/boards/${data.id}`)}
-              >
-                <p>
-                  제목 :
-                  {(data?.title)
-                    .replaceAll(
-                      keyword,
-                      `${mySecretCode}${keyword}${mySecretCode}`
-                    )
-                    .split(mySecretCode)
-                    .map((el: any) => (
-                      <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
-                        {el}
-                      </S.Keyword>
-                    ))}
-                </p>
-                <br />
-                <p>
-                  {(data?.contents)
-                    .replaceAll(
-                      keyword,
-                      `${mySecretCode}${keyword}${mySecretCode}`
-                    )
-                    .split(mySecretCode)
-                    .map((el: any) => (
-                      <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
-                        {el}
-                      </S.Keyword>
-                    ))}
-                </p>
-                <br />
-                <p>{getDate(data?.createdAt)}</p>
-              </S.TD>
-              <S.TD>{data?.answers?.length}</S.TD>
-              <S.TD>
-                <S.ControlsWrap>
-                  <S.IconBox onClick={onClickMoveToPage(`/boards/${data.id}`)}>
-                    <Icon_Edit />
-                  </S.IconBox>
-                  <S.IconBox>
-                    <Icon_Delete onClick={() => handleDeleteBoard(data.id)} />
-                  </S.IconBox>
-                </S.ControlsWrap>
-              </S.TD>
-            </S.TR>
-          ))}
-        </S.Tbody>
+        {isSearch ? (
+          <S.Tbody>
+            {searchs?.map((data: any, idx: string) => (
+              <S.TR key={data.id}>
+                <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
+                <S.TD
+                  style={{ cursor: "pointer" }}
+                  onClick={onClickMoveToPage(`/boards/${data.id}`)}
+                >
+                  <p>
+                    제목 :
+                    {(data?.title)
+                      .replaceAll(
+                        keyword,
+                        `${mySecretCode}${keyword}${mySecretCode}`
+                      )
+                      .split(mySecretCode)
+                      .map((el: any) => (
+                        <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
+                          {el}
+                        </S.Keyword>
+                      ))}
+                  </p>
+                  <br />
+                  <p>
+                    {(data?.contents)
+                      .replaceAll(
+                        keyword,
+                        `${mySecretCode}${keyword}${mySecretCode}`
+                      )
+                      .split(mySecretCode)
+                      .map((el: any) => (
+                        <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
+                          {el}
+                        </S.Keyword>
+                      ))}
+                  </p>
+                  <br />
+                  <p>{getDate(data?.createdAt)}</p>
+                </S.TD>
+                <S.TD>{data?.answers?.length}</S.TD>
+                <S.TD>
+                  <S.ControlsWrap>
+                    <S.IconBox
+                      onClick={onClickMoveToPage(`/boards/${data.id}`)}
+                    >
+                      <Icon_Edit />
+                    </S.IconBox>
+                    <S.IconBox>
+                      <Icon_Delete onClick={() => handleDeleteBoard(data.id)} />
+                    </S.IconBox>
+                  </S.ControlsWrap>
+                </S.TD>
+              </S.TR>
+            ))}
+          </S.Tbody>
+        ) : (
+          <S.Tbody>
+            {boards.map((data: any, idx: string) => (
+              <S.TR key={data.id}>
+                <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
+                <S.TD
+                  style={{ cursor: "pointer" }}
+                  onClick={onClickMoveToPage(`/boards/${data.id}`)}
+                >
+                  <p>제목 :{data?.title}</p>
+                  <br />
+                  <p>{data?.contents}</p>
+                  <br />
+                  <p>{getDate(data?.createdAt)}</p>
+                </S.TD>
+                <S.TD>{data?.answers?.length}</S.TD>
+                <S.TD>
+                  <S.ControlsWrap>
+                    <S.IconBox
+                      onClick={onClickMoveToPage(`/boards/${data.id}`)}
+                    >
+                      <Icon_Edit />
+                    </S.IconBox>
+                    <S.IconBox>
+                      <Icon_Delete onClick={() => handleDeleteBoard(data.id)} />
+                    </S.IconBox>
+                  </S.ControlsWrap>
+                </S.TD>
+              </S.TR>
+            ))}
+          </S.Tbody>
+        )}
       </S.Table>
 
       <Popup

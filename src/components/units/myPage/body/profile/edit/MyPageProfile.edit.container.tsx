@@ -5,8 +5,11 @@ import CustomBtn from "../../../../../commons/buttons/CustomBtn";
 import { IMyPageProps } from "../../../MyPage.type";
 import * as S from "./../MyPageProfile.style";
 import Popup from "../../../../../commons/modals/PopupModal";
-import { useRecoilValue } from "recoil";
-import { accessTokenState } from "../../../../../../commons/store/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  accessTokenState,
+  userProfileState,
+} from "../../../../../../commons/store/atoms";
 
 const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
   const [data, setData] = useState({
@@ -16,6 +19,7 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
   const [confirm, setConfirm] = useState(false);
   const [warning, setWarning] = useState(false);
   const accessToken = useRecoilValue(accessTokenState);
+  const [, setUserProfile] = useRecoilState(userProfileState);
 
   const onChangeNickname = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -27,6 +31,7 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
 
     try {
       const result = await UpdateUser(accessToken, nickname, userImg);
+      setUserProfile(result); // 전역 스테이트 변경
       setMyData(result);
       setConfirm(true);
       setTimeout(() => {

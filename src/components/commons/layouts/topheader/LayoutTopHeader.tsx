@@ -26,6 +26,10 @@ export default function LayoutTopHeader() {
   const getUserInformation = async () => {
     const data = await getUserInfo(accessToken);
     console.log(data);
+    // 페이지 새로고침시 state가 초기화되는 현상을 막기위헤,  로컬 스토리지에 담아준다!
+    if (typeof window !== "undefined") {
+      localStorage.setItem("userProfile", data);
+    }
     setUserProfile(data);
 
     // 어드민 계정일 경우 어드민 페이지로 라우팅
@@ -39,8 +43,10 @@ export default function LayoutTopHeader() {
     setUserProfile([]);
   };
 
-  const logOut = () => {
-    logout(accessToken);
+  const logOut = async () => {
+    await logout(accessToken);
+    localStorage.clear();
+    router.push("/");
   };
 
   console.log("headerUser", userProfile);

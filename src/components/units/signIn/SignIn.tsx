@@ -10,7 +10,6 @@ import { accessTokenState } from "../../../commons/store/atoms";
 import { useRouter } from "next/router";
 
 export default function SignIn() {
-  const router = useRouter();
   const { data: session } = useSession();
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -27,8 +26,12 @@ export default function SignIn() {
     event?.preventDefault();
     await login(inputs.email, inputs.password).then((data) => {
       console.log(data);
+      // 페이지 새로고침시 state가 초기화되는 현상을 막기위헤,  로컬 스토리지에 담아준다!
+      if (typeof window !== "undefined") {
+        localStorage.setItem("accessToken", data);
+      }
+      // Recoil state 업데이트
       setAccessToken(data);
-      console.log(data);
     });
 
     // const response = await login(inputs.email, inputs.password);
