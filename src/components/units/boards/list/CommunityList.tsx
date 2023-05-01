@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import * as S from "./CommunityList.styles";
 import { v4 as uuidv4 } from "uuid";
 
@@ -18,10 +18,12 @@ import CustomSearchInput from "../../../commons/search/CustomSearchInput";
 
 export default function CommunityList() {
   const { onClickMoveToPage } = useMoveToPage();
-  const [ranking, setRanking] = useState<Array>([]);
-  const [answers, setAnswers] = useState<Array>([]);
-  const [boards, setBoards] = useState<Array>([]);
-  const [searchs, setSearchs] = useState<Array>([]);
+  // data
+  const [ranking, setRanking] = useState([]);
+  const [answers, setAnswers] = useState([]);
+  const [boards, setBoards] = useState([]);
+  const [searchs, setSearchs] = useState([]);
+  // 검색
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
   const [keywordStore, setKeywordStore] = useState<string>("");
@@ -41,15 +43,19 @@ export default function CommunityList() {
   };
 
   const fetchSearch = async () => {
-    if (keyword === "" || keyword === " ") return;
+    if (keyword === "" || keyword === " ") {
+      return;
+    }
     const result = await SearchBoard(keyword);
     setSearchs(result);
     setKeywordStore(keyword);
     setIsSearch(true);
   };
 
-  const enter = (event: any) => {
-    if (keyword === "" || keyword === " ") return;
+  const enter = (event: KeyboardEvent) => {
+    if (keyword === "" || keyword === " ") {
+      return;
+    }
     if (event.charCode == 13) {
       fetchSearch();
     }

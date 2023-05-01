@@ -1,7 +1,6 @@
 import * as S from "./MyPageNav.style";
 import { IMyPageProps } from "../MyPage.type";
 import {
-  ConfirmModal,
   InputModal,
   WidthdrawalModal,
 } from "../body/withdrawal/MyPageWithdrawal.Modal";
@@ -32,13 +31,13 @@ const MyPageNav = ({ myData, IsActive, setIsActive }: IMyPageProps) => {
     <>
       <S.NavWrap openNav={openNav}>
         <S.MenuWrap openNav={openNav}>
-          <S.ProfileWrap key={myData.id}>
+          <S.ProfileWrap key={myData?.id}>
             {myData?.userImg ? (
               <S.ProfileImg src={myData?.userImg} />
             ) : (
               <S.ProfileImg src="/img/community/default_userImg.png" />
             )}
-            <S.Nickname>{myData.nickname}</S.Nickname>
+            <S.Nickname>{myData?.nickname}</S.Nickname>
           </S.ProfileWrap>
           <S.Line />
           <S.ListsWrap>

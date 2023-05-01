@@ -3,8 +3,6 @@ import { IMyPageProps } from "../../../MyPage.type";
 import CustomBtn from "../../../../../commons/buttons/CustomBtn";
 
 const MyPageProfileDetail = ({ myData, setIsEdit }: IMyPageProps) => {
-  console.log(myData);
-
   return (
     <S.ProfileWrap>
       <S.Row>

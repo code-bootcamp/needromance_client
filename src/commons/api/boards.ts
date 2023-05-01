@@ -1,6 +1,4 @@
 import axios from "axios";
-import { accessToken } from "./token";
-import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
 // axios.defaults.withCredentials = true;
@@ -23,7 +21,7 @@ export const GetBoard = async (id: number) => {
   }
 };
 
-export const DeleteBoard = async (id: number) => {
+export const DeleteBoard = async (accessToken: string, id: number) => {
   try {
     const response = await axios.delete(`${URL}/boards/${id}`, {
       headers: {

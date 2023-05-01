@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import * as S from "./MyPageBoard.style";
 import { Icon_Delete, Icon_Edit } from "../../../../../commons/styles/icons";
 import { MyPageTitle } from "../MyPage.body.style";
@@ -9,29 +9,37 @@ import { GetUserBoard, SearchUserBoard } from "../../../../../commons/api/user";
 import { DeleteBoard } from "../../../../../commons/api/boards";
 import Popup from "../../../../commons/modals/PopupModal";
 import CustomSearchInput from "../../../../commons/search/CustomSearchInput";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../../../../commons/store/atoms";
 
 const MyPageBoard = ({ myData }: any) => {
   const { onClickMoveToPage } = useMoveToPage();
-  const [boards, setBoards] = useState<Array>([]);
+  // data 저장
+  const [boards, setBoards] = useState([]);
+  const [searchs, setSearchs] = useState([]);
+  // Popup 모달
   const [confirm, setConfirm] = useState(false);
   const [warning, setWarning] = useState(false);
-  const [searchs, setSearchs] = useState<Array>([]);
-  const [isSearch, setIsSearch] = useState<boolean>(false);
-  const [keyword, setKeyword] = useState<string>("");
-  // const [keywordStore, setKeywordStore] = useState<string>("");
+  // search
+  const [keyword, setKeyword] = useState("");
+  // 토큰
+  const accessToken = useRecoilValue(accessTokenState);
+  console.log(accessToken, "-------");
 
   useEffect(() => {
     fetch();
   }, []);
 
   const fetch = async () => {
-    const result = await GetUserBoard();
-    setBoards(result[0]?.boards);
+    const result = await GetUserBoard(accessToken);
+    if (result !== undefined) {
+      setBoards(result[0]?.boards);
+    }
   };
 
   const handleDeleteBoard = async (boardId: number) => {
     try {
-      await DeleteBoard(Number(boardId));
+      await DeleteBoard(accessToken, Number(boardId));
       await fetch();
       setConfirm(true);
       setTimeout(() => {
@@ -42,16 +50,30 @@ const MyPageBoard = ({ myData }: any) => {
     }
   };
 
-  const fetchSearch = async () => {
-    if (keyword === "" || keyword === " ") return;
-    const result = await SearchUserBoard(keyword);
-    setSearchs(result);
-    setIsSearch(true);
-    // setKeywordStore(keyword);
+  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.currentTarget.value);
+
+    setTimeout(() => {
+      fetchSearch();
+    }, 1500);
   };
 
-  const enter = (event: any) => {
-    if (keyword === "" || keyword === " ") return;
+  const fetchSearch = async () => {
+    if (keyword === "" || keyword === " ") {
+      return;
+    }
+    const result = await SearchUserBoard(accessToken, keyword);
+    console.log(result);
+    if (result !== undefined) {
+      setSearchs(result[0]?.boards);
+      // setBoards(result[0]?.boards);
+    }
+  };
+
+  const enter = (event: KeyboardEvent) => {
+    if (keyword === "" || keyword === " ") {
+      return;
+    }
     if (event.charCode == 13) {
       fetchSearch();
     }
@@ -62,18 +84,21 @@ const MyPageBoard = ({ myData }: any) => {
   };
 
   const mySecretCode = uuidv4();
-  console.log(boards);
+  console.log(searchs);
+
   return (
     <>
       <MyPageTitle>"{myData.nickname}"님의 이야기들</MyPageTitle>
+
       <CustomSearchInput
         placeholder="제목 / 내용을 검색하세요."
         value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
+        onChange={(e) => onChangeSearch(e)}
         onClick={() => fetchSearch()}
         onKeyPress={enter}
         onClickClear={onClickClear}
       />
+
       <S.Table>
         <S.Thead>
           <tr>
@@ -84,6 +109,57 @@ const MyPageBoard = ({ myData }: any) => {
           </tr>
         </S.Thead>
         <S.Tbody>
+          {/* {searchs?.map((data: any, idx: string) => (
+            <S.TR key={data.id}>
+              <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
+              <S.TD
+                style={{ cursor: "pointer" }}
+                onClick={onClickMoveToPage(`/boards/${data.id}`)}
+              >
+                <p>
+                  제목 :
+                  {(data?.title)
+                    .replaceAll(
+                      keyword,
+                      `${mySecretCode}${keyword}${mySecretCode}`
+                    )
+                    .split(mySecretCode)
+                    .map((el: any) => (
+                      <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
+                        {el}
+                      </S.Keyword>
+                    ))}
+                </p>
+                <br />
+                <p>
+                  {(data?.contents)
+                    .replaceAll(
+                      keyword,
+                      `${mySecretCode}${keyword}${mySecretCode}`
+                    )
+                    .split(mySecretCode)
+                    .map((el: any) => (
+                      <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
+                        {el}
+                      </S.Keyword>
+                    ))}
+                </p>
+                <br />
+                <p>{getDate(data?.createdAt)}</p>
+              </S.TD>
+              <S.TD>{data?.answers?.length}</S.TD>
+              <S.TD>
+                <S.ControlsWrap>
+                  <S.IconBox onClick={onClickMoveToPage(`/boards/${data.id}`)}>
+                    <Icon_Edit />
+                  </S.IconBox>
+                  <S.IconBox>
+                    <Icon_Delete onClick={() => handleDeleteBoard(data.id)} />
+                  </S.IconBox>
+                </S.ControlsWrap>
+              </S.TD>
+            </S.TR>
+          ))} */}
           {boards.map((data: any, idx: string) => (
             <S.TR key={data.id}>
               <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
@@ -92,7 +168,7 @@ const MyPageBoard = ({ myData }: any) => {
                 onClick={onClickMoveToPage(`/boards/${data.id}`)}
               >
                 <p>
-                  제목 :{" "}
+                  제목 :
                   {(data?.title)
                     .replaceAll(
                       keyword,

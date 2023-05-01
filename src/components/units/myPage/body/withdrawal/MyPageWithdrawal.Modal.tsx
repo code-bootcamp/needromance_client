@@ -6,6 +6,8 @@ import { Modal } from "antd";
 import * as S from "../../../../commons/modals/CustomModal.styles";
 import BorderInput from "../../../../commons/input/Input";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
+import { useRecoilValue } from "recoil";
+import { accessTokenState } from "../../../../../commons/store/atoms";
 
 const modalBodyStyle = {
   padding: "0px",
@@ -35,6 +37,7 @@ export const WidthdrawalModal = ({ open, setOpen, setCheck }) => {
 export const InputModal = ({ check, setCheck, setConfirm, setWarning }) => {
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const { onClickMoveToPage } = useMoveToPage();
+  const accessToken = useRecoilValue(accessTokenState);
 
   const onChangeInput =
     (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +50,7 @@ export const InputModal = ({ check, setCheck, setConfirm, setWarning }) => {
     if (email === "" && password === "") return;
 
     try {
-      const result = await DeleteUser(email, password);
+      const result = await DeleteUser(accessToken, email, password);
       if (result.response.status === 401) {
         setCheck(false);
         setWarning(true);
