@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import AdminUI from "./Admin.presenter";
 import {
   deleteUserBoard,
@@ -95,7 +95,7 @@ export default function Admin() {
     });
   };
   // 유저 검색 엔터로 요청할 때
-  const submitKeyPressUserSearch = (e: KeyboardEvent) => {
+  const submitKeyPressUserSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     if (keyword.board === "") {
       return;
     }
@@ -123,7 +123,7 @@ export default function Admin() {
     // });
   };
   // 게시글 검색 엔터로 요청할 때
-  const submitKeyPressBoardSearch = (e: KeyboardEvent) => {
+  const submitKeyPressBoardSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     if (keyword.board === "") {
       return;
     }

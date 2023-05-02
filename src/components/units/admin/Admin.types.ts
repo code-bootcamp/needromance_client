@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, KeyboardEvent, SetStateAction } from "react";
 
 export interface IAdminProps {
   pageTabs: number;
@@ -26,8 +26,8 @@ export interface IAdminProps {
   getBanId: string;
   userProfile: any;
   handleClearInput: () => void;
-  submitKeyPressBoardSearch: (e: KeyboardEvent) => void;
-  submitKeyPressUserSearch: (e: KeyboardEvent) => void;
+  submitKeyPressBoardSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
+  submitKeyPressUserSearch: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 export interface AllUsers {
   createdAt: string;

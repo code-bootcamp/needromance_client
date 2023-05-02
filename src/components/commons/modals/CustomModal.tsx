@@ -14,7 +14,7 @@ const modalBodyStyle = {
 };
 
 interface IModalProps {
-  icontype: string;
+  icontype?: string;
   openModal: boolean;
   text: string;
   ok?: string;

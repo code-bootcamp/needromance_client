@@ -35,12 +35,14 @@ const LogoImage = styled.img`
 export default function LayoutHeader() {
   return (
     <Wrapper>
-      <Link href={"/"}>
-        <Logo>
-          <LogoImage src="/img/logo/INR_logo.png" />
-          <span>로맨스가 필요해</span>
-        </Logo>
-      </Link>
+      <div>
+        <Link href={"/"}>
+          <Logo>
+            <LogoImage src="/img/logo/INR_logo.png" />
+            <span>로맨스가 필요해</span>
+          </Logo>
+        </Link>
+      </div>
     </Wrapper>
   );
 }

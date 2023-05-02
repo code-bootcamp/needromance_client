@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { postUserQuestion } from "../../../commons/api/chatGPT";
 import ChatGPTUI from "./ChatGPT.presenter";
 import { accessTokenState } from "../../../commons/store/atoms";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 export default function ChatGPT() {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -15,6 +15,17 @@ export default function ChatGPT() {
     setUserText(e.currentTarget.value);
   };
 
+  // 유저 채팅 요청 엔터로 할때
+  const submitKeyPressUserText = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (userText === "") {
+      return;
+    }
+    if (e.charCode == 13) {
+      submitUserText();
+    }
+  };
+
+  // 유저 채팅 요청
   const submitUserText = async () => {
     setMessageList((prevText) => [...prevText, userText]);
     setUserText("");
@@ -42,6 +53,7 @@ export default function ChatGPT() {
       submitUserText={submitUserText}
       messageList={messageList}
       loading={loading}
+      submitKeyPressUserText={submitKeyPressUserText}
     />
   );
 }
