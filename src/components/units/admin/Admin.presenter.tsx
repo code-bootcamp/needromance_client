@@ -1,4 +1,3 @@
-import { useState } from "react";
 import * as S from "./Admin.styles";
 import type { ColumnsType } from "antd/es/table";
 import { Table } from "antd";
@@ -15,6 +14,7 @@ import CustomModal from "../../commons/modals/CustomModal";
 import { AllBoards, AllUsers, IAdminProps } from "./Admin.types";
 import CustomSearchInput from "../../commons/search/CustomSearchInput";
 import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 
 const TabsItems = ["유저관리", "게시글관리"];
 
@@ -27,11 +27,8 @@ export default function AdminUI({
   openModal,
   setOpenModal,
   allUsers,
-  setAllUsers,
   allBoards,
-  setAllBoards,
   keyword,
-  setKeyword,
   handleSearchInput,
   submitUserSearch,
   submitBoardSearch,
@@ -52,28 +49,28 @@ export default function AdminUI({
     {
       title: "닉네임",
       dataIndex: "nickname",
-      key: "nicknameU",
+      key: uuidv4(),
     },
     {
       title: "포인트",
       dataIndex: "point",
-      key: "pointU",
+      key: uuidv4(),
     },
     {
       title: "이메일",
       dataIndex: "email",
-      key: "emailU",
+      key: uuidv4(),
     },
     {
       title: "가입일",
       dataIndex: "createdAt",
-      key: "createdAtU",
+      key: uuidv4(),
       render: (el) => <span>{el.split("T")[0]}</span>,
     },
     {
       title: "상태",
       dataIndex: "state",
-      key: "stateU",
+      key: uuidv4(),
       render: (el) => (
         <>
           {el === true ? (
@@ -87,7 +84,7 @@ export default function AdminUI({
     {
       title: "관리",
       dataIndex: "id",
-      key: "idU",
+      key: uuidv4(),
       render: (el) => (
         <div
           id={el}
@@ -117,23 +114,23 @@ export default function AdminUI({
     {
       title: "닉네임",
       dataIndex: "user_nickname",
-      key: "nicknameB",
+      key: uuidv4(),
     },
     {
       title: "제목",
       dataIndex: "board_title",
-      key: "titleB",
+      key: uuidv4(),
     },
     {
       title: "작성일",
       dataIndex: "board_createdAt",
-      key: "createdAtB",
+      key: uuidv4(),
       render: (el) => <span>{el.split("T")[0]}</span>,
     },
     {
       title: "이동",
       dataIndex: "board_id",
-      key: "moveIdB",
+      key: uuidv4(),
       render: (el) => (
         <ProfileOutlined
           id={el}
@@ -146,7 +143,7 @@ export default function AdminUI({
     {
       title: "관리",
       dataIndex: "board_id",
-      key: "idB",
+      key: uuidv4(),
       render: (el) => (
         <div
           id={el}
@@ -183,8 +180,7 @@ export default function AdminUI({
         {TabsItems.map((el, index) => (
           <S.TabsItem
             pageTabs={pageTabs}
-            index={index}
-            key={index}
+            key={uuidv4()}
             onClick={() => setPageTabs(index)}
           >
             {el}
@@ -222,6 +218,8 @@ export default function AdminUI({
               dataSource={allUsers}
               size="small"
               scroll={{ x: "max-content", y: "max-content" }}
+              key={uuidv4()}
+              rowKey={uuidv4()}
             />
           </S.TableUserWrapper>
         )}
@@ -254,6 +252,8 @@ export default function AdminUI({
               dataSource={allBoards}
               size="small"
               scroll={{ x: "max-content", y: "max-content" }}
+              key={uuidv4()}
+              rowKey={uuidv4()}
             />
           </S.TableBoardWrapper>
         )}

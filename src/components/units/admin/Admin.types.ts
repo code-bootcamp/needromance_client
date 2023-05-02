@@ -8,12 +8,9 @@ export interface IAdminProps {
   allUsers: AllUsers[];
   allBoards: AllBoards[];
   keyword: { user: string; board: string };
-  setKeyword: Dispatch<SetStateAction<{ user: string; board: string }>>;
   setPageTabs: Dispatch<SetStateAction<number>>;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   setOpenTabs: Dispatch<SetStateAction<boolean>>;
-  setAllUsers: Dispatch<SetStateAction<AllUsers[]>>;
-  setAllBoards: Dispatch<SetStateAction<AllBoards[]>>;
   togleTabs: (prev: boolean) => void;
   handleSearchInput: (e: ChangeEvent<HTMLInputElement>) => void;
   submitUserSearch: () => void;
@@ -37,6 +34,7 @@ export interface AllUsers {
   point: number;
   state: boolean;
   userImg: string | null;
+  userRanking: string;
 }
 export interface AllBoards {
   board_id: number;

@@ -17,15 +17,21 @@ export const postUserQuestion = async (
     const response = await axios({
       method: "post",
       url: `${server}/consult/question`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      data: {
-        question: text,
-      },
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: { question: text },
     });
+
     return response.data;
   } catch (error) {
-    throw new Error();
+    if (axios.isAxiosError(error)) {
+      const { response } = error;
+      throw {
+        message: response?.data?.message || "Server Error",
+        status: response?.status || 500,
+        data: response?.data,
+      };
+    } else {
+      throw error;
+    }
   }
 };

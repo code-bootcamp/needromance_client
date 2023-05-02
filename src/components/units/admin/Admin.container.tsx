@@ -1,4 +1,10 @@
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import AdminUI from "./Admin.presenter";
 import {
   deleteUserBoard,
@@ -35,38 +41,38 @@ export default function Admin() {
   const [getBanId, setGetBanId] = useState("");
 
   // 유저목록 검색어 초기화시 리스트 리렌더링
+  const getAllUsersData = useCallback(async () => {
+    try {
+      const response = await getAllUsers(accessToken);
+      setAllUsers([...response]);
+    } catch (error) {
+      alert("서버 에러가 발생했습니다. 나중에 다시 시도해 주세요.");
+      throw error;
+    }
+  }, [accessToken, setAllUsers]);
+
   useEffect(() => {
     if (keyword.user === "") {
       getAllUsersData();
     }
-  }, [setAllUsers, keyword.user]);
-
-  const getAllUsersData = async () => {
-    await getAllUsers(accessToken)
-      .then((res) => {
-        setAllUsers(() => [...res]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  }, [keyword.user, getAllUsersData]);
 
   // 게시글 검색어 초기화시 리스트 리렌더링
+  const getAllBoardsData = useCallback(async () => {
+    try {
+      const response = await getAllBoards(accessToken);
+      setAllBoards([...response]);
+    } catch (error) {
+      alert("서버 에러가 발생했습니다. 나중에 다시 시도해 주세요.");
+      throw error;
+    }
+  }, [accessToken, setAllBoards]);
+
   useEffect(() => {
     if (keyword.board === "") {
       getAllBoardsData();
     }
-  }, [setAllBoards, keyword.board]);
-
-  const getAllBoardsData = async () => {
-    await getAllBoards(accessToken)
-      .then((res) => {
-        setAllBoards([...res]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  }, [keyword.board, getAllBoardsData]);
 
   // 검색어 input 관리
   const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +82,7 @@ export default function Admin() {
     });
     console.log(keyword);
   };
+
   // 검색어 초기화 함수
   const handleClearInput = () => {
     setKeyword({
@@ -84,19 +91,16 @@ export default function Admin() {
       board: "",
     });
   };
+
   // 유저 검색 요청
-  const submitUserSearch = () => {
-    getSearchUser({ keyword, accessToken }).then((res) => {
-      if (res.status === 422) {
-        setAllUsers([]);
-        return;
-      }
-      setAllUsers([...res]);
-    });
+  const submitUserSearch = async () => {
+    const response = await getSearchUser({ keyword, accessToken });
+    setAllUsers([...response]);
   };
+
   // 유저 검색 엔터로 요청할 때
   const submitKeyPressUserSearch = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (keyword.board === "") {
+    if (keyword.user === "") {
       return;
     }
     if (e.charCode == 13) {
@@ -106,22 +110,10 @@ export default function Admin() {
 
   // 게시글 검색 요청
   const submitBoardSearch = async () => {
-    try {
-      const response = await getSearchBoard({ keyword, accessToken });
-      setAllBoards([...response]);
-    } catch (error) {
-      console.log(error);
-      setAllBoards([]);
-    }
-    // getSearchBoard({ keyword, accessToken }).then((res) => {
-    //   // 일치하는 검색값이 없는 경우
-    //   if (res.status === 422) {
-    //     setAllBoards([]);
-    //     return;
-    //   }
-    //   setAllBoards([...res]);
-    // });
+    const response = await getSearchBoard({ keyword, accessToken });
+    setAllBoards([...response]);
   };
+
   // 게시글 검색 엔터로 요청할 때
   const submitKeyPressBoardSearch = (e: KeyboardEvent<HTMLInputElement>) => {
     if (keyword.board === "") {
@@ -134,32 +126,30 @@ export default function Admin() {
 
   // 유저 활성화 비활성화
   const handleUserState = async () => {
-    console.log(getBanId);
-
-    await patchUserState({ accessToken, id: getBanId }).then(() => {
-      getAllUsers(accessToken)
-        .then((res) => {
-          setAllUsers([...res]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    try {
+      await patchUserState({ accessToken, id: getBanId });
+      const response = await getAllUsers(accessToken);
+      setAllUsers([...response]);
+    } catch (error) {
+      alert("서버 에러가 발생했습니다. 나중에 다시 시도해 주세요.");
+      throw error;
+    } finally {
       setOpenModal(false);
-    });
+    }
   };
+
   // 유저 게시글 삭제하기
   const handleBoardDelete = async () => {
-    console.log(getDeleteId);
-    await deleteUserBoard({ accessToken, id: Number(getDeleteId) }).then(() => {
-      getAllBoards(accessToken)
-        .then((res) => {
-          setAllBoards([...res]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    try {
+      await deleteUserBoard({ accessToken, id: Number(getDeleteId) });
+      const response = await getAllBoards(accessToken);
+      setAllBoards([...response]);
+    } catch (error) {
+      alert("서버 에러가 발생했습니다. 나중에 다시 시도해 주세요.");
+      throw error;
+    } finally {
       setOpenModal(false);
-    });
+    }
   };
 
   // 반응형 햄버거 view ture, false
@@ -186,12 +176,9 @@ export default function Admin() {
       setOpenTabs={setOpenTabs}
       browserWidth={browserWidth}
       togleTabs={togleTabs}
-      setAllUsers={setAllUsers}
       allUsers={allUsers}
-      setAllBoards={setAllBoards}
       allBoards={allBoards}
       keyword={keyword}
-      setKeyword={setKeyword}
       handleSearchInput={handleSearchInput}
       submitUserSearch={submitUserSearch}
       submitBoardSearch={submitBoardSearch}
