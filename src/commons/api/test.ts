@@ -100,6 +100,9 @@ export const login = async (email: string, password: string) => {
         password,
       },
       withCredentials: true,
+      headers: {
+        "Cache-Control": "no-cache",
+      },
     });
 
     return response.data;

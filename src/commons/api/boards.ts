@@ -46,3 +46,51 @@ export const SearchBoard = async (keyword: string) => {
     console.log(err);
   }
 };
+
+export const WriteBoard = async (
+  params: {
+    title: string;
+    contents: string;
+    hashTags?: any[];
+  },
+  accessToken: string
+) => {
+  try {
+    const response = await axios.post(
+      `${URL}/boards`,
+      {
+        title: params.title,
+        contents: params.contents,
+        hashTag: params.hashTags,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const EditBoard = async (
+  id: string,
+  params: { title: string; contents: string; hashTags?: string[] },
+  accessToken: string
+) => {
+  const response = await axios.patch(
+    `${URL}/boards/:${id}`,
+    {
+      title: params.title,
+      contents: params.contents,
+      hashTags: params.hashTags,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};

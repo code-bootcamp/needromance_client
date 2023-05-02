@@ -52,6 +52,8 @@ export default function BorderInput({
   name,
   disabled,
   autoComplete,
+  value,
+  defaultValue,
 }: {
   label?: string;
   placeholder?: string;
@@ -62,6 +64,8 @@ export default function BorderInput({
   name?: string;
   disabled?: boolean;
   autoComplete?: string;
+  value?: any;
+  defaultValue: string;
 }) {
   return (
     <Wrapper>
@@ -76,6 +80,8 @@ export default function BorderInput({
           name={name}
           disabled={disabled}
           autoComplete={autoComplete}
+          value={value}
+          defaultValue={defaultValue}
         />
       </InputBox>
     </Wrapper>
