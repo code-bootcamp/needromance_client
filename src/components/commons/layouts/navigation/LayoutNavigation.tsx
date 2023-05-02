@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, MouseEventHandler, useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import { UrlObject } from "url";
+import { userProfileState } from "../../../../commons/store/atoms";
 
 interface IIsActiveProps {
   isActive: boolean;
@@ -50,15 +52,16 @@ const NavigationMenu = styled.a`
   transition: background 0.5s;
 `;
 
-const NAVIGATION = [
-  { name: "너의 마음을 말해줘", page: "/chatgpt" },
-  { name: "대화공간", page: "/boards" },
-];
-
 export default function LayoutNavigation() {
+  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
   const router = useRouter();
 
   const [activeMenu, setActiveMenu] = useState("");
+
+  const NAVIGATION = [
+    { name: "너의 마음을 말해줘", page: `/chatgpt/${userProfile?.id}` },
+    { name: "대화공간", page: "/boards" },
+  ];
 
   useEffect(() => {
     NAVIGATION.map((menu) => {
