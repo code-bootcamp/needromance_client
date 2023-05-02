@@ -17,6 +17,7 @@ import Tag from "../../../commons/tag/Tag";
 import BorderInput from "../../../commons/input/Input";
 import CustomModal from "../../../commons/modals/CustomModal";
 import { useRouter } from "next/router";
+import CustomBtn from "../../../commons/buttons/CustomBtn";
 const ToastEditor = dynamic(() => import("../../../commons/toast-ui/Toast"), {
   ssr: false,
 });
@@ -111,30 +112,29 @@ export default function CommunityWrite({
         <S.Title>게시글 작성/수정</S.Title>
         <S.TitleInputWrapper>
           <S.InfoTitle>제목</S.InfoTitle>
-          <div>
-            <S.InputWrapper>
-              <BorderInput
-                name="title"
-                value={formik.values.title}
-                defaultValue={editData?.title}
-                onChange={formik.handleChange}
-              />
-            </S.InputWrapper>
-            {formik.errors.title && <p>{formik.errors.title}</p>}
-          </div>
+          <S.InputWrapper>
+            <BorderInput
+              name="title"
+              value={formik.values.title}
+              defaultValue={editData?.title}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.title && (
+              <S.AlertTitle>{formik.errors.title}</S.AlertTitle>
+            )}
+          </S.InputWrapper>
         </S.TitleInputWrapper>
-
         <S.ContentBox>
           <S.InfoTitle>내용</S.InfoTitle>
-          {formik.errors.contents && <p>{formik.errors.contents}</p>}
-
+          {formik.errors.contents && (
+            <S.AlertContent>{formik.errors.contents}</S.AlertContent>
+          )}
           <ToastEditor
             defaultValue={editData?.contents}
             editorRef={editorRef}
             onChangeContent={onChangeContent}
           />
         </S.ContentBox>
-
         <S.TitleInputWrapper>
           <S.InfoTitle>태그</S.InfoTitle>
           <Tag
@@ -145,9 +145,11 @@ export default function CommunityWrite({
             // editData={editData}
           />
         </S.TitleInputWrapper>
-        <button type="button" onClick={onSubmitForm}>
-          제출
-        </button>
+        <S.SubmitBtnWrapper>
+          <S.SubmitBtn type="button" onClick={onSubmitForm}>
+            작성하기
+          </S.SubmitBtn>
+        </S.SubmitBtnWrapper>
       </form>
       {isLoginModalOpen && (
         <CustomModal
