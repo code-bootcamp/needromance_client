@@ -4,6 +4,7 @@ import { FaCommentDots } from "react-icons/fa";
 import Tag from "../../../commons/hashtag/HashTag";
 import { breakPoints } from "../../../../commons/styles/media";
 import { getDate2 } from "../../../../commons/libraries/getDate";
+import DOMPurify from "dompurify";
 
 const Wrapper = styled.div`
   position: relative;
@@ -193,14 +194,26 @@ export default function Writing({
 
       <ContentWrapper>
         <Content>
-          {content
-            .replaceAll(keyword!, `${mySecretCode}${keyword}${mySecretCode}`)
-            .split(mySecretCode)
-            .map((el) => (
-              <Keyword key={uuidv4()} isKeyword={el === keyword}>
-                {el}
-              </Keyword>
-            ))}
+          <div
+            style={{}}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(
+                content
+                  .replaceAll(
+                    keyword!,
+                    `${mySecretCode}${keyword}${mySecretCode}`
+                  )
+                  .split(mySecretCode)
+                  .map((el) => {
+                    if (el === keyword) {
+                      return `<Keyword key=${uuidv4()} isKeyword={true}>${el}</Keyword>`;
+                    }
+                    return el;
+                  })
+                  .join("")
+              ),
+            }}
+          ></div>
         </Content>
         <HashtagWrapper>
           <Tag tags={tags!} />
