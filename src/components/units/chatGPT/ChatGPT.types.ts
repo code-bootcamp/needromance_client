@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, KeyboardEvent, SetStateAction } from "react";
 
 export interface IChatGPTProps {
   userText: string;
@@ -7,4 +7,5 @@ export interface IChatGPTProps {
   submitUserText: () => void;
   messageList: string[];
   loading: boolean;
+  submitKeyPressUserText: (e: KeyboardEvent<HTMLInputElement>) => void;
 }

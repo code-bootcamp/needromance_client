@@ -2,6 +2,7 @@ import { ExclamationCircleFilled, SendOutlined } from "@ant-design/icons";
 import * as S from "./ChatGPT.styles";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { IChatGPTProps } from "./ChatGPT.types";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ChatGPTUI({
   userText,
@@ -10,6 +11,7 @@ export default function ChatGPTUI({
   submitUserText,
   messageList,
   loading,
+  submitKeyPressUserText,
 }: IChatGPTProps) {
   return (
     <>
@@ -39,11 +41,11 @@ export default function ChatGPTUI({
                   return (
                     <>
                       {index % 2 === 0 ? (
-                        <S.WrapperMessageUser key={index}>
+                        <S.WrapperMessageUser key={uuidv4()}>
                           <S.MessageUser>{text}</S.MessageUser>
                         </S.WrapperMessageUser>
                       ) : (
-                        <S.WrapperMessageGPT key={index}>
+                        <S.WrapperMessageGPT key={uuidv4()}>
                           <S.MessageGPT>{text}</S.MessageGPT>
                         </S.WrapperMessageGPT>
                       )}
@@ -59,9 +61,7 @@ export default function ChatGPTUI({
               type="text"
               placeholder="고민을 말해주세요!"
               onChange={handleChangeUserText}
-              onKeyPress={(e: any) => {
-                e.key === "Enter";
-              }}
+              onKeyPress={submitKeyPressUserText}
             />
             <S.SendBtn
               onClick={submitUserText}
