@@ -1,59 +1,163 @@
 import * as S from "./CommunityWrite.styles";
+import { useFormik } from "formik";
+import { EditBoard, WriteBoard } from "../../../../commons/api/boards";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../commons/store/atoms";
 
 import dynamic from "next/dynamic";
-import { createRef, useState } from "react";
-
-//
+import { createRef, useEffect, useState } from "react";
+import * as yup from "yup";
+// type
 import { Editor } from "@toast-ui/react-editor";
-import Tag from "../../../commons/tag/Tag";
-import BorderInput from "../../../commons/input/Input";
+
 import useAuth from "../../../commons/hooks/customs/useAuth";
 
+// components
+import Tag from "../../../commons/tag/Tag";
+import BorderInput from "../../../commons/input/Input";
+import CustomModal from "../../../commons/modals/CustomModal";
+import { useRouter } from "next/router";
 const ToastEditor = dynamic(() => import("../../../commons/toast-ui/Toast"), {
   ssr: false,
 });
 
-export default function CommunityWrite() {
+const schema = yup.object({
+  title: yup.string().required("제목을 입력해주세요."),
+  contents: yup.string().required("내용을 입력해주세요."),
+  hashTags: yup.array(),
+});
+
+export default function CommunityWrite({
+  isEdit,
+  editData,
+}: {
+  isEdit: boolean;
+  editData: any;
+}) {
+  const router = useRouter();
+
+  const [accessToken] = useRecoilState(accessTokenState);
   const editorRef = createRef<Editor>();
 
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      title: editData?.title || "",
+      contents: editData?.contents || "",
+      hashTags: editData?.hashTags || [],
+    },
+    validationSchema: schema,
+    onSubmit: () => {
+      isEdit ? onSubmitEditForm() : onSubmitForm();
+    },
+    enableReinitialize: true,
+  });
+
+  // 기존 태그
+  useEffect(() => {
+    if (editData?.hashTags?.length > 0) {
+      setTagList(editData.hashTags);
+    }
+  });
+
+  // edit
+  const onSubmitEditForm = async () => {
+    event?.preventDefault();
+
+    // 기존의 데이터를 요청보낼 데이터에 넣기
+    if (editData.title) {
+      formik.setValues(editData.title);
+    }
+    if (editData.contents) {
+      formik.setValues(editData.contents);
+    }
+
+    formik.setFieldValue("hashTags", tagList);
+
+    const data = await EditBoard(router.pathname, formik.values, accessToken);
+    console.log(data);
+  };
+
+  // write
+  const onSubmitForm = async () => {
+    event?.preventDefault();
+
+    if (!formik.values.title || !formik.values.contents) {
+      setIsLoginModalOpen(true);
+      return;
+    }
+    formik.setFieldValue("hashTags", tagList);
+
+    const data = await WriteBoard(formik.values, accessToken);
+  };
 
   const onChangeContent = () => {
     const inputs = editorRef.current?.getInstance().getHTML();
-    // setValue("content", inputs);
+    if (!inputs) return;
+
+    formik.setFieldValue("contents", inputs);
   };
 
   useAuth();
+
+  console.log(formik.values);
+  console.log(editData);
   return (
     <S.Wrapper>
-      <S.Title>게시글 작성/수정</S.Title>
-      <S.TitleInputWrapper>
-        <S.InfoTitle>제목</S.InfoTitle>
-        <S.InputWrapper>
-          <BorderInput />
-        </S.InputWrapper>
-      </S.TitleInputWrapper>
+      <form>
+        <S.Title>게시글 작성/수정</S.Title>
+        <S.TitleInputWrapper>
+          <S.InfoTitle>제목</S.InfoTitle>
+          <div>
+            <S.InputWrapper>
+              <BorderInput
+                name="title"
+                value={formik.values.title}
+                defaultValue={editData?.title}
+                onChange={formik.handleChange}
+              />
+            </S.InputWrapper>
+            {formik.errors.title && <p>{formik.errors.title}</p>}
+          </div>
+        </S.TitleInputWrapper>
 
-      <S.ContentBox>
-        <S.InfoTitle>내용</S.InfoTitle>
-        <ToastEditor
-          defaultValue="하하"
-          editorRef={editorRef}
-          onChangeContent={onChangeContent}
-        />
-      </S.ContentBox>
+        <S.ContentBox>
+          <S.InfoTitle>내용</S.InfoTitle>
+          {formik.errors.contents && <p>{formik.errors.contents}</p>}
 
-      <S.TitleInputWrapper>
-        <S.InfoTitle>태그</S.InfoTitle>
-        <Tag
-          tagItem={tagItem}
-          setTagItem={setTagItem}
-          tagList={tagList}
-          setTagList={setTagList}
-          // editData={editData}
-        />
-      </S.TitleInputWrapper>
+          <ToastEditor
+            defaultValue={editData?.contents}
+            editorRef={editorRef}
+            onChangeContent={onChangeContent}
+          />
+        </S.ContentBox>
+
+        <S.TitleInputWrapper>
+          <S.InfoTitle>태그</S.InfoTitle>
+          <Tag
+            tagItem={tagItem}
+            setTagItem={setTagItem}
+            tagList={tagList}
+            setTagList={setTagList}
+            // editData={editData}
+          />
+        </S.TitleInputWrapper>
+        <button type="button" onClick={onSubmitForm}>
+          제출
+        </button>
+      </form>
+      {isLoginModalOpen && (
+        <CustomModal
+          icontype="warning"
+          openModal={isLoginModalOpen}
+          text="로그인"
+          ok="닫음"
+          onClickOk={() => setIsLoginModalOpen(false)}
+        ></CustomModal>
+      )}
     </S.Wrapper>
   );
 }

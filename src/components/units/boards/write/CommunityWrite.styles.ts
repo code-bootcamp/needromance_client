@@ -7,6 +7,7 @@ export const Wrapper = styled.main`
 
   align-items: center;
   width: 100%;
+
   height: 100%;
   padding: 3% 2%;
   background-color: white;
@@ -39,6 +40,8 @@ export const InfoTitle = styled.div`
 
 export const ContentBox = styled.div`
   width: 100%;
+  max-width: 910px;
+
   margin: 2em 0px;
   display: flex;
   flex-direction: column;

@@ -60,7 +60,8 @@ const CounseleeImg = styled.img`
 `;
 
 const CounseleeName = styled.span`
-  font-size: 1rem;
+  width: max-content;
+  font-size: 0.9rem;
   letter-spacing: -1px;
 
   @media ${breakPoints.tablet} {
@@ -180,7 +181,7 @@ export default function Writing({
         <CounseleeImg src="img/community/default_profile.jpg" />
         <CounseleeName>
           {name
-            .replaceAll(keyword, `${mySecretCode}${keyword}${mySecretCode}`)
+            .replaceAll(keyword!, `${mySecretCode}${keyword}${mySecretCode}`)
             .split(mySecretCode)
             .map((el) => (
               <Keyword key={uuidv4()} isKeyword={el === keyword}>
@@ -193,7 +194,7 @@ export default function Writing({
       <ContentWrapper>
         <Content>
           {content
-            .replaceAll(keyword, `${mySecretCode}${keyword}${mySecretCode}`)
+            .replaceAll(keyword!, `${mySecretCode}${keyword}${mySecretCode}`)
             .split(mySecretCode)
             .map((el) => (
               <Keyword key={uuidv4()} isKeyword={el === keyword}>

@@ -11,12 +11,13 @@ export default function ToastEditor(props: {
 }) {
   return (
     <Editor
-      initialValue="내용을 입력하세요."
+      initialValue={props.defaultValue}
       previewStyle="vertical"
-      height="600px"
+      height="500px"
       initialEditType="markdown"
       useCommandShortcut={true}
       ref={props.editorRef}
+      onChange={props.onChangeContent}
     />
   );
 }

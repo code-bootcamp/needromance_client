@@ -8,7 +8,6 @@ export default function useAuth() {
   const router = useRouter();
   const [accessToken] = useRecoilState(accessTokenState);
 
-  console.log(router);
   useEffect(() => {
     // 보고 있던 페이지 저장
     localStorage.setItem("prevPage", router.pathname);
