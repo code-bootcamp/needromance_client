@@ -16,94 +16,104 @@ interface IDeleteBoardData {
   id: number;
   accessToken: string;
 }
+
 export const getAllUsers = async (accessToken: string): Promise<AllUsers[]> => {
   try {
     const response = await axios({
       method: "get",
       url: server + "/admin/users",
-      headers: {
-        Authorization: "Bearer " + accessToken,
-      },
+      headers: { Authorization: "Bearer " + accessToken },
     });
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response?.data || error.message);
+      const { response } = error;
+      throw {
+        message: response?.data?.message || "Server Error",
+        status: response?.status || 500,
+        data: response?.data,
+      };
     } else {
-      console.log(error);
+      throw error;
     }
-    // 에러발생시 빈 배열로 리턴시키기
-    return [];
   }
 };
 
-export const getSearchUser = async (data: ISearchInputData) => {
+export const getSearchUser = async (
+  data: ISearchInputData
+): Promise<AllUsers[]> => {
   const { keyword, accessToken } = data;
 
   try {
     const response = await axios({
       method: "get",
       url: server + `/admin/user/search?keyword=${keyword.user}`,
-      headers: {
-        Authorization: "Bearer " + accessToken,
-      },
+      headers: { Authorization: "Bearer " + accessToken },
     });
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response?.data || error.message);
-      // 검색결과가 없다면 error status 422 code를 받아 alert modal 호출
-      return error.response;
+      const { response } = error;
+      throw {
+        message: response?.data?.message || "Server Error",
+        status: response?.status || 500,
+        data: response?.data,
+      };
     } else {
-      console.log(error);
-      return [];
+      throw error;
     }
   }
 };
-export const patchUserState = async (data: IBanData) => {
+export const patchUserState = async (data: IBanData): Promise<AllUsers> => {
   const { accessToken, id } = data;
 
   try {
     const response = await axios({
       method: "patch",
       url: server + "/admin/user/status",
-      headers: {
-        Authorization: "Bearer " + accessToken,
-      },
+      headers: { Authorization: "Bearer " + accessToken },
       data: { id },
     });
 
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response?.data || error.message);
+      const { response } = error;
+      throw {
+        message: response?.data?.message || "Server Error",
+        status: response?.status || 500,
+        data: response?.data,
+      };
     } else {
-      console.log(error);
+      throw error;
     }
-    return [];
   }
 };
 
-export const getAllBoards = async (accessToken: string) => {
+export const getAllBoards = async (
+  accessToken: string
+): Promise<AllBoards[]> => {
   try {
     const response = await axios({
       method: "get",
       url: server + "/admin/boards",
-      headers: {
-        Authorization: "Bearer " + accessToken,
-      },
+      headers: { Authorization: "Bearer " + accessToken },
     });
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response?.data || error.message);
+      const { response } = error;
+      throw {
+        message: response?.data?.message || "Server Error",
+        status: response?.status || 500,
+        data: response?.data,
+      };
     } else {
-      console.log(error);
+      throw error;
     }
-    // 에러발생시 빈 배열로 리턴시키기
-    return [];
   }
 };
 export const getSearchBoard = async (
@@ -115,35 +125,44 @@ export const getSearchBoard = async (
     const response = await axios({
       method: "get",
       url: server + `/admin/boards/search?keyword=${keyword.board}`,
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error();
-  }
-};
-export const deleteUserBoard = async (data: IDeleteBoardData) => {
-  const { accessToken, id } = data;
-
-  try {
-    const response = await axios({
-      method: "delete",
-      url: server + `/admin/boards/${id}`,
-      headers: {
-        Authorization: "Bearer " + accessToken,
-      },
+      headers: { Authorization: `Bearer ${accessToken}` },
     });
 
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error.response?.data || error.message);
-      return error.response;
+      const { response } = error;
+      throw {
+        message: response?.data?.message || "Server Error",
+        status: response?.status || 500,
+        data: response?.data,
+      };
     } else {
-      console.log(error);
-      throw new Error();
+      throw error;
+    }
+  }
+};
+export const deleteUserBoard = async (
+  data: IDeleteBoardData
+): Promise<void> => {
+  const { accessToken, id } = data;
+
+  try {
+    await axios({
+      method: "delete",
+      url: server + `/admin/boards/${id}`,
+      headers: { Authorization: "Bearer " + accessToken },
+    });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const { response } = error;
+      throw {
+        message: response?.data?.message || "Server Error",
+        status: response?.status || 500,
+        data: response?.data,
+      };
+    } else {
+      throw error;
     }
   }
 };
