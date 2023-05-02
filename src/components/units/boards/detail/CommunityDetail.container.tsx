@@ -11,6 +11,7 @@ import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../commons/store/atoms";
 import Popup from "../../../commons/modals/PopupModal";
 import { userProfileState } from "../../../../commons/store/atoms";
+import Dompurify from "dompurify";
 
 const CommunityDetailContainer = () => {
   const router = useRouter();
@@ -84,7 +85,16 @@ const CommunityDetailContainer = () => {
           </S.Title>
           <S.InnerWrap>
             <S.LeftWrap>
-              <S.Contents>{data?.contents}</S.Contents>
+              <S.Contents>
+                {typeof window !== "undefined" && (
+                  <div
+                    style={{}}
+                    dangerouslySetInnerHTML={{
+                      __html: Dompurify.sanitize(data?.contents),
+                    }}
+                  ></div>
+                )}
+              </S.Contents>
             </S.LeftWrap>
             <S.RigthWrap>
               <S.StampWrap>

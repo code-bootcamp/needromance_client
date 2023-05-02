@@ -27,7 +27,7 @@ const Popup = ({
       />
 
       <CustomModal
-        icontype="waring"
+        icontype="warning"
         openModal={warning}
         text="오류가 발생하여 요청한 작업을 완료할 수 없습니다."
         confirm="확인"
