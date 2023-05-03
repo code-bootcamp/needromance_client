@@ -150,6 +150,7 @@ export default function CommunityList() {
               <Writing
                 key={board.id}
                 name={board.user.nickname}
+                userImg={board.user.userImg}
                 content={board.title}
                 hashtags={board.hashtags}
                 createdAt={board.createdAt}
@@ -178,6 +179,7 @@ export default function CommunityList() {
             <Writing
               key={board.id}
               name={board.user.nickname}
+              userImg={board.user.userImg}
               content={board.contents}
               hashtags={board.hashtags}
               createdAt={board.createdAt}

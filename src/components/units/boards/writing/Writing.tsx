@@ -156,6 +156,7 @@ const Heart = styled.div``;
 
 export default function Writing({
   name,
+  userImg,
   content,
   hashtags,
   createdAt,
@@ -164,6 +165,7 @@ export default function Writing({
   onClick,
 }: {
   name: string;
+  userImg: string;
   content: string;
   hashtags?: string[];
   createdAt: string;
@@ -179,7 +181,9 @@ export default function Writing({
   return (
     <Wrapper onClick={onClick}>
       <Counselee>
-        <CounseleeImg src="img/community/default_profile.jpg" />
+        <CounseleeImg
+          src={userImg ? userImg : "img/community/default_profile.jpg"}
+        />
         <CounseleeName>
           {name
             .replaceAll(keyword!, `${mySecretCode}${keyword}${mySecretCode}`)
