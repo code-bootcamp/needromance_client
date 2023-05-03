@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
+import { useRecoilState } from "recoil";
+import { globalModalState } from "../../../commons/store/atoms";
 import { breakPoints } from "../../../commons/styles/media";
+import CustomModal from "../modals/CustomModal";
 import LayoutFooter from "./footer/LayoutFooter";
 import LayoutHeader from "./header/LayoutHeader";
 import LayoutNavigation from "./navigation/LayoutNavigation";
@@ -31,6 +34,7 @@ export default function Layout(props: ILayoutProps) {
 
   const HIDDEN_SIDEBAR = ["/", "/boards"];
   const isHiddenSidebar = HIDDEN_SIDEBAR.includes(router.asPath);
+  const [modalState] = useRecoilState(globalModalState);
 
   return (
     <>
@@ -42,6 +46,17 @@ export default function Layout(props: ILayoutProps) {
           <Body>{props.children}</Body>
           <LayoutFooter />
         </Wrapper>
+        <CustomModal
+          text={modalState?.text}
+          openModal={modalState.openModal}
+          icontype={modalState.icontype}
+          ok={modalState.ok}
+          cancel={modalState.cancel}
+          confirm={modalState.confirm}
+          onClickOk={modalState.onClickOk}
+          onClickCancel={modalState.onClickCancel}
+          onClickConfirm={modalState.onClickConfirm}
+        />
       </MainWrapper>
     </>
   );

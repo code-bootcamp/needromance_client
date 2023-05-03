@@ -13,7 +13,7 @@ const modalBodyStyle = {
   borderRadius: "5px",
 };
 
-interface IModalProps {
+export interface IModalProps {
   icontype?: string;
   openModal: boolean;
   text: string;
@@ -36,6 +36,7 @@ export default function CustomModal(props: IModalProps) {
   // onClickCancel : cancle 함수
   // onClickConfirm : 확인하는 함수
 
+  console.log(props.onClickOk);
   return (
     <>
       <Modal
