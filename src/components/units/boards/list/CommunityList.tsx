@@ -1,8 +1,7 @@
-import { KeyboardEvent, useEffect, useState } from "react";
 import * as S from "./CommunityList.styles";
+import { KeyboardEvent, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
-
 // api
 import { GetBoards, SearchBoard } from "../../../../commons/api/boards";
 import { BestUsers } from "../../../../commons/api/user";
@@ -179,7 +178,7 @@ export default function CommunityList() {
           <S.LatestCounselWriting>
             {searchs?.map((board: IBoardsType) => (
               <Writing
-                key={board.id}
+                key={uuidv4()}
                 name={board.user.nickname}
                 userImg={board.user.userImg}
                 content={board.title}
@@ -209,7 +208,7 @@ export default function CommunityList() {
           <S.LatestCounselWriting>
             {boards?.map((board: IBoardsType) => (
               <Writing
-                key={board.id}
+                key={uuidv4()}
                 name={board.user.nickname}
                 userImg={board.user.userImg}
                 content={board.contents}
