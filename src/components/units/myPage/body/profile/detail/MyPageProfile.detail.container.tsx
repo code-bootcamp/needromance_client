@@ -10,7 +10,7 @@ const MyPageProfileDetail = ({ myData, setIsEdit }: IMyPageProps) => {
           <S.List>닉네임</S.List>
           <S.List>프로필사진</S.List>
           <S.List>이메일</S.List>
-          <S.List>회원등급</S.List>
+          <S.List>상담점수</S.List>
         </S.ListWrap>
         <S.ListWrap>
           <S.List>{myData?.nickname}</S.List>

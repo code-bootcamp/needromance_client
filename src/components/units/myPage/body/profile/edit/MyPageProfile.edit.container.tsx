@@ -13,10 +13,7 @@ import {
 import CustomModal from "../../../../../commons/modals/CustomModal";
 
 const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
-  const [data, setData] = useState({
-    nickname: myData?.nickname ?? "",
-    userImg: myData?.userImg ?? "/img/community/default_userImg.png",
-  });
+  const [nickname, setNickname] = useState(myData?.nickname ?? "");
   const [confirm, setConfirm] = useState(false);
   const [warning, setWarning] = useState(false);
   const accessToken = useRecoilValue(accessTokenState);
@@ -25,10 +22,12 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
   const InputRef = useRef<HTMLInputElement>(null);
   const [errModal, setErrModal] = useState(false);
   const [errMsg, setErrMsg] = useState("");
+  const [preImg, setPreImg] = useState("");
+  const [savefile, setSaveFile] = useState(null);
 
   const onChangeNickname = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setData({ ...data, nickname: value });
+    setNickname(value);
   };
 
   const onClickUpload = () => {
@@ -37,7 +36,6 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
 
   const onChangeImage = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log("file", file);
     // check validation Image
     if (!file?.size) {
       setErrMsg("파일이 없습니다.");
@@ -54,20 +52,29 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
       setErrModal(true);
       return false;
     }
-
-    // try {
-    //   const result = await uploadFile({ variables: { file } });
-    //   props.onChangeFileUrls(result.data.uploadFile.url, props.index);
-    // } catch (error) {
-    //   if (error instanceof Error) Modal.error({ content: error.message });
-    // }
+    if (!file) {
+      return;
+    }
+    // 업로드된 이미지 미리보기
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreImg(reader.result);
+    };
+    // formData형식으로 state에 담기
+    const formData = new FormData();
+    formData.append("file", file);
+    setSaveFile(formData);
   };
 
   const handleUpdateUser = async () => {
-    const { nickname, userImg } = data;
-
+    if (savefile === null) {
+      setErrMsg("프로필 사진을 변경해주세요!");
+      setErrModal(true);
+      return false;
+    }
     try {
-      const result = await UpdateUser(accessToken, nickname, userImg);
+      const result = await UpdateUser(accessToken, String(nickname), savefile);
       setUserProfile(result); // 전역 스테이트 변경
       setMyData(result);
       setConfirm(true);
@@ -92,11 +99,17 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
           </S.ListWrap>
           <S.ListWrap>
             <S.List>
-              <S.Input onChange={onChangeNickname} value={data.nickname} />
+              <S.Input onChange={onChangeNickname} value={nickname} />
             </S.List>
             <S.List>
               <S.ProfileImg
-                src={myData?.userImg ?? "/img/community/default_userImg.png"}
+                src={
+                  preImg
+                    ? preImg
+                    : myData?.userImg
+                    ? myData?.userImg
+                    : "/img/community/default_userImg.png"
+                }
               />
               <S.IconWrap>
                 <Icon_Plus onClick={onClickUpload} />

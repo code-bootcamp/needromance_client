@@ -27,7 +27,23 @@ export default function CommunityList() {
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
   const [keywordStore, setKeywordStore] = useState<string>("");
+  // scroll
+  const [currPage, setCurrPage] = useState<number>(1);
+  // const handleScroll = async () => {
+  //   const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+  //   console.log(scrollTop, clientHeight, scrollHeight);
 
+  //   if (scrollTop + clientHeight >= scrollHeight) {
+  //     setCurrPage((prevPage) => prevPage + 1);
+  //     const newBoards = await GetBoards(currPage);
+  //     setBoards((prevBoards) => prevBoards.concat(newBoards));
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [handleScroll]);
   useEffect(() => {
     fetch();
   }, []);
@@ -70,11 +86,11 @@ export default function CommunityList() {
       <S.Ranking>
         <p>상담 랭킹</p>
         <S.MedalWrapper>
-          <Medal label={ranking[0]} ranking="1st" />
-          <Medal label={ranking[1]} ranking="2nd" />
-          <Medal label={ranking[2]} ranking="3rd" />
-          <Medal label={ranking[3]} ranking="4th" />
-          <Medal label={ranking[4]} ranking="5th" />
+          <Medal label={ranking && ranking[0]} ranking="1st" />
+          <Medal label={ranking && ranking[1]} ranking="2nd" />
+          <Medal label={ranking && ranking[2]} ranking="3rd" />
+          <Medal label={ranking && ranking[3]} ranking="4th" />
+          <Medal label={ranking && ranking[4]} ranking="5th" />
         </S.MedalWrapper>
       </S.Ranking>
       <S.BestAnswerWrapper>

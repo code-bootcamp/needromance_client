@@ -11,6 +11,7 @@ import Popup from "../../../../commons/modals/PopupModal";
 import CustomSearchInput from "../../../../commons/search/CustomSearchInput";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../../commons/store/atoms";
+import Dompurify from "dompurify";
 
 const MyPageBoard = ({ myData }: any) => {
   const { onClickMoveToPage } = useMoveToPage();
@@ -168,7 +169,12 @@ const MyPageBoard = ({ myData }: any) => {
                 >
                   <p>제목 :{data?.title}</p>
                   <br />
-                  <p>{data?.contents}</p>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: Dompurify.sanitize(data?.contents),
+                    }}
+                  ></div>
+
                   <br />
                   <p>{getDate(data?.createdAt)}</p>
                 </S.TD>

@@ -98,8 +98,8 @@ const CommunityDetailContainer = () => {
             </S.LeftWrap>
             <S.RigthWrap>
               <S.StampWrap>
-                {data?.user?.profileImg ? (
-                  <S.ProfileImg src={data?.user?.profileImg} />
+                {data?.user?.userImg ? (
+                  <S.ProfileImg src={data?.user?.userImg} />
                 ) : (
                   <S.ProfileImg src="/img/community/default_userImg.png" />
                 )}

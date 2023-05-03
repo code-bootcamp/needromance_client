@@ -16,29 +16,12 @@ export const GetUserInfo = async (accessToken: string) => {
   }
 };
 
-export const UpdateUser = async (
-  accessToken: string,
-  nickname: string,
-  img: string
-) => {
+export const BestUsers = async () => {
   try {
-    const response = await axios.patch(
-      `${URL}/user/update`,
-      {
-        nickname,
-        img,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-    if (response.status === 200) {
-      return response.data;
-    }
-  } catch (err) {
-    console.log(err);
+    const response = await axios.get(`${URL}/user?sort=point`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -87,12 +70,29 @@ export const GetUserAnswer = async (accessToken: string) => {
   }
 };
 
-export const BestUsers = async () => {
+export const UpdateUser = async (
+  accessToken: string,
+  nickname: string,
+  formData?: File
+) => {
+  console.log(nickname, formData);
   try {
-    const response = await axios.get(`${URL}/user?sort=point`);
-    return response.data;
-  } catch (error) {
-    console.log(error);
+    const response = await axios.patch(
+      `${URL}/user/update?nickname=${nickname}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    if (response.status === 200) {
+      console.log(response.data);
+      return response.data;
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
