@@ -1,15 +1,12 @@
-import { accessToken } from "./token";
 import axios from "axios";
 import config from "./config";
 const URL = "https://need-romance.site";
-
-const server = config.backend.baseURL;
 
 export const checkDuplicateEmail = async (email: string) => {
   try {
     const response = await axios({
       method: "get",
-      url: URL + `/user/find/email?email=${email}`,
+      url: `${URL}/user/find/email?email=${email}`,
     });
     return response.data;
   } catch (error) {

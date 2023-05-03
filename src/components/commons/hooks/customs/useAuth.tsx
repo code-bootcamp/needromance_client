@@ -3,40 +3,36 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import {
   accessTokenState,
-  authModalState,
+  globalModalState,
 } from "../../../../commons/store/atoms";
-import CustomModal from "../../modals/CustomModal";
 
 export default function useAuth() {
   //   const Auth = useRecoilValueLoadable(restoreAccessTokenLoadable);
   const router = useRouter();
   const [accessToken] = useRecoilState(accessTokenState);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useRecoilState(authModalState);
+  const [modalState, setModalState] = useRecoilState(globalModalState);
+
+  const handleOk = () => {
+    setModalState({
+      text: "",
+      openModal: false,
+    });
+    router.push("/signin");
+  };
 
   useEffect(() => {
     // 보고 있던 페이지 저장
     localStorage.setItem("prevPage", router.pathname);
-
+    console.log(accessToken);
     if (!accessToken) {
-      setIsAuthModalOpen(true);
-      // router.push("/signin");
+      console.log("hi");
+      setModalState({
+        text: "로그인이 필요합니다.",
+        openModal: true,
+        icontype: "warning",
+        ok: "확인",
+        onClickOk: handleOk,
+      });
     }
-
-    console.log(isAuthModalOpen);
   }, [accessToken]);
-
-  return (
-    <>
-      {isAuthModalOpen && (
-        <CustomModal
-          text="로그인이 필요합니다."
-          icontype="warning"
-          openModal={isAuthModalOpen}
-          ok="확인"
-          onClickCancel={() => setIsLoginModalOpen(false)}
-        />
-      )}
-    </>
-  );
 }

@@ -163,15 +163,6 @@ export default function CommunityWrite({
           </S.SubmitBtn>
         </S.SubmitBtnWrapper>
       </form>
-      {isAuthModalOpen && (
-        <CustomModal
-          icontype="warning"
-          openModal={isAuthModalOpen}
-          text="로그인"
-          ok="닫음"
-          onClickOk={() => setIsLoginModalOpen(false)}
-        ></CustomModal>
-      )}
     </S.Wrapper>
   );
 }
