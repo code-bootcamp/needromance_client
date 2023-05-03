@@ -4,8 +4,11 @@ import Layout from "../src/components/commons/layouts";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 import { SessionProvider } from "next-auth/react";
+import CustomModal from "../src/components/commons/modals/CustomModal";
+import { authModalState } from "../src/commons/store/atoms";
+const [isAuthModalOpen, setIsAuthModalOpen] = useRecoilState(authModalState);
 
 export default function App({
   Component,
@@ -22,6 +25,7 @@ export default function App({
             <Layout>
               <Component {...pageProps} />
             </Layout>
+            <CustomModal text="" openModal={isAuthModalOpen} />
           </GoogleOAuthProvider>
         </SessionProvider>
       </RecoilRoot>

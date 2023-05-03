@@ -21,6 +21,11 @@ export const visitedPageState = atom({
   default: "",
 });
 
+export const authModalState = atom({
+  key: "authModalState",
+  default: false,
+});
+
 // export const restoreAccessTokenLoadable = selector({
 //   key: "restoreAccessTokenLoadable",
 //   get: async () => {

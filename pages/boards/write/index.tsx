@@ -1,9 +1,9 @@
 import CommunityWrite from "../../../src/components/units/boards/write/CommunityWrite";
 
-export default function CoummunityWritePage() {
+export default function CommunityWritePage() {
   return (
     <div>
-      <CommunityWrite />
+      <CommunityWrite isEdit={false} />
     </div>
   );
 }

@@ -65,7 +65,7 @@ export default function BorderInput({
   disabled?: boolean;
   autoComplete?: string;
   value?: any;
-  defaultValue: string;
+  defaultValue?: string;
 }) {
   return (
     <Wrapper>

@@ -6,7 +6,7 @@ import {
   checkVerificationEmail,
   resetPassword,
   sendVerificationEmail,
-} from "../../../commons/api/test";
+} from "../../../commons/api/signup";
 import BorderInput from "../../commons/input/Input";
 import Loader from "../../commons/loader/Loader";
 import CustomModal from "../../commons/modals/CustomModal";

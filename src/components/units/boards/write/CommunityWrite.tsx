@@ -2,7 +2,10 @@ import * as S from "./CommunityWrite.styles";
 import { useFormik } from "formik";
 import { EditBoard, WriteBoard } from "../../../../commons/api/boards";
 import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../../commons/store/atoms";
+import {
+  accessTokenState,
+  authModalState,
+} from "../../../../commons/store/atoms";
 
 import dynamic from "next/dynamic";
 import { createRef, useEffect, useState } from "react";
@@ -33,10 +36,11 @@ export default function CommunityWrite({
   editData,
 }: {
   isEdit: boolean;
-  editData: any;
+  editData?: any;
 }) {
   const router = useRouter();
 
+  const [isAuthModalOpen] = useRecoilState(authModalState);
   const [accessToken] = useRecoilState(accessTokenState);
   const editorRef = createRef<Editor>();
 
@@ -62,7 +66,12 @@ export default function CommunityWrite({
     if (editData?.hashTags?.length > 0) {
       setTagList(editData.hashTags);
     }
-  });
+  }, []);
+
+  // toast editor HTML 보기
+  useEffect(() => {
+    editorRef.current?.getInstance().setHTML(editData?.contents);
+  }, [editData]);
 
   // edit
   const onSubmitEditForm = async () => {
@@ -92,7 +101,9 @@ export default function CommunityWrite({
     }
     formik.setFieldValue("hashTags", tagList);
 
-    const data = await WriteBoard(formik.values, accessToken);
+    const data = await WriteBoard(formik.values, accessToken).then((res) => {
+      router.push(`/boards/${res?.data?.id}`);
+    });
   };
 
   const onChangeContent = () => {
@@ -103,13 +114,14 @@ export default function CommunityWrite({
   };
 
   useAuth();
-
   console.log(formik.values);
-  console.log(editData);
+  console.log(formik.errors);
+  console.log(isAuthModalOpen);
+
   return (
     <S.Wrapper>
       <form>
-        <S.Title>게시글 작성/수정</S.Title>
+        <S.Title>게시글 {isEdit ? "수정" : "작성"}</S.Title>
         <S.TitleInputWrapper>
           <S.InfoTitle>제목</S.InfoTitle>
           <S.InputWrapper>
@@ -147,14 +159,14 @@ export default function CommunityWrite({
         </S.TitleInputWrapper>
         <S.SubmitBtnWrapper>
           <S.SubmitBtn type="button" onClick={onSubmitForm}>
-            작성하기
+            {isEdit ? "수정하기" : "작성하기"}
           </S.SubmitBtn>
         </S.SubmitBtnWrapper>
       </form>
-      {isLoginModalOpen && (
+      {isAuthModalOpen && (
         <CustomModal
           icontype="warning"
-          openModal={isLoginModalOpen}
+          openModal={isAuthModalOpen}
           text="로그인"
           ok="닫음"
           onClickOk={() => setIsLoginModalOpen(false)}
