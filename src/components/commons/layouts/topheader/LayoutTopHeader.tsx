@@ -52,16 +52,16 @@ export default function LayoutTopHeader() {
   console.log("headerUser", userProfile);
   return (
     <TopHeader>
-      {userProfile.length !== 0 && userProfile && (
+      {userProfile?.length !== 0 && userProfile && (
         <Profile>
           <ProfileImg
-            src={userProfile?.picture || "/img/community/default_userImg.png"}
+            src={userProfile?.userImg || "/img/community/default_userImg.png"}
             alt="프로필 사진"
           />
           <span>{userProfile?.name || userProfile?.nickname}</span>
         </Profile>
       )}
-      {userProfile.length === 0 ? (
+      {userProfile?.length === 0 ? (
         <Link href={"/signin"}>
           <Menu>로그인</Menu>
         </Link>
