@@ -8,7 +8,7 @@ import { RecoilRoot, useRecoilState } from "recoil";
 import { SessionProvider } from "next-auth/react";
 import CustomModal from "../src/components/commons/modals/CustomModal";
 import { authModalState } from "../src/commons/store/atoms";
-const [isAuthModalOpen, setIsAuthModalOpen] = useRecoilState(authModalState);
+// const [isAuthModalOpen, setIsAuthModalOpen] = useRecoilState(authModalState);
 
 export default function App({
   Component,
@@ -25,7 +25,7 @@ export default function App({
             <Layout>
               <Component {...pageProps} />
             </Layout>
-            <CustomModal text="" openModal={isAuthModalOpen} />
+            {/* <CustomModal text="" openModal={isAuthModalOpen} /> */}
           </GoogleOAuthProvider>
         </SessionProvider>
       </RecoilRoot>
