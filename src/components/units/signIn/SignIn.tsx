@@ -3,7 +3,7 @@ import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
 import GoogleSignIn from "./GoogleSignIn";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { login } from "../../../commons/api/test";
+import { login } from "../../../commons/api/signup";
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store/atoms";

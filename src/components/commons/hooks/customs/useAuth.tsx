@@ -1,21 +1,42 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import { accessTokenState } from "../../../../commons/store/atoms";
+import {
+  accessTokenState,
+  authModalState,
+} from "../../../../commons/store/atoms";
+import CustomModal from "../../modals/CustomModal";
 
 export default function useAuth() {
   //   const Auth = useRecoilValueLoadable(restoreAccessTokenLoadable);
   const router = useRouter();
   const [accessToken] = useRecoilState(accessTokenState);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useRecoilState(authModalState);
 
   useEffect(() => {
     // 보고 있던 페이지 저장
     localStorage.setItem("prevPage", router.pathname);
 
-    // if (!accessToken) {
-    //   console.log("accessToken없음!", accessToken);
-    //   router.push("/signin");
-    // }
-    // 지금 로그인, 로그아웃이 제대로 안 돼서 주석처리 해놨음
-  }, []);
+    if (!accessToken) {
+      setIsAuthModalOpen(true);
+      // router.push("/signin");
+    }
+
+    console.log(isAuthModalOpen);
+  }, [accessToken]);
+
+  return (
+    <>
+      {isAuthModalOpen && (
+        <CustomModal
+          text="로그인이 필요합니다."
+          icontype="warning"
+          openModal={isAuthModalOpen}
+          ok="확인"
+          onClickCancel={() => setIsLoginModalOpen(false)}
+        />
+      )}
+    </>
+  );
 }

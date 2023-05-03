@@ -63,6 +63,8 @@ export const SubmitBtn = styled.button`
   font-size: var(--font-size-md);
   border-radius: var(--btn-radius);
   padding: var(--btn-padding);
-  min-width: var(--btn-width-lg);
-  height: var(--btn-height);
+  /* min-width: var(--btn-width-lg); */
+  min-width: 10rem;
+  /* height: var(--btn-height); */
+  height: 3rem;
 `;

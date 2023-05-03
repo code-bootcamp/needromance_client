@@ -11,7 +11,7 @@ import {
   checkVerificationEmail,
   sendVerificationEmail,
   signUp,
-} from "../../../commons/api/test";
+} from "../../../commons/api/signup";
 
 // components
 import BorderInput from "../../commons/input/Input";

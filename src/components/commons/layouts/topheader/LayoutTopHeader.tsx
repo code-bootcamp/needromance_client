@@ -3,7 +3,7 @@ import { googleLogout } from "@react-oauth/google";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { getUserInfo, logout } from "../../../../commons/api/test";
+import { getUserInfo, logout } from "../../../../commons/api/signup";
 import {
   accessTokenState,
   userProfileState,
@@ -16,16 +16,14 @@ export default function LayoutTopHeader() {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
   useEffect(() => {
-    console.log("acc", accessToken);
     if (accessToken) {
-      console.log("발동됨");
       getUserInformation();
     }
   }, [accessToken]);
 
   const getUserInformation = async () => {
     const data = await getUserInfo(accessToken);
-    console.log(data);
+
     // 페이지 새로고침시 state가 초기화되는 현상을 막기위헤,  로컬 스토리지에 담아준다!
     if (typeof window !== "undefined") {
       localStorage.setItem("userProfile", data);
@@ -33,7 +31,7 @@ export default function LayoutTopHeader() {
     setUserProfile(data);
 
     // 어드민 계정일 경우 어드민 페이지로 라우팅
-    if (data.email === "admin@romance.com" && data.nickname === "admin") {
+    if (data?.email === "admin@romance.com" && data?.nickname === "admin") {
       router.push("/admin");
     }
   };
@@ -43,13 +41,14 @@ export default function LayoutTopHeader() {
     setUserProfile([]);
   };
 
+  // 로그아웃 api, localstorage, 전역 변수 지우기
   const logOut = async () => {
     await logout(accessToken);
     localStorage.clear();
+    setAccessToken("");
     router.push("/");
   };
 
-  console.log("headerUser", userProfile);
   return (
     <TopHeader>
       {userProfile?.length !== 0 && userProfile && (
@@ -58,7 +57,9 @@ export default function LayoutTopHeader() {
             src={userProfile?.userImg || "/img/community/default_userImg.png"}
             alt="프로필 사진"
           />
-          <span>{userProfile?.name || userProfile?.nickname}</span>
+          <Link href={"/mypage"}>
+            <a>{userProfile?.name || userProfile?.nickname}</a>
+          </Link>
         </Profile>
       )}
       {userProfile?.length === 0 ? (
@@ -117,6 +118,15 @@ const Profile = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 100%;
+  }
+
+  a {
+    color: #d2d2d2;
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+    }
   }
 `;
 

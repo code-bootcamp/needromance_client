@@ -17,7 +17,7 @@ export default function CommunityWritePage() {
 
   return (
     <div>
-      <CommunityWrite editData={data} />
+      <CommunityWrite isEdit={true} editData={data} />
     </div>
   );
 }
