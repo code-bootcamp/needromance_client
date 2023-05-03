@@ -107,22 +107,6 @@ const HashtagWrapper = styled.div`
   /* padding: 0px 0px; */
 `;
 
-const Hashtag = styled.div`
-  height: 30px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  font-size: var(--font-size-xs);
-  border-radius: 3px;
-  background-color: #cfbbae;
-  color: white;
-
-  &:hover {
-    background-color: #baa08f;
-    cursor: pointer;
-  }
-`;
-
 const CommentDateWrapper = styled.div`
   /* width: 100%; */
   height: 100%;
@@ -152,8 +136,6 @@ const Date = styled.span`
   bottom: 20px;
 `;
 
-const Heart = styled.div``;
-
 export default function Writing({
   name,
   userImg,
@@ -174,7 +156,7 @@ export default function Writing({
   onClick: () => void;
 }) {
   // tags
-  const tags = hashtags?.map((el) => el.tag);
+  const Hashtags = hashtags?.map((el: any) => el.tag);
   // 시크릿코드
   const mySecretCode = uuidv4();
 
@@ -220,7 +202,7 @@ export default function Writing({
           ></div>
         </Content>
         <HashtagWrapper>
-          <Tag tags={tags!} />
+          <Tag tags={Hashtags!} />
         </HashtagWrapper>
       </ContentWrapper>
       <CommentDateWrapper>
