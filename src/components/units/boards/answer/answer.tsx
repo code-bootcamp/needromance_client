@@ -126,13 +126,6 @@ const TagHeartWrapper = styled.div`
   }
 `;
 
-const RankingTag = styled.div`
-  position: relative;
-  width: 50px;
-  height: 100px;
-  background-color: blue;
-`;
-
 const RankingSeal = styled.div`
   position: absolute;
   width: 60px;

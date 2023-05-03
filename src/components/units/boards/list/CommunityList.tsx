@@ -1,20 +1,24 @@
-import { KeyboardEvent, useCallback, useEffect, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { KeyboardEvent, useEffect, useState } from "react";
 import * as S from "./CommunityList.styles";
 import { v4 as uuidv4 } from "uuid";
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 
 // api
 import { GetBoards, SearchBoard } from "../../../../commons/api/boards";
 import { BestUsers } from "../../../../commons/api/user";
 import { BestAnswer } from "../../../../commons/api/answers";
 
+// type
+import { IBoardsType } from "../Boards.types";
+import { IAnswersType } from "../../communityComment/Comment.types";
+import { IUserType } from "../../myPage/User.types";
+
 // components
-import CustomBtn from "../../../commons/buttons/CustomBtn";
 import Tag from "../../../commons/hashtag/HashTag";
 import Medal from "../medal/medal";
 import Answer from "../answer/answer";
 import Writing from "../writing/Writing";
-import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import CustomBtn from "../../../commons/buttons/CustomBtn";
 import CustomSearchInput from "../../../commons/search/CustomSearchInput";
 
 export default function CommunityList() {
@@ -29,21 +33,41 @@ export default function CommunityList() {
   const [keyword, setKeyword] = useState<string>("");
   const [keywordStore, setKeywordStore] = useState<string>("");
   // infinity
-  const [loadingErr, setLoadingError] = useState(null);
-  const [page, setPage] = useState(1);
+  const [loadingErr, setLoadingError] = useState("");
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     fetch();
+    // fetchInitialBoards
+    const fetchInitialBoards = async () => {
+      const initialBoards = await fetchBoards(1);
+      setBoards(initialBoards);
+    };
+    fetchInitialBoards();
+    // scroll
+    document.body.addEventListener("scroll", handleScroll);
+    return () => document.body.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetch = async () => {
     const ranking = await BestUsers();
     const answers = await BestAnswer();
-    const boards = await GetBoards(1);
-    const rankingUser = ranking?.map((user: any) => user.nickname);
+    console.log(ranking);
+    const rankingUser = ranking?.map((user: IUserType) => user.nickname);
     setRanking(rankingUser);
     setAnswers(answers);
-    setBoards(boards);
+  };
+
+  const fetchBoards = async (pageNum: number) => {
+    try {
+      const fetchedBoards = await GetBoards(pageNum);
+      return fetchedBoards;
+    } catch (error) {
+      if (error instanceof Error) {
+        setLoadingError(error.message);
+      }
+    }
   };
 
   const fetchSearch = async () => {
@@ -69,43 +93,24 @@ export default function CommunityList() {
     setKeyword("");
   };
 
-  const onLoadMore = async () => {
-    setLoadingError(null);
-    setPage((prevPage) => prevPage + 1);
-    console.log("==== onLoadMore ===", page);
-    try {
-      const boards = await GetBoards(page);
-      // setBoards((prevItems) => [...prevItems, ...boards]);
-      setBoards((preBoards) => preBoards.concat(boards));
-    } catch (error) {
-      setLoadingError(error);
+  const handleScroll = () => {
+    if (document.documentElement.clientHeight <= document.body.scrollTop) {
+      onLoadMore();
     }
   };
 
-  const fetchBoards = useCallback(async () => {
-    setLoadingError(null);
+  const onLoadMore = async () => {
+    setLoadingError("");
     setPage((prevPage) => prevPage + 1);
-    console.log("==== onLoadMore ===", page);
-    try {
-      const boards = await GetBoards(page);
-      setBoards((prevItems) => [...prevItems, ...boards]);
-      // setBoards((preBoards) => preBoards.concat(boards));
-    } catch (error) {
-      setLoadingError(error.message);
-    }
-  }, [page]);
-
-  const handleScroll = () => {
-    console.log("scrolled!", document.documentElement.clientHeight);
-    if (document.documentElement.clientHeight <= document.body.scrollTop) {
-      fetchBoards();
-    }
   };
 
   useEffect(() => {
-    document.body.addEventListener("scroll", handleScroll);
-    return () => document.body.removeEventListener("scroll", handleScroll);
-  }, []);
+    const fetchMoreBoards = async () => {
+      const moreBoards = await fetchBoards(page);
+      setBoards((prevBoards) => prevBoards.concat(moreBoards));
+    };
+    fetchMoreBoards();
+  }, [page]);
 
   return (
     <S.Wrapper>
@@ -120,7 +125,7 @@ export default function CommunityList() {
         </S.MedalWrapper>
       </S.Ranking>
       <S.BestAnswerWrapper>
-        {answers?.map((answer: any, index: number) => (
+        {answers?.map((answer: IAnswersType, index: number) => (
           <Answer
             key={uuidv4()}
             name={answer.nickname}
@@ -172,7 +177,7 @@ export default function CommunityList() {
             </S.AskCounsel>
           )}
           <S.LatestCounselWriting>
-            {searchs?.map((board: any) => (
+            {searchs?.map((board: IBoardsType) => (
               <Writing
                 key={board.id}
                 name={board.user.nickname}
@@ -200,15 +205,9 @@ export default function CommunityList() {
           />
         </S.LatestCounsel>
 
-        {/* <InfiniteScroll
-          dataLength={boards?.length}
-          next={onLoadMore}
-          hasMore={true}
-          loader={<p>Loading...</p>}
-        > */}
         <div id="Scroller">
           <S.LatestCounselWriting>
-            {boards?.map((board: any) => (
+            {boards?.map((board: IBoardsType) => (
               <Writing
                 key={board.id}
                 name={board.user.nickname}
@@ -222,8 +221,7 @@ export default function CommunityList() {
             ))}
           </S.LatestCounselWriting>
         </div>
-        {/* </InfiniteScroll> */}
-        {loadingErr && <p>Error: {loadingErr.message}</p>}
+        {loadingErr && <p>Error: {loadingErr}</p>}
       </S.CounselWrapper>
     </S.Wrapper>
   );

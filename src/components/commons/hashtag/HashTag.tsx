@@ -40,7 +40,7 @@ export const HashTag = styled.div`
     font-size: var(--font-mobile-size-sm);
   }
 `;
-export default function Tag({ tags }: { tags: string[] }) {
+export default function Tag({ tags }) {
   return (
     <TagBox>
       {tags?.map((tag: string) => (

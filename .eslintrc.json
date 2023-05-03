@@ -28,6 +28,8 @@
     "sort-vars": "warn",
     "curly": "error",
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "var", "next": "return" }

@@ -1,23 +1,25 @@
-import { useRouter } from "next/router";
-import CustomBtn from "../../../commons/buttons/CustomBtn";
-import Tag from "../../../commons/hashtag/HashTag";
-import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
-import CummunityCommentListContainer from "../../communityComment/list/CommunityCommentList.container";
 import * as S from "./CommunityDetail.style";
-import { getDate } from "../../../../commons/libraries/getDate";
-import { DeleteBoard, GetBoard } from "../../../../commons/api/boards";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import { getDate } from "../../../../commons/libraries/getDate";
+import Dompurify from "dompurify";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../commons/store/atoms";
-import Popup from "../../../commons/modals/PopupModal";
 import { userProfileState } from "../../../../commons/store/atoms";
-import Dompurify from "dompurify";
+// components
+import Tag from "../../../commons/hashtag/HashTag";
+import CustomBtn from "../../../commons/buttons/CustomBtn";
+import CummunityCommentListContainer from "../../communityComment/list/CommunityCommentList.container";
+import Popup from "../../../commons/modals/PopupModal";
+// API
+import { DeleteBoard, GetBoard } from "../../../../commons/api/boards";
 
 const CommunityDetailContainer = () => {
   const router = useRouter();
   const { onClickMoveToPage } = useMoveToPage();
   // data
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<object>({});
   const [checkUser, setCheckUser] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [warning, setWarning] = useState(false);
@@ -30,6 +32,7 @@ const CommunityDetailContainer = () => {
   useEffect(() => {
     fetch();
     getUserInformation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query.communityId]);
 
   const fetch = async () => {
@@ -54,8 +57,8 @@ const CommunityDetailContainer = () => {
     }
   };
 
-  console.log("***토큰:", accessToken);
-  console.log("***유저:", checkUser);
+  console.log(data);
+  const Hashtags = data?.hashtags?.map((el: any) => el.tag);
 
   return (
     <>
@@ -109,7 +112,7 @@ const CommunityDetailContainer = () => {
             </S.RigthWrap>
           </S.InnerWrap>
           <S.FooterWrap>
-            <Tag tags={data?.tags} />
+            <Tag tags={Hashtags} />
             <S.CreatedAt>{getDate(data?.createdAt)}</S.CreatedAt>
             <S.View>
               <span>💌 조회수</span>
