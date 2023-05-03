@@ -1,4 +1,5 @@
-import { KeyboardEvent, useEffect, useState } from "react";
+import { KeyboardEvent, useCallback, useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import * as S from "./CommunityList.styles";
 import { v4 as uuidv4 } from "uuid";
 
@@ -27,23 +28,10 @@ export default function CommunityList() {
   const [isSearch, setIsSearch] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>("");
   const [keywordStore, setKeywordStore] = useState<string>("");
-  // scroll
-  const [currPage, setCurrPage] = useState<number>(1);
-  // const handleScroll = async () => {
-  //   const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-  //   console.log(scrollTop, clientHeight, scrollHeight);
+  // infinity
+  const [loadingErr, setLoadingError] = useState(null);
+  const [page, setPage] = useState(1);
 
-  //   if (scrollTop + clientHeight >= scrollHeight) {
-  //     setCurrPage((prevPage) => prevPage + 1);
-  //     const newBoards = await GetBoards(currPage);
-  //     setBoards((prevBoards) => prevBoards.concat(newBoards));
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [handleScroll]);
   useEffect(() => {
     fetch();
   }, []);
@@ -80,6 +68,44 @@ export default function CommunityList() {
   const onClickClear = () => {
     setKeyword("");
   };
+
+  const onLoadMore = async () => {
+    setLoadingError(null);
+    setPage((prevPage) => prevPage + 1);
+    console.log("==== onLoadMore ===", page);
+    try {
+      const boards = await GetBoards(page);
+      // setBoards((prevItems) => [...prevItems, ...boards]);
+      setBoards((preBoards) => preBoards.concat(boards));
+    } catch (error) {
+      setLoadingError(error);
+    }
+  };
+
+  const fetchBoards = useCallback(async () => {
+    setLoadingError(null);
+    setPage((prevPage) => prevPage + 1);
+    console.log("==== onLoadMore ===", page);
+    try {
+      const boards = await GetBoards(page);
+      setBoards((prevItems) => [...prevItems, ...boards]);
+      // setBoards((preBoards) => preBoards.concat(boards));
+    } catch (error) {
+      setLoadingError(error.message);
+    }
+  }, [page]);
+
+  const handleScroll = () => {
+    console.log("scrolled!", document.documentElement.clientHeight);
+    if (document.documentElement.clientHeight <= document.body.scrollTop) {
+      fetchBoards();
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("scroll", handleScroll);
+    return () => document.body.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <S.Wrapper>
@@ -174,20 +200,30 @@ export default function CommunityList() {
           />
         </S.LatestCounsel>
 
-        <S.LatestCounselWriting>
-          {boards?.map((board: any) => (
-            <Writing
-              key={board.id}
-              name={board.user.nickname}
-              userImg={board.user.userImg}
-              content={board.contents}
-              hashtags={board.hashtags}
-              createdAt={board.createdAt}
-              answers={board.answers.length}
-              onClick={onClickMoveToPage(`/boards/${board.id}`)}
-            />
-          ))}
-        </S.LatestCounselWriting>
+        {/* <InfiniteScroll
+          dataLength={boards?.length}
+          next={onLoadMore}
+          hasMore={true}
+          loader={<p>Loading...</p>}
+        > */}
+        <div id="Scroller">
+          <S.LatestCounselWriting>
+            {boards?.map((board: any) => (
+              <Writing
+                key={board.id}
+                name={board.user.nickname}
+                userImg={board.user.userImg}
+                content={board.contents}
+                hashtags={board.hashtags}
+                createdAt={board.createdAt}
+                answers={board.answers.length}
+                onClick={onClickMoveToPage(`/boards/${board.id}`)}
+              />
+            ))}
+          </S.LatestCounselWriting>
+        </div>
+        {/* </InfiniteScroll> */}
+        {loadingErr && <p>Error: {loadingErr.message}</p>}
       </S.CounselWrapper>
     </S.Wrapper>
   );
