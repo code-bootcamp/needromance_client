@@ -31,20 +31,23 @@ interface ILayoutProps {
 }
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
-
-  const HIDDEN_SIDEBAR = ["/", "/boards"];
-  const isHiddenSidebar = HIDDEN_SIDEBAR.includes(router.asPath);
   const [modalState] = useRecoilState(globalModalState);
 
+  const HIDDEN_PAGE = ["/signin", "/signup"];
+  const isHidden = HIDDEN_PAGE.includes(router.asPath);
   return (
     <>
       <MainWrapper>
         <Wrapper>
-          <LayoutTopHeader />
-          <LayoutHeader />
-          <LayoutNavigation />
+          {!isHidden && (
+            <>
+              <LayoutTopHeader />
+              <LayoutHeader />
+              <LayoutNavigation />
+            </>
+          )}
           <Body>{props.children}</Body>
-          <LayoutFooter />
+          {!isHidden && <LayoutFooter />}
         </Wrapper>
         <CustomModal
           text={modalState?.text}

@@ -1,10 +1,18 @@
 import styled from "@emotion/styled";
+import { breakPoints } from "../../../commons/styles/media";
 
 export const Wrapper = styled.section`
   padding: 50px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${breakPoints.mobile} {
+    padding: 0;
+  }
+  @media ${breakPoints.tablet} {
+    padding: 0;
+  }
 `;
 
 export const SignInWindow = styled.div`

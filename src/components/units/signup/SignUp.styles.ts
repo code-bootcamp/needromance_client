@@ -15,6 +15,11 @@ export const Wrapper = styled.section`
 
   @media ${breakPoints.mobile} {
     width: 100%;
+    padding: 0;
+  }
+
+  @media ${breakPoints.tablet} {
+    padding: 0;
   }
 `;
 
