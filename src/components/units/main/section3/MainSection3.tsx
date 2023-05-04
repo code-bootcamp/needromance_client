@@ -127,13 +127,13 @@ export default function MainSection3UI(): JSX.Element {
       <WrapperBody>
         <BodyImgBox>
           <Image
-            src="/img/main/section3_img1.png"
+            src="/img/main/section3_img1.webp"
             alt="img"
             width={400}
             height={400}
           />
           <Image
-            src="/img/main/section3_img2.png"
+            src="/img/main/section3_img2.webp"
             alt="img"
             width={400}
             height={400}

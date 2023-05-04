@@ -6,6 +6,8 @@ import { ChangeEvent, KeyboardEvent, useState } from "react";
 import useAuth from "../../commons/hooks/customs/useAuth";
 
 export default function ChatGPT() {
+  useAuth();
+
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userText, setUserText] = useState("");
   const [messageList, setMessageList] = useState<string[]>([]);
@@ -45,8 +47,6 @@ export default function ChatGPT() {
       setLoading(false);
     }
   };
-
-  useAuth();
 
   return (
     <ChatGPTUI

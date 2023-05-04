@@ -174,7 +174,7 @@ export default function MainSection2UI(): JSX.Element {
         <BodyImgBox>
           <div>
             <Image
-              src="/img/main/section2_img1.png"
+              src="/img/main/section2_img1.webp"
               alt="img"
               layout="fill"
               objectFit="contain"
@@ -182,7 +182,7 @@ export default function MainSection2UI(): JSX.Element {
           </div>
           <div>
             <Image
-              src="/img/main/section2_img2.png"
+              src="/img/main/section2_img2.webp"
               alt="img"
               layout="fill"
               objectFit="contain"
@@ -203,7 +203,7 @@ export default function MainSection2UI(): JSX.Element {
             type={"Md"}
             fill={true}
             text={"채팅하러가기"}
-            onClick={onClickMoveToPage(`/chatgpt/${userProfile.id}`)}
+            onClick={onClickMoveToPage(`/chatgpt/${userProfile?.id}`)}
           />
         </BtnPosition>
       </WrapperBody>
