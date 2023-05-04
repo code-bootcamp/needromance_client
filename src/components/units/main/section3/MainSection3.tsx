@@ -159,7 +159,7 @@ export default function MainSection3UI(): JSX.Element {
             type={"Sm"}
             fill={true}
             text={"친구들과 소통하기"}
-            onClick={onClickMoveToPage("/community")}
+            onClick={onClickMoveToPage("/boards")}
           />
         </BtnPosition>
       </WrapperBody>
