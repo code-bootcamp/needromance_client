@@ -86,7 +86,6 @@ export default function CommunityWrite({
     formik.setFieldValue("hashTags", tagList);
 
     const data = await EditBoard(router.pathname, formik.values, accessToken);
-    console.log(data);
   };
 
   // write

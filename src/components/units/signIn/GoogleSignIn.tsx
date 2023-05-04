@@ -66,9 +66,6 @@ export default function GoogleSignIn() {
     }
   }, [user]);
 
-  // console.log(user);
-  // console.log(profile);
-
   const googleSocialLogin = useGoogleLogin({
     onSuccess: (res) => {
       setUser(res);
@@ -79,8 +76,6 @@ export default function GoogleSignIn() {
     // scope: "https://www.googleapis.com/auth/business.manage",
   });
 
-  console.log(user);
-  console.log(userProfile);
   return (
     <div>
       <GoogleLoginButton onClick={() => googleSocialLogin()}>

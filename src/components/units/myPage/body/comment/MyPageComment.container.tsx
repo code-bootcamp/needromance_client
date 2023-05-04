@@ -47,7 +47,6 @@ const MyPageComment = ({ myData }: any) => {
     }
   };
 
-  console.log(comments);
   return (
     <>
       <MyPageTitle>"{myData.nickname}"님의 답변들</MyPageTitle>

@@ -2,9 +2,7 @@ import { Icon_Bell, Icon_Close } from "../../../../../commons/styles/icons";
 import * as S from "./MyPageNotification.style";
 
 const MyPageNotification = () => {
-  const handleDeleteNoti = () => {
-    console.log("삭제 클릭");
-  };
+  const handleDeleteNoti = () => {};
 
   return (
     <>

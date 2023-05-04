@@ -12,7 +12,6 @@ export const postUserQuestion = async (
   data: IUserQestionData
 ): Promise<string> => {
   const { accessToken, text } = data;
-  console.log(accessToken);
   try {
     const response = await axios({
       method: "post",

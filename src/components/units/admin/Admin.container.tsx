@@ -88,7 +88,6 @@ export default function Admin() {
       ...keyword,
       [e.currentTarget.name]: e.currentTarget.value,
     });
-    console.log(keyword);
   };
 
   // 검색어 초기화 함수
