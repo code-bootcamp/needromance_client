@@ -21,8 +21,11 @@ import {
   userProfileState,
 } from "../../../commons/store/atoms";
 import useAuth from "../../commons/hooks/customs/useAuth";
+import { useRouter } from "next/router";
 
 export default function Admin() {
+  const router = useRouter();
+  useAuth();
   // accessToken
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
@@ -41,6 +44,10 @@ export default function Admin() {
   const [getDeleteId, setGetDeleteId] = useState("");
   const [getBanId, setGetBanId] = useState("");
 
+  // 임시로 어드민 로그인 - 로그아웃 일반유저 로그인시 어드민 페이지로 이동되는 버그 수정
+  if (userProfile.email !== "admin@romance.com") {
+    router.push("/");
+  }
   // 유저목록 검색어 초기화시 리스트 리렌더링
   const getAllUsersData = useCallback(async () => {
     try {
@@ -167,7 +174,6 @@ export default function Admin() {
     setOpenTabs(!prev);
   };
 
-  useAuth();
   return (
     <AdminUI
       pageTabs={pageTabs}
