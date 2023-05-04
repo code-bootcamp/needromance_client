@@ -23,7 +23,6 @@ export default function useAuth() {
 
   useEffect(() => {
     if (!accessToken) {
-      console.log("hi");
       setModalState({
         text: "로그인이 필요합니다.",
         openModal: true,

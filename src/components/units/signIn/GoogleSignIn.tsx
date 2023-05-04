@@ -2,9 +2,13 @@ import styled from "@emotion/styled";
 // import { GoogleLogin } from "@react-oauth/google";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { userProfileState } from "../../../commons/store/atoms";
+import {
+  accessTokenState,
+  userProfileState,
+} from "../../../commons/store/atoms";
 
 const GoogleLoginButton = styled.div`
   position: relative;
@@ -30,8 +34,10 @@ const GoogleLogo = styled.img`
 `;
 
 export default function GoogleSignIn() {
+  const router = useRouter();
   const [user, setUser] = useState([]);
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
   useEffect(() => {
     if (user.length !== 0) {
@@ -47,6 +53,14 @@ export default function GoogleSignIn() {
         )
         .then((res) => {
           setUserProfile(res.data);
+          setAccessToken(user.access_token);
+          const page = localStorage.getItem("prevPage");
+
+          if (page) {
+            router.push(String(page));
+          } else {
+            router.push("/");
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -56,13 +70,17 @@ export default function GoogleSignIn() {
   // console.log(profile);
 
   const googleSocialLogin = useGoogleLogin({
-    onSuccess: (res) => setUser(res),
+    onSuccess: (res) => {
+      setUser(res);
+    },
     onError: (res) => console.log(res, "로그인 실패"),
     // flow: "auth-code",
 
     // scope: "https://www.googleapis.com/auth/business.manage",
   });
 
+  console.log(user);
+  console.log(userProfile);
   return (
     <div>
       <GoogleLoginButton onClick={() => googleSocialLogin()}>
