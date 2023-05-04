@@ -3,13 +3,12 @@ import { FaGithub } from "react-icons/fa";
 
 const Wrapper = styled.footer`
   width: 100%;
-  max-width: 1100px;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-size: 0.8rem;
-  padding: 2px;
+  padding: 20px 4px;
   font-family: var(--eng-font);
 `;
 
@@ -17,6 +16,7 @@ const Info = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 20px;
 `;
 
 const InfoLeft = styled.div`
@@ -24,12 +24,21 @@ const InfoLeft = styled.div`
 `;
 
 const InfoRight = styled.div`
-  width: 30%;
-  line-height: 1.6;
   display: flex;
   flex-direction: row;
   justify-content: right;
   font-size: 1.2rem;
+`;
+
+const GitBtn = styled.div`
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  span {
+    margin-left: 2px;
+    line-height: 1.2;
+  }
 `;
 
 export default function LayoutFooter() {
@@ -48,11 +57,17 @@ export default function LayoutFooter() {
           사업자등록번호 : 000-00-00000 <br />
         </InfoLeft>
         <InfoRight>
-          <div>
+          <GitBtn
+            onClick={() =>
+              window.open(
+                "https://github.com/code-bootcamp/pbp1_team02_client",
+                "_blank"
+              )
+            }
+          >
             <FaGithub />
-            {"   "}
-            Github
-          </div>
+            <span>Github</span>
+          </GitBtn>
         </InfoRight>
       </Info>
       Copyright© INeedRomance(주) All rights reserved.
