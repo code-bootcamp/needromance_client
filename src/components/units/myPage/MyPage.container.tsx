@@ -11,7 +11,6 @@ import MyPageContent from "./body/MyPage.body";
 // 권한분기
 import useAuth from "../../commons/hooks/customs/useAuth";
 
-
 const MyPageContainer = () => {
   // data
   const [myData, setMyData] = useState<object>({});

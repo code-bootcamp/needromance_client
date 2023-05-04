@@ -56,6 +56,9 @@ const MyPageBoard = ({ myData }: any) => {
 
   const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value);
+    if (event.target.value === "") {
+      onClickClear();
+    }
   };
 
   const fetchSearch = async () => {
@@ -130,17 +133,25 @@ const MyPageBoard = ({ myData }: any) => {
                   </p>
                   <br />
                   <p>
-                    {(data?.contents)
-                      .replaceAll(
-                        keyword,
-                        `${mySecretCode}${keyword}${mySecretCode}`
-                      )
-                      .split(mySecretCode)
-                      .map((el: any) => (
-                        <S.Keyword key={uuidv4()} isKeyword={el === keyword}>
-                          {el}
-                        </S.Keyword>
-                      ))}
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: Dompurify.sanitize(
+                          (data?.contents)
+                            .replaceAll(
+                              keyword!,
+                              `${mySecretCode}${keyword}${mySecretCode}`
+                            )
+                            .split(mySecretCode)
+                            .map((el: any) => {
+                              if (el === keyword) {
+                                return `<Keyword key=${uuidv4()} isKeyword={true}>${el}</Keyword>`;
+                              }
+                              return el;
+                            })
+                            .join("")
+                        ),
+                      }}
+                    ></div>
                   </p>
                   <br />
                   <p>{getDate(data?.createdAt)}</p>
@@ -177,7 +188,6 @@ const MyPageBoard = ({ myData }: any) => {
                       __html: Dompurify.sanitize(data?.contents),
                     }}
                   ></div>
-
                   <br />
                   <p>{getDate(data?.createdAt)}</p>
                 </S.TD>
