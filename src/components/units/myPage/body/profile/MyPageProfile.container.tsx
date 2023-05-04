@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { IMyPageProps } from "../../MyPage.type";
+// components
 import MyPageProfileDetail from "./detail/MyPageProfile.detail.container";
 import MyPageProfileEdit from "./edit/MyPageProfile.edit.container";
-import { IMyPageProps } from "../../MyPage.type";
 
 const MyPageProfile = ({ myData, setMyData }: IMyPageProps) => {
   const [IsEdit, setIsEdit] = useState<boolean>(false);

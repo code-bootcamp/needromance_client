@@ -1,15 +1,18 @@
+import * as S from "./MyPageComment.style";
 import { useEffect, useState } from "react";
-import { GetUserAnswer } from "../../../../../commons/api/user";
 import {
   Icon_Delete,
   Icon_Heart,
   Icon_HeartFilled,
 } from "../../../../../commons/styles/icons";
 import { MyPageTitle } from "../MyPage.body.style";
-import * as S from "./MyPageComment.style";
 import { getDate } from "../../../../../commons/libraries/getDate";
+// api
+import { GetUserAnswer } from "../../../../../commons/api/user";
 import { DeleteAnswer } from "../../../../../commons/api/answers";
+// modal
 import Popup from "../../../../commons/modals/PopupModal";
+// G-state
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../../commons/store/atoms";
 

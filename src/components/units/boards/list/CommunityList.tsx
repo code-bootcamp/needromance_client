@@ -1,7 +1,7 @@
 import * as S from "./CommunityList.styles";
 import { KeyboardEvent, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
+import { v4 as uuidv4 } from "uuid";
 // api
 import { GetBoards, SearchBoard } from "../../../../commons/api/boards";
 import { BestUsers } from "../../../../commons/api/user";
@@ -203,22 +203,20 @@ export default function CommunityList() {
           />
         </S.LatestCounsel>
 
-        <div id="Scroller">
-          <S.LatestCounselWriting>
-            {boards?.map((board: IBoardsType) => (
-              <Writing
-                key={uuidv4()}
-                name={board.user.nickname}
-                userImg={board.user.userImg}
-                content={board.contents}
-                hashtags={board.hashtags}
-                createdAt={board.createdAt}
-                answers={board.answers.length}
-                onClick={onClickMoveToPage(`/boards/${board.id}`)}
-              />
-            ))}
-          </S.LatestCounselWriting>
-        </div>
+        <S.LatestCounselWriting>
+          {boards?.map((board: IBoardsType) => (
+            <Writing
+              key={uuidv4()}
+              name={board.user.nickname}
+              userImg={board.user.userImg}
+              content={board.contents}
+              hashtags={board.hashtags}
+              createdAt={board.createdAt}
+              answers={board.answers.length}
+              onClick={onClickMoveToPage(`/boards/${board.id}`)}
+            />
+          ))}
+        </S.LatestCounselWriting>
         {loadingErr && <p>Error: {loadingErr}</p>}
       </S.CounselWrapper>
     </S.Wrapper>

@@ -1,11 +1,16 @@
-import MyPageNav from "./nav/MyPageNav";
 import * as S from "./MyPage.style";
 import { useEffect, useState } from "react";
-import MyPageContent from "./body/MyPage.body";
-import { GetUserInfo } from "../../../commons/api/user";
+// G-state
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../commons/store/atoms";
+// api
+import { GetUserInfo } from "../../../commons/api/user";
+// component
+import MyPageNav from "./nav/MyPageNav";
+import MyPageContent from "./body/MyPage.body";
+// 권한분기
 import useAuth from "../../commons/hooks/customs/useAuth";
+
 
 const MyPageContainer = () => {
   // data

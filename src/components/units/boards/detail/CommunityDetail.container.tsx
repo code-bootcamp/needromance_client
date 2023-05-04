@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import { getDate } from "../../../../commons/libraries/getDate";
 import Dompurify from "dompurify";
+// G-state
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../commons/store/atoms";
 import { userProfileState } from "../../../../commons/store/atoms";
@@ -102,11 +103,12 @@ const CommunityDetailContainer = () => {
             </S.LeftWrap>
             <S.RigthWrap>
               <S.StampWrap>
-                {data?.user?.userImg ? (
-                  <S.ProfileImg src={data?.user?.userImg} />
-                ) : (
-                  <S.ProfileImg src="/img/community/default_userImg.png" />
-                )}
+                <S.ProfileImg
+                  src={
+                    data?.user?.userImg || "/img/community/default_userImg.png"
+                  }
+                  alt="프로필 사진"
+                />
                 <S.SealImg src="/img/community/seal.png" />
               </S.StampWrap>
               <S.Nickname>{data?.user?.nickname}</S.Nickname>

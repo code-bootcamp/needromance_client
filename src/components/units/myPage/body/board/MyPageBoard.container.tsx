@@ -1,17 +1,20 @@
-import { v4 as uuidv4 } from "uuid";
-import { ChangeEvent, useEffect, useState } from "react";
 import * as S from "./MyPageBoard.style";
-import { Icon_Delete, Icon_Edit } from "../../../../../commons/styles/icons";
 import { MyPageTitle } from "../MyPage.body.style";
+import { Icon_Delete, Icon_Edit } from "../../../../../commons/styles/icons";
+import { ChangeEvent, useEffect, useState } from "react";
 import { getDate } from "../../../../../commons/libraries/getDate";
 import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
+import CustomSearchInput from "../../../../commons/search/CustomSearchInput";
+import { v4 as uuidv4 } from "uuid";
+import Dompurify from "dompurify";
+// api
 import { GetUserBoard, SearchUserBoard } from "../../../../../commons/api/user";
 import { DeleteBoard } from "../../../../../commons/api/boards";
+// modal
 import Popup from "../../../../commons/modals/PopupModal";
-import CustomSearchInput from "../../../../commons/search/CustomSearchInput";
+// G- state
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../../commons/store/atoms";
-import Dompurify from "dompurify";
 
 const MyPageBoard = ({ myData }: any) => {
   const { onClickMoveToPage } = useMoveToPage();
@@ -104,7 +107,7 @@ const MyPageBoard = ({ myData }: any) => {
         </S.Thead>
         {isSearch ? (
           <S.Tbody>
-            {searchs?.map((data: any, idx: string) => (
+            {searchs?.map((data: any, idx: number) => (
               <S.TR key={data.id}>
                 <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
                 <S.TD
@@ -160,7 +163,7 @@ const MyPageBoard = ({ myData }: any) => {
           </S.Tbody>
         ) : (
           <S.Tbody>
-            {boards.map((data: any, idx: string) => (
+            {boards.map((data: any, idx: number) => (
               <S.TR key={data.id}>
                 <S.TD>{String(boards?.length - idx).padStart(2, "0")}</S.TD>
                 <S.TD

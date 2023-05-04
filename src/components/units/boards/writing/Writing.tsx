@@ -1,9 +1,9 @@
-import { v4 as uuidv4 } from "uuid";
 import styled from "@emotion/styled";
-import { FaCommentDots } from "react-icons/fa";
 import Tag from "../../../commons/hashtag/HashTag";
+import { FaCommentDots } from "react-icons/fa";
 import { breakPoints } from "../../../../commons/styles/media";
 import { getDate2 } from "../../../../commons/libraries/getDate";
+import { v4 as uuidv4 } from "uuid";
 import DOMPurify from "dompurify";
 
 const Wrapper = styled.div`
@@ -104,11 +104,9 @@ const HashtagWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  /* padding: 0px 0px; */
 `;
 
 const CommentDateWrapper = styled.div`
-  /* width: 100%; */
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -164,7 +162,8 @@ export default function Writing({
     <Wrapper onClick={onClick}>
       <Counselee>
         <CounseleeImg
-          src={userImg ? userImg : "img/community/default_profile.jpg"}
+          src={userImg || "img/community/default_profile.jpg"}
+          alt="프로필 사진"
         />
         <CounseleeName>
           {name
