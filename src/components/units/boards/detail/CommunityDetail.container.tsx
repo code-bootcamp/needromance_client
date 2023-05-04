@@ -14,6 +14,7 @@ import CummunityCommentListContainer from "../../communityComment/list/Community
 import Popup from "../../../commons/modals/PopupModal";
 // API
 import { DeleteBoard, GetBoard } from "../../../../commons/api/boards";
+import useAuth from "../../../commons/hooks/customs/useAuth";
 
 const CommunityDetailContainer = () => {
   const router = useRouter();
@@ -57,9 +58,9 @@ const CommunityDetailContainer = () => {
     }
   };
 
-  console.log(data);
   const Hashtags = data?.hashtags?.map((el: any) => el.tag);
 
+  useAuth();
   return (
     <>
       <S.Wrap>

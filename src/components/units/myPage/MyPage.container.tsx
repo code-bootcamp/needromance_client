@@ -5,6 +5,7 @@ import MyPageContent from "./body/MyPage.body";
 import { GetUserInfo } from "../../../commons/api/user";
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../commons/store/atoms";
+import useAuth from "../../commons/hooks/customs/useAuth";
 
 const MyPageContainer = () => {
   // data
@@ -24,6 +25,8 @@ const MyPageContainer = () => {
     const result = await GetUserInfo(accessToken);
     setMyData(result);
   };
+
+  useAuth();
 
   return (
     <S.MyPageWrap>

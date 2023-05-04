@@ -20,6 +20,7 @@ import {
   accessTokenState,
   userProfileState,
 } from "../../../commons/store/atoms";
+import useAuth from "../../commons/hooks/customs/useAuth";
 
 export default function Admin() {
   // accessToken
@@ -166,6 +167,7 @@ export default function Admin() {
     setOpenTabs(!prev);
   };
 
+  useAuth();
   return (
     <AdminUI
       pageTabs={pageTabs}
