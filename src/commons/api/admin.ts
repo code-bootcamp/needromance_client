@@ -3,6 +3,7 @@ import { AllBoards, AllUsers } from "../../components/units/admin/Admin.types";
 import config from "./config";
 
 const server = config.backend.baseURL;
+axios.defaults.withCredentials = true;
 
 interface ISearchInputData {
   keyword: { user?: string; board?: string };

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const URL = "https://need-romance.site";
+axios.defaults.withCredentials = true;
 
 export const GetUserInfo = async (accessToken: string) => {
   try {

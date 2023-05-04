@@ -2,6 +2,7 @@ import axios from "axios";
 import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
+axios.defaults.withCredentials = true;
 
 export const GetAnswers = async (
   accessToken: string,

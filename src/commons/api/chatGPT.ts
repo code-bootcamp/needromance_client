@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "./config";
 
 const server = config.backend.baseURL;
+axios.defaults.withCredentials = true;
 
 interface IUserQestionData {
   accessToken: string;

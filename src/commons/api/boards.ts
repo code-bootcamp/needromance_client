@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const URL = "https://need-romance.site";
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 export const GetBoards = async (page: number) => {
   try {
