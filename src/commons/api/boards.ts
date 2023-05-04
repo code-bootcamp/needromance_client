@@ -61,7 +61,7 @@ export const WriteBoard = async (
       {
         title: params.title,
         contents: params.contents,
-        hashTag: params.hashTags,
+        hashTags: params.hashTags,
       },
       {
         headers: {

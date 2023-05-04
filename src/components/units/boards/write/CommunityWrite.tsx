@@ -40,13 +40,11 @@ export default function CommunityWrite({
 }) {
   const router = useRouter();
 
-  const [isAuthModalOpen] = useRecoilState(authModalState);
   const [accessToken] = useRecoilState(accessTokenState);
   const editorRef = createRef<Editor>();
 
   const [tagItem, setTagItem] = useState("");
   const [tagList, setTagList] = useState([]);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -96,7 +94,6 @@ export default function CommunityWrite({
     event?.preventDefault();
 
     if (!formik.values.title || !formik.values.contents) {
-      setIsLoginModalOpen(true);
       return;
     }
     formik.setFieldValue("hashTags", tagList);
@@ -114,9 +111,6 @@ export default function CommunityWrite({
   };
 
   useAuth();
-  console.log(formik.values);
-  console.log(formik.errors);
-  console.log(isAuthModalOpen);
 
   return (
     <S.Wrapper>

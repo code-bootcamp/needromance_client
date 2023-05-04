@@ -3,6 +3,7 @@ import { postUserQuestion } from "../../../commons/api/chatGPT";
 import ChatGPTUI from "./ChatGPT.presenter";
 import { accessTokenState } from "../../../commons/store/atoms";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
+import useAuth from "../../commons/hooks/customs/useAuth";
 
 export default function ChatGPT() {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -44,6 +45,8 @@ export default function ChatGPT() {
       setLoading(false);
     }
   };
+
+  useAuth();
 
   return (
     <ChatGPTUI
