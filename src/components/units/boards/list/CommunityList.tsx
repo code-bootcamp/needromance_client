@@ -52,7 +52,6 @@ export default function CommunityList() {
   const fetch = async () => {
     const ranking = await BestUsers();
     const answers = await BestAnswer();
-    console.log(ranking);
     const rankingUser = ranking?.map((user: IUserType) => user.nickname);
     setRanking(rankingUser);
     setAnswers(answers);
