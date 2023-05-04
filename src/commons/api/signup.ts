@@ -138,3 +138,15 @@ export const resetPassword = async (email: string, password: string) => {
     console.log(error);
   }
 };
+
+export const googleLogin = async () => {
+  try {
+    const response = await axios({
+      method: "get",
+      url: URL + "/auth/login/google",
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

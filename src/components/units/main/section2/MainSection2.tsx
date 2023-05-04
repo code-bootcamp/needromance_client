@@ -203,7 +203,7 @@ export default function MainSection2UI(): JSX.Element {
             type={"Md"}
             fill={true}
             text={"채팅하러가기"}
-            onClick={onClickMoveToPage(`/chatgpt/${userProfile.id}`)}
+            onClick={onClickMoveToPage(`/chatgpt/${userProfile?.id}`)}
           />
         </BtnPosition>
       </WrapperBody>
