@@ -5,6 +5,8 @@ import CustomBtn from "../../../commons/buttons/CustomBtn";
 import { useMoveToPage } from "../../../commons/hooks/customs/useMoveToPage";
 import { breakPoints } from "../../../../commons/styles/media";
 import Image from "next/image";
+import { useRecoilState } from "recoil";
+import { userProfileState } from "../../../../commons/store/atoms";
 
 interface IAnimationProps {
   inView: boolean;
@@ -128,6 +130,7 @@ const BodyImgBox = styled.div`
 `;
 export default function MainSection2UI(): JSX.Element {
   const { onClickMoveToPage } = useMoveToPage();
+  const [userProfile, setUserProfile] = useRecoilState(userProfileState);
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -200,7 +203,7 @@ export default function MainSection2UI(): JSX.Element {
             type={"Md"}
             fill={true}
             text={"채팅하러가기"}
-            onClick={onClickMoveToPage("/chatgpt")}
+            onClick={onClickMoveToPage(`/chatgpt/${userProfile.id}`)}
           />
         </BtnPosition>
       </WrapperBody>
