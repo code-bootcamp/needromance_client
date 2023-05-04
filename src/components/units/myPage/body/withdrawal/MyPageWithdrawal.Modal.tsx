@@ -1,14 +1,15 @@
-import { DeleteUser, GetUserInfo } from "../../../../../commons/api/user";
-import { ChangeEvent, useEffect, useState } from "react";
-import { accessToken } from "../../../../../commons/api/token";
-import CustomModal from "../../../../commons/modals/CustomModal";
+import { useRouter } from "next/router";
+import { ChangeEvent, useState } from "react";
+import BorderInput from "../../../../commons/input/Input";
+// modal
 import { Modal } from "antd";
 import * as S from "../../../../commons/modals/CustomModal.styles";
-import BorderInput from "../../../../commons/input/Input";
-import { useMoveToPage } from "../../../../commons/hooks/customs/useMoveToPage";
+import CustomModal from "../../../../commons/modals/CustomModal";
+// G-state
 import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../../commons/store/atoms";
-import { useRouter } from "next/router";
+//api
+import { DeleteUser } from "../../../../../commons/api/user";
 
 const modalBodyStyle = {
   padding: "0px",

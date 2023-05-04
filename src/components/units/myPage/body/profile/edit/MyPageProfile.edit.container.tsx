@@ -1,16 +1,19 @@
+import * as S from "./../MyPageProfile.style";
 import { ChangeEvent, useRef, useState } from "react";
-import { UpdateUser } from "../../../../../../commons/api/user";
 import { Icon_Plus } from "../../../../../../commons/styles/icons";
 import CustomBtn from "../../../../../commons/buttons/CustomBtn";
 import { IMyPageProps } from "../../../MyPage.type";
-import * as S from "./../MyPageProfile.style";
-import Popup from "../../../../../commons/modals/PopupModal";
+// G-state
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   accessTokenState,
   userProfileState,
 } from "../../../../../../commons/store/atoms";
+// modal
 import CustomModal from "../../../../../commons/modals/CustomModal";
+import Popup from "../../../../../commons/modals/PopupModal";
+// api
+import { UpdateUser } from "../../../../../../commons/api/user";
 
 const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
   const [nickname, setNickname] = useState(myData?.nickname ?? "");
@@ -110,6 +113,7 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
                     ? myData?.userImg
                     : "/img/community/default_userImg.png"
                 }
+                alt="프로필 사진"
               />
               <S.IconWrap>
                 <Icon_Plus onClick={onClickUpload} />

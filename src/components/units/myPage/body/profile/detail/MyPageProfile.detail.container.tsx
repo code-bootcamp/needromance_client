@@ -14,12 +14,10 @@ const MyPageProfileDetail = ({ myData, setIsEdit }: IMyPageProps) => {
         </S.ListWrap>
         <S.ListWrap>
           <S.List>{myData?.nickname}</S.List>
-          {myData?.userImg ? (
-            <S.ProfileImg src={myData?.userImg} />
-          ) : (
-            <S.ProfileImg src="/img/community/default_userImg.png" />
-          )}
-
+          <S.ProfileImg
+            src={myData?.userImg || "/img/community/default_userImg.png"}
+            alt="프로필 사진"
+          />
           <S.List_EN>{myData?.email}</S.List_EN>
           <S.List>{myData?.point}</S.List>
         </S.ListWrap>

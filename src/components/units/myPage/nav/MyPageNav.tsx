@@ -1,20 +1,19 @@
 import * as S from "./MyPageNav.style";
+import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
+import { MenuOutlined } from "@ant-design/icons";
 import { IMyPageProps } from "../MyPage.type";
+// modal
 import {
   InputModal,
   WidthdrawalModal,
 } from "../body/withdrawal/MyPageWithdrawal.Modal";
-import { useState } from "react";
-import { useMediaQuery } from "react-responsive";
-import { MenuOutlined } from "@ant-design/icons";
 import Popup from "../../../commons/modals/PopupModal";
 
 const NAV_LISTS = [
   { id: "myProfile", name: "내 정보" },
   { id: "board", name: "내 게시글 조회" },
   { id: "comment", name: "내 답변 조회" },
-  // { id: "notification", name: "알람" },
-  // { id: "withdrawal", name: "회원탈퇴" },
 ];
 
 const MyPageNav = ({ myData, IsActive, setIsActive }: IMyPageProps) => {
