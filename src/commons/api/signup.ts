@@ -16,7 +16,6 @@ export const checkDuplicateEmail = async (email: string) => {
 
 export const sendVerificationEmail = async (email: string) => {
   try {
-    console.log(email);
     const response = await axios({
       method: "get",
       url: URL + `/user/sendtoken/?email=${email}`,
@@ -77,18 +76,6 @@ export const signUp = async (inputs: {
 
 export const login = async (email: string, password: string) => {
   try {
-    // await axios
-    //   .post(
-    //     `${URL}/auth/login`,
-    //     {
-    //       data: {
-    //         email,
-    //         password,
-    //       },
-    //     }
-    //     // { withCredentials: true }
-    //   )
-    //   .then((res) => console.log(res));
     const response = await axios({
       method: "post",
       url: URL + "/auth/login",
@@ -110,8 +97,6 @@ export const login = async (email: string, password: string) => {
 
 export const logout = async (accessToken: string) => {
   try {
-    console.log("d", accessToken);
-
     const response = await axios({
       method: "get",
       url: URL + "/auth/logout",
@@ -119,7 +104,6 @@ export const logout = async (accessToken: string) => {
         accessToken,
       },
     });
-    console.log("re", response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -149,25 +133,8 @@ export const resetPassword = async (email: string, password: string) => {
         password,
       },
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
   }
 };
-// export const getUserInfo = async (param: string) => {
-//   try {
-//     await axios({
-//       method: "get",
-//       url: URL + "/user/login",
-//       headers: {
-//         authorization: `bearer ${param}`,
-//       },
-//     }).then((res) => {
-//       console.log(res);
-//       return res.data;
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };

@@ -60,8 +60,8 @@ const CommunityDetailContainer = () => {
   };
 
   const Hashtags = data?.hashtags?.map((el: any) => el.tag);
-
   useAuth();
+
   return (
     <>
       <S.Wrap>

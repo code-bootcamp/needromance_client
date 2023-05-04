@@ -26,7 +26,6 @@ export const PostAnswer = async (
   boardId: number,
   contents: string
 ) => {
-  console.log(boardId, contents);
   try {
     const response = await axios.post(
       `${URL}/answers`,
@@ -94,7 +93,6 @@ export const LikeAnswer = async (accessToken: string, id: number) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response, "댓글 좋아요");
     return response.data;
   } catch (error) {
     console.log(error);

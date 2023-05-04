@@ -16,7 +16,6 @@ import { useRecoilValue } from "recoil";
 import { accessTokenState } from "../../../../commons/store/atoms";
 
 const CummunityCommentListContainer = ({ boardId, writer }: any) => {
-  console.log(boardId, writer);
   // data
   const [data, setData] = useState(null);
   // 컴포넌트 변경

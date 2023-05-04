@@ -17,7 +17,6 @@ const CommunityCommentWriteContainer = ({
   defaultContents,
 }: IPropstype) => {
   const [contents, setContent] = useState<string>("");
-  console.log(defaultContents, "ddd");
 
   useEffect(() => {
     setContent(defaultContents ?? "");

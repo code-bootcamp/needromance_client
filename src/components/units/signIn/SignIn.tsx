@@ -24,7 +24,6 @@ export default function SignIn() {
   const handleLoginButton = async () => {
     event?.preventDefault();
     await login(inputs.email, inputs.password).then((data) => {
-      console.log(data);
       // 페이지 새로고침시 state가 초기화되는 현상을 막기위헤,  로컬 스토리지에 담아준다!
       if (typeof window !== "undefined") {
         localStorage.setItem("accessToken", data);
@@ -40,14 +39,6 @@ export default function SignIn() {
         router.push("/");
       }
     });
-
-    // const response = await login(inputs.email, inputs.password);
-
-    // if (response) {
-    //   const prevPage = localStorage.getItem("prevPage") || "/";
-    //   console.log(prevPage);
-    //   router.push(prevPage);
-    // }
   };
 
   return (

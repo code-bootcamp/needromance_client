@@ -48,7 +48,6 @@ export default function LayoutTopHeader() {
     setUserProfile("");
     setAccessToken("");
     router.push("/");
-    console.log(userProfile);
   };
 
   const handleLoginButton = () => {
