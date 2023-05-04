@@ -7,6 +7,7 @@ axios.defaults.withCredentials = true;
 export const checkDuplicateEmail = async (email: string) => {
   try {
     const response = await axios({
+      withCredentials: true,
       method: "get",
       url: `${URL}/user/find/email?email=${email}`,
     });
@@ -19,6 +20,7 @@ export const checkDuplicateEmail = async (email: string) => {
 export const sendVerificationEmail = async (email: string) => {
   try {
     const response = await axios({
+      withCredentials: true,
       method: "get",
       url: URL + `/user/sendtoken/?email=${email}`,
     });
@@ -32,6 +34,7 @@ export const sendVerificationEmail = async (email: string) => {
 export const checkVerificationEmail = async (email: string, token: string) => {
   try {
     const response = await axios({
+      withCredentials: true,
       method: "get",
       url: URL + `/user/checktoken/?email=${email}&token=${token}`,
     });
@@ -45,6 +48,7 @@ export const checkVerificationEmail = async (email: string, token: string) => {
 export const checkDuplicateNickname = async (nickname: string) => {
   try {
     const response = await axios({
+      withCredentials: true,
       method: "get",
       url: URL + `/user/find/nickname?nickname=${nickname}`,
     });
@@ -62,6 +66,7 @@ export const signUp = async (inputs: {
   const { email, nickname, password } = inputs;
   try {
     const response = await axios({
+      withCredentials: true,
       method: "post",
       url: URL + "/user/signup",
       data: {
@@ -79,13 +84,13 @@ export const signUp = async (inputs: {
 export const login = async (email: string, password: string) => {
   try {
     const response = await axios({
+      withCredentials: true,
       method: "post",
       url: URL + "/auth/login",
       data: {
         email,
         password,
       },
-      withCredentials: true,
       headers: {
         "Cache-Control": "no-cache",
       },
@@ -100,6 +105,7 @@ export const login = async (email: string, password: string) => {
 export const logout = async (accessToken: string) => {
   try {
     const response = await axios({
+      withCredentials: true,
       method: "get",
       url: URL + "/auth/logout",
       headers: {
@@ -115,6 +121,7 @@ export const logout = async (accessToken: string) => {
 export const getUserInfo = async (accessToken: string) => {
   try {
     const response = await axios.get(`${URL}/user/login`, {
+      withCredentials: true,
       headers: {
         Authorization: `bearer ${accessToken}`,
       },
@@ -128,6 +135,7 @@ export const getUserInfo = async (accessToken: string) => {
 export const resetPassword = async (email: string, password: string) => {
   try {
     const response = await axios({
+      withCredentials: true,
       method: "patch",
       url: URL + "/user/find/password",
       data: {

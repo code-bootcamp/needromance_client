@@ -15,6 +15,7 @@ export const postUserQuestion = async (
   const { accessToken, text } = data;
   try {
     const response = await axios({
+      withCredentials: true,
       method: "post",
       url: `${server}/consult/question`,
       headers: { Authorization: `Bearer ${accessToken}` },

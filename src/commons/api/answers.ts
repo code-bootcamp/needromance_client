@@ -2,7 +2,6 @@ import axios from "axios";
 import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
-axios.defaults.withCredentials = true;
 
 export const GetAnswers = async (
   accessToken: string,
@@ -12,7 +11,10 @@ export const GetAnswers = async (
   try {
     const response = await axios.get(
       `${URL}/answers?board-id=${boardId}&status=${status}`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
     );
     if (response.status === 200) {
       return response.data;
@@ -35,6 +37,7 @@ export const PostAnswer = async (
         contents,
       },
       {
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -59,6 +62,7 @@ export const UpdateAnswer = async (
         contents,
       },
       {
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -75,6 +79,7 @@ export const UpdateAnswer = async (
 export const DeleteAnswer = async (accessToken: string, id: number) => {
   try {
     const response = await axios.delete(`${URL}/answers/${id}`, {
+      withCredentials: true,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -90,6 +95,7 @@ export const DeleteAnswer = async (accessToken: string, id: number) => {
 export const LikeAnswer = async (accessToken: string, id: number) => {
   try {
     const response = await axios.patch(`${URL}/answers/${id}/likes`, {
+      withCredentials: true,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -114,6 +120,7 @@ export const PickAnswer = async (
         status,
       },
       {
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -127,7 +134,9 @@ export const PickAnswer = async (
 
 export const BestAnswer = async () => {
   try {
-    const response = await axios.get(`${URL}/answers/best`);
+    const response = await axios.get(`${URL}/answers/best`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log(error);

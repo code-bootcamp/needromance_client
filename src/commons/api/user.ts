@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const URL = "https://need-romance.site";
-axios.defaults.withCredentials = true;
 
 export const GetUserInfo = async (accessToken: string) => {
   try {
     const response = await axios.get(`${URL}/user/login`, {
+      withCredentials: true,
       headers: {
         Authorization: `bearer ${accessToken}`,
       },
@@ -19,7 +19,9 @@ export const GetUserInfo = async (accessToken: string) => {
 
 export const BestUsers = async () => {
   try {
-    const response = await axios.get(`${URL}/user?sort=point`);
+    const response = await axios.get(`${URL}/user?sort=point`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -29,6 +31,7 @@ export const BestUsers = async () => {
 export const GetUserBoard = async (accessToken: string) => {
   try {
     const response = await axios.get(`${URL}/user/boards`, {
+      withCredentials: true,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -44,6 +47,7 @@ export const SearchUserBoard = async (accessToken: string, keyword: string) => {
     const response = await axios.get(
       `${URL}/user/boards/search?keyword=${keyword}`,
       {
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -61,6 +65,7 @@ export const GetUserAnswer = async (accessToken: string) => {
   try {
     const response = await axios.get(`${URL}/user/answers`, {
       headers: {
+        withCredentials: true,
         Authorization: `Bearer ${accessToken}`,
       },
     });
@@ -80,6 +85,7 @@ export const UpdateUser = async (
       `${URL}/user/update?nickname=${nickname}`,
       formData,
       {
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
@@ -101,6 +107,7 @@ export const DeleteUser = async (
 ) => {
   try {
     const response = await axios.delete(`${URL}/user/delete`, {
+      withCredentials: true,
       data: {
         email,
         password,
