@@ -169,7 +169,7 @@ export default function Writing({
           {name
             .replaceAll(keyword!, `${mySecretCode}${keyword}${mySecretCode}`)
             .split(mySecretCode)
-            .map((el) => (
+            .map((el: any) => (
               <Keyword key={uuidv4()} isKeyword={el === keyword}>
                 {el}
               </Keyword>
@@ -180,7 +180,6 @@ export default function Writing({
       <ContentWrapper>
         <Content>
           <div
-            style={{}}
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(
                 content
@@ -189,7 +188,7 @@ export default function Writing({
                     `${mySecretCode}${keyword}${mySecretCode}`
                   )
                   .split(mySecretCode)
-                  .map((el) => {
+                  .map((el: any) => {
                     if (el === keyword) {
                       return `<Keyword key=${uuidv4()} isKeyword={true}>${el}</Keyword>`;
                     }
