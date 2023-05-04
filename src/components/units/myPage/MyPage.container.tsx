@@ -8,6 +8,9 @@ import { GetUserInfo } from "../../../commons/api/user";
 // component
 import MyPageNav from "./nav/MyPageNav";
 import MyPageContent from "./body/MyPage.body";
+// 권한분기
+import useAuth from "../../commons/hooks/customs/useAuth";
+
 
 const MyPageContainer = () => {
   // data
@@ -27,6 +30,8 @@ const MyPageContainer = () => {
     const result = await GetUserInfo(accessToken);
     setMyData(result);
   };
+
+  useAuth();
 
   return (
     <S.MyPageWrap>

@@ -104,7 +104,6 @@ export default function SignUp() {
     // 인증번호 전송을 누르면,
     setIsLoading(true);
     const data = await sendVerificationEmail(inputs.email);
-    console.log(data);
     // 상태코드로 확인이 가능하다...
     setIsLoading(false);
 
