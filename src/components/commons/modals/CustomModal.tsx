@@ -36,7 +36,6 @@ export default function CustomModal(props: IModalProps) {
   // onClickCancel : cancle 함수
   // onClickConfirm : 확인하는 함수
 
-  console.log(props.onClickOk);
   return (
     <>
       <Modal

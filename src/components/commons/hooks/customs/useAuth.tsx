@@ -17,13 +17,11 @@ export default function useAuth() {
       text: "",
       openModal: false,
     });
+    localStorage.setItem("prevPage", router.asPath);
     router.push("/signin");
   };
 
   useEffect(() => {
-    // 보고 있던 페이지 저장
-    localStorage.setItem("prevPage", router.pathname);
-    console.log(accessToken);
     if (!accessToken) {
       console.log("hi");
       setModalState({

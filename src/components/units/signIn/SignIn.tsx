@@ -2,7 +2,6 @@ import Link from "next/link";
 import BorderInput from "../../commons/input/Input";
 import * as S from "./SignIn.styles";
 import GoogleSignIn from "./GoogleSignIn";
-import { useSession, signIn, signOut } from "next-auth/react";
 import { login } from "../../../commons/api/signup";
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -11,7 +10,6 @@ import { useRouter } from "next/router";
 
 export default function SignIn() {
   const router = useRouter();
-  const { data: session } = useSession();
   const [inputs, setInputs] = useState({ email: "", password: "" });
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
@@ -35,7 +33,12 @@ export default function SignIn() {
       setAccessToken(data);
 
       const page = localStorage.getItem("prevPage");
-      router.push(String(page));
+
+      if (page) {
+        router.push(String(page));
+      } else {
+        router.push("/");
+      }
     });
 
     // const response = await login(inputs.email, inputs.password);
@@ -83,20 +86,15 @@ export default function SignIn() {
             를 잊으셨나요?
           </S.FindID>
           <S.Line />
-          <div>{/* <GoogleSignIn /> */}</div>
+          <div>
+            <GoogleSignIn />
+          </div>
           <S.SignUpLink>
             <Link href="/signup">
               <a>회원가입</a>
             </Link>
           </S.SignUpLink>
         </S.BottomWrapper>
-        <button onClick={() => signIn("google")}>구글 로그인</button>
-        <button onClick={() => signIn("kakao", { callbackUrl: "/" })}>
-          카카오톡 Sign in
-        </button>
-        <button onClick={() => signIn("github")}>깃허브 로그인</button>
-        <button onClick={() => signIn("naver")}>네이버 로그인</button>
-        {session && <button onClick={() => signOut()}>로그아웃</button>}
       </S.SignInWindow>
     </S.Wrapper>
   );

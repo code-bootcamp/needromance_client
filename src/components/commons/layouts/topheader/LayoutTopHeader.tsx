@@ -45,8 +45,15 @@ export default function LayoutTopHeader() {
   const logOut = async () => {
     await logout(accessToken);
     localStorage.clear();
+    setUserProfile("");
     setAccessToken("");
     router.push("/");
+    console.log(userProfile);
+  };
+
+  const handleLoginButton = () => {
+    localStorage.setItem("prevPage", router.asPath);
+    router.push("/signin");
   };
 
   return (
@@ -63,9 +70,9 @@ export default function LayoutTopHeader() {
         </Profile>
       )}
       {userProfile?.length === 0 ? (
-        <Link href={"/signin"}>
+        <div onClick={handleLoginButton}>
           <Menu>로그인</Menu>
-        </Link>
+        </div>
       ) : (
         <span onClick={logOut}>로그아웃</span>
       )}
