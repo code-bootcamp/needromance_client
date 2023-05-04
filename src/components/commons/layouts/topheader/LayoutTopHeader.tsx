@@ -121,11 +121,6 @@ const Profile = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;
-  img {
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-  }
 
   a {
     color: #d2d2d2;
@@ -140,4 +135,6 @@ const Profile = styled.div`
 const ProfileImg = styled.img`
   background-color: white;
   border-radius: 100%;
+  width: 20px;
+  height: 20px;
 `;
