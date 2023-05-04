@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import { googleLogin } from "../../../commons/api/signup";
 import {
   accessTokenState,
   userProfileState,
@@ -39,32 +40,32 @@ export default function GoogleSignIn() {
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  useEffect(() => {
-    if (user.length !== 0) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.access_token}`,
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          setUserProfile(res.data);
-          setAccessToken(user.access_token);
-          const page = localStorage.getItem("prevPage");
+  // useEffect(() => {
+  //   if (user.length !== 0) {
+  //     axios
+  //       .get(
+  //         `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${user.access_token}`,
+  //             Accept: "application/json",
+  //           },
+  //         }
+  //       )
+  //       .then((res) => {
+  //         setUserProfile(res.data);
+  //         setAccessToken(user.access_token);
+  //         const page = localStorage.getItem("prevPage");
 
-          if (page) {
-            router.push(String(page));
-          } else {
-            router.push("/");
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [user]);
+  //         if (page) {
+  //           router.push(String(page));
+  //         } else {
+  //           router.push("/");
+  //         }
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [user]);
 
   const googleSocialLogin = useGoogleLogin({
     onSuccess: (res) => {
@@ -76,9 +77,13 @@ export default function GoogleSignIn() {
     // scope: "https://www.googleapis.com/auth/business.manage",
   });
 
+  const googleApiLogin = async () => {
+    const data = await googleLogin();
+    console.log(data);
+  };
   return (
     <div>
-      <GoogleLoginButton onClick={() => googleSocialLogin()}>
+      <GoogleLoginButton onClick={googleApiLogin}>
         <GoogleLogo src="/img/signin/g-logo.png" />
         구글로 로그인하기
       </GoogleLoginButton>
