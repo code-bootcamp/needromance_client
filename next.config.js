@@ -16,7 +16,8 @@ const nextConfig = {
           {
             key: "Access-Control-Allow-Origin",
             // value: "https://need-romance.site",
-            value: "https://needromance.online",
+            // value: "https://needromance.online",
+            value: "*",
           },
           {
             key: "Access-Control-Allow-Headers",
