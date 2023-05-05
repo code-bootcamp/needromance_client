@@ -2,6 +2,8 @@ import axios from "axios";
 import config from "./config";
 
 const server = config.backend.baseURL;
+axios.defaults.headers.common["Access-Control-Allow-Origin"] =
+  "https://needromance.online";
 axios.defaults.withCredentials = true;
 
 interface IUserQestionData {
@@ -15,7 +17,6 @@ export const postUserQuestion = async (
   const { accessToken, text } = data;
   try {
     const response = await axios({
-      withCredentials: true,
       method: "post",
       url: `${server}/consult/question`,
       headers: { Authorization: `Bearer ${accessToken}` },

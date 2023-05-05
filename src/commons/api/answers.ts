@@ -2,6 +2,9 @@ import axios from "axios";
 import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
+axios.defaults.headers.common["Access-Control-Allow-Origin"] =
+  "https://needromance.online";
+axios.defaults.withCredentials = true;
 
 export const GetAnswers = async (
   accessToken: string,
@@ -12,7 +15,6 @@ export const GetAnswers = async (
     const response = await axios.get(
       `${URL}/answers?board-id=${boardId}&status=${status}`,
       {
-        withCredentials: true,
         headers: { Authorization: `Bearer ${accessToken}` },
       }
     );
@@ -37,7 +39,6 @@ export const PostAnswer = async (
         contents,
       },
       {
-        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -62,7 +63,6 @@ export const UpdateAnswer = async (
         contents,
       },
       {
-        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -79,7 +79,6 @@ export const UpdateAnswer = async (
 export const DeleteAnswer = async (accessToken: string, id: number) => {
   try {
     const response = await axios.delete(`${URL}/answers/${id}`, {
-      withCredentials: true,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -95,7 +94,6 @@ export const DeleteAnswer = async (accessToken: string, id: number) => {
 export const LikeAnswer = async (accessToken: string, id: number) => {
   try {
     const response = await axios.patch(`${URL}/answers/${id}/likes`, {
-      withCredentials: true,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -120,7 +118,6 @@ export const PickAnswer = async (
         status,
       },
       {
-        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -134,9 +131,7 @@ export const PickAnswer = async (
 
 export const BestAnswer = async () => {
   try {
-    const response = await axios.get(`${URL}/answers/best`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${URL}/answers/best`, {});
     return response.data;
   } catch (error) {
     console.log(error);

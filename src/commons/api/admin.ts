@@ -3,6 +3,8 @@ import { AllBoards, AllUsers } from "../../components/units/admin/Admin.types";
 import config from "./config";
 
 const server = config.backend.baseURL;
+axios.defaults.headers.common["Access-Control-Allow-Origin"] =
+  "https://needromance.online";
 axios.defaults.withCredentials = true;
 
 interface ISearchInputData {
@@ -21,7 +23,6 @@ interface IDeleteBoardData {
 export const getAllUsers = async (accessToken: string): Promise<AllUsers[]> => {
   try {
     const response = await axios({
-      withCredentials: true,
       method: "get",
       url: server + "/admin/users",
       headers: { Authorization: "Bearer " + accessToken },
@@ -49,7 +50,6 @@ export const getSearchUser = async (
 
   try {
     const response = await axios({
-      withCredentials: true,
       method: "get",
       url: server + `/admin/user/search?keyword=${keyword.user}`,
       headers: { Authorization: "Bearer " + accessToken },
@@ -74,7 +74,6 @@ export const patchUserState = async (data: IBanData): Promise<AllUsers> => {
 
   try {
     const response = await axios({
-      withCredentials: true,
       method: "patch",
       url: server + "/admin/user/status",
       headers: { Authorization: "Bearer " + accessToken },
@@ -101,7 +100,6 @@ export const getAllBoards = async (
 ): Promise<AllBoards[]> => {
   try {
     const response = await axios({
-      withCredentials: true,
       method: "get",
       url: server + "/admin/boards",
       headers: { Authorization: "Bearer " + accessToken },
@@ -128,7 +126,6 @@ export const getSearchBoard = async (
 
   try {
     const response = await axios({
-      withCredentials: true,
       method: "get",
       url: server + `/admin/boards/search?keyword=${keyword.board}`,
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -155,7 +152,6 @@ export const deleteUserBoard = async (
 
   try {
     await axios({
-      withCredentials: true,
       method: "delete",
       url: server + `/admin/boards/${id}`,
       headers: { Authorization: "Bearer " + accessToken },

@@ -1,12 +1,13 @@
 import axios from "axios";
 
 const URL = "https://need-romance.site";
+axios.defaults.headers.common["Access-Control-Allow-Origin"] =
+  "https://needromance.online";
+axios.defaults.withCredentials = true;
 
 export const GetBoards = async (page: number) => {
   try {
-    const response = await axios.get(`${URL}/boards?page=${page}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${URL}/boards?page=${page}`, {});
     return response.data;
   } catch (err) {
     console.log(err);
@@ -15,9 +16,7 @@ export const GetBoards = async (page: number) => {
 
 export const GetBoard = async (id: number) => {
   try {
-    const response = await axios.get(`${URL}/boards/${id}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${URL}/boards/${id}`, {});
     return response.data;
   } catch (err) {
     console.log(err);
@@ -27,7 +26,6 @@ export const GetBoard = async (id: number) => {
 export const DeleteBoard = async (accessToken: string, id: number) => {
   try {
     const response = await axios.delete(`${URL}/boards/${id}`, {
-      withCredentials: true,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -44,9 +42,7 @@ export const SearchBoard = async (keyword: string) => {
   try {
     const response = await axios.get(
       `${URL}/boards/search?keyword=${keyword}&page=1`,
-      {
-        withCredentials: true,
-      }
+      {}
     );
     return response.data;
   } catch (err) {
@@ -71,7 +67,6 @@ export const WriteBoard = async (
         hashTags: params.hashTags,
       },
       {
-        withCredentials: true,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -96,7 +91,6 @@ export const EditBoard = async (
       hashTags: params.hashTags,
     },
     {
-      withCredentials: true,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
