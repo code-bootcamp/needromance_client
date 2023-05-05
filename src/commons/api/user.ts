@@ -2,6 +2,7 @@ import axios from "axios";
 
 const URL = "https://need-romance.site";
 
+axios.defaults.headers["content-type"] = "application/json";
 axios.defaults.headers.common["Access-Control-Allow-Origin"] =
   "https://needromance.online";
 axios.defaults.withCredentials = true;

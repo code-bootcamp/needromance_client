@@ -3,6 +3,7 @@ import { AllBoards, AllUsers } from "../../components/units/admin/Admin.types";
 import config from "./config";
 
 const server = config.backend.baseURL;
+axios.defaults.headers["content-type"] = "application/json";
 axios.defaults.headers.common["Access-Control-Allow-Origin"] =
   "https://needromance.online";
 axios.defaults.withCredentials = true;
