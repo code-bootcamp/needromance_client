@@ -57,6 +57,7 @@ export const getAllUsers = async (accessToken: string): Promise<AllUsers[]> => {
     }
   }
 };
+
 export const getSearchUser = async (
   data: ISearchInputData
 ): Promise<AllUsers[]> => {

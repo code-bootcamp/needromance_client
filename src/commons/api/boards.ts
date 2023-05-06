@@ -81,7 +81,9 @@ export const WriteBoard = async (
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          Origin: "https://needromance.online",
         },
+        withCredentials: true,
       }
     );
     return response;
@@ -106,7 +108,9 @@ export const EditBoard = async (
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     }
   );
 };

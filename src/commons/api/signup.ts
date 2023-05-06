@@ -9,6 +9,8 @@ export const checkDuplicateEmail = async (email: string) => {
     const response = await axios({
       method: "get",
       url: `${URL}/user/find/email?email=${email}`,
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -21,6 +23,8 @@ export const sendVerificationEmail = async (email: string) => {
     const response = await axios({
       method: "get",
       url: URL + `/user/sendtoken/?email=${email}`,
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
     });
 
     return response.status;
@@ -34,6 +38,8 @@ export const checkVerificationEmail = async (email: string, token: string) => {
     const response = await axios({
       method: "get",
       url: URL + `/user/checktoken/?email=${email}&token=${token}`,
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
     });
 
     return response.data;
@@ -47,6 +53,8 @@ export const checkDuplicateNickname = async (nickname: string) => {
     const response = await axios({
       method: "get",
       url: URL + `/user/find/nickname?nickname=${nickname}`,
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -69,6 +77,8 @@ export const signUp = async (inputs: {
         nickname,
         password,
       },
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -87,7 +97,9 @@ export const login = async (email: string, password: string) => {
       },
       headers: {
         "Cache-Control": "no-cache",
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
 
     return response.data;
@@ -103,7 +115,9 @@ export const logout = async (accessToken: string) => {
       url: URL + "/auth/logout",
       headers: {
         accessToken,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -116,7 +130,9 @@ export const getUserInfo = async (accessToken: string) => {
     const response = await axios.get(`${URL}/user/login`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -133,6 +149,8 @@ export const resetPassword = async (email: string, password: string) => {
         email,
         password,
       },
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
     });
     return response;
   } catch (error) {

@@ -32,14 +32,14 @@ const nextConfig = {
   //     },
   //   ];
   // },
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        destination: "https://needromance.online/:path*",
-      },
-    ];
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/:path*",
+  //       destination: "https://needromance.online/:path*",
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;
