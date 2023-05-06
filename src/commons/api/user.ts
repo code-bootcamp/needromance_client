@@ -2,12 +2,16 @@ import axios from "axios";
 
 const URL = "https://need-romance.site";
 
+axios.defaults.withCredentials = true;
+
 export const GetUserInfo = async (accessToken: string) => {
   try {
     const response = await axios.get(`${URL}/user/login`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -18,7 +22,10 @@ export const GetUserInfo = async (accessToken: string) => {
 
 export const BestUsers = async () => {
   try {
-    const response = await axios.get(`${URL}/user?sort=point`);
+    const response = await axios.get(`${URL}/user?sort=point`, {
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -30,7 +37,9 @@ export const GetUserBoard = async (accessToken: string) => {
     const response = await axios.get(`${URL}/user/boards`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     return response.data;
   } catch (err) {
@@ -45,7 +54,9 @@ export const SearchUserBoard = async (accessToken: string, keyword: string) => {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          Origin: "https://needromance.online",
         },
+        withCredentials: true,
       }
     );
     if (response.status === 200) {
@@ -61,7 +72,9 @@ export const GetUserAnswer = async (accessToken: string) => {
     const response = await axios.get(`${URL}/user/answers`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     return response.data;
   } catch (err) {
@@ -82,7 +95,9 @@ export const UpdateUser = async (
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
+          Origin: "https://needromance.online",
         },
+        withCredentials: true,
       }
     );
     if (response.status === 200) {
@@ -106,7 +121,9 @@ export const DeleteUser = async (
       },
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     if (response.status === 200) {
       return response;

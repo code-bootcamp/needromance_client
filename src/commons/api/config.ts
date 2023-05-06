@@ -1,10 +1,19 @@
+import axios, { AxiosInstance } from "axios";
+
 const config = {
   backend: {
     baseURL: process.env.NEXT_PUBLIC_BACKEND,
   },
-  chatGPT: {
-    apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  },
 };
 
-export default config;
+const server = config.backend.baseURL;
+
+const api: AxiosInstance = axios.create({
+  baseURL: server,
+  headers: {
+    Origin: "https://needromance.online",
+  },
+  withCredentials: true,
+});
+
+export default api;

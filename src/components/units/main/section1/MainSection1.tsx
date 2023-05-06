@@ -74,7 +74,7 @@ export default function MainSection1UI(): JSX.Element {
           <ImagesWrap>
             <div>
               <Image
-                src="/img/main/slider_1.jpg"
+                src="/img/main/slider_1.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -83,7 +83,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_2.jpg"
+                src="/img/main/slider_2.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -92,7 +92,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_3.jpg"
+                src="/img/main/slider_3.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -101,36 +101,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_4.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-          </ImagesWrap>
-          <ImagesWrap>
-            <div>
-              <Image
-                src="/img/main/slider_5.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_6.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_7.jpg"
+                src="/img/main/slider_4.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -141,7 +112,7 @@ export default function MainSection1UI(): JSX.Element {
           <ImagesWrap>
             <div>
               <Image
-                src="/img/main/slider_8.jpg"
+                src="/img/main/slider_5.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -150,7 +121,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_9.jpg"
+                src="/img/main/slider_6.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -159,56 +130,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_10.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_1.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-          </ImagesWrap>
-        </Slide>
-        <Slide>
-          <ImagesWrap>
-            <div>
-              <Image
-                src="/img/main/slider_2.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_3.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_4.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_5.jpg"
+                src="/img/main/slider_7.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -219,7 +141,7 @@ export default function MainSection1UI(): JSX.Element {
           <ImagesWrap>
             <div>
               <Image
-                src="/img/main/slider_6.jpg"
+                src="/img/main/slider_8.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -228,7 +150,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_7.jpg"
+                src="/img/main/slider_1.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -237,7 +159,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_8.jpg"
+                src="/img/main/slider_2.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -246,54 +168,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_9.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_10.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-          </ImagesWrap>
-          <ImagesWrap>
-            <div>
-              <Image
-                src="/img/main/slider_1.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_2.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_3.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_4.jpg"
+                src="/img/main/slider_3.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -306,7 +181,7 @@ export default function MainSection1UI(): JSX.Element {
           <ImagesWrap>
             <div>
               <Image
-                src="/img/main/slider_5.jpg"
+                src="/img/main/slider_4.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -315,7 +190,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_6.jpg"
+                src="/img/main/slider_5.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -324,18 +199,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_7.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-          </ImagesWrap>
-          <ImagesWrap>
-            <div>
-              <Image
-                src="/img/main/slider_8.jpg"
+                src="/img/main/slider_6.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -344,25 +208,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_9.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_10.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_1.jpg"
+                src="/img/main/slider_7.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -373,7 +219,7 @@ export default function MainSection1UI(): JSX.Element {
           <ImagesWrap>
             <div>
               <Image
-                src="/img/main/slider_2.jpg"
+                src="/img/main/slider_8.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -382,7 +228,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_3.jpg"
+                src="/img/main/slider_1.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -391,7 +237,63 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_4.jpg"
+                src="/img/main/slider_2.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_3.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_4.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+          </ImagesWrap>
+          <ImagesWrap>
+            <div>
+              <Image
+                src="/img/main/slider_5.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_6.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_7.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_8.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -404,7 +306,7 @@ export default function MainSection1UI(): JSX.Element {
           <ImagesWrap>
             <div>
               <Image
-                src="/img/main/slider_5.jpg"
+                src="/img/main/slider_1.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -413,7 +315,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_6.jpg"
+                src="/img/main/slider_2.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -422,16 +324,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_7.jpg"
-                alt="img"
-                width={180}
-                height={180}
-                objectFit="cover"
-              />
-            </div>
-            <div>
-              <Image
-                src="/img/main/slider_8.jpg"
+                src="/img/main/slider_3.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -442,7 +335,7 @@ export default function MainSection1UI(): JSX.Element {
           <ImagesWrap>
             <div>
               <Image
-                src="/img/main/slider_9.jpg"
+                src="/img/main/slider_4.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -451,7 +344,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_10.jpg"
+                src="/img/main/slider_5.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -460,7 +353,16 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_1.jpg"
+                src="/img/main/slider_6.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_7.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -471,7 +373,7 @@ export default function MainSection1UI(): JSX.Element {
           <ImagesWrap>
             <div>
               <Image
-                src="/img/main/slider_2.jpg"
+                src="/img/main/slider_8.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -480,7 +382,7 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_3.jpg"
+                src="/img/main/slider_1.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -489,7 +391,20 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_4.jpg"
+                src="/img/main/slider_2.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+          </ImagesWrap>
+        </Slide>
+        <Slide>
+          <ImagesWrap>
+            <div>
+              <Image
+                src="/img/main/slider_3.webp"
                 alt="img"
                 width={180}
                 height={180}
@@ -498,7 +413,92 @@ export default function MainSection1UI(): JSX.Element {
             </div>
             <div>
               <Image
-                src="/img/main/slider_5.jpg"
+                src="/img/main/slider_4.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_5.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_6.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+          </ImagesWrap>
+          <ImagesWrap>
+            <div>
+              <Image
+                src="/img/main/slider_7.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_8.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_1.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+          </ImagesWrap>
+          <ImagesWrap>
+            <div>
+              <Image
+                src="/img/main/slider_2.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_3.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_4.webp"
+                alt="img"
+                width={180}
+                height={180}
+                objectFit="cover"
+              />
+            </div>
+            <div>
+              <Image
+                src="/img/main/slider_5.webp"
                 alt="img"
                 width={180}
                 height={180}

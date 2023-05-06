@@ -1,11 +1,15 @@
 import axios from "axios";
 
 const URL = "https://need-romance.site";
-// axios.defaults.withCredentials = true;
+
+axios.defaults.withCredentials = true;
 
 export const GetBoards = async (page: number) => {
   try {
-    const response = await axios.get(`${URL}/boards?page=${page}`);
+    const response = await axios.get(`${URL}/boards?page=${page}`, {
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
     console.log(err);
@@ -14,7 +18,10 @@ export const GetBoards = async (page: number) => {
 
 export const GetBoard = async (id: number) => {
   try {
-    const response = await axios.get(`${URL}/boards/${id}`);
+    const response = await axios.get(`${URL}/boards/${id}`, {
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
     console.log(err);
@@ -26,7 +33,9 @@ export const DeleteBoard = async (accessToken: string, id: number) => {
     const response = await axios.delete(`${URL}/boards/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     if (response.status == 200) {
       return response.data;
@@ -39,7 +48,13 @@ export const DeleteBoard = async (accessToken: string, id: number) => {
 export const SearchBoard = async (keyword: string) => {
   try {
     const response = await axios.get(
-      `${URL}/boards/search?keyword=${keyword}&page=1`
+      `${URL}/boards/search?keyword=${keyword}&page=1`,
+      {
+        headers: {
+          Origin: "https://needromance.online",
+        },
+        withCredentials: true,
+      }
     );
     return response.data;
   } catch (err) {
@@ -66,7 +81,9 @@ export const WriteBoard = async (
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          Origin: "https://needromance.online",
         },
+        withCredentials: true,
       }
     );
     return response;
@@ -75,6 +92,7 @@ export const WriteBoard = async (
   }
 };
 
+// return 값이 안보임.
 export const EditBoard = async (
   id: string,
   params: { title: string; contents: string; hashTags?: string[] },
@@ -90,7 +108,9 @@ export const EditBoard = async (
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     }
   );
 };

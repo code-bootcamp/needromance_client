@@ -11,7 +11,13 @@ export const GetAnswers = async (
   try {
     const response = await axios.get(
       `${URL}/answers?board-id=${boardId}&status=${status}`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Origin: "https://needromance.online",
+        },
+        withCredentials: true,
+      }
     );
     if (response.status === 200) {
       return response.data;
@@ -36,7 +42,9 @@ export const PostAnswer = async (
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          Origin: "https://needromance.online",
         },
+        withCredentials: true,
       }
     );
     Modal.success({ content: "답변이 등록되었습니다." });
@@ -60,7 +68,9 @@ export const UpdateAnswer = async (
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          Origin: "https://needromance.online",
         },
+        withCredentials: true,
       }
     );
     if (response.status === 200) {
@@ -76,7 +86,9 @@ export const DeleteAnswer = async (accessToken: string, id: number) => {
     const response = await axios.delete(`${URL}/answers/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     if (response.status === 200) {
       return response.data;
@@ -91,7 +103,9 @@ export const LikeAnswer = async (accessToken: string, id: number) => {
     const response = await axios.patch(`${URL}/answers/${id}/likes`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -115,7 +129,9 @@ export const PickAnswer = async (
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          Origin: "https://needromance.online",
         },
+        withCredentials: true,
       }
     );
     return response.data;
@@ -126,7 +142,10 @@ export const PickAnswer = async (
 
 export const BestAnswer = async () => {
   try {
-    const response = await axios.get(`${URL}/answers/best`);
+    const response = await axios.get(`${URL}/answers/best`, {
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     console.log(error);
