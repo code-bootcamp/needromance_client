@@ -105,7 +105,7 @@ export default function CommunityList() {
   useEffect(() => {
     const fetchMoreBoards = async () => {
       const moreBoards = await fetchBoards(page);
-      setBoards((prevBoards) => prevBoards.concat(moreBoards));
+      setBoards((prevBoards) => prevBoards?.concat(moreBoards));
     };
     fetchMoreBoards();
   }, [page]);
