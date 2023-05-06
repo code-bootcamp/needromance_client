@@ -2,10 +2,6 @@ import axios from "axios";
 import { Modal } from "antd";
 
 const URL = "https://need-romance.site";
-axios.defaults.headers["content-type"] = "application/json";
-axios.defaults.headers.common["Access-Control-Allow-Origin"] =
-  "https://needromance.online";
-axios.defaults.withCredentials = true;
 
 export const GetAnswers = async (
   accessToken: string,

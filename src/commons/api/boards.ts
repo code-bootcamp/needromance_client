@@ -1,23 +1,37 @@
 import axios from "axios";
 
 const URL = "https://need-romance.site";
-axios.defaults.headers["content-type"] = "application/json";
-axios.defaults.headers.common["Access-Control-Allow-Origin"] =
-  "https://needromance.online";
-axios.defaults.withCredentials = true;
+
+// export const GetBoards = async (page: number) => {
+//   try {
+//     const response = await axios.get(`${URL}/boards?page=${page}`, {});
+//     return response.data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 export const GetBoards = async (page: number) => {
   try {
-    const response = await axios.get(`${URL}/boards?page=${page}`, {});
+    const response = await axios.get(`/boards?page=${page}`, {});
     return response.data;
   } catch (err) {
     console.log(err);
   }
 };
 
+// export const GetBoard = async (id: number) => {
+//   try {
+//     const response = await axios.get(`${URL}/boards/${id}`, {});
+//     return response.data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
 export const GetBoard = async (id: number) => {
   try {
-    const response = await axios.get(`${URL}/boards/${id}`, {});
+    const response = await axios.get(`/boards/${id}`, {});
     return response.data;
   } catch (err) {
     console.log(err);
