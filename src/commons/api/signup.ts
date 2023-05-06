@@ -2,9 +2,6 @@ import axios from "axios";
 import config from "./config";
 const URL = "https://need-romance.site";
 
-axios.defaults.headers["content-type"] = "application/json";
-axios.defaults.headers.common["Access-Control-Allow-Origin"] =
-  "https://needromance.online";
 axios.defaults.withCredentials = true;
 
 export const checkDuplicateEmail = async (email: string) => {

@@ -5,10 +5,3 @@ const CommunityDetailPage = () => {
 };
 
 export default CommunityDetailPage;
-
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { chatId: "test" } }],
-    fallback: false,
-  };
-}

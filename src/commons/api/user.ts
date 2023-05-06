@@ -2,31 +2,16 @@ import axios from "axios";
 
 const URL = "https://need-romance.site";
 
-axios.defaults.headers["content-type"] = "application/json";
-axios.defaults.headers["Access-Control-Allow-Origin"] =
-  "https://needromance.online";
 axios.defaults.withCredentials = true;
-
-// export const GetUserInfo = async (accessToken: string) => {
-//   try {
-//     const response = await axios.get(`${URL}/user/login`, {
-//       headers: {
-//         Authorization: `bearer ${accessToken}`,
-//       },
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// };
 
 export const GetUserInfo = async (accessToken: string) => {
   try {
-    const response = await axios.get(`/user/login`, {
+    const response = await axios.get(`${URL}/user/login`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {

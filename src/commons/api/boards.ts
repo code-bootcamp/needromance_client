@@ -2,36 +2,26 @@ import axios from "axios";
 
 const URL = "https://need-romance.site";
 
-// export const GetBoards = async (page: number) => {
-//   try {
-//     const response = await axios.get(`${URL}/boards?page=${page}`, {});
-//     return response.data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+axios.defaults.withCredentials = true;
 
 export const GetBoards = async (page: number) => {
   try {
-    const response = await axios.get(`/boards?page=${page}`, {});
+    const response = await axios.get(`${URL}/boards?page=${page}`, {
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-// export const GetBoard = async (id: number) => {
-//   try {
-//     const response = await axios.get(`${URL}/boards/${id}`, {});
-//     return response.data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
 export const GetBoard = async (id: number) => {
   try {
-    const response = await axios.get(`/boards/${id}`, {});
+    const response = await axios.get(`${URL}/boards/${id}`, {
+      headers: { Origin: "https://needromance.online" },
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
     console.log(err);
@@ -43,7 +33,9 @@ export const DeleteBoard = async (accessToken: string, id: number) => {
     const response = await axios.delete(`${URL}/boards/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        Origin: "https://needromance.online",
       },
+      withCredentials: true,
     });
     if (response.status == 200) {
       return response.data;
@@ -57,7 +49,12 @@ export const SearchBoard = async (keyword: string) => {
   try {
     const response = await axios.get(
       `${URL}/boards/search?keyword=${keyword}&page=1`,
-      {}
+      {
+        headers: {
+          Origin: "https://needromance.online",
+        },
+        withCredentials: true,
+      }
     );
     return response.data;
   } catch (err) {
@@ -93,6 +90,7 @@ export const WriteBoard = async (
   }
 };
 
+// return 값이 안보임.
 export const EditBoard = async (
   id: string,
   params: { title: string; contents: string; hashTags?: string[] },
