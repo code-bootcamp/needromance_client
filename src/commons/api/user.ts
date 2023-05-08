@@ -9,7 +9,7 @@ export const GetUserInfo = async (accessToken: string) => {
     const response = await axios.get(`${URL}/user/login`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
-        Origin: "https://needromance.online",
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     });
@@ -23,7 +23,7 @@ export const GetUserInfo = async (accessToken: string) => {
 export const BestUsers = async () => {
   try {
     const response = await axios.get(`${URL}/user?sort=point`, {
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
     return response.data;
@@ -37,7 +37,7 @@ export const GetUserBoard = async (accessToken: string) => {
     const response = await axios.get(`${URL}/user/boards`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Origin: "https://needromance.online",
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     });
@@ -54,7 +54,7 @@ export const SearchUserBoard = async (accessToken: string, keyword: string) => {
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          Origin: "https://needromance.online",
+          // Origin: "https://needromance.online",
         },
         withCredentials: true,
       }
@@ -72,7 +72,7 @@ export const GetUserAnswer = async (accessToken: string) => {
     const response = await axios.get(`${URL}/user/answers`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Origin: "https://needromance.online",
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     });
@@ -95,7 +95,7 @@ export const UpdateUser = async (
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
-          Origin: "https://needromance.online",
+          // Origin: "https://needromance.online",
         },
         withCredentials: true,
       }
@@ -121,7 +121,7 @@ export const DeleteUser = async (
       },
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Origin: "https://needromance.online",
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     });

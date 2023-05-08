@@ -10,9 +10,9 @@ const server = config.backend.baseURL;
 
 const api: AxiosInstance = axios.create({
   baseURL: server,
-  headers: {
-    Origin: "https://needromance.online",
-  },
+  // headers: {
+  //   Origin: "https://needromance.online",
+  // },
   withCredentials: true,
 });
 

@@ -9,7 +9,7 @@ export const checkDuplicateEmail = async (email: string) => {
     const response = await axios({
       method: "get",
       url: `${URL}/user/find/email?email=${email}`,
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
     return response.data;
@@ -23,7 +23,7 @@ export const sendVerificationEmail = async (email: string) => {
     const response = await axios({
       method: "get",
       url: URL + `/user/sendtoken/?email=${email}`,
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
 
@@ -38,7 +38,7 @@ export const checkVerificationEmail = async (email: string, token: string) => {
     const response = await axios({
       method: "get",
       url: URL + `/user/checktoken/?email=${email}&token=${token}`,
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
 
@@ -53,7 +53,7 @@ export const checkDuplicateNickname = async (nickname: string) => {
     const response = await axios({
       method: "get",
       url: URL + `/user/find/nickname?nickname=${nickname}`,
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
     return response.data;
@@ -77,7 +77,7 @@ export const signUp = async (inputs: {
         nickname,
         password,
       },
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
     return response.data;
