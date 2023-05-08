@@ -97,7 +97,7 @@ export const login = async (email: string, password: string) => {
       },
       headers: {
         "Cache-Control": "no-cache",
-        Origin: "https://needromance.online",
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     });
@@ -114,8 +114,8 @@ export const logout = async (accessToken: string) => {
       method: "get",
       url: URL + "/auth/logout",
       headers: {
-        Origin: "https://needromance.online",
-        Authorization: `bearer ${accessToken}`,
+        accessToken,
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     });
@@ -130,7 +130,7 @@ export const getUserInfo = async (accessToken: string) => {
     const response = await axios.get(`${URL}/user/login`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
-        Origin: "https://needromance.online",
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     });
@@ -149,7 +149,7 @@ export const resetPassword = async (email: string, password: string) => {
         email,
         password,
       },
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
     return response;
@@ -163,6 +163,7 @@ export const googleLogin = async () => {
     const response = await axios({
       method: "get",
       url: URL + "/auth/login/google",
+      withCredentials: true,
     });
     return response;
   } catch (error) {
