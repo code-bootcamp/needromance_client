@@ -114,8 +114,8 @@ export const logout = async (accessToken: string) => {
       method: "get",
       url: URL + "/auth/logout",
       headers: {
-        accessToken,
         Origin: "https://needromance.online",
+        Authorization: `bearer ${accessToken}`,
       },
       withCredentials: true,
     });
