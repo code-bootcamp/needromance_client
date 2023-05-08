@@ -2,12 +2,10 @@ import axios from "axios";
 
 const URL = "https://need-romance.site";
 
-axios.defaults.withCredentials = true;
-
 export const GetBoards = async (page: number) => {
   try {
     const response = await axios.get(`${URL}/boards?page=${page}`, {
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
     return response.data;
@@ -19,7 +17,7 @@ export const GetBoards = async (page: number) => {
 export const GetBoard = async (id: number) => {
   try {
     const response = await axios.get(`${URL}/boards/${id}`, {
-      headers: { Origin: "https://needromance.online" },
+      // headers: { Origin: "https://needromance.online" },
       withCredentials: true,
     });
     return response.data;
@@ -33,7 +31,7 @@ export const DeleteBoard = async (accessToken: string, id: number) => {
     const response = await axios.delete(`${URL}/boards/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Origin: "https://needromance.online",
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     });
@@ -51,7 +49,7 @@ export const SearchBoard = async (keyword: string) => {
       `${URL}/boards/search?keyword=${keyword}&page=1`,
       {
         headers: {
-          Origin: "https://needromance.online",
+          // Origin: "https://needromance.online",
         },
         withCredentials: true,
       }
@@ -81,7 +79,7 @@ export const WriteBoard = async (
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          Origin: "https://needromance.online",
+          // Origin: "https://needromance.online",
         },
         withCredentials: true,
       }
@@ -108,7 +106,7 @@ export const EditBoard = async (
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        Origin: "https://needromance.online",
+        // Origin: "https://needromance.online",
       },
       withCredentials: true,
     }
