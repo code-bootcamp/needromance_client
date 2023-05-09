@@ -97,9 +97,10 @@ export const login = async (email: string, password: string) => {
       },
       headers: {
         "Cache-Control": "no-cache",
+        withCredentials: true,
         // Origin: "https://needromance.online",
       },
-      withCredentials: true,
+      // withCredentials: true,
     });
 
     return response.data;
@@ -114,7 +115,7 @@ export const logout = async (accessToken: string) => {
       method: "get",
       url: URL + "/auth/logout",
       headers: {
-        accessToken,
+        Authorization: `bearer ${accessToken}`,
         // Origin: "https://needromance.online",
       },
       withCredentials: true,
