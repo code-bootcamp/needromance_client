@@ -5,7 +5,6 @@ import {
   HeartFilled,
   EditOutlined,
   DeleteOutlined,
-  SearchOutlined,
   PlusOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";

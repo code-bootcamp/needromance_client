@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "../../../../commons/styles/media";
-import { TiHeart } from "react-icons/ti";
+import { HeartFilled } from "@ant-design/icons";
 
 export default function Answer({
   userImg,
@@ -33,7 +33,7 @@ export default function Answer({
       </RankingSeal>
       <TagHeartWrapper>
         <Heart>
-          <TiHeart style={{ color: "#ff7d93", fontSize: "20px" }} />
+          <HeartFilled />
           <span>{likes}</span>
         </Heart>
       </TagHeartWrapper>
@@ -153,9 +153,9 @@ const Heart = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* font-size: 0.8rem; */
-
-  span {
+  color: #ff7d93;
+  font-size: 20px;
+  > span {
     color: #7f6350;
   }
 `;

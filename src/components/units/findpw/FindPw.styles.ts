@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { IoCheckmarkSharp } from "react-icons/io5";
-
 interface IFindPwProps {
   isExistId?: boolean;
 }
