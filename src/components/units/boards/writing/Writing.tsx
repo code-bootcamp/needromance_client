@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import Tag from "../../../commons/hashtag/HashTag";
-import { FaCommentDots } from "react-icons/fa";
 import { breakPoints } from "../../../../commons/styles/media";
 import { getDate2 } from "../../../../commons/libraries/getDate";
 import { v4 as uuidv4 } from "uuid";
 import DOMPurify from "dompurify";
+import { MessageFilled } from "@ant-design/icons";
 
 const Wrapper = styled.div`
   position: relative;
@@ -205,7 +205,7 @@ export default function Writing({
       </ContentWrapper>
       <CommentDateWrapper>
         <CommentCount>
-          <FaCommentDots />
+          <MessageFilled />
           <span>{answers}</span>
         </CommentCount>
         <Date>{getDate2(createdAt)}</Date>

@@ -1,9 +1,7 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "../../../commons/styles/media";
-import { BsSearchHeartFill } from "react-icons/bs";
-import { ChangeEvent, Dispatch, SetStateAction, MouseEvent } from "react";
-import { Icon_Close } from "../../../commons/styles/icons";
-import { CloseOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { ChangeEvent } from "react";
+import { CloseOutlined, HeartFilled } from "@ant-design/icons";
 
 export const SearchSection = styled.section`
   width: 100vw;
@@ -93,7 +91,7 @@ export const ResetBtn = styled(CloseOutlined)`
   border-radius: 50%;
 `;
 
-export const SearchIcon = styled(BsSearchHeartFill)`
+export const SearchIcon = styled(HeartFilled)`
   color: var(--point-color-beige);
   font-size: var(--font-size-md);
 

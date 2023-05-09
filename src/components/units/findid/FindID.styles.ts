@@ -1,5 +1,5 @@
+import { CheckOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
-import { IoCheckmarkSharp } from "react-icons/io5";
 
 export const Wrapper = styled.section`
   padding: 50px 0px;
@@ -49,7 +49,7 @@ export const InputWrapper = styled.div`
   gap: 100px;
 `;
 
-export const Checker = styled(IoCheckmarkSharp)`
+export const Checker = styled(CheckOutlined)`
   position: absolute;
   top: 0;
 `;
