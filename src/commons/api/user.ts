@@ -1,86 +1,144 @@
 import axios from "axios";
+import api from "./config";
 
-const URL = "https://need-romance.site";
-
-axios.defaults.withCredentials = true;
+// const URL = "https://need-romance.site";
+// axios.defaults.withCredentials = true;
 
 export const GetUserInfo = async (accessToken: string) => {
   try {
-    const response = await axios.get(`${URL}/user/login`, {
-      headers: {
-        Authorization: `bearer ${accessToken}`,
-        // Origin: "https://needromance.online",
-      },
-      withCredentials: true,
+    const response = await api.get(`/user/login`, {
+      headers: { Authorization: `bearer ${accessToken}` },
     });
+
     return response.data;
   } catch (error) {
     console.log(error);
-    return error;
   }
 };
+
+// export const GetUserInfo = async (accessToken: string) => {
+//   try {
+//     const response = await axios.get(`${URL}/user/login`, {
+//       headers: {
+//         Authorization: `bearer ${accessToken}`,
+//         // Origin: "https://needromance.online",
+//       },
+//       withCredentials: true,
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.log(error);
+//     return error;
+//   }
+// };
 
 export const BestUsers = async () => {
   try {
-    const response = await axios.get(`${URL}/user?sort=point`, {
-      // headers: { Origin: "https://needromance.online" },
-      withCredentials: true,
-    });
+    const response = await api.get(`/user?sort=point`);
+
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
+// export const BestUsers = async () => {
+//   try {
+//     const response = await axios.get(`${URL}/user?sort=point`, {
+//       // headers: { Origin: "https://needromance.online" },
+//       withCredentials: true,
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 export const GetUserBoard = async (accessToken: string) => {
   try {
-    const response = await axios.get(`${URL}/user/boards`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        // Origin: "https://needromance.online",
-      },
-      withCredentials: true,
+    const response = await api.get(`/user/boards`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
     });
+
     return response.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
+
+// export const GetUserBoard = async (accessToken: string) => {
+//   try {
+//     const response = await axios.get(`${URL}/user/boards`, {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//         // Origin: "https://needromance.online",
+//       },
+//       withCredentials: true,
+//     });
+//     return response.data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 export const SearchUserBoard = async (accessToken: string, keyword: string) => {
   try {
-    const response = await axios.get(
-      `${URL}/user/boards/search?keyword=${keyword}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          // Origin: "https://needromance.online",
-        },
-        withCredentials: true,
-      }
-    );
-    if (response.status === 200) {
-      return response.data;
-    }
-  } catch (err) {
-    console.log(err);
+    const response = await api.get(`/user/boards/search?keyword=${keyword}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 };
 
+// export const SearchUserBoard = async (accessToken: string, keyword: string) => {
+//   try {
+//     const response = await axios.get(
+//       `${URL}/user/boards/search?keyword=${keyword}`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//           // Origin: "https://needromance.online",
+//         },
+//         withCredentials: true,
+//       }
+//     );
+//     if (response.status === 200) {
+//       return response.data;
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
 export const GetUserAnswer = async (accessToken: string) => {
   try {
-    const response = await axios.get(`${URL}/user/answers`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        // Origin: "https://needromance.online",
-      },
-      withCredentials: true,
+    const response = await api.get(`/user/answers`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
     });
+
     return response.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
+
+// export const GetUserAnswer = async (accessToken: string) => {
+//   try {
+//     const response = await axios.get(`${URL}/user/answers`, {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//         // Origin: "https://needromance.online",
+//       },
+//       withCredentials: true,
+//     });
+//     return response.data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 export const UpdateUser = async (
   accessToken: string,
@@ -88,25 +146,44 @@ export const UpdateUser = async (
   formData?: File
 ) => {
   try {
-    const response = await axios.patch(
-      `${URL}/user/update?nickname=${nickname}`,
+    const response = await api.patch(`/user/update?nickname=${nickname}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "multipart/form-data",
+      },
       formData,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "multipart/form-data",
-          // Origin: "https://needromance.online",
-        },
-        withCredentials: true,
-      }
-    );
-    if (response.status === 200) {
-      return response.data;
-    }
-  } catch (err) {
-    console.log(err);
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 };
+
+// export const UpdateUser = async (
+//   accessToken: string,
+//   nickname: string,
+//   formData?: File
+// ) => {
+//   try {
+//     const response = await axios.patch(
+//       `${URL}/user/update?nickname=${nickname}`,
+//       formData,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//           "Content-Type": "multipart/form-data",
+//           // Origin: "https://needromance.online",
+//         },
+//         withCredentials: true,
+//       }
+//     );
+//     if (response.status === 200) {
+//       return response.data;
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 export const DeleteUser = async (
   accessToken: string,
@@ -114,22 +191,42 @@ export const DeleteUser = async (
   password: string
 ) => {
   try {
-    const response = await axios.delete(`${URL}/user/delete`, {
+    const response = await api.delete(`/user/delete`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
       data: {
         email,
         password,
       },
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        // Origin: "https://needromance.online",
-      },
-      withCredentials: true,
     });
-    if (response.status === 200) {
-      return response;
-    }
+
+    return response;
   } catch (error) {
     console.log(error);
-    return error;
   }
 };
+
+// export const DeleteUser = async (
+//   accessToken: string,
+//   email: string,
+//   password: string
+// ) => {
+//   try {
+//     const response = await axios.delete(`${URL}/user/delete`, {
+//       data: {
+//         email,
+//         password,
+//       },
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//         // Origin: "https://needromance.online",
+//       },
+//       withCredentials: true,
+//     });
+//     if (response.status === 200) {
+//       return response;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return error;
+//   }
+// };

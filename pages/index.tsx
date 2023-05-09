@@ -6,10 +6,10 @@ export default function Home() {
     <>
       <Head>
         <title>로맨스가 필요해💕</title>
-        <meta http-equiv="Expires" content="Sun, 07 Aug 2022 18:51:54 GMT" />
-        <meta http-equiv="Expires" content="0" />
+        <meta httpEquiv="Expires" content="Sun, 07 Aug 2022 18:51:54 GMT" />
+        <meta httpEquiv="Expires" content="0" />
         <meta
-          http-equiv="Cache-Control"
+          httpEquiv="Cache-Control"
           content="no-cache, no-store, must-revalidate"
         />
         <meta name="referrer" content="no-referrer" />
