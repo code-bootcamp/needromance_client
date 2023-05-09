@@ -10,10 +10,10 @@ const server = config.backend.baseURL;
 
 const api: AxiosInstance = axios.create({
   baseURL: server,
-  // headers: {
-  //   Origin: "https://needromance.online",
-  // },
   withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 export default api;
