@@ -44,13 +44,6 @@ export default function Admin() {
   const [getDeleteId, setGetDeleteId] = useState("");
   const [getBanId, setGetBanId] = useState("");
 
-  // 임시로 어드민 로그인 - 로그아웃 일반유저 로그인시 어드민 페이지로 이동되는 버그 수정
-  useEffect(() => {
-    if (userProfile?.email !== "admin@romance.com") {
-      router.push("/");
-    }
-  }, []);
-
   console.log(userProfile);
   // 유저목록 검색어 초기화시 리스트 리렌더링
   const getAllUsersData = useCallback(async () => {
