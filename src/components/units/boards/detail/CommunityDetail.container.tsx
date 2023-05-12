@@ -69,18 +69,26 @@ const CommunityDetailContainer = () => {
           {checkUser?.id === data?.user?.id && (
             <S.BtnWrap>
               <CustomBtn
-                type="Sm"
-                fill={false}
-                text="수정"
+                type="button"
+                text={"수정"}
                 onClick={onClickMoveToPage(
                   `/boards/${router.query.communityId}/edit`
                 )}
+                style={{
+                  border: "1px solid var(--point-color-green)",
+                  width: "var(--btn-width-sm)",
+                  color: "var(--point-color-green)",
+                }}
               />
               <CustomBtn
-                type="Sm"
-                fill={false}
-                text="삭제"
+                type="button"
+                text={"삭제"}
                 onClick={() => handleDeleteBoard()}
+                style={{
+                  border: "1px solid var(--point-color-green)",
+                  width: "var(--btn-width-sm)",
+                  color: "var(--point-color-green)",
+                }}
               />
             </S.BtnWrap>
           )}
@@ -123,14 +131,12 @@ const CommunityDetailContainer = () => {
             </S.View>
           </S.FooterWrap>
         </S.CardWrap>
-
         <CustomBtn
-          type="Md"
-          fill={true}
+          type="button"
           text="목록으로"
           onClick={onClickMoveToPage("/boards")}
+          style={{ backgroundColor: "var(--point-color-green)", color: "#fff" }}
         />
-
         <CummunityCommentListContainer
           checkUser={checkUser}
           boardId={router.query.communityId}
@@ -138,7 +144,6 @@ const CommunityDetailContainer = () => {
           onlyWriter={data?.user?.id === checkUser?.id}
         />
       </S.Wrap>
-
       <Popup
         text="게시물이 삭제되었습니다."
         confirm={confirm}

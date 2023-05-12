@@ -156,10 +156,13 @@ export default function MainSection3UI(): JSX.Element {
         </BodyCommentsBox>
         <BtnPosition>
           <CustomBtn
-            type={"Sm"}
-            fill={true}
-            text={"친구들과 소통하기"}
+            type="button"
+            text="고민공유하기"
             onClick={onClickMoveToPage("/boards")}
+            style={{
+              backgroundColor: "var(--point-color-green)",
+              color: "#fff",
+            }}
           />
         </BtnPosition>
       </WrapperBody>

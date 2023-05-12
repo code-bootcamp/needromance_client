@@ -110,23 +110,30 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
               <S.CardWrap>
                 <S.BtnWrap>
                   <CustomBtn
-                    type="Sm"
-                    fill={false}
+                    type="button"
                     text="수정"
                     onClick={() => setIsEdit(list.id)}
+                    style={{
+                      width: "var(--btn-width-sm)",
+                      border: "1px solid var(--point-color-green)",
+                      color: "var(--point-color-green)",
+                    }}
                   />
                   <CustomBtn
-                    type="Sm"
-                    fill={true}
+                    type="button"
                     text="삭제"
                     onClick={() => handleDeleteAnswer(list.id)}
+                    style={{
+                      width: "var(--btn-width-sm)",
+                      border: "1px solid var(--point-color-green)",
+                      color: "var(--point-color-green)",
+                    }}
                   />
                 </S.BtnWrap>
                 <S.NameTo>
                   <span>To.</span>
                   {writer}
                 </S.NameTo>
-
                 <S.InnerWrap>
                   <S.LeftWrap>
                     <S.Contents>{list?.contents}</S.Contents>
@@ -155,16 +162,24 @@ const CummunityCommentListContainer = ({ boardId, writer }: any) => {
                   </div>
                   <S.BtnWrap>
                     <CustomBtn
-                      type="Sm"
-                      fill={false}
+                      type="button"
                       text="좋아요"
                       onClick={() => toggleLike(list.id)}
+                      style={{
+                        width: "var(--btn-width-sm)",
+                        border: "1px solid var(--point-color-green)",
+                        color: "var(--point-color-green)",
+                      }}
                     />
                     <CustomBtn
-                      type="Sm"
-                      fill={false}
+                      type="button"
                       text={list?.status ? "채택취소" : "채택하기"}
                       onClick={() => togglePick(list.id, list.status)}
+                      style={{
+                        width: "var(--btn-width-sm)",
+                        border: "1px solid var(--point-color-green)",
+                        color: "var(--point-color-green)",
+                      }}
                     />
                   </S.BtnWrap>
                 </S.FooterWrap>

@@ -20,7 +20,6 @@ import Tag from "../../../commons/tag/Tag";
 import BorderInput from "../../../commons/input/Input";
 import CustomModal from "../../../commons/modals/CustomModal";
 import { useRouter } from "next/router";
-import CustomBtn from "../../../commons/buttons/CustomBtn";
 const ToastEditor = dynamic(() => import("../../../commons/toast-ui/Toast"), {
   ssr: false,
 });
