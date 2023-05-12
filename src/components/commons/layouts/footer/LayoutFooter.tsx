@@ -54,7 +54,7 @@ export default function LayoutFooter() {
         </InfoLeft>
         <InfoRight>
           <GitBtn
-            href="https://github.com/code-bootcamp/pbp1_team02_client"
+            href="https://github.com/code-bootcamp/needromance_client"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -62,7 +62,7 @@ export default function LayoutFooter() {
             <span>프론트 저장소</span>
           </GitBtn>
           <GitBtn
-            href="https://google.com"
+            href="https://github.com/code-bootcamp/needromance_server"
             target="_blank"
             rel="noopener noreferrer"
           >

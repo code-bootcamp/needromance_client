@@ -21,10 +21,8 @@ import {
   userProfileState,
 } from "../../../commons/store/atoms";
 import useAuth from "../../commons/hooks/customs/useAuth";
-import { useRouter } from "next/router";
 
 export default function Admin() {
-  const router = useRouter();
   useAuth();
   // accessToken
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
@@ -51,7 +49,6 @@ export default function Admin() {
       const response = await getAllUsers(accessToken);
       setAllUsers([...response]);
     } catch (error) {
-      alert("서버 에러가 발생했습니다. 나중에 다시 시도해 주세요.");
       throw error;
     }
   }, [accessToken, setAllUsers]);
@@ -68,7 +65,6 @@ export default function Admin() {
       const response = await getAllBoards(accessToken);
       setAllBoards([...response]);
     } catch (error) {
-      alert("서버 에러가 발생했습니다. 나중에 다시 시도해 주세요.");
       throw error;
     }
   }, [accessToken, setAllBoards]);
@@ -135,7 +131,6 @@ export default function Admin() {
       const response = await getAllUsers(accessToken);
       setAllUsers([...response]);
     } catch (error) {
-      alert("서버 에러가 발생했습니다. 나중에 다시 시도해 주세요.");
       throw error;
     } finally {
       setOpenModal(false);
@@ -149,7 +144,6 @@ export default function Admin() {
       const response = await getAllBoards(accessToken);
       setAllBoards([...response]);
     } catch (error) {
-      alert("서버 에러가 발생했습니다. 나중에 다시 시도해 주세요.");
       throw error;
     } finally {
       setOpenModal(false);
