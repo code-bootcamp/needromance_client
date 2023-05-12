@@ -24,10 +24,14 @@ const MyPageProfileDetail = ({ myData, setIsEdit }: IMyPageProps) => {
       </S.Row>
       <S.BtnWrap>
         <CustomBtn
-          type="Md"
-          fill={true}
+          type="button"
           text="프로필 수정"
           onClick={() => setIsEdit(true)}
+          style={{
+            width: "var(--btn-width-md)",
+            backgroundColor: "var(--point-color-green)",
+            color: "#fff",
+          }}
         />
       </S.BtnWrap>
     </S.ProfileWrap>

@@ -200,10 +200,13 @@ export default function MainSection2UI(): JSX.Element {
         </BodyCommentsBox>
         <BtnPosition>
           <CustomBtn
-            type={"Md"}
-            fill={true}
-            text={"채팅하러가기"}
+            type="button"
+            text="상담하러가기"
             onClick={onClickMoveToPage(`/chatgpt/${userProfile?.id}`)}
+            style={{
+              backgroundColor: "var(--point-color-green)",
+              color: "#fff",
+            }}
           />
         </BtnPosition>
       </WrapperBody>

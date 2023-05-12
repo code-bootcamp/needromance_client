@@ -196,13 +196,16 @@ export default function CommunityList() {
         <S.LatestCounsel>
           <p>최신 상담 List</p>
           <CustomBtn
-            fill={false}
-            type="Md"
-            text="글 작성하기"
+            type="button"
+            text="작성하기"
             onClick={onClickMoveToPage("/boards/write")}
+            style={{
+              backgroundColor: "var(--point-color-green)",
+              color: "#fff",
+              width: "var(--btn-width-sm)",
+            }}
           />
         </S.LatestCounsel>
-
         <S.LatestCounselWriting>
           {boards?.map((board: IBoardsType) => (
             <Writing

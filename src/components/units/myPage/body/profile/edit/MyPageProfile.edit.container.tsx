@@ -131,16 +131,24 @@ const MyPageProfileEdit = ({ myData, setMyData, setIsEdit }: IMyPageProps) => {
         </S.Row>
         <S.BtnWrap>
           <CustomBtn
-            type="Md"
-            fill={false}
+            type="button"
             text="취소"
             onClick={() => setIsEdit(false)}
+            style={{
+              width: "var(--btn-width-md)",
+              border: "1px solid var(--point-color-green)",
+              color: "var(--point-color-green)",
+            }}
           />
           <CustomBtn
-            type="Md"
-            fill={true}
+            type="button"
             text="수정"
             onClick={() => handleUpdateUser()}
+            style={{
+              width: "var(--btn-width-md)",
+              backgroundColor: "var(--point-color-green)",
+              color: "#fff",
+            }}
           />
         </S.BtnWrap>
       </S.ProfileWrap>

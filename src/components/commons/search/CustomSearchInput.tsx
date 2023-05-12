@@ -5,9 +5,7 @@ import { CloseOutlined, HeartFilled } from "@ant-design/icons";
 
 export const SearchSection = styled.section`
   width: 100vw;
-  // 양쪽에 꽉차게 하기 위한 옵션
   position: relative;
-  /* left: calc(-50vw + 50%); */
   display: flex;
   flex-direction: column;
   align-items: center;
