@@ -156,6 +156,8 @@ export default function Admin() {
       setBrowserWidth(document.documentElement.clientWidth);
     }
     window.addEventListener("resize", handleBrowserResize);
+    // 컴포넌트 최초 실행시 한번 실행
+    handleBrowserResize();
 
     return () => window.removeEventListener("resize", handleBrowserResize);
   }, []);
