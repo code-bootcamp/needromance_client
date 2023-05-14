@@ -151,15 +151,11 @@ export default function CommunityList() {
               onClickClear={onClickClear}
             />
           </S.SearchBox>
-          <S.TagBox>
-            <Tag tags={["장거리", "100일선물"]} />
-          </S.TagBox>
         </S.SearchWrapper>
       </S.SearchSection>
       <section>
         <input />
       </section>
-
       {isSearch && (
         <S.CounselWrapper>
           <S.LatestCounsel>
