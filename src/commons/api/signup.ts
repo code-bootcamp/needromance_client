@@ -1,8 +1,4 @@
-import axios from "axios";
 import api from "./config";
-
-// const URL = "https://need-romance.site";
-// axios.defaults.withCredentials = true;
 
 export const checkDuplicateEmail = async (email: string) => {
   try {
@@ -14,20 +10,6 @@ export const checkDuplicateEmail = async (email: string) => {
   }
 };
 
-// export const checkDuplicateEmail = async (email: string) => {
-//   try {
-//     const response = await axios({
-//       method: "get",
-//       url: `${URL}/user/find/email?email=${email}`,
-//       // headers: { Origin: "https://needromance.online" },
-//       withCredentials: true,
-//     });
-//     return response.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
 export const sendVerificationEmail = async (email: string) => {
   try {
     const response = await api.get(`/user/sendtoken/?email=${email}`);
@@ -37,21 +19,6 @@ export const sendVerificationEmail = async (email: string) => {
     console.log(error);
   }
 };
-
-// export const sendVerificationEmail = async (email: string) => {
-//   try {
-//     const response = await axios({
-//       method: "get",
-//       url: URL + `/user/sendtoken/?email=${email}`,
-//       // headers: { Origin: "https://needromance.online" },
-//       withCredentials: true,
-//     });
-
-//     return response.status;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export const checkVerificationEmail = async (email: string, token: string) => {
   try {
@@ -65,21 +32,6 @@ export const checkVerificationEmail = async (email: string, token: string) => {
   }
 };
 
-// export const checkVerificationEmail = async (email: string, token: string) => {
-//   try {
-//     const response = await axios({
-//       method: "get",
-//       url: URL + `/user/checktoken/?email=${email}&token=${token}`,
-//       // headers: { Origin: "https://needromance.online" },
-//       withCredentials: true,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const checkDuplicateNickname = async (nickname: string) => {
   try {
     const response = await api.get(`/user/find/nickname?nickname=${nickname}`);
@@ -89,20 +41,6 @@ export const checkDuplicateNickname = async (nickname: string) => {
     console.log(error);
   }
 };
-
-// export const checkDuplicateNickname = async (nickname: string) => {
-//   try {
-//     const response = await axios({
-//       method: "get",
-//       url: URL + `/user/find/nickname?nickname=${nickname}`,
-//       // headers: { Origin: "https://needromance.online" },
-//       withCredentials: true,
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export const signUp = async (inputs: {
   email: string;
@@ -123,30 +61,6 @@ export const signUp = async (inputs: {
   }
 };
 
-// export const signUp = async (inputs: {
-//   email: string;
-//   nickname: string;
-//   password: string;
-// }) => {
-//   const { email, nickname, password } = inputs;
-//   try {
-//     const response = await axios({
-//       method: "post",
-//       url: URL + "/user/signup",
-//       data: {
-//         email,
-//         nickname,
-//         password,
-//       },
-//       // headers: { Origin: "https://needromance.online" },
-//       withCredentials: true,
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const login = async (email: string, password: string) => {
   try {
     const response = await api.post(`/auth/login`, {
@@ -161,29 +75,6 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-// export const login = async (email: string, password: string) => {
-//   try {
-//     const response = await axios({
-//       method: "post",
-//       url: URL + "/auth/login",
-//       data: {
-//         email,
-//         password,
-//       },
-//       headers: {
-//         "Cache-Control": "no-cache",
-//         withCredentials: true,
-//         // Origin: "https://needromance.online",
-//       },
-//       // withCredentials: true,
-//     });
-
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const logout = async (accessToken: string) => {
   try {
     const response = await api.get(`/auth/logout`, {
@@ -196,23 +87,6 @@ export const logout = async (accessToken: string) => {
   }
 };
 
-// export const logout = async (accessToken: string) => {
-//   try {
-//     const response = await axios({
-//       method: "get",
-//       url: URL + "/auth/logout",
-//       headers: {
-//         Authorization: `bearer ${accessToken}`,
-//         // Origin: "https://needromance.online",
-//       },
-//       withCredentials: true,
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const getUserInfo = async (accessToken: string) => {
   try {
     const response = await api.get(`/user/login`, {
@@ -224,21 +98,6 @@ export const getUserInfo = async (accessToken: string) => {
     console.log(error);
   }
 };
-
-// export const getUserInfo = async (accessToken: string) => {
-//   try {
-//     const response = await axios.get(`${URL}/user/login`, {
-//       headers: {
-//         Authorization: `bearer ${accessToken}`,
-//         // Origin: "https://needromance.online",
-//       },
-//       withCredentials: true,
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export const resetPassword = async (email: string, password: string) => {
   try {
@@ -253,24 +112,6 @@ export const resetPassword = async (email: string, password: string) => {
   }
 };
 
-// export const resetPassword = async (email: string, password: string) => {
-//   try {
-//     const response = await axios({
-//       method: "patch",
-//       url: URL + "/user/find/password",
-//       data: {
-//         email,
-//         password,
-//       },
-//       // headers: { Origin: "https://needromance.online" },
-//       withCredentials: true,
-//     });
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const googleLogin = async () => {
   try {
     const response = await api.get(`/auth/login/google`);
@@ -280,16 +121,3 @@ export const googleLogin = async () => {
     console.log(error);
   }
 };
-
-// export const googleLogin = async () => {
-//   try {
-//     const response = await axios({
-//       method: "get",
-//       url: URL + "/auth/login/google",
-//       withCredentials: true,
-//     });
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };

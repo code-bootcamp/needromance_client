@@ -29,11 +29,6 @@ export default function LayoutTopHeader() {
       localStorage.setItem("userProfile", data);
     }
     setUserProfile(data);
-
-    // 어드민 계정일 경우 어드민 페이지로 라우팅
-    if (data?.email === "admin@romance.com" && data?.nickname === "admin") {
-      router.push("/admin");
-    }
   };
 
   const GoogleLogout = () => {
