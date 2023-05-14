@@ -1,6 +1,5 @@
-import * as S from "./Admin.styles";
-import type { ColumnsType } from "antd/es/table";
 import { Table } from "antd";
+import type { ColumnsType } from "antd/es/table";
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
@@ -9,12 +8,13 @@ import {
   ProfileOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 
+import * as S from "./Admin.styles";
 import CustomModal from "../../commons/modals/CustomModal";
 import { AllBoards, AllUsers, IAdminProps } from "./Admin.types";
 import CustomSearchInput from "../../commons/search/CustomSearchInput";
-import { useRouter } from "next/router";
-import { v4 as uuidv4 } from "uuid";
 
 const TabsItems = ["유저관리", "게시글관리"];
 
@@ -179,6 +179,7 @@ export default function AdminUI({
       <S.TabsWrapper openTabs={openTabs} onClick={() => togleTabs(openTabs)}>
         {TabsItems.map((el, index) => (
           <S.TabsItem
+            index={index}
             pageTabs={pageTabs}
             key={uuidv4()}
             onClick={() => setPageTabs(index)}

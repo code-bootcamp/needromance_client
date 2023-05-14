@@ -1,5 +1,4 @@
 import { atom } from "recoil";
-import { boolean, string } from "yup";
 import { IModalProps } from "../../components/commons/modals/CustomModal";
 
 export const userProfileState = atom({

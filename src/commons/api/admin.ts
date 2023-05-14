@@ -63,6 +63,7 @@ export const getSearchUser = async (
 
 export const patchUserState = async (data: IBanData): Promise<AllUsers> => {
   const { accessToken, id } = data;
+
   try {
     const response = await api.patch("/admin/user/status", {
       headers: { Authorization: `Bearer ${accessToken}` },
