@@ -5,7 +5,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import AdminUI from "./Admin.presenter";
+import { useRecoilState } from "recoil";
+
 import {
   deleteUserBoard,
   patchUserState,
@@ -14,16 +15,18 @@ import {
   getSearchBoard,
   getSearchUser,
 } from "../../../commons/api/admin";
-import { AllBoards, AllUsers } from "./Admin.types";
-import { useRecoilState } from "recoil";
 import {
   accessTokenState,
   userProfileState,
 } from "../../../commons/store/atoms";
+import { AllBoards, AllUsers } from "./Admin.types";
+import AdminUI from "./Admin.presenter";
 import useAuth from "../../commons/hooks/customs/useAuth";
+import { useRouter } from "next/router";
 
 export default function Admin() {
-  useAuth();
+  const router = useRouter();
+
   // accessToken
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [userProfile, setUserProfile] = useRecoilState(userProfileState);
@@ -42,7 +45,13 @@ export default function Admin() {
   const [getDeleteId, setGetDeleteId] = useState("");
   const [getBanId, setGetBanId] = useState("");
 
-  console.log(userProfile);
+  // 어드민 계정 확인
+  // useEffect(() => {
+  //   if (userProfile.role !== "admin") {
+  //     router.push("/");
+  //   }
+  // }, []);
+
   // 유저목록 검색어 초기화시 리스트 리렌더링
   const getAllUsersData = useCallback(async () => {
     try {
