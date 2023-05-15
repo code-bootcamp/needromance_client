@@ -20,6 +20,7 @@ export const getAllUsers = async (accessToken: string): Promise<AllUsers[]> => {
     const response = await api.get("/admin/users", {
       headers: { Authorization: "Bearer " + accessToken },
     });
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

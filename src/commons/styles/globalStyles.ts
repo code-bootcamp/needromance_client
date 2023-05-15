@@ -5,6 +5,9 @@ export const globalStyles = css`
   :root {
     --main-bg-color: #f8f3eb;
     --sub-bg-color: #f0e9e0;
+    --white-bg-color: #fff;
+    --light-gary-color: #eee;
+    --heavy-gary-color: #999;
     --point-color-beige: #cfbbae;
     --point-color-brown: #433b32;
     --point-color-green: #5f795a;
@@ -20,7 +23,6 @@ export const globalStyles = css`
     --eng-font: "Poppins";
     --btn-radius-lg: 3.125rem;
     --btn-radius-sm: 0.5rem;
-
     --btn-radius: 3.125rem;
     --btn-padding: 7px 15px;
     --btn-font-size: 0.875rem;

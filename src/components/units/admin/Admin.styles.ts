@@ -66,7 +66,6 @@ export const TabsWrapper = styled.li<ITabsItemProps>`
   @media ${breakPoints.tablet} {
     border-right: 1px solid #eee;
     position: absolute;
-    /* display 설정을 해주면 닫을때 바로 none 적용이 되버림.. 안하면 새로고침 시  closeTabs 애니메이션이 보임..*/
     display: ${({ openTabs }) => (openTabs ? "flex" : "none")};
     ::before {
       content: "";

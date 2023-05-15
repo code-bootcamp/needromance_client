@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { breakPoints } from "../../../commons/styles/media";
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 import { CloseOutlined, HeartFilled } from "@ant-design/icons";
 
 export const SearchSection = styled.section`
@@ -40,14 +40,13 @@ export const SearchWrapper = styled.div`
 `;
 export const SearchBox = styled.div`
   width: 100%;
-  /* max-width: 600px; */
   position: relative;
   .anticon-close-circle {
     position: absolute;
     top: 15px;
     right: 50px;
     font-size: var(--font-size-sm);
-    color: #999;
+    color: var(--heavy-gary-color);
   }
 `;
 
@@ -58,7 +57,7 @@ export const SearchInput = styled.input`
   border-radius: 20px;
   padding: 15px;
   border: 1px solid var(--point-color-beige);
-  background-color: white;
+  background-color: var(--white-bg-color);
   font-size: var(--font-size-sm);
 
   @media ${breakPoints.mobile} {
@@ -79,34 +78,33 @@ export const BtnWrap = styled.div`
 `;
 
 export const ResetBtn = styled(CloseOutlined)`
-  color: #fff;
-  font-size: 0.7rem;
+  color: var(--white-bg-color);
+  font-size: var(--font-size-sm);
   width: var(--font-size-md);
   height: var(--font-size-md);
   line-height: var(--font-size-md);
   text-align: center;
-  background-color: #eee;
+  background-color: var(--light-gary-color);
   border-radius: 50%;
 `;
 
 export const SearchIcon = styled(HeartFilled)`
   color: var(--point-color-beige);
   font-size: var(--font-size-md);
-
   &:hover {
     cursor: pointer;
   }
 `;
 
 interface IInputProps {
-  type?: string;
-  name?: string;
+  type: string;
+  name: string;
   placeholder: string;
   value?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onClick: () => void;
-  onKeyPress: (e: any) => void;
-  onClickClear?: () => void;
+  onKeyPress: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onClickClear: () => void;
 }
 
 const CustomSearchInput = (props: IInputProps) => {
