@@ -4,4 +4,4 @@
 
 정명희 : https://github.com/MyeongheeJung/needromance_client
 
-신하니 :
+신하니 : https://github.com/haneebunny/needromance_client
