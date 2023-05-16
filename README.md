@@ -20,163 +20,6 @@
 
 ---
 
-## 폴더 구조 트리 (구현한 부분)
-
-```
-src
-├── commons
-│   ├── api
-│   │   ├── admin.ts            // 어드민 페이지 API
-│   │   ├── answers.ts
-│   │   ├── boards.ts
-│   │   ├── chatGPT.ts
-│   │   ├── config.ts           // 초기 axios default 설정
-│   │   ├── main.ts             // 메인페이지 정보 API
-│   │   ├── signup.ts
-│   │   └── user.ts
-│   ├── libraries
-│   │   ├── getAccessToken.ts
-│   │   ├── getDate.ts
-│   │   └── validation.ts
-│   ├── store
-│   │   └── atoms.ts
-│   └── styles
-│       ├── globalStyles.ts     // 글로벌 스타일 설정
-│       ├── icons.ts
-│       └── media.ts            // 반응형 breakPoint 설정
-└── components
-    ├── commons
-    │   ├── buttons
-    │   │   └── CustomBtn.tsx   // 버튼 공통컴포넌트
-    │   ├── hashtag
-    │   │   └── HashTag.tsx
-    │   ├── hooks
-    │   │   └── customs
-    │   │       ├── useAuth.tsx
-    │   │       └── useMoveToPage.tsx
-    │   ├── input
-    │   │   └── Input.tsx
-    │   ├── layouts
-    │   │   ├── footer
-    │   │   │   └── LayoutFooter.tsx
-    │   │   ├── header
-    │   │   │   └── LayoutHeader.tsx
-    │   │   ├── index.tsx
-    │   │   ├── navigation
-    │   │   │   └── LayoutNavigation.tsx
-    │   │   └── topheader
-    │   │       └── LayoutTopHeader.tsx
-    │   ├── loader
-    │   │   └── Loader.tsx
-    │   ├── modals
-    │   │   ├── CustomModal.styles.ts       // 모달 공통컴포넌트 Style
-    │   │   ├── CustomModal.tsx             // 모달 공통컴포넌트 Container & View
-    │   │   └── PopupModal.tsx
-    │   ├── search
-    │   │   └── CustomSearchInput.tsx       // 검색 input 공통컴포넌트
-    │   ├── tag
-    │   │   └── Tag.tsx
-    │   └── toast-ui
-    │       └── Toast.tsx
-    └── units
-        ├── admin
-        │   ├── Admin.container.tsx         // 관리자페이지 Container
-        │   ├── Admin.presenter.tsx         // 관리자페이지 View
-        │   ├── Admin.styles.ts             // 관리자페이지 Style
-        │   └── Admin.types.ts              // 관리자페이지 Type
-        ├── boards
-        │   ├── Boards.types.ts
-        │   ├── answer
-        │   │   └── answer.tsx
-        │   ├── detail
-        │   │   ├── CommunityDetail.container.tsx
-        │   │   └── CommunityDetail.style.ts
-        │   ├── list
-        │   │   ├── CommunityList.styles.ts
-        │   │   └── CommunityList.tsx
-        │   ├── medal
-        │   │   └── medal.tsx
-        │   ├── write
-        │   │   ├── CommunityWrite.styles.ts
-        │   │   └── CommunityWrite.tsx
-        │   └── writing
-        │       └── Writing.tsx
-        ├── chatGPT
-        │   ├── ChatGPT.container.tsx       // chat-GPT Container
-        │   ├── ChatGPT.presenter.tsx       // chat-GPT View
-        │   ├── ChatGPT.styles.ts           // chat-GPT Style
-        │   └── ChatGPT.types.ts            // chat-GPT Type
-        ├── communityComment
-        │   ├── Comment.types.ts
-        │   ├── list
-        │   │   ├── CommunityCommentList.container.tsx
-        │   │   └── CommunityCommentList.style.ts
-        │   └── write
-        │       ├── CommunityCommentWrite.container.tsx
-        │       └── CommunityCommentWrite.style.ts
-        ├── findid
-        │   ├── FindID.styles.ts
-        │   └── FindID.tsx
-        ├── findpw
-        │   ├── FindPw.styles.ts
-        │   ├── FindPw.tsx
-        │   └── FindPwSuc.tsx
-        ├── main
-        │   ├── Main.container.tsx                  // 메인페이지 전체 Container
-        │   ├── Main.presenter.tsx                  // 메인페이지 전체 View
-        │   ├── Main.types.ts                       // 메인페이지 내 하위 컴포넌트 Type
-        │   ├── section1
-        │   │   ├── MainSection1.styles.ts          // 메인페이지 첫번째 컴포넌트 Style
-        │   │   └── MainSection1.tsx                // 메인페이지 첫번째 컴포넌트 Container & view
-        │   ├── section2
-        │   │   ├── MainSection2.styles.ts          // 메인페이지 두번째 컴포넌트 Style
-        │   │   └── MainSection2.tsx                // 메인페이지 두번째 컴포넌트 Container & view
-        │   └── section3
-        │       ├── MainSection3.styles.ts          // 메인페이지 세번째 컴포넌트 Style
-        │       └── MainSection3.tsx                // 메인페이지 세번째 컴포넌트 Container & view
-        ├── myPage
-        │   ├── MyPage.container.tsx
-        │   ├── MyPage.style.ts
-        │   ├── MyPage.type.ts
-        │   ├── User.types.ts
-        │   ├── body
-        │   │   ├── MyPage.body.style.ts
-        │   │   ├── MyPage.body.tsx
-        │   │   ├── board
-        │   │   │   ├── MyPageBoard.container.tsx
-        │   │   │   └── MyPageBoard.style.ts
-        │   │   ├── comment
-        │   │   │   ├── MyPageComment.container.tsx
-        │   │   │   └── MyPageComment.style.ts
-        │   │   ├── notification
-        │   │   │   ├── MyPageNotification.container.tsx
-        │   │   │   └── MyPageNotification.style.ts
-        │   │   ├── profile
-        │   │   │   ├── MyPageProfile.container.tsx
-        │   │   │   ├── MyPageProfile.style.ts
-        │   │   │   ├── detail
-        │   │   │   │   └── MyPageProfile.detail.container.tsx
-        │   │   │   └── edit
-        │   │   │       └── MyPageProfile.edit.container.tsx
-        │   │   └── withdrawal
-        │   │       └── MyPageWithdrawal.Modal.tsx
-        │   └── nav
-        │       ├── MyPageNav.style.ts
-        │       └── MyPageNav.tsx
-        ├── signIn
-        │   ├── GoogleSignIn.tsx
-        │   ├── SignIn.styles.ts
-        │   └── SignIn.tsx
-        └── signup
-            ├── SignUp.styles.ts
-            ├── SignUp.tsx
-            └── google
-                ├── SignUpGoogle.styles.ts
-                └── SignUpGoogle.tsx
-```
-
----
-
 ## 구현설명
 
 #### 1. 메인페이지
@@ -327,7 +170,16 @@ export const globalStyles = css`
 `;
 ```
 
-- **breakPoint를 tablet, mobile을 적용하여 사용자 UX, UI 개선**
+- breakPoint를 tablet, mobile을 적용하여 사용자 UX, UI 개선
+
+```ts
+// src/commons/styles/media.ts
+
+export const breakPoints = {
+  tablet: "(min-width: 376px) and (max-width: 768px)",
+  mobile: "(max-width: 375px)",
+};
+```
 
 ```ts
 // src/components/units/main/seaction2/MainSection2.styles.ts
@@ -380,18 +232,9 @@ export const TopBox = styled.div<AnimationStyle>`
 
 - eslint & prettier를 활용하여 일관된 코드스타일 적용
 
-```js
-// src/commons/styles/media.ts
-
-export const breakPoints = {
-  tablet: "(min-width: 376px) and (max-width: 768px)",
-  mobile: "(max-width: 375px)",
-};
-```
+**.eslintrc.json**
 
 ```json
-// .eslintrc.json
-
 {
   "env": {
     "browser": true,
@@ -429,9 +272,9 @@ export const breakPoints = {
 }
 ```
 
-```json
-// .prettierrc.json
+**.prettierrc.json**
 
+```json
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -446,12 +289,169 @@ export const breakPoints = {
 
 ---
 
+## 폴더 구조 트리 (구현한 부분)
+
+```
+src
+├── commons
+│   ├── api
+│   │   ├── admin.ts            // 어드민 페이지 API
+│   │   ├── answers.ts
+│   │   ├── boards.ts
+│   │   ├── chatGPT.ts
+│   │   ├── config.ts           // 초기 axios default 설정
+│   │   ├── main.ts             // 메인페이지 정보 API
+│   │   ├── signup.ts
+│   │   └── user.ts
+│   ├── libraries
+│   │   ├── getAccessToken.ts
+│   │   ├── getDate.ts
+│   │   └── validation.ts
+│   ├── store
+│   │   └── atoms.ts
+│   └── styles
+│       ├── globalStyles.ts     // 글로벌 스타일 설정
+│       ├── icons.ts
+│       └── media.ts            // 반응형 breakPoint 설정
+└── components
+    ├── commons
+    │   ├── buttons
+    │   │   └── CustomBtn.tsx   // 버튼 공통컴포넌트
+    │   ├── hashtag
+    │   │   └── HashTag.tsx
+    │   ├── hooks
+    │   │   └── customs
+    │   │       ├── useAuth.tsx
+    │   │       └── useMoveToPage.tsx
+    │   ├── input
+    │   │   └── Input.tsx
+    │   ├── layouts
+    │   │   ├── footer
+    │   │   │   └── LayoutFooter.tsx
+    │   │   ├── header
+    │   │   │   └── LayoutHeader.tsx
+    │   │   ├── index.tsx
+    │   │   ├── navigation
+    │   │   │   └── LayoutNavigation.tsx
+    │   │   └── topheader
+    │   │       └── LayoutTopHeader.tsx
+    │   ├── loader
+    │   │   └── Loader.tsx
+    │   ├── modals
+    │   │   ├── CustomModal.styles.ts       // 모달 공통컴포넌트 Style
+    │   │   ├── CustomModal.tsx             // 모달 공통컴포넌트
+    │   │   └── PopupModal.tsx
+    │   ├── search
+    │   │   └── CustomSearchInput.tsx       // 검색 input 공통컴포넌트
+    │   ├── tag
+    │   │   └── Tag.tsx
+    │   └── toast-ui
+    │       └── Toast.tsx
+    └── units
+        ├── admin
+        │   ├── Admin.container.tsx         // 관리자페이지 Container
+        │   ├── Admin.presenter.tsx         // 관리자페이지 View
+        │   ├── Admin.styles.ts             // 관리자페이지 Style
+        │   └── Admin.types.ts              // 관리자페이지 Type
+        ├── boards
+        │   ├── Boards.types.ts
+        │   ├── answer
+        │   │   └── answer.tsx
+        │   ├── detail
+        │   │   ├── CommunityDetail.container.tsx
+        │   │   └── CommunityDetail.style.ts
+        │   ├── list
+        │   │   ├── CommunityList.styles.ts
+        │   │   └── CommunityList.tsx
+        │   ├── medal
+        │   │   └── medal.tsx
+        │   ├── write
+        │   │   ├── CommunityWrite.styles.ts
+        │   │   └── CommunityWrite.tsx
+        │   └── writing
+        │       └── Writing.tsx
+        ├── chatGPT
+        │   ├── ChatGPT.container.tsx       // chat-GPT Container
+        │   ├── ChatGPT.presenter.tsx       // chat-GPT View
+        │   ├── ChatGPT.styles.ts           // chat-GPT Style
+        │   └── ChatGPT.types.ts            // chat-GPT Type
+        ├── communityComment
+        │   ├── Comment.types.ts
+        │   ├── list
+        │   │   ├── CommunityCommentList.container.tsx
+        │   │   └── CommunityCommentList.style.ts
+        │   └── write
+        │       ├── CommunityCommentWrite.container.tsx
+        │       └── CommunityCommentWrite.style.ts
+        ├── findid
+        │   ├── FindID.styles.ts
+        │   └── FindID.tsx
+        ├── findpw
+        │   ├── FindPw.styles.ts
+        │   ├── FindPw.tsx
+        │   └── FindPwSuc.tsx
+        ├── main
+        │   ├── Main.container.tsx                  // 메인페이지 전체 Container
+        │   ├── Main.presenter.tsx                  // 메인페이지 전체 View
+        │   ├── Main.types.ts                       // 메인페이지 내 하위 컴포넌트 Type
+        │   ├── section1
+        │   │   ├── MainSection1.styles.ts          // 메인페이지 첫번째 컴포넌트 Style
+        │   │   └── MainSection1.tsx                // 메인페이지 첫번째 컴포넌트 Container & view
+        │   ├── section2
+        │   │   ├── MainSection2.styles.ts          // 메인페이지 두번째 컴포넌트 Style
+        │   │   └── MainSection2.tsx                // 메인페이지 두번째 컴포넌트 Container & view
+        │   └── section3
+        │       ├── MainSection3.styles.ts          // 메인페이지 세번째 컴포넌트 Style
+        │       └── MainSection3.tsx                // 메인페이지 세번째 컴포넌트 Container & view
+        ├── myPage
+        │   ├── MyPage.container.tsx
+        │   ├── MyPage.style.ts
+        │   ├── MyPage.type.ts
+        │   ├── User.types.ts
+        │   ├── body
+        │   │   ├── MyPage.body.style.ts
+        │   │   ├── MyPage.body.tsx
+        │   │   ├── board
+        │   │   │   ├── MyPageBoard.container.tsx
+        │   │   │   └── MyPageBoard.style.ts
+        │   │   ├── comment
+        │   │   │   ├── MyPageComment.container.tsx
+        │   │   │   └── MyPageComment.style.ts
+        │   │   ├── notification
+        │   │   │   ├── MyPageNotification.container.tsx
+        │   │   │   └── MyPageNotification.style.ts
+        │   │   ├── profile
+        │   │   │   ├── MyPageProfile.container.tsx
+        │   │   │   ├── MyPageProfile.style.ts
+        │   │   │   ├── detail
+        │   │   │   │   └── MyPageProfile.detail.container.tsx
+        │   │   │   └── edit
+        │   │   │       └── MyPageProfile.edit.container.tsx
+        │   │   └── withdrawal
+        │   │       └── MyPageWithdrawal.Modal.tsx
+        │   └── nav
+        │       ├── MyPageNav.style.ts
+        │       └── MyPageNav.tsx
+        ├── signIn
+        │   ├── GoogleSignIn.tsx
+        │   ├── SignIn.styles.ts
+        │   └── SignIn.tsx
+        └── signup
+            ├── SignUp.styles.ts
+            ├── SignUp.tsx
+            └── google
+                ├── SignUpGoogle.styles.ts
+                └── SignUpGoogle.tsx
+```
+
+---
+
 ## 프로젝트 회고
 
-<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-1-API%ED%86%B5%EC%8B%A0-%EC%97%90%EB%9F%AC-%ED%95%B8%EB%93%A4%EB%A7%81%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EC%B0%B0">프로젝트 회고록 - 1 API통신 에러 핸들링에 대한 고찰</a>
-<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-2-chat-GPT%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EB%8C%80%ED%99%94%EA%B5%AC%ED%98%84">프로젝트 회고록 - 2 chat-GPT를 활용한 대화구현</a>
-<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-3-next.js-Image-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8">프로젝트 회고록 - 3 next.js Image 컴포넌트</a>
-<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-4-AWS-docker-%EB%B0%B0%ED%8F%AC%EC%8B%9C-EC2-%EC%84%B1%EB%8A%A5-%EB%AC%B8%EC%A0%9C">프로젝트 회고록 - 4 AWS EC2 & docker 배포, EC2 성능 문제</a>
-<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-5-Axios-default-%EC%84%A4%EC%A0%95-CORS-Error">프로젝트 회고록 - 5 Axios default 설정 & CORS Error</a>
-<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-6-%EA%B3%B5%ED%86%B5-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%9D%98-%EC%9E%AC%EC%82%AC%EC%9A%A9%EC%97%90-%EA%B4%80%ED%95%9C-%EA%B3%A0%EC%B0%B0">프로젝트 회고록 - 6 공통 컴포넌트의 재사용에 관한 고찰</a>
+<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-1-API%ED%86%B5%EC%8B%A0-%EC%97%90%EB%9F%AC-%ED%95%B8%EB%93%A4%EB%A7%81%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B3%A0%EC%B0%B0">프로젝트 회고록 - 1 API통신 에러 핸들링에 대한 고찰</a><br />
+<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-2-chat-GPT%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EB%8C%80%ED%99%94%EA%B5%AC%ED%98%84">프로젝트 회고록 - 2 chat-GPT를 활용한 대화구현</a><br />
+<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-3-next.js-Image-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8">프로젝트 회고록 - 3 next.js Image 컴포넌트</a><br />
+<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-4-AWS-docker-%EB%B0%B0%ED%8F%AC%EC%8B%9C-EC2-%EC%84%B1%EB%8A%A5-%EB%AC%B8%EC%A0%9C">프로젝트 회고록 - 4 AWS EC2 & docker 배포, EC2 성능 문제</a><br />
+<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-5-Axios-default-%EC%84%A4%EC%A0%95-CORS-Error">프로젝트 회고록 - 5 Axios default 설정 & CORS Error</a><br />
+<a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-6-%EA%B3%B5%ED%86%B5-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%9D%98-%EC%9E%AC%EC%82%AC%EC%9A%A9%EC%97%90-%EA%B4%80%ED%95%9C-%EA%B3%A0%EC%B0%B0">프로젝트 회고록 - 6 공통 컴포넌트의 재사용에 관한 고찰</a><br />
 <a href="https://velog.io/@olzlel2000/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0%EB%A1%9D-7-%EC%B4%88%EA%B8%B0-%EC%84%A4%EA%B3%84%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A4%91%EC%9A%94%EC%84%B1%EA%B3%BC-%EA%B0%9C%EC%84%A0%ED%95%A0-%EC%A0%90">프로젝트 회고록 - 7 프로젝트 초기 설계에 대한 중요성과 개선할 점</a>
