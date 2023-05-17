@@ -83,12 +83,20 @@ export const BodyComment = styled.p`
   }
 `;
 export const BodyImgBox = styled.div`
-  height: fit-content;
+  height: 600px;
   position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  > div:nth-of-type(1) {
+    position: absolute;
+    width: 50%;
+    height: 70%;
+    left: 0;
+  }
+  > div:nth-of-type(2) {
+    position: absolute;
+    width: 50%;
+    height: 70%;
+    right: 0;
+  }
 `;
 export const BtnPosition = styled.div`
   display: flex;

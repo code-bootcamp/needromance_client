@@ -28,18 +28,24 @@ export default function MainSection3UI(): JSX.Element {
       </S.WrapperTop>
       <S.WrapperBody>
         <S.BodyImgBox>
-          <Image
-            src="/img/main/section3_img1.webp"
-            alt="img"
-            width={400}
-            height={400}
-          />
-          <Image
-            src="/img/main/section3_img2.webp"
-            alt="img"
-            width={400}
-            height={400}
-          />
+          <div>
+            <Image
+              src="/img/main/section3_img1.webp"
+              alt="img"
+              layout="fill"
+              objectFit="contain"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <Image
+              src="/img/main/section3_img2.webp"
+              alt="img"
+              layout="fill"
+              objectFit="contain"
+              loading="lazy"
+            />
+          </div>
         </S.BodyImgBox>
         <S.BodyCommentsBox>
           <S.BodyComment>
