@@ -15,7 +15,7 @@ export default function ChatGPTUI({
     <>
       <S.Position>
         <S.Wrapper>
-          {!loading && (
+          {loading && (
             <S.LodingWrapper>
               <S.LoadingNotice></S.LoadingNotice>
             </S.LodingWrapper>
