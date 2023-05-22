@@ -75,6 +75,7 @@ export default function MainSection2UI(): JSX.Element {
               alt="img"
               layout="fill"
               objectFit="contain"
+              loading="lazy"
             />
           </div>
           <div>
@@ -83,6 +84,7 @@ export default function MainSection2UI(): JSX.Element {
               alt="img"
               layout="fill"
               objectFit="contain"
+              loading="lazy"
             />
           </div>
         </S.BodyImgBox>

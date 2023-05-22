@@ -64,13 +64,16 @@ export const UpdateUser = async (
   formData?: File
 ) => {
   try {
-    const response = await api.patch(`/user/update?nickname=${nickname}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "multipart/form-data",
-      },
-      formData,
-    });
+    const response = await api.patch(
+      `/user/update?nickname=${nickname}`,
+      { formData },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -82,6 +85,11 @@ export const DeleteUser = async (
   email: string,
   password: string
 ) => {
+  // headers: { Authorization: `Bearer ${accessToken}` },
+  // data: {
+  //   email,
+  //   password,
+  // },
   try {
     const response = await api.delete(`/user/delete`, {
       headers: { Authorization: `Bearer ${accessToken}` },

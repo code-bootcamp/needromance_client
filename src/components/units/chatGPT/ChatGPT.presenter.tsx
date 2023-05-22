@@ -2,11 +2,9 @@ import { ExclamationCircleFilled, SendOutlined } from "@ant-design/icons";
 import * as S from "./ChatGPT.styles";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { IChatGPTProps } from "./ChatGPT.types";
-import { v4 as uuidv4 } from "uuid";
 
 export default function ChatGPTUI({
   userText,
-  setUserText,
   handleChangeUserText,
   submitUserText,
   messageList,
@@ -35,17 +33,17 @@ export default function ChatGPTUI({
             </S.Notice>
           </S.TitleWrapper>
           <S.ChatBody>
-            <ScrollToBottom>
+            <ScrollToBottom mode="bottom">
               <S.ChatWrapper>
                 {messageList?.map((text: string, index: number) => {
                   return (
                     <>
                       {index % 2 === 0 ? (
-                        <S.WrapperMessageUser key={uuidv4()}>
+                        <S.WrapperMessageUser key={index}>
                           <S.MessageUser>{text}</S.MessageUser>
                         </S.WrapperMessageUser>
                       ) : (
-                        <S.WrapperMessageGPT key={uuidv4()}>
+                        <S.WrapperMessageGPT key={index}>
                           <S.MessageGPT>{text}</S.MessageGPT>
                         </S.WrapperMessageGPT>
                       )}
