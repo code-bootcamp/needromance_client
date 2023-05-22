@@ -20,9 +20,6 @@ export const Wrapper = styled.div`
   margin-top: 20px;
   border-radius: var(--btn-radius-sm);
   @media ${breakPoints.mobile} {
-    margin-top: 10px;
-  }
-  @media ${breakPoints.tablet} {
     margin-top: 20px;
   }
 `;
@@ -34,10 +31,13 @@ export const LodingWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100% + 43px);
+  height: 627px;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 2;
   border-radius: var(--btn-radius-sm);
+  @media ${breakPoints.mobile} {
+    height: 600px;
+  }
 `;
 export const LoadingNotice = styled.div`
   @keyframes loadingAnimation {
