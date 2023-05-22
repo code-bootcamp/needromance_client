@@ -103,16 +103,13 @@ export const ChatBody = styled.div`
   display: flex;
   position: relative;
   height: 450px;
-  .test {
-    height: 100%;
-    overflow-y: auto;
-  }
 `;
 export const ChatWrapper = styled.div`
   /* 데이터 들어오고 아래로 최신대화가 안내려오면 height 속성을 바꿔보기. */
   width: 375px;
   height: 450px;
   overflow-x: hidden;
+  overflow-y: auto;
   background-color: var(--main-bg-color);
   @media ${breakPoints.tablet} {
   }

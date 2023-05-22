@@ -33,7 +33,7 @@ export default function ChatGPTUI({
             </S.Notice>
           </S.TitleWrapper>
           <S.ChatBody>
-            <ScrollToBottom mode="bottom" className="test">
+            <ScrollToBottom mode="bottom">
               <S.ChatWrapper>
                 {messageList?.map((text: string, index: number) => {
                   return (
