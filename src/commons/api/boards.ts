@@ -46,13 +46,17 @@ export const WriteBoard = async (
   params: { title: string; contents: string; hashTags?: string[] },
   accessToken: string
 ) => {
+  console.log(params);
   try {
-    const response = await api.post(`/boards`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      title: params.title,
-      contents: params.contents,
-      hashTags: params.hashTags,
-    });
+    const response = await api.post(
+      `/boards`,
+      {
+        title: params.title,
+        contents: params.contents,
+        hashTags: params.hashTags,
+      },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
 
     return response;
   } catch (error) {
@@ -70,12 +74,15 @@ export const EditBoard = async (
   accessToken: string
 ) => {
   try {
-    await api.patch(`/boards/${id}`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      title: params.title,
-      contents: params.contents,
-      hashTags: params.hashTags,
-    });
+    await api.patch(
+      `/boards/${id}`,
+      {
+        title: params.title,
+        contents: params.contents,
+        hashTags: params.hashTags,
+      },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
   } catch (error) {
     console.log(error);
   }

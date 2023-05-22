@@ -24,11 +24,11 @@ export const PostAnswer = async (
   contents: string
 ) => {
   try {
-    const response = await api.post(`/answers`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      boardId,
-      contents,
-    });
+    const response = await api.post(
+      `/answers`,
+      { boardId, contents },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
 
     Modal.success({ content: "답변이 등록되었습니다." });
     return response.data;
@@ -43,10 +43,13 @@ export const UpdateAnswer = async (
   contents: string
 ) => {
   try {
-    const response = await api.patch(`/answers/${id}`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      contents,
-    });
+    const response = await api.patch(
+      `/answers/${id}`,
+      { contents },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
 
     return response.data;
   } catch (error) {
@@ -85,11 +88,13 @@ export const PickAnswer = async (
   status: boolean
 ) => {
   try {
-    const response = await api.patch(`/answers/${id}/status`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      boardId,
-      status,
-    });
+    const response = await api.patch(
+      `/answers/${id}/status`,
+      { boardId, status },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
 
     return response.data;
   } catch (error) {

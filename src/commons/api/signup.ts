@@ -63,11 +63,11 @@ export const signUp = async (inputs: {
 
 export const login = async (email: string, password: string) => {
   try {
-    const response = await api.post(`/auth/login`, {
-      headers: { "Cache-Control": "no-cache" },
-      email,
-      password,
-    });
+    const response = await api.post(
+      `/auth/login`,
+      { email, password },
+      { headers: { "Cache-Control": "no-cache" } }
+    );
 
     return response.data;
   } catch (error) {

@@ -101,14 +101,17 @@ export const Notice = styled.div`
 `;
 export const ChatBody = styled.div`
   display: flex;
-  width: 375px;
+  position: relative;
+  height: 450px;
+  .test {
+    height: 100%;
+    overflow-y: auto;
+  }
 `;
 export const ChatWrapper = styled.div`
-  /* 반응형으로 사이즈 맞추기 */
   /* 데이터 들어오고 아래로 최신대화가 안내려오면 height 속성을 바꿔보기. */
   width: 375px;
   height: 450px;
-  overflow-y: scroll;
   overflow-x: hidden;
   background-color: var(--main-bg-color);
   @media ${breakPoints.tablet} {

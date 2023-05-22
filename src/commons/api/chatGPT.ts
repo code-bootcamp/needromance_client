@@ -1,8 +1,6 @@
 import axios from "axios";
 import api from "./config";
 
-axios.defaults.withCredentials = true;
-
 interface IUserQestionData {
   accessToken: string;
   text: string;
@@ -13,10 +11,12 @@ export const postUserQuestion = async (
 ): Promise<string> => {
   const { accessToken, text } = data;
   try {
-    const response = await api.get("/consult/question", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      data: { question: text },
-    });
+    const response = await api.post(
+      "/consult/question",
+      { question: text },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

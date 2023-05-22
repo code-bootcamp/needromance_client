@@ -42,7 +42,7 @@ export default function ChatGPT() {
         ...prevText,
         "통신에 에러가 발생했습니다. 나중에 다시 시도해 주세요.",
       ]);
-      throw new Error();
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -51,7 +51,6 @@ export default function ChatGPT() {
   return (
     <ChatGPTUI
       userText={userText}
-      setUserText={setUserText}
       handleChangeUserText={handleChangeUserText}
       submitUserText={submitUserText}
       messageList={messageList}
